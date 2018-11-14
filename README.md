@@ -4,6 +4,13 @@ This is team Error 404's implementation of the Amazon Handmade capstone project
 
 ## Installation
 
+### Set Up React Native
+
+Follow the instructions in the "Installing Dependencies" section for your specific operating system here:
+https://facebook.github.io/react-native/docs/getting-started.html#installing-dependencies
+
+### Set Up This Project
+
 Run the following commands in a termainl to download, set-up, and run this project.
 
 ```
