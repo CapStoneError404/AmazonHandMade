@@ -1,7 +1,20 @@
-/** @format */
+import React from 'react'
+import { AppRegistry, View } from 'react-native'
+import { createStore } from 'redux'
+import { PersistGate } from 'redux-persist/integration/react'
+import { Provider } from 'react-redux'
 
-import {AppRegistry} from 'react-native';
-import App from './App';
-import {name as appName} from './app.json';
+import { store, persistor } from './src/store'
 
-AppRegistry.registerComponent(appName, () => App);
+import App from './src/App';
+
+// Pass the store into the Provider
+const AppWithStore = () => (
+  <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+         <App />
+      </PersistGate>
+  </Provider>
+)
+
+AppRegistry.registerComponent('AmazonHandmadeRN', () => AppWithStore)
