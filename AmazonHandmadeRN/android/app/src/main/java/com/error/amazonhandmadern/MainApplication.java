@@ -53,20 +53,20 @@ public class MainApplication extends Application implements ReactApplication {
             new LinearGradientPackage(),
             new VectorIconsPackage(),
         // add/remove these packages as appropriate
-        new RNFirebaseAdMobPackage(),
+        //new RNFirebaseAdMobPackage(),
         new RNFirebaseAnalyticsPackage(),
         new RNFirebaseAuthPackage(),
-        new RNFirebaseRemoteConfigPackage(),
+        //new RNFirebaseRemoteConfigPackage(),
         new RNFirebaseCrashlyticsPackage(),
         new RNFirebaseDatabasePackage(),
         new RNFirebaseFirestorePackage(),
         new RNFirebaseFunctionsPackage(),
         new RNFirebaseInstanceIdPackage(),
-        new RNFirebaseInvitesPackage(),
+        //new RNFirebaseInvitesPackage(),
         new RNFirebaseLinksPackage(),
-        new RNFirebaseMessagingPackage(),
+        //new RNFirebaseMessagingPackage(),
         new RNFirebaseNotificationsPackage(),
-        new RNFirebasePerformancePackage(),
+        //new RNFirebasePerformancePackage(),
         new RNFirebaseStoragePackage()
       );
     }
