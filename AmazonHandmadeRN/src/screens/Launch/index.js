@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import * as globalActions from '@actions'
 
 function mapStateToProps(state) {
-   return {
-      
-   }
+  return {
+
+  }
 }
 
 function mapDispatchToProps(dispatch) {
-   return bindActionCreators(globalActions, dispatch);
+  return bindActionCreators(globalActions, dispatch);
 }
 
 import Launch from './Launch'

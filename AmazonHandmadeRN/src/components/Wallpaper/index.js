@@ -1,28 +1,33 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Dimensions from 'Dimensions';
-import {StyleSheet} from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
 
 const backImg = require('../../../assets/images/BlurredBackground.png')
 
 export default class Wallpaper extends Component {
   render() {
     return (
-      <LinearGradient colors={['#50C8C8', '#40B7B7']} style={styles.container}>
-        {this.props.children}
+      <LinearGradient colors={['#50C8C8', '#40B7B7']}>
+        <KeyboardAwareScrollView style={styles.container} contentContainerStyle={styles.content}>
+          {this.props.children}
+        </KeyboardAwareScrollView>
       </LinearGradient>
     );
   }
 }
 
 const styles = StyleSheet.create({
-   container: {
-      flex: 1,
-      flexDirection: 'column',
-      justifyContent: 'space-evenly',
-      alignItems: 'center',
-      padding: '10%',
-      backgroundColor: 'red'
-   }
+  container: {
+    width: '100%',
+    height: '100%',
+    padding: '10%'
+  },
+  content: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'space-between'
+  }
 });
