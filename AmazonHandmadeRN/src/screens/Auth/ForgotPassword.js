@@ -1,29 +1,29 @@
 import React, { Component } from 'react'
 import {
-   View, Text, StyleSheet
+  View, Text, StyleSheet
 } from 'react-native'
 import { Wallpaper } from '@components'
 
 export default class ForgotPassword extends Component {
-   constructor(props) {
-      super(props)
-   }
+  constructor(props) {
+    super(props)
+  }
 
-   render() {
-      return (
-         <Wallpaper>
-            <Text style={styles.logo}>Handmade</Text>
-         </Wallpaper>
-      )
-   }
+  render() {
+    return (
+      <Wallpaper>
+        <Text style={styles.logo}>Handmade</Text>
+      </Wallpaper>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
-   logo: {
-      flex: 3,
-      textAlign: 'center',
-      fontSize: 60,
-      color: 'white',
-      marginTop: 60
-   }
+  logo: {
+    flex: 3,
+    textAlign: 'center',
+    fontSize: 60,
+    color: 'white',
+    marginTop: 60
+  }
 })

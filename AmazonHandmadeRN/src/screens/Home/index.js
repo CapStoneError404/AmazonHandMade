@@ -4,13 +4,13 @@ import * as actions from './actions'
 import * as globalActions from '@actions'
 
 function mapStateToProps(state) {
-   return {
-      
-   }
+  return {
+
+  }
 }
 
 function mapDispatchToProps(dispatch) {
-   return bindActionCreators({...actions, ...globalActions}, dispatch);
+  return bindActionCreators({ ...actions, ...globalActions }, dispatch);
 }
 
 import Home from './Home'

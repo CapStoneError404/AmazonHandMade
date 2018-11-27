@@ -5,6 +5,6 @@ import Errs from './Errs'
 import User from './User'
 
 //Then combine them all here
-const rootReducer = combineReducers({User, Errs});
+const rootReducer = combineReducers({ User, Errs });
 
 export default rootReducer;

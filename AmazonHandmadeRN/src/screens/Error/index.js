@@ -4,13 +4,13 @@ import * as actions from './actions'
 import * as globalActions from '@actions'
 
 function mapStateToProps(state) {
-   return {
-      Errs: state.Errs
-   }
+  return {
+    Errs: state.Errs
+  }
 }
 
 function mapDispatchToProps(dispatch) {
-   return bindActionCreators({...actions, ...globalActions}, dispatch);
+  return bindActionCreators({ ...actions, ...globalActions }, dispatch);
 }
 
 import Error from './Error'
