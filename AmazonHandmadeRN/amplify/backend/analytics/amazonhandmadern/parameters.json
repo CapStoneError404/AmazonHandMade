@@ -1,0 +1,11 @@
+{
+    "appName": "amazonhandmadern",
+    "roleName": "pinpointLambdaRole5487024c",
+    "cloudWatchPolicyName": "cloudWatchPolicy5487024c",
+    "pinpointPolicyName": "pinpointPolicy5487024c",
+    "authPolicyName": "pinpoint_amplify_5487024c",
+    "unauthPolicyName": "pinpoint_amplify_5487024c",
+    "authRoleName": "mazonandmade-20181115144911-authRole",
+    "unauthRoleName": "mazonandmade-20181115144911-unauthRole",
+    "IAMPrefix": "504857514802"
+}

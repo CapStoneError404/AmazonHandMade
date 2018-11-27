@@ -1,0 +1,36 @@
+{
+    "providers": {
+        "awscloudformation": {
+            "AuthRoleName": "mazonandmade-20181115144911-authRole",
+            "UnauthRoleArn": "arn:aws:iam::504857514802:role/mazonandmade-20181115144911-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::504857514802:role/mazonandmade-20181115144911-authRole",
+            "Region": "us-west-2",
+            "DeploymentBucketName": "mazonandmade-20181115144911-deployment",
+            "UnauthRoleName": "mazonandmade-20181115144911-unauthRole",
+            "StackName": "mazonandmade-20181115144911",
+            "StackId": "arn:aws:cloudformation:us-west-2:504857514802:stack/mazonandmade-20181115144911/ab2e44e0-e928-11e8-a01c-50a686be7356"
+        }
+    },
+    "auth": {
+        "cognitobe415095": {
+            "service": "Cognito",
+            "providerPlugin": "awscloudformation",
+            "providerMetadata": {
+                "s3TemplateURL": "https://s3.amazonaws.com/mazonandmade-20181115144911-deployment/amplify-cfn-templates/auth/cognitobe415095-cloudformation-template.yml",
+                "logicalId": "authcognitobe415095"
+            },
+            "lastPushTimeStamp": "2018-11-15T22:53:45.848Z"
+        }
+    },
+    "analytics": {
+        "amazonhandmadern": {
+            "service": "Pinpoint",
+            "providerPlugin": "awscloudformation",
+            "providerMetadata": {
+                "s3TemplateURL": "https://s3.amazonaws.com/mazonandmade-20181115144911-deployment/amplify-cfn-templates/analytics/pinpoint-cloudformation-template.json",
+                "logicalId": "analyticsamazonhandmadern"
+            },
+            "lastPushTimeStamp": "2018-11-15T22:53:46.019Z"
+        }
+    }
+}

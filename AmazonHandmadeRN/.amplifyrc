@@ -1,0 +1,14 @@
+{
+    "providers": {
+        "awscloudformation": {
+            "AuthRoleName": "mazonandmade-20181115144911-authRole",
+            "UnauthRoleArn": "arn:aws:iam::504857514802:role/mazonandmade-20181115144911-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::504857514802:role/mazonandmade-20181115144911-authRole",
+            "Region": "us-west-2",
+            "DeploymentBucketName": "mazonandmade-20181115144911-deployment",
+            "UnauthRoleName": "mazonandmade-20181115144911-unauthRole",
+            "StackName": "mazonandmade-20181115144911",
+            "StackId": "arn:aws:cloudformation:us-west-2:504857514802:stack/mazonandmade-20181115144911/ab2e44e0-e928-11e8-a01c-50a686be7356"
+        }
+    }
+}
