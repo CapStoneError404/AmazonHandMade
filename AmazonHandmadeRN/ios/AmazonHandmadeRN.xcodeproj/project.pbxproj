@@ -66,6 +66,9 @@
 		FA8F51C991634783B318054C /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6620EA4C519348FBAA6A978C /* AntDesign.ttf */; };
 		FEB43FD99980490F8F86C8A8 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1C71F371E58D444E80827434 /* EvilIcons.ttf */; };
 		98228849B9F5476C8BF5CD23 /* HandmadeLogo.svg in Resources */ = {isa = PBXBuildFile; fileRef = 693E4B28A8B74DF1BF87FF5C /* HandmadeLogo.svg */; };
+		B61C2387BAEB4AA18590CEFD /* HandmadeLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = FD3FF9616115406D9E26C6E1 /* HandmadeLogo.png */; };
+		F95FEBEB12254199BCE5FFBC /* HandmadeLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1C347B193AC84C1392129B44 /* HandmadeLogo@2x.png */; };
+		E30C3C615A374BA2ADB48681 /* HandmadeLogo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B47597FAE6784261857BDE01 /* HandmadeLogo@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -410,6 +413,9 @@
 		FBC8C743C046423C960F2237 /* libRNFirebase.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFirebase.a; sourceTree = "<group>"; };
 		FC8B229EFF744D619E2DBF86 /* NewEventButton.svg */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = NewEventButton.svg; path = ../assets/images/NewEventButton.svg; sourceTree = "<group>"; };
 		693E4B28A8B74DF1BF87FF5C /* HandmadeLogo.svg */ = {isa = PBXFileReference; name = "HandmadeLogo.svg"; path = "../assets/images/HandmadeLogo.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FD3FF9616115406D9E26C6E1 /* HandmadeLogo.png */ = {isa = PBXFileReference; name = "HandmadeLogo.png"; path = "../assets/images/1x/HandmadeLogo.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		1C347B193AC84C1392129B44 /* HandmadeLogo@2x.png */ = {isa = PBXFileReference; name = "HandmadeLogo@2x.png"; path = "../assets/images/2x/HandmadeLogo@2x.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B47597FAE6784261857BDE01 /* HandmadeLogo@3x.png */ = {isa = PBXFileReference; name = "HandmadeLogo@3x.png"; path = "../assets/images/3x/HandmadeLogo@3x.png"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -698,6 +704,9 @@
 				FC8B229EFF744D619E2DBF86 /* NewEventButton.svg */,
 				00EEB749D6E94378AEE27644 /* Akronim-Regular.ttf */,
 				693E4B28A8B74DF1BF87FF5C /* HandmadeLogo.svg */,
+				FD3FF9616115406D9E26C6E1 /* HandmadeLogo.png */,
+				1C347B193AC84C1392129B44 /* HandmadeLogo@2x.png */,
+				B47597FAE6784261857BDE01 /* HandmadeLogo@3x.png */,
 			);
 			name = Resources;
 			path = "";
@@ -1224,6 +1233,9 @@
 				40D2E59FD9F24ACB8843C04C /* NewEventButton.svg in Resources */,
 				A5E74311F3D846698E67A512 /* Akronim-Regular.ttf in Resources */,
 				98228849B9F5476C8BF5CD23 /* HandmadeLogo.svg in Resources */,
+				B61C2387BAEB4AA18590CEFD /* HandmadeLogo.png in Resources */,
+				F95FEBEB12254199BCE5FFBC /* HandmadeLogo@2x.png in Resources */,
+				E30C3C615A374BA2ADB48681 /* HandmadeLogo@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
