@@ -37,7 +37,10 @@ const RootStack = FluidNavigator(
     Home: { screen: HomeStack }
   },
   {
-    initialRouteName: 'Launch'
+    initialRouteName: 'Launch',
+    navigationOptions: {
+      gesturesEnabled: false
+    }
   }
 )
 
