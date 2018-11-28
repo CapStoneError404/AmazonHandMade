@@ -5,8 +5,6 @@ import { Platform, StyleSheet } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
 
-const backImg = require('../../../assets/images/BlurredBackground.png')
-
 export default class Wallpaper extends Component {
   render() {
     return (
