@@ -86,6 +86,7 @@ export default class Register extends Component {
 const styles = StyleSheet.create({
   logo: {
     flex: 3,
+    fontFamily: 'Bitter',
     textAlign: 'center',
     fontSize: 60,
     color: 'white',
