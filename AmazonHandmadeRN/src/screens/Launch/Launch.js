@@ -5,6 +5,11 @@ import {
   StyleSheet
 } from 'react-native'
 
+import {
+  Wallpaper,
+  Logo
+} from '@components'
+
 import LinearGradient from 'react-native-linear-gradient'
 import firebase from 'react-native-firebase'
 
@@ -33,8 +38,9 @@ export default class Launch extends Component {
 
   render() {
     return (
-      <LinearGradient colors={['#f12711', '#f5af19']} style={styles.container}>
-      </LinearGradient>
+      <Wallpaper>
+        <Logo />
+      </Wallpaper>
     )
   }
 }
