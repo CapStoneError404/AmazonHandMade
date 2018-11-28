@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -66,6 +65,7 @@
 		F6AFB4BDD7CF4C44A91EFD3D /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9669DC798DF043FB8C6C3E5D /* FontAwesome5_Solid.ttf */; };
 		FA8F51C991634783B318054C /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6620EA4C519348FBAA6A978C /* AntDesign.ttf */; };
 		FEB43FD99980490F8F86C8A8 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1C71F371E58D444E80827434 /* EvilIcons.ttf */; };
+		98228849B9F5476C8BF5CD23 /* HandmadeLogo.svg in Resources */ = {isa = PBXBuildFile; fileRef = 693E4B28A8B74DF1BF87FF5C /* HandmadeLogo.svg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -409,6 +409,7 @@
 		FA426A35C6D44642B839C430 /* DefaultCalnderIcon.png */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = DefaultCalnderIcon.png; path = ../assets/images/DefaultCalnderIcon.png; sourceTree = "<group>"; };
 		FBC8C743C046423C960F2237 /* libRNFirebase.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFirebase.a; sourceTree = "<group>"; };
 		FC8B229EFF744D619E2DBF86 /* NewEventButton.svg */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = NewEventButton.svg; path = ../assets/images/NewEventButton.svg; sourceTree = "<group>"; };
+		693E4B28A8B74DF1BF87FF5C /* HandmadeLogo.svg */ = {isa = PBXFileReference; name = "HandmadeLogo.svg"; path = "../assets/images/HandmadeLogo.svg"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -696,6 +697,7 @@
 				AD19A5321F154D7A879E6F61 /* NewEventButton.png */,
 				FC8B229EFF744D619E2DBF86 /* NewEventButton.svg */,
 				00EEB749D6E94378AEE27644 /* Akronim-Regular.ttf */,
+				693E4B28A8B74DF1BF87FF5C /* HandmadeLogo.svg */,
 			);
 			name = Resources;
 			path = "";
@@ -1221,6 +1223,7 @@
 				28E6E523F774452E9E6A6BDE /* NewEventButton.png in Resources */,
 				40D2E59FD9F24ACB8843C04C /* NewEventButton.svg in Resources */,
 				A5E74311F3D846698E67A512 /* Akronim-Regular.ttf in Resources */,
+				98228849B9F5476C8BF5CD23 /* HandmadeLogo.svg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

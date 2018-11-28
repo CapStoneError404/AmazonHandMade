@@ -12,7 +12,8 @@ import {
   UserInput,
   Button,
   Divider,
-  Wallpaper
+  Wallpaper,
+  Logo
 } from '@components'
 
 export default class Login extends Component {
@@ -57,7 +58,7 @@ export default class Login extends Component {
   render() {
     return (
       <Wallpaper>
-        <Text style={styles.logo}>Handmade</Text>
+        <Logo />
         <UserInput
           iconName="envelope"
           placeholder="Email"
