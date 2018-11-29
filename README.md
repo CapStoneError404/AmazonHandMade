@@ -1,8 +1,8 @@
 # Amazon Handmade by Error 404
 
-This is team Error 404's implementation of the Amazon Handmade capstone project
-
 [![Build Status](https://app.bitrise.io/app/da6882a3406c4076/status.svg?token=_GV7vk-FI6Fj_Lg-gufs0A&branch=dev)](https://app.bitrise.io/app/da6882a3406c4076)
+
+This is team Error 404's implementation of the Amazon Handmade capstone project
 
 ## Installation
 
