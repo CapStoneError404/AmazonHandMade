@@ -19,6 +19,7 @@ import {
   Wallpaper,
   Logo
 } from '@components'
+import { ProfilePicture } from '../../components';
 
 export default class ArtisanList extends Component {
   static navigationOptions = ({navigation}) => {
@@ -46,7 +47,7 @@ export default class ArtisanList extends Component {
     this.fetchArtisans = this.fetchArtisans.bind(this)
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.fetchArtisans()
     this.props.navigation.setParams({
       addArtisan: this.addArtisan
@@ -56,7 +57,6 @@ export default class ArtisanList extends Component {
   fetchArtisans() {
     this.setState({fetchingArtisans: true})
     this.props.fetchArtisans().then(() => {
-      console.log(this.props.Artisans)
       this.setState({fetchingArtisans: false})
     })
   }
@@ -67,7 +67,7 @@ export default class ArtisanList extends Component {
 
   _renderArtisanItem = ({item}) => (
     <TouchableOpacity style={styles.artisanView}>
-      <Image 
+      <ProfilePicture 
         source={{uri: item.profilePictureURL}}
         style={styles.image}
       />
@@ -80,6 +80,15 @@ export default class ArtisanList extends Component {
 
   _keyExtractor = (item, index) => item.uid
 
+  _getData() {
+    artisans = Object.keys(this.props.Artisans).map((key, index) => {
+      newObject = this.props.Artisans[key]
+      newObject["uid"] = key
+      return newObject
+    })
+    artisans.sort((first, second) => first.name < second.name)
+    return artisans
+  }
 
   render() {
     return (
@@ -92,11 +101,7 @@ export default class ArtisanList extends Component {
         />
         :
         <FlatList 
-          data={Object.keys(this.props.Artisans).map((key, index) => {
-            newObject = this.props.Artisans[key]
-            newObject["uid"] = key
-            return newObject
-          })}
+          data={this._getData()}
           keyExtractor={this._keyExtractor}
           renderItem={this._renderArtisanItem}
         />
@@ -107,15 +112,13 @@ export default class ArtisanList extends Component {
 }
 
 const styles = StyleSheet.create({
-  list: {
-
-  },
   image: {
-    width: 90,
     height: 90,
+    aspectRatio: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 45
+    borderRadius: 45,
+    margin: 5
   },
   artisanView: {
     width: '100%',

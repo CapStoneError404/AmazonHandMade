@@ -14,7 +14,7 @@ import {
   UserInput,
   Divider,
   Wallpaper,
-  ProfilePicture
+  AddImage
 } from '@components'
 
 import ImagePicker from 'react-native-image-crop-picker';
@@ -74,7 +74,7 @@ export default class AddArtisan extends Component {
     return (
       <Wallpaper style={styles.container}>
         <View style={styles.firstSection}>
-          <ProfilePicture 
+          <AddImage 
             imageUri={this.state.profilePicturePath}
             onPress={() => this.pickImage()}
             style={styles.image}

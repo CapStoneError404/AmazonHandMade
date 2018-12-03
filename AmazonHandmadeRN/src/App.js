@@ -34,7 +34,7 @@ const TabNavigator = createBottomTabNavigator(
         else if(routeName === 'Error') {
           iconName = 'cog'
         }
-        console.log("Working!!!!")
+        
         return <Icon name={iconName} size={25} color={tintColor} />
       }
     })
