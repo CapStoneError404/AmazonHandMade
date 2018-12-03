@@ -58,6 +58,7 @@ export default class Login extends Component {
           placeholder="Email"
           value={this.state.email}
           onChangeText={(newText) => this.setState({ email: newText })}
+          keyboardType="email-address"
         />
         <UserInput
           iconName="key"

@@ -93,6 +93,7 @@ export default class AddArtisan extends Component {
               value={this.state.phoneNumber}
               onChangeText={(newText) => this.setState({phoneNumber: newText})}
               style={styles.smallInput2}
+              keyboardType="number-pad"
             />
           </View>
         </View>
