@@ -22,6 +22,7 @@ export default class UserInput extends Component {
           autoCorrect={this.props.autoCorrect}
           secureTextEntry={this.props.secureTextEntry}
           multiline={(this.props.multiline) ? this.props.multiline : false}
+          keyboardType={this.props.keyboardType}
         />
       </View>
     );
@@ -36,7 +37,8 @@ UserInput.propTypes = {
   autoCorrect: PropTypes.bool,
   secureTextEntry: PropTypes.bool,
   style: PropTypes.object,
-  multiline: PropTypes.bool
+  multiline: PropTypes.bool,
+  keyboardType: PropTypes.string
 };
 
 const styles = StyleSheet.create({
