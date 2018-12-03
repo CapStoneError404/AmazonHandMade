@@ -7,7 +7,9 @@ import {
   KeyboardAvoidingView,
   TouchableOpacity,
   FlatList,
-  Modal
+  Modal,
+  ActivityIndicator,
+  Image
 } from 'react-native';
 
 import {
@@ -17,8 +19,6 @@ import {
   Wallpaper,
   Logo
 } from '@components'
-
-import { AddArtisan } from '@screens/ArtisanHub'
 
 export default class ArtisanList extends Component {
   static navigationOptions = ({navigation}) => {
@@ -38,16 +38,26 @@ export default class ArtisanList extends Component {
     super(props)
 
     this.state = {
-      artisans: [],
-      showAddArtisan: false
+      showAddArtisan: false,
+      fetchingArtisans: false
     }
 
     this.addArtisan = this.addArtisan.bind(this)
+    this.fetchArtisans = this.fetchArtisans.bind(this)
   }
 
   componentWillMount() {
+    this.fetchArtisans()
     this.props.navigation.setParams({
       addArtisan: this.addArtisan
+    })
+  }
+
+  fetchArtisans() {
+    this.setState({fetchingArtisans: true})
+    this.props.fetchArtisans().then(() => {
+      console.log(this.props.Artisans)
+      this.setState({fetchingArtisans: false})
     })
   }
 
@@ -56,20 +66,33 @@ export default class ArtisanList extends Component {
   }
 
   _renderArtisanItem = ({item}) => (
-    <View>
-      <Text>{item.name}</Text>
-    </View>
+    <TouchableOpacity style={styles.artisanView}>
+      <Image 
+        source={{uri: item.profilePictureURL}}
+        style={styles.image}
+      />
+      <View style={styles.namePhone}>
+        <Text style={styles.text}>{item.name}</Text>
+        <Text style={styles.text}>{item.phoneNumber}</Text>
+      </View>
+    </TouchableOpacity>
   )
 
   render() {
     return (
       <Wallpaper>
-        <FlatList 
-          data={this.state.artisans}
-          renderItem={({item}) => (
-            <ArtisanListItem />
-          )}
+        {(this.state.fetchingArtisans) ?
+        <ActivityIndicator 
+          size='large'
+          animating={this.props.spinning}
+          color='white'
         />
+        :
+        <FlatList 
+          data={Object.values(this.props.Artisans)}
+          renderItem={this._renderArtisanItem}
+        />
+        }
       </Wallpaper>
     )
   }
@@ -78,5 +101,34 @@ export default class ArtisanList extends Component {
 const styles = StyleSheet.create({
   list: {
 
+  },
+  image: {
+    width: 90,
+    height: 90,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 45
+  },
+  artisanView: {
+    width: '100%',
+    height: 100,
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    borderRadius: 0,
+    marginTop: 10
+  },
+  namePhone: {
+    flex: 1,
+    height: '100%',
+    flexDirection: 'column',
+    alignItems: 'stretch',
+    justifyContent: 'space-evenly',
+    width: '100%',
+  },
+  text: {
+    fontSize: 20,
+    color: '#444444',
+    marginLeft: 5
   }
 })
