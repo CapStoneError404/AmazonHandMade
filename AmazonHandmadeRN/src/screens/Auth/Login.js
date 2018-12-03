@@ -25,7 +25,8 @@ export default class Login extends Component {
 
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      waiting: false
     }
 
     this.submit = this.submit.bind(this)
@@ -34,7 +35,10 @@ export default class Login extends Component {
   }
 
   submit() {
-    this.props.emailLogin(this.state.email, this.state.password)
+    this.setState({waiting: true})
+    this.props.emailLogin(this.state.email, this.state.password).then(() => {
+      this.setState({waiting: false})
+    })
   }
 
   createAccount() {
@@ -67,6 +71,7 @@ export default class Login extends Component {
           color="#c14700"
           textColor="white"
           onPress={this.submit}
+          spinning={this.state.waiting}
         />
         <View style={styles.createForgot}>
           <TouchableOpacity

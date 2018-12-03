@@ -6,23 +6,26 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 export default class ProfilePicture extends Component {
   render() {
     return (
-      <View>
+      <TouchableOpacity 
+        style={[styles.default, styles.addImage, this.props.style]}
+        onPress={this.props.onPress}
+      >
         {(this.props.imageUri) ? 
           <Image
             style={[styles.default, this.props.style]}
             source={{uri: this.props.imageUri}}
           />
           :
-          <TouchableOpacity style={[styles.default, styles.addImage]}>
+          <View style={[styles.default, styles.addImage]}>
             <Text style={styles.text}>Add Image</Text>
             <Icon
               name="plus"
               size={20}
               color="darkgrey"
             />
-          </TouchableOpacity>
+          </View>
         }
-      </View>
+      </TouchableOpacity>
     );
   }
 }

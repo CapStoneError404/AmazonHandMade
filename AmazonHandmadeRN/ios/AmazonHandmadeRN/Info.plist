@@ -78,5 +78,7 @@
 		<string>Roboto.ttf</string>
 		<string>rubicon-icon-font.ttf</string>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string> We need access to your photo library to allow you to upload pictures. </string>
 </dict>
 </plist>
