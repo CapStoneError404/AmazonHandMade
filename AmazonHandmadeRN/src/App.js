@@ -8,6 +8,7 @@ import { Login, Register, ForgotPassword } from '@screens/Auth'
 import Error from '@screens/Error'
 import Launch from '@screens/Launch'
 import { ArtisanList, AddArtisan } from '@screens/ArtisanHub'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 
 const ArtisanHubStack = createStackNavigator(
@@ -21,6 +22,22 @@ const TabNavigator = createBottomTabNavigator(
   {
     ArtisanHub: { screen: ArtisanHubStack },
     Error: { screen: Error }
+  },
+  {
+    navigationOptions: ({navigation}) => ({
+      tabBarIcon: ({ focused, tintColor }) => {
+        const { routeName } = navigation.state
+        var iconName
+        if(routeName === 'ArtisanHub') {
+          iconName = "users"
+        }
+        else if(routeName === 'Error') {
+          iconName = 'cog'
+        }
+        console.log("Working!!!!")
+        return <Icon name={iconName} size={25} color={tintColor} />
+      }
+    })
   }
 )
 
