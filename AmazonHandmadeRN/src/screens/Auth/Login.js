@@ -28,8 +28,6 @@ export default class Login extends Component {
       password: ""
     }
 
-    this.handleEmailChange = this.handleEmailChange.bind(this)
-    this.handlePasswordChange = this.handlePasswordChange.bind(this)
     this.submit = this.submit.bind(this)
     this.createAccount = this.createAccount.bind(this)
     this.forgotPassword = this.forgotPassword.bind(this)
@@ -47,29 +45,21 @@ export default class Login extends Component {
     this.props.navigation.navigate('ForgotPassword')
   }
 
-  handleEmailChange(newText) {
-    this.setState({ email: newText })
-  }
-
-  handlePasswordChange(newText) {
-    this.setState({ password: newText })
-  }
-
   render() {
     return (
-      <Wallpaper>
+      <Wallpaper style={{padding: '10%'}}>
         <Logo />
         <UserInput
           iconName="envelope"
           placeholder="Email"
           value={this.state.email}
-          onChangeText={this.handleEmailChange}
+          onChangeText={(newText) => this.setState({ email: newText })}
         />
         <UserInput
           iconName="key"
           placeholder="Password"
           value={this.state.password}
-          onChangeText={this.handlePasswordChange}
+          onChangeText={(newText) => this.setState({ password: newText })}
           secureTextEntry={true}
         />
         <AsyncButton

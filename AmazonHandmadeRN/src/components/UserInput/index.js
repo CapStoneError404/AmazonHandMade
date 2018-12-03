@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 export default class UserInput extends Component {
   render() {
     return (
-      <View style={styles.inputWrapper}>
+      <View style={[styles.inputWrapper, this.props.style]}>
         {(this.props.iconName) ?
           <Icon name={this.props.iconName} style={styles.icon} /> : null}
         <TextInput
@@ -30,7 +30,8 @@ UserInput.propTypes = {
   value: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   autoCorrect: PropTypes.bool,
-  secureTextEntry: PropTypes.bool
+  secureTextEntry: PropTypes.bool,
+  style: PropTypes.object
 };
 
 const styles = StyleSheet.create({

@@ -8,7 +8,7 @@ export default class AsyncButton extends Component {
   render() {
     return (
       <TouchableOpacity
-        style={[styles.buttonWrapper, { backgroundColor: (this.props.color) ? this.props.color : 'white' }]}
+        style={[styles.buttonWrapper, this.props.style, {backgroundColor: (this.props.color) ? this.props.color : 'black'}]}
         onPress={this.props.onPress}>
         {(this.props.iconName) ?
           <Icon name={this.props.iconName} style={styles.icon} color={(this.props.iconColor) ? this.props.iconColor : styles.icon.color} /> : null}
@@ -23,10 +23,11 @@ export default class AsyncButton extends Component {
 AsyncButton.propTypes = {
   iconName: PropTypes.string,
   iconColor: PropTypes.string,
+  color: PropTypes.string,
   onPress: PropTypes.func.isRequired,
   title: PropTypes.string,
-  color: PropTypes.string,
-  textColor: PropTypes.string
+  textColor: PropTypes.string,
+  style: PropTypes.object
 };
 
 const styles = StyleSheet.create({
@@ -36,11 +37,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: 60,
-    backgroundColor: 'rgba(255,255,255,1)',
+    backgroundColor: 'black',
     paddingHorizontal: 20,
     borderRadius: 30,
     marginTop: 5,
-    marginBottom: 10
+    marginBottom: 5
   },
   icon: {
     fontSize: 20,

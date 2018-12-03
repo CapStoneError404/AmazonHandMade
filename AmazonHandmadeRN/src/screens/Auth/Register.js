@@ -50,7 +50,7 @@ export default class Register extends Component {
 
   render() {
     return (
-      <Wallpaper>
+      <Wallpaper style={{padding: '10%'}}>
         <Text style={styles.logo}>Register</Text>
         <UserInput
           iconName="envelope"

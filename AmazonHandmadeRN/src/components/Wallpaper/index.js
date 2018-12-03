@@ -9,7 +9,7 @@ export default class Wallpaper extends Component {
   render() {
     return (
       <LinearGradient colors={['#50C8C8', '#40B7B7']}>
-        <KeyboardAwareScrollView style={styles.container} bounces='false' contentContainerStyle={styles.content}>
+        <KeyboardAwareScrollView style={[styles.container, this.props.style]} bounces='false' contentContainerStyle={styles.content}>
           {this.props.children}
         </KeyboardAwareScrollView>
       </LinearGradient>
@@ -17,11 +17,14 @@ export default class Wallpaper extends Component {
   }
 }
 
+Wallpaper.propTypes = {
+  style: PropTypes.object
+};
+
 const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: '100%',
-    padding: '10%'
   },
   content: {
     flex: 1,

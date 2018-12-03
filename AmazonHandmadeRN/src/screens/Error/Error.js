@@ -36,7 +36,7 @@ export default class Error extends Component {
           title="Return to Login"
           color="#c14700"
           textColor="white"
-          onPress={this.props.clearErrors}
+          onPress={this.logout}
         />
       </LinearGradient>
     )
