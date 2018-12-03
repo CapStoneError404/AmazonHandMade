@@ -5,13 +5,20 @@ import { FluidNavigator } from 'react-navigation-fluid-transitions'
 import DropdownAlert from 'react-native-dropdownalert'
 
 import { Login, Register, ForgotPassword } from '@screens/Auth'
-import Home from '@screens/Home'
 import Error from '@screens/Error'
 import Launch from '@screens/Launch'
+import { ArtisanList } from '@screens/ArtisanHub'
 
-const HomeStack = createBottomTabNavigator(
+
+const ArtisanHubStack = createStackNavigator(
   {
-    Home: { screen: Home },
+    ArtisanList: { screen: ArtisanList }
+  }
+)
+
+const TabNavigator = createBottomTabNavigator(
+  {
+    ArtisanHub: { screen: ArtisanHubStack },
     Error: { screen: Error }
   }
 )
@@ -34,7 +41,7 @@ const RootStack = FluidNavigator(
   {
     Launch: { screen: Launch },
     Auth: { screen: AuthStack },
-    Home: { screen: HomeStack }
+    Home: { screen: TabNavigator }
   },
   {
     initialRouteName: 'Launch',
