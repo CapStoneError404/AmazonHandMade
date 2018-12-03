@@ -78,6 +78,9 @@ export default class ArtisanList extends Component {
     </TouchableOpacity>
   )
 
+  _keyExtractor = (item, index) => item.uid
+
+
   render() {
     return (
       <Wallpaper>
@@ -89,7 +92,12 @@ export default class ArtisanList extends Component {
         />
         :
         <FlatList 
-          data={Object.values(this.props.Artisans)}
+          data={Object.keys(this.props.Artisans).map((key, index) => {
+            newObject = this.props.Artisans[key]
+            newObject["uid"] = key
+            return newObject
+          })}
+          keyExtractor={this._keyExtractor}
           renderItem={this._renderArtisanItem}
         />
         }
