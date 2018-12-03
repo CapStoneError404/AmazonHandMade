@@ -16,9 +16,6 @@ import firebase from 'react-native-firebase'
 export default class Launch extends Component {
   constructor(props) {
     super(props)
-
-    console.log("PROPS")
-    console.log(this.props)
   }
 
   componentDidMount() {

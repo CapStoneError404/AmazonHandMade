@@ -6,50 +6,34 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 export default class ProfilePicture extends Component {
   render() {
     return (
-      <TouchableOpacity 
-        style={[styles.default, styles.addImage, this.props.style]}
-        onPress={this.props.onPress}
-      >
-        {(this.props.imageUri) ? 
-          <Image
-            style={[styles.default, this.props.style]}
-            source={{uri: this.props.imageUri}}
-          />
-          :
-          <View style={[styles.default, styles.addImage]}>
-            <Text style={styles.text}>Add Image</Text>
-            <Icon
-              name="plus"
-              size={20}
-              color="darkgrey"
-            />
-          </View>
-        }
-      </TouchableOpacity>
-    );
+      (this.props.source.uri) ? 
+        <Image 
+          source={this.props.source}
+          style={[styles.image, this.props.style]}
+        />
+        :
+        <View style={[styles.noImage, this.props.style]}>
+          <Icon name="user" size={50} color="darkgrey"/>
+        </View>
+    )
   }
 }
 
 ProfilePicture.propTypes = {
   style: PropTypes.object,
-  imageUri: PropTypes.string,
-  onPress: PropTypes.func,
+  source: PropTypes.object
 };
 
 const styles = StyleSheet.create({
-  default: {
-    width: 100,
-    height: 100,
+  image: {
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  noImage: {
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 10
-  },
-  addImage: {
-    backgroundColor: '#DDDDDD'
-  },
-  text: {
-    fontSize: 16, 
-    fontWeight: 'bold', 
-    color: 'darkgrey'
+    backgroundColor: 'lightgrey'
   }
 });
+
+
