@@ -1,7 +1,7 @@
 import firebase from 'react-native-firebase'
 
 export function createArtisan(data) {
-  return async (dispatch, prevState) => { 
+  return (dispatch, prevState) => { 
     var uid = ""
     var profilePicURL = ""
     return firebase.database().ref('artisans/').push({
@@ -25,6 +25,14 @@ export function createArtisan(data) {
         description: data.description,
         imageURL: profilePicURL
       }})
+    })
+  }
+}
+
+export function fetchArtisans() {
+  return (dispatch, prevState) => {
+    return firebase.database().ref('artisans').once('value').then((snapshot) => {
+      dispatch({type: 'GET_ARTISANS', artisans: snapshot.val()})
     })
   }
 }
