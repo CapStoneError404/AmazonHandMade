@@ -110,7 +110,7 @@ export default class AddArtisan extends Component {
           color="#c14700"
           textColor="white"
           onPress={this.createArtisan}
-          style={{borderRadius: 5}}
+          style={styles.button}
           spinning={this.state.adding}
         />
       </Wallpaper>
@@ -134,7 +134,8 @@ const styles = StyleSheet.create({
   },
   secondSection: {
     width: '100%',
-    flexDirection: 'row'
+    flexDirection: 'column',
+    flex: 4
   },
   namePhone: {
     flex: 1,
@@ -163,6 +164,10 @@ const styles = StyleSheet.create({
     marginLeft: 0,
     marginRight: 0,
     borderRadius: 5,
-    height: 300
+  },
+  button: {
+    borderRadius: 5, 
+    flex: 1, 
+    flexDirection: 'column'
   }
 })
