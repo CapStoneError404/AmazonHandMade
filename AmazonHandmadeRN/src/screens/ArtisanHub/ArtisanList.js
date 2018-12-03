@@ -27,7 +27,7 @@ export default class ArtisanList extends Component {
       headerRight: (
         <Button 
           transparent
-          onPress={() => navigation.state.params.addArtisan()}
+          onPress={() => navigation.navigate("AddArtisan")}
           title="Add"
         />
       )
@@ -64,17 +64,6 @@ export default class ArtisanList extends Component {
   render() {
     return (
       <Wallpaper>
-        <Modal
-          animationType="slide"
-          transparent={false}
-          visible={this.state.showAddArtisan}
-          onRequestClose={() => {
-            this.state.showAddArtisan = false
-            Alert.alert('Modal has been closed.');
-          }}
-        >
-          <AddArtisan/>
-        </Modal>
         <FlatList 
           data={this.state.artisans}
           renderItem={({item}) => (

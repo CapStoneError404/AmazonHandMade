@@ -7,7 +7,10 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 export default class UserInput extends Component {
   render() {
     return (
-      <View style={[styles.inputWrapper, this.props.style]}>
+      <View style={(this.props.multiline) ? 
+        [styles.multiLineInputWrapper, this.props.style] : 
+        [styles.singleLineInputWrapper, this.props.style]}
+      >
         {(this.props.iconName) ?
           <Icon name={this.props.iconName} style={styles.icon} /> : null}
         <TextInput
@@ -18,6 +21,7 @@ export default class UserInput extends Component {
           autoCapitalize="none"
           autoCorrect={this.props.autoCorrect}
           secureTextEntry={this.props.secureTextEntry}
+          multiline={(this.props.multiline) ? this.props.multiline : false}
         />
       </View>
     );
@@ -31,11 +35,12 @@ UserInput.propTypes = {
   placeholder: PropTypes.string,
   autoCorrect: PropTypes.bool,
   secureTextEntry: PropTypes.bool,
-  style: PropTypes.object
+  style: PropTypes.object,
+  multiline: PropTypes.bool
 };
 
 const styles = StyleSheet.create({
-  inputWrapper: {
+  singleLineInputWrapper: {
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-start',
@@ -43,6 +48,18 @@ const styles = StyleSheet.create({
     height: 60,
     backgroundColor: 'rgba(255,255,255,0.85)',
     paddingHorizontal: 20,
+    borderRadius: 30,
+    marginTop: 5,
+    marginBottom: 10
+  },
+  multiLineInputWrapper: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+    height: 60,
+    backgroundColor: 'rgba(255,255,255,0.85)',
+    paddingHorizontal: 10,
     borderRadius: 30,
     marginTop: 5,
     marginBottom: 10

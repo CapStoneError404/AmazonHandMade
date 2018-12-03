@@ -1,22 +1,39 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Dimensions from 'Dimensions';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 export default class AsyncButton extends Component {
   render() {
-    return (
-      <TouchableOpacity
-        style={[styles.buttonWrapper, this.props.style, {backgroundColor: (this.props.color) ? this.props.color : 'black'}]}
-        onPress={this.props.onPress}>
-        {(this.props.iconName) ?
-          <Icon name={this.props.iconName} style={styles.icon} color={(this.props.iconColor) ? this.props.iconColor : styles.icon.color} /> : null}
-        <Text style={[styles.text, { color: (this.props.textColor) ? this.props.textColor : 'black' }]}>
-          {this.props.title}
-        </Text>
-      </TouchableOpacity>
-    );
+    console.log("Spinning: " + this.props.spinning)
+    if(this.props.spinning) {
+      return (
+        <TouchableOpacity
+          style={[styles.buttonWrapper, this.props.style, {backgroundColor: (this.props.color) ? this.props.color : 'black'}]}
+          onPress={this.handleOnPress}
+        >
+          <ActivityIndicator 
+            size='small'
+            animating={this.props.spinning}
+            color='white'
+          />
+        </TouchableOpacity>
+      )
+    }
+    else {
+      return (
+        <TouchableOpacity
+          style={[styles.buttonWrapper, this.props.style, {backgroundColor: (this.props.color) ? this.props.color : 'black'}]}
+          onPress={this.props.onPress}>
+          {(this.props.iconName) ?
+            <Icon name={this.props.iconName} style={styles.icon} color={(this.props.iconColor) ? this.props.iconColor : styles.icon.color} /> : null}
+          <Text style={[styles.text, { color: (this.props.textColor) ? this.props.textColor : 'black' }]}>
+            {this.props.title}
+          </Text>
+        </TouchableOpacity>
+      )
+    }
   }
 }
 
@@ -27,7 +44,8 @@ AsyncButton.propTypes = {
   onPress: PropTypes.func.isRequired,
   title: PropTypes.string,
   textColor: PropTypes.string,
-  style: PropTypes.object
+  style: PropTypes.object,
+  spinning: PropTypes.bool
 };
 
 const styles = StyleSheet.create({

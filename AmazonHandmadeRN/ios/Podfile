@@ -6,7 +6,20 @@ target 'AmazonHandmadeRN' do
   # use_frameworks!
 
   # Pods for AmazonHandmadeRN
-  pod 'React', :path => '../node_modules/react-native'
+  rn_path = '../node_modules/react-native'
+  pod 'React', path: rn_path, subspecs: [
+    'Core',
+    'RCTActionSheet',
+    'RCTAnimation',
+    'RCTGeolocation',
+    'RCTImage',
+    'RCTLinkingIOS',
+    'RCTNetwork',
+    'RCTSettings',
+    'RCTText',
+    'RCTVibration',
+    'RCTWebSocket'
+  ]
   pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
 
   # Required by RNFirebase
@@ -30,4 +43,15 @@ target 'AmazonHandmadeRN' do
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
   pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
 
+
+  pod 'RNImageCropPicker', :path => '../node_modules/react-native-image-crop-picker'
+
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    if target.name == "React"
+      target.remove_from_project
+    end
+  end
 end
