@@ -45,6 +45,7 @@ export default class ArtisanList extends Component {
 
     this.addArtisan = this.addArtisan.bind(this)
     this.fetchArtisans = this.fetchArtisans.bind(this)
+    this.navigateToArtisan = this.navigateToArtisan.bind(this)
   }
 
   componentDidMount() {
@@ -65,8 +66,17 @@ export default class ArtisanList extends Component {
     this.setState({showAddArtisan: true})
   }
 
+  navigateToArtisan(artisan) {
+    console.log("Worked")
+    this.props.navigation.navigate('ArtisanDetail', {...artisan})
+  }
+
   _renderArtisanItem = ({item}) => (
-    <TouchableOpacity style={styles.artisanView}>
+    <TouchableOpacity 
+      style={styles.artisanView}
+      onPress={() => this.navigateToArtisan(item)}
+      key={item.key}
+    >
       <ProfilePicture 
         source={{uri: item.profilePictureURL}}
         style={styles.image}
@@ -121,13 +131,14 @@ const styles = StyleSheet.create({
     margin: 5
   },
   artisanView: {
-    width: '100%',
     height: 100,
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'white',
-    borderRadius: 0,
-    marginTop: 10
+    borderRadius: 5,
+    marginTop: 10,
+    marginLeft: 10,
+    marginRight: 10
   },
   namePhone: {
     flex: 1,

@@ -7,14 +7,15 @@ import DropdownAlert from 'react-native-dropdownalert'
 import { Login, Register, ForgotPassword } from '@screens/Auth'
 import Error from '@screens/Error'
 import Launch from '@screens/Launch'
-import { ArtisanList, AddArtisan } from '@screens/ArtisanHub'
+import { ArtisanList, AddArtisan, ArtisanDetail } from '@screens/ArtisanHub'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 
 const ArtisanHubStack = createStackNavigator(
   {
     ArtisanList: { screen: ArtisanList },
-    AddArtisan: { screen: AddArtisan }
+    AddArtisan: { screen: AddArtisan },
+    ArtisanDetail: { screen: ArtisanDetail }
   }
 )
 

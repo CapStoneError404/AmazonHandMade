@@ -15,11 +15,14 @@ function mapDispatchToProps(dispatch) {
 
 import { default as UnconnectedArtisanList } from './ArtisanList'
 import { default as UnconnectedAddArtisan } from './AddArtisan'
+import { default as UnconnectedArtisanDetail } from './ArtisanDetail'
 
 const ArtisanList = connect(mapStateToProps, mapDispatchToProps)(UnconnectedArtisanList)
 const AddArtisan = connect(mapStateToProps, mapDispatchToProps)(UnconnectedAddArtisan)
+const ArtisanDetail = connect(mapStateToProps, mapDispatchToProps)(UnconnectedArtisanDetail)
 
 export {
   ArtisanList,
-  AddArtisan
+  AddArtisan,
+  ArtisanDetail
 }
