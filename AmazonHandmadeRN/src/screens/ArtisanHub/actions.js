@@ -3,27 +3,35 @@ import firebase from 'react-native-firebase'
 export function createArtisan(data) {
   return async (dispatch, prevState) => { 
     var uid = ""
-    var profilePicURL = ""
+    var profilePictureURL = ""
     return firebase.database().ref('artisans/').push({
       name: data.name,
       phoneNumber: data.phoneNumber,
       description: data.description
     }).then((ref) => {
       uid = ref.key
-      return firebase.storage()
-        .ref(`artisanFiles/${ref.key}/images/profilePicture`)
-        .putFile(data.profilePicturePath)
-    }).then((ref) => {
-      profilePicURL = ref.downloadURL
-      return firebase.database().ref(`artisans/${uid}`).update({
-        profilePictureURL: ref.downloadURL
-      })
+      if (data.profilePicturePath) {
+        return firebase.storage()
+          .ref(`artisanFiles/${ref.key}/images/profilePicture`)
+          .putFile(data.profilePicturePath)
+          .then((ref) => {
+            profilePictureURL = ref.downloadURL
+            return firebase.database().ref(`artisans/${uid}`).update({
+              profilePictureURL: ref.downloadURL
+          })
+        })
+      } else {
+        return new Promise((resolve, reject) => {
+          resolve()
+        })
+      }
     }).then(() => {
-      dispatch({type: 'ADD_ARTISAN', artisan: {
+      return dispatch({type: 'ADD_ARTISAN', artisanId: uid, artisan: {
         name: data.name,
         phoneNumber: data.phoneNumber,
         description: data.description,
-        imageURL: profilePicURL
+        profilePictureURL: profilePictureURL,
+        uid: uid
       }})
     })
   }
@@ -32,7 +40,16 @@ export function createArtisan(data) {
 export function fetchArtisans() {
   return async (dispatch, prevState) => {
     return firebase.database().ref('artisans').once('value').then((snapshot) => {
-      dispatch({type: 'GET_ARTISANS', artisans: snapshot.val()})
+      artisanArray = []
+      artisanObject = snapshot.val()
+      for(var uid in artisanObject) {
+        artisanArray.push({
+          ...artisanObject[uid],
+          uid: uid
+        })
+      }
+      
+      dispatch({type: 'GET_ARTISANS', artisans: artisanArray})
     })
   }
 }

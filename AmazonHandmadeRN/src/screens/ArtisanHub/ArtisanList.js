@@ -91,13 +91,22 @@ export default class ArtisanList extends Component {
   _keyExtractor = (item, index) => item.uid
 
   _getData() {
-    artisans = Object.keys(this.props.Artisans).map((key, index) => {
-      newObject = this.props.Artisans[key]
-      newObject["uid"] = key
-      return newObject
-    })
-    artisans.sort((first, second) => first.name < second.name)
-    return artisans
+    if(this.props.Artisans) {
+      artisans = Array.from(this.props.Artisans)
+      artisans.sort((first, second) => {
+        name1 = first.name.toLowerCase()
+        name2 = second.name.toLowerCase()
+        if (name1 < name2)
+          return -1
+        else if(name1 > name2)
+         return 1
+        else
+          return 0
+      })
+      return artisans
+    } else {
+      return []
+    }
   }
 
   render() {

@@ -51,8 +51,16 @@ export default class AddArtisan extends Component {
   }
 
   verifyFields() {
-    console.log("Not yet implemented")
-    return true
+    if(!this.state.name)
+      this.props.displayError("Name field required.")
+    else if(!this.state.phoneNumber)
+      this.props.displayError("Phone field required")
+    else if(!this.state.description)
+      this.props.displayError("Please provide a brief description")
+    //else if(!this.state.profilePicturePath)
+    //  this.props.displayError("Please upload a profile picture")
+
+    return this.state.name && this.state.phoneNumber && this.state.description// && this.state.profilePicturePath
   }
   
   createArtisan() {
