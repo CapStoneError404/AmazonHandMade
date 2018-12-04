@@ -8,6 +8,12 @@ export function authLogout() {
   }
 }
 
+export function displayError(msg) {
+  return (dispatch, prevState) => {
+    dispatch({type: 'ERROR', error: {message: msg} })
+  }
+}
+
 export function clearErrors() {
   return (dispatch, prevState) => {
     dispatch({ type: 'CLEAR_ERRS' })
