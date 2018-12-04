@@ -14,15 +14,8 @@ export default class UserInput extends Component {
         {(this.props.iconName) ?
           <Icon name={this.props.iconName} style={styles.icon} /> : null}
         <TextInput
-          style={styles.input}
-          onChangeText={this.props.onChangeText}
-          value={this.props.value}
-          placeholder={this.props.placeholder}
-          autoCapitalize="none"
-          autoCorrect={this.props.autoCorrect}
-          secureTextEntry={this.props.secureTextEntry}
-          multiline={(this.props.multiline) ? this.props.multiline : false}
-          keyboardType={this.props.keyboardType}
+          {...this.props}
+          style={[styles.input, this.props.style]}
         />
       </View>
     );
@@ -31,14 +24,7 @@ export default class UserInput extends Component {
 
 UserInput.propTypes = {
   iconName: PropTypes.string,
-  onChangeText: PropTypes.func.isRequired,
-  value: PropTypes.string.isRequired,
-  placeholder: PropTypes.string,
-  autoCorrect: PropTypes.bool,
-  secureTextEntry: PropTypes.bool,
-  style: PropTypes.object,
-  multiline: PropTypes.bool,
-  keyboardType: PropTypes.string
+  style: PropTypes.object
 };
 
 const styles = StyleSheet.create({

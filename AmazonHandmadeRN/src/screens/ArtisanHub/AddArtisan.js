@@ -17,7 +17,7 @@ import {
   AddImage
 } from '@components'
 
-import ImagePicker from 'react-native-image-crop-picker';
+import ImagePicker from 'react-native-image-crop-picker'
 
 export default class AddArtisan extends Component {
   static navigationOptions = {
