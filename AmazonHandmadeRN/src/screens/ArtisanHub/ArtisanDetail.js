@@ -1,17 +1,7 @@
+import { ProfilePicture, Wallpaper } from '@components';
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  ScrollView
-} from 'react-native';
-
-import {
-  Wallpaper,
-  ProfilePicture
-} from '@components'
-
-import { withMappedNavigationProps } from 'react-navigation-props-mapper'
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { withMappedNavigationProps } from 'react-navigation-props-mapper';
 
 class ArtisanDetail extends Component {
   static navigationOptions = {

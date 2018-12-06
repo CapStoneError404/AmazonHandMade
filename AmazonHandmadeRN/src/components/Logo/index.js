@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Image } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 
 export default class Logo extends Component {
   render() {

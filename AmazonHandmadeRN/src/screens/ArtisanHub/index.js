@@ -5,7 +5,9 @@ import * as globalActions from '@actions'
 
 function mapStateToProps(state) {
   return {
-    Artisans: state.Artisans
+    User: state.User,
+    Artisans: state.Artisans,
+    Errors: state.Errors
   }
 }
 

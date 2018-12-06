@@ -1,6 +1,5 @@
 import React from 'react'
-import { AppRegistry, View } from 'react-native'
-import { createStore } from 'redux'
+import { AppRegistry } from 'react-native'
 import { PersistGate } from 'redux-persist/integration/react'
 import { Provider } from 'react-redux'
 

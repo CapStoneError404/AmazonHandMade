@@ -3,13 +3,12 @@ import { View } from 'react-native'
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation'
 import { FluidNavigator } from 'react-navigation-fluid-transitions'
 import DropdownAlert from 'react-native-dropdownalert'
-
-import { Login, Register, ForgotPassword } from '@screens/Auth'
-import Error from '@screens/Error'
-import Launch from '@screens/Launch'
-import { ArtisanList, AddArtisan, ArtisanDetail } from '@screens/ArtisanHub'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
+import { Login, Register, ForgotPassword } from '@screens/Auth'
+import Settings from '@screens/Settings'
+import Launch from '@screens/Launch'
+import { ArtisanList, AddArtisan, ArtisanDetail } from '@screens/ArtisanHub'
 
 const ArtisanHubStack = createStackNavigator(
   {
@@ -22,9 +21,10 @@ const ArtisanHubStack = createStackNavigator(
 const TabNavigator = createBottomTabNavigator(
   {
     ArtisanHub: { screen: ArtisanHubStack },
-    Error: { screen: Error }
+    Settings: { screen: Settings }
   },
   {
+    initialRouteName: "ArtisanHub",
     navigationOptions: ({navigation}) => ({
       tabBarIcon: ({ focused, tintColor }) => {
         const { routeName } = navigation.state
@@ -32,7 +32,7 @@ const TabNavigator = createBottomTabNavigator(
         if(routeName === 'ArtisanHub') {
           iconName = "users"
         }
-        else if(routeName === 'Error') {
+        else if(routeName === 'Settings') {
           iconName = 'cog'
         }
         
@@ -77,8 +77,8 @@ class Main extends Component {
   }
 
   render() {
-    if (this.props.Errs.length > 0 && this.dropdown)
-      this.dropdown.alertWithType('error', 'Error', this.props.Errs.join("\n\n"))
+    if (this.props.Errors.length > 0 && this.dropdown)
+      this.dropdown.alertWithType('error', 'Error', this.props.Errors.join("\n\n"))
 
     return (
       <View style={{ flex: 1 }}>
@@ -97,7 +97,7 @@ import * as actions from '@actions'
 
 function mapStateToProps(state) {
   return {
-    Errs: state.Errs
+    Errors: state.Errors
   }
 }
 

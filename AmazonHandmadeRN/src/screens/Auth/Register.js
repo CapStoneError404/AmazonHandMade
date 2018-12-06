@@ -1,20 +1,7 @@
+import { AsyncButton, UserInput, Wallpaper } from '@components';
 import React, { Component } from 'react';
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-  KeyboardAvoidingView,
-  TouchableOpacity,
-  ScrollView
-} from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 
-import LinearGradient from 'react-native-linear-gradient'
-import {
-  UserInput,
-  AsyncButton,
-  Wallpaper
-} from '@components'
 
 export default class Register extends Component {
   constructor(props) {
@@ -23,7 +10,8 @@ export default class Register extends Component {
     this.state = {
       email: "",
       password: "",
-      confirm: ""
+      confirm: "",
+      waiting: false
     }
 
     this.submit = this.submit.bind(this)
@@ -45,7 +33,12 @@ export default class Register extends Component {
   }
 
   submit() {
-    this.props.register(this.state.email, this.state.password)
+    this.setState({waiting: true})
+    this.props.register(this.state.email, this.state.password).then(() => {
+      this.setState({waiting: false})
+      if(this.props.User)
+        this.props.navigation.navigate("Home")
+    })
   }
 
   render() {
@@ -77,6 +70,7 @@ export default class Register extends Component {
           color="#c14700"
           textColor="white"
           onPress={this.submit}
+          spinning={this.state.waiting}
         />
       </Wallpaper>
     )

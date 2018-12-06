@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { StyleSheet, View, Image, TouchableOpacity, Text } from 'react-native';
 import PropTypes from 'prop-types';
-import Icon from 'react-native-vector-icons/FontAwesome'
+import React, { Component } from 'react';
+import { Image, StyleSheet, View } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class ProfilePicture extends Component {
   render() {

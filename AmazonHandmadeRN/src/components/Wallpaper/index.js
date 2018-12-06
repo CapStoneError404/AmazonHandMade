@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Dimensions from 'Dimensions';
-import { Platform, StyleSheet } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient'
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
+import React, { Component } from 'react';
+import { StyleSheet } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
+import LinearGradient from 'react-native-linear-gradient';
 
 export default class Wallpaper extends Component {
   render() {

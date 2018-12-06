@@ -1,8 +1,6 @@
-import React, { Component } from 'react'
-import {
-  View, Text, StyleSheet
-} from 'react-native'
-import { Wallpaper } from '@components'
+import { Wallpaper } from '@components';
+import React, { Component } from 'react';
+import { StyleSheet, Text } from 'react-native';
 
 export default class ForgotPassword extends Component {
   constructor(props) {
