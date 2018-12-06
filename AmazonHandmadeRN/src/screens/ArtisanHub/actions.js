@@ -1,47 +1,45 @@
 import firebase from 'react-native-firebase'
 
 export function createArtisan(data) {
-  return async (dispatch, prevState) => { 
-    var uid = ""
-    var profilePictureURL = ""
-    return firebase.database().ref('artisans/').push({
-      name: data.name,
-      phoneNumber: data.phoneNumber,
-      description: data.description
-    }).then((ref) => {
-      uid = ref.key
-      if (data.profilePicturePath) {
-        return firebase.storage()
-          .ref(`artisanFiles/${ref.key}/images/profilePicture`)
-          .putFile(data.profilePicturePath)
-          .then((ref) => {
-            profilePictureURL = ref.downloadURL
-            return firebase.database().ref(`artisans/${uid}`).update({
-              profilePictureURL: ref.downloadURL
-          })
-        })
-      } else {
-        return new Promise((resolve, reject) => {
-          resolve()
-        })
-      }
-    }).then(() => {
-      return dispatch({type: 'ADD_ARTISAN', artisanId: uid, artisan: {
+  return (dispatch, prevState) => { 
+    return new Promise(async (resolve, reject) => {
+      var db_ref = await firebase.database().ref('artisans/').push({
+        name: data.name,
+        phoneNumber: data.phoneNumber,
+        description: data.description
+      })
+
+      artisanObject = {
         name: data.name,
         phoneNumber: data.phoneNumber,
         description: data.description,
-        profilePictureURL: profilePictureURL,
-        uid: uid
-      }})
+        uid: db_ref.key
+      }
+
+      if(data.profilePicturePath) {
+        var st_ref = await firebase.storage()
+          .ref(`artisanFiles/${db_ref.key}/images/profilePicture`)
+          .putFile(data.profilePicturePath)
+
+        artisanObject.profilePictureURL = st_ref.downloadURL
+        
+        firebase.database().ref(`artisans/${artisanObject.uid}`).update(
+          { profilePictureURL: st_ref.downloadURL })
+      }
+
+      resolve()
+      dispatch({type: 'ADD_ARTISAN', artisan: artisanObject})
     })
   }
 }
 
 export function fetchArtisans() {
-  return async (dispatch, prevState) => {
-    return firebase.database().ref('artisans').once('value').then((snapshot) => {
+  return (dispatch, prevState) => {
+    return new Promise(async (resolve, reject) => {
+      snapshot = await firebase.database().ref('artisans').once('value')
       artisanArray = []
       artisanObject = snapshot.val()
+      
       for(var uid in artisanObject) {
         artisanArray.push({
           ...artisanObject[uid],
@@ -49,6 +47,7 @@ export function fetchArtisans() {
         })
       }
       
+      resolve()
       dispatch({type: 'GET_ARTISANS', artisans: artisanArray})
     })
   }

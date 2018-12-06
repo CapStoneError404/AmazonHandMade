@@ -1,24 +1,6 @@
+import { Wallpaper } from '@components';
 import React, { Component } from 'react';
-import {
-  Button,
-  StyleSheet,
-  Text,
-  View,
-  KeyboardAvoidingView,
-  TouchableOpacity,
-  FlatList,
-  Modal,
-  ActivityIndicator,
-  Image
-} from 'react-native';
-
-import {
-  AsyncButton,
-  UserInput,
-  Divider,
-  Wallpaper,
-  Logo
-} from '@components'
+import { ActivityIndicator, Button, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { ProfilePicture } from '../../components';
 
 export default class ArtisanList extends Component {
@@ -43,16 +25,12 @@ export default class ArtisanList extends Component {
       fetchingArtisans: false
     }
 
-    this.addArtisan = this.addArtisan.bind(this)
     this.fetchArtisans = this.fetchArtisans.bind(this)
     this.navigateToArtisan = this.navigateToArtisan.bind(this)
   }
 
   componentDidMount() {
     this.fetchArtisans()
-    this.props.navigation.setParams({
-      addArtisan: this.addArtisan
-    })
   }
 
   fetchArtisans() {
@@ -62,12 +40,7 @@ export default class ArtisanList extends Component {
     })
   }
 
-  addArtisan() {
-    this.setState({showAddArtisan: true})
-  }
-
   navigateToArtisan(artisan) {
-    console.log("Worked")
     this.props.navigation.navigate('ArtisanDetail', {...artisan})
   }
 
@@ -90,29 +63,29 @@ export default class ArtisanList extends Component {
 
   _keyExtractor = (item, index) => item.uid
 
-  _getData() {
-    if(this.props.Artisans) {
-      artisans = Array.from(this.props.Artisans)
-      artisans.sort((first, second) => {
-        name1 = first.name.toLowerCase()
-        name2 = second.name.toLowerCase()
-        if (name1 < name2)
-          return -1
-        else if(name1 > name2)
-         return 1
-        else
-          return 0
-      })
-      return artisans
-    } else {
-      return []
-    }
+  sortedArtisans() {
+      if(this.props.Artisans != []) {
+        sortedArtisans = Array.from(this.props.Artisans)
+        sortedArtisans.sort((first, second) => {
+          name1 = first.name.toLowerCase()
+          name2 = second.name.toLowerCase()
+          if (name1 < name2)
+            return -1
+          else if(name1 > name2)
+          return 1
+          else
+            return 0
+        })
+        return sortedArtisans
+      } else {
+        return []
+      }
   }
 
   render() {
     return (
       <Wallpaper>
-        {(this.state.fetchingArtisans) ?
+        {(this.props.Artisans != [] && this.state.fetchingArtisans) ?
         <ActivityIndicator 
           size='large'
           animating={this.props.spinning}
@@ -120,7 +93,7 @@ export default class ArtisanList extends Component {
         />
         :
         <FlatList 
-          data={this._getData()}
+          data={this.sortedArtisans()}
           keyExtractor={this._keyExtractor}
           renderItem={this._renderArtisanItem}
         />

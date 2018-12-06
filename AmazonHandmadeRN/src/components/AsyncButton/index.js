@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Dimensions from 'Dimensions';
-import { StyleSheet, View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome'
+import React, { Component } from 'react';
+import { ActivityIndicator, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class AsyncButton extends Component {
   render() {
-    console.log("Spinning: " + this.props.spinning)
     if(this.props.spinning) {
       return (
         <TouchableOpacity

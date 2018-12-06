@@ -1,11 +1,24 @@
 import { combineReducers } from 'redux';
+import storage from 'redux-persist/lib/storage'
 
 // Import individual module's reducers here
-import Errs from './Errs'
+import Errors from './Errors'
 import User from './User'
 import Artisans from './Artisans'
 
 //Then combine them all here
-const rootReducer = combineReducers({ User, Errs, Artisans });
+const appReducer = combineReducers({ User, Errors, Artisans });
+
+const rootReducer = (state, action) => {
+  if(action.type == 'RESET_STORE' || (__DEV__ && action.type == 'LOGOUT')) {
+    Object.keys(state).forEach(key => {
+      storage.removeItem(`persist:${key}`);
+    });
+    
+    state = undefined
+  }
+
+  return appReducer(state, action)
+}
 
 export default rootReducer;

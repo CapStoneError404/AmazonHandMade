@@ -1,4 +1,4 @@
-export default function User(state = [], action) {
+export default function User(state = null, action) {
   console.log("User reducing action " + action.type);
   switch (action.type) {
     case 'LOGIN':

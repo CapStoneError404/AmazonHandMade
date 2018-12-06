@@ -1,23 +1,7 @@
+import { AddImage, AsyncButton, UserInput, Wallpaper } from '@components';
 import React, { Component } from 'react';
-import {
-  Button,
-  StyleSheet,
-  Text,
-  View,
-  KeyboardAvoidingView,
-  TouchableOpacity,
-  FlatList
-} from 'react-native';
-
-import {
-  AsyncButton,
-  UserInput,
-  Divider,
-  Wallpaper,
-  AddImage
-} from '@components'
-
-import ImagePicker from 'react-native-image-crop-picker'
+import { StyleSheet, View } from 'react-native';
+import ImagePicker from 'react-native-image-crop-picker';
 
 export default class AddArtisan extends Component {
   static navigationOptions = {

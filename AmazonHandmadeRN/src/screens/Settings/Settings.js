@@ -1,18 +1,10 @@
+import { Button } from '@components';
 import React, { Component } from 'react';
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-  KeyboardAvoidingView,
-  TouchableOpacity,
-  ScrollView
-} from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 
-import LinearGradient from 'react-native-linear-gradient'
-import { Button } from '@components'
 
-export default class Error extends Component {
+export default class Settings extends Component {
   constructor(props) {
     super(props)
 
@@ -20,15 +12,17 @@ export default class Error extends Component {
   }
 
   logout() {
-    this.props.authLogout()
+    this.props.authLogout().then(() => {
+      this.props.navigation.navigate("Login")
+    })
   }
 
   render() {
     return (
-      <LinearGradient colors={['#ff5555', '#ff5566']} style={styles.container}>
+      <LinearGradient colors={['#AAAAAA', '#AAAAAA']} style={styles.container}>
         <View style={styles.textContainer}>
           <ScrollView>
-            <Text style={styles.text}>{"Error!\n\n" + this.props.Errs.join("\n\n")}</Text>
+            <Text style={styles.text}>{"Settings"}</Text>
           </ScrollView>
         </View>
         <Button

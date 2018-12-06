@@ -1,27 +1,11 @@
+import { AsyncButton, Logo, UserInput, Wallpaper } from '@components';
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  KeyboardAvoidingView,
-  TouchableOpacity
-} from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-import {
-  AsyncButton,
-  UserInput,
-  Button,
-  Divider,
-  Wallpaper,
-  Logo
-} from '@components'
 
 export default class Login extends Component {
   constructor(props) {
     super(props)
-
-    console.log("Props: ")
-    console.log(this.props)
 
     this.state = {
       email: "",
@@ -38,6 +22,8 @@ export default class Login extends Component {
     this.setState({waiting: true})
     this.props.emailLogin(this.state.email, this.state.password).then(() => {
       this.setState({waiting: false})
+      if(this.props.User)
+        this.props.navigation.navigate("Home")
     })
   }
 

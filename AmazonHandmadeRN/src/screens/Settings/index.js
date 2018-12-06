@@ -5,7 +5,8 @@ import * as globalActions from '@actions'
 
 function mapStateToProps(state) {
   return {
-    Errs: state.Errs
+    User: state.User,
+    Errors: state.Errors
   }
 }
 
@@ -13,5 +14,5 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ ...actions, ...globalActions }, dispatch);
 }
 
-import Error from './Error'
-export default connect(mapStateToProps, mapDispatchToProps)(Error)
+import Settings from './Settings'
+export default connect(mapStateToProps, mapDispatchToProps)(Settings)
