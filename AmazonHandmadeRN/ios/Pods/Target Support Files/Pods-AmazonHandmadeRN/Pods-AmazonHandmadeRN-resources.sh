@@ -92,6 +92,7 @@ EOM
   esac
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_resource "${PODS_CONFIGURATION_BUILD_DIR}/QBImagePickerController/QBImagePicker.bundle"
   install_resource "${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"
   install_resource "${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"
   install_resource "${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"
@@ -107,9 +108,11 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"
   install_resource "${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"
   install_resource "${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"
+  install_resource "${PODS_ROOT}/RSKImageCropper/RSKImageCropper/RSKImageCropperStrings.bundle"
   install_resource "${PODS_CONFIGURATION_BUILD_DIR}/gRPC/gRPCCertificates.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_resource "${PODS_CONFIGURATION_BUILD_DIR}/QBImagePickerController/QBImagePicker.bundle"
   install_resource "${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"
   install_resource "${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"
   install_resource "${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"
@@ -125,6 +128,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"
   install_resource "${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"
   install_resource "${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"
+  install_resource "${PODS_ROOT}/RSKImageCropper/RSKImageCropper/RSKImageCropperStrings.bundle"
   install_resource "${PODS_CONFIGURATION_BUILD_DIR}/gRPC/gRPCCertificates.bundle"
 fi
 

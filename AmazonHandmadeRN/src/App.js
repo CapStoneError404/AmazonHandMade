@@ -3,16 +3,42 @@ import { View } from 'react-native'
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation'
 import { FluidNavigator } from 'react-navigation-fluid-transitions'
 import DropdownAlert from 'react-native-dropdownalert'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 import { Login, Register, ForgotPassword } from '@screens/Auth'
-import Home from '@screens/Home'
-import Error from '@screens/Error'
+import Settings from '@screens/Settings'
 import Launch from '@screens/Launch'
+import { ArtisanList, AddArtisan, ArtisanDetail } from '@screens/ArtisanHub'
 
-const HomeStack = createBottomTabNavigator(
+const ArtisanHubStack = createStackNavigator(
   {
-    Home: { screen: Home },
-    Error: { screen: Error }
+    ArtisanList: { screen: ArtisanList },
+    AddArtisan: { screen: AddArtisan },
+    ArtisanDetail: { screen: ArtisanDetail }
+  }
+)
+
+const TabNavigator = createBottomTabNavigator(
+  {
+    ArtisanHub: { screen: ArtisanHubStack },
+    Settings: { screen: Settings }
+  },
+  {
+    initialRouteName: "ArtisanHub",
+    navigationOptions: ({navigation}) => ({
+      tabBarIcon: ({ focused, tintColor }) => {
+        const { routeName } = navigation.state
+        var iconName
+        if(routeName === 'ArtisanHub') {
+          iconName = "users"
+        }
+        else if(routeName === 'Settings') {
+          iconName = 'cog'
+        }
+        
+        return <Icon name={iconName} size={25} color={tintColor} />
+      }
+    })
   }
 )
 
@@ -34,7 +60,7 @@ const RootStack = FluidNavigator(
   {
     Launch: { screen: Launch },
     Auth: { screen: AuthStack },
-    Home: { screen: HomeStack }
+    Home: { screen: TabNavigator }
   },
   {
     initialRouteName: 'Launch',
@@ -51,8 +77,8 @@ class Main extends Component {
   }
 
   render() {
-    if (this.props.Errs.length > 0 && this.dropdown)
-      this.dropdown.alertWithType('error', 'Error', this.props.Errs.join("\n\n"))
+    if (this.props.Errors.length > 0 && this.dropdown)
+      this.dropdown.alertWithType('error', 'Error', this.props.Errors.join("\n\n"))
 
     return (
       <View style={{ flex: 1 }}>
@@ -71,7 +97,7 @@ import * as actions from '@actions'
 
 function mapStateToProps(state) {
   return {
-    Errs: state.Errs
+    Errors: state.Errors
   }
 }
 

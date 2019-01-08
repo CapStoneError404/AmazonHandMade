@@ -74,6 +74,11 @@
 		<string>Bitter-Bold.ttf</string>
 		<string>Bitter-Italic.ttf</string>
 		<string>Bitter-Regular.ttf</string>
+		<string>Roboto_medium.ttf</string>
+		<string>Roboto.ttf</string>
+		<string>rubicon-icon-font.ttf</string>
 	</array>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string> We need access to your photo library to allow you to upload pictures. </string>
 </dict>
 </plist>

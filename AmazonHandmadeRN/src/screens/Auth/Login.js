@@ -1,42 +1,30 @@
+import { AsyncButton, Logo, UserInput, Wallpaper } from '@components';
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  KeyboardAvoidingView,
-  TouchableOpacity
-} from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-import {
-  AsyncButton,
-  UserInput,
-  Button,
-  Divider,
-  Wallpaper,
-  Logo
-} from '@components'
 
 export default class Login extends Component {
   constructor(props) {
     super(props)
 
-    console.log("Props: ")
-    console.log(this.props)
-
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      waiting: false
     }
 
-    this.handleEmailChange = this.handleEmailChange.bind(this)
-    this.handlePasswordChange = this.handlePasswordChange.bind(this)
     this.submit = this.submit.bind(this)
     this.createAccount = this.createAccount.bind(this)
     this.forgotPassword = this.forgotPassword.bind(this)
   }
 
   submit() {
-    this.props.emailLogin(this.state.email, this.state.password)
+    this.setState({waiting: true})
+    this.props.emailLogin(this.state.email, this.state.password).then(() => {
+      this.setState({waiting: false})
+      if(this.props.User)
+        this.props.navigation.navigate("Home")
+    })
   }
 
   createAccount() {
@@ -47,29 +35,22 @@ export default class Login extends Component {
     this.props.navigation.navigate('ForgotPassword')
   }
 
-  handleEmailChange(newText) {
-    this.setState({ email: newText })
-  }
-
-  handlePasswordChange(newText) {
-    this.setState({ password: newText })
-  }
-
   render() {
     return (
-      <Wallpaper>
+      <Wallpaper style={{padding: '10%'}}>
         <Logo />
         <UserInput
           iconName="envelope"
           placeholder="Email"
           value={this.state.email}
-          onChangeText={this.handleEmailChange}
+          onChangeText={(newText) => this.setState({ email: newText })}
+          keyboardType="email-address"
         />
         <UserInput
           iconName="key"
           placeholder="Password"
           value={this.state.password}
-          onChangeText={this.handlePasswordChange}
+          onChangeText={(newText) => this.setState({ password: newText })}
           secureTextEntry={true}
         />
         <AsyncButton
@@ -77,6 +58,7 @@ export default class Login extends Component {
           color="#c14700"
           textColor="white"
           onPress={this.submit}
+          spinning={this.state.waiting}
         />
         <View style={styles.createForgot}>
           <TouchableOpacity
