@@ -32,13 +32,24 @@ export default class Register extends Component {
     this.setState({ confirm: newText })
   }
 
+  verifyFields() {
+    if(this.state.password == this.state.confirm)
+      return true
+    else {
+      this.props.displayError("Passwords dont match")
+      return false
+    }
+  }
+
   submit() {
-    this.setState({waiting: true})
-    this.props.register(this.state.email, this.state.password).then(() => {
-      this.setState({waiting: false})
-      if(this.props.User)
-        this.props.navigation.navigate("Home")
-    })
+    if(this.verifyFields()) {
+      this.setState({waiting: true})
+      this.props.register(this.state.email, this.state.password).then(() => {
+        this.setState({waiting: false})
+        if(this.props.User)
+          this.props.navigation.navigate("Home")
+      })
+    }
   }
 
   render() {
