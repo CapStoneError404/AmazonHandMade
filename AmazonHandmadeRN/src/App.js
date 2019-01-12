@@ -25,6 +25,7 @@ const TabNavigator = createBottomTabNavigator(
   },
   {
     initialRouteName: "ArtisanHub",
+    order: ['ArtisanHub', 'Settings'],
     navigationOptions: ({navigation}) => ({
       tabBarIcon: ({ focused, tintColor }) => {
         const { routeName } = navigation.state
