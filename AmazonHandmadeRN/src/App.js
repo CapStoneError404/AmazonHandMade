@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View } from 'react-native'
-import { createStackNavigator, createSwitchNavigator, createBottomTabNavigator } from 'react-navigation'
+import { createStackNavigator, createSwitchNavigator, createMaterialTopTabNavigator } from 'react-navigation'
 import { FluidNavigator } from 'react-navigation-fluid-transitions'
 import DropdownAlert from 'react-native-dropdownalert'
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -18,14 +18,29 @@ const ArtisanHubStack = createStackNavigator(
   }
 )
 
-const TabNavigator = createBottomTabNavigator(
+const TabNavigator = createMaterialTopTabNavigator(
   {
     ArtisanHub: ArtisanHubStack,
     Settings: Settings
   },
   {
     initialRouteName: "ArtisanHub",
+    tabBarPosition: 'bottom',
+    swipeEnabled: true,
+    animationEnabled: true,
+    tabBarOptions: {
+      activeTintColor: '#00A8E1',
+      inactiveTintColor: 'gray',
+      indicatorStyle: {
+        height: 0
+      },
+      style: {
+        backgroundColor: "#ffffff",
+      },
+      showIcon: true,
+    },
     order: ['ArtisanHub', 'Settings'],
+    
     navigationOptions: ({navigation}) => ({
       tabBarIcon: ({ focused, tintColor }) => {
         const { routeName } = navigation.state
