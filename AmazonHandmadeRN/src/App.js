@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View } from 'react-native'
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation'
+import { createStackNavigator, createSwitchNavigator, createBottomTabNavigator } from 'react-navigation'
 import { FluidNavigator } from 'react-navigation-fluid-transitions'
 import DropdownAlert from 'react-native-dropdownalert'
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -56,7 +56,7 @@ const AuthStack = createStackNavigator(
   }
 )
 
-const RootStack = FluidNavigator(
+const RootStack = createSwitchNavigator(
   {
     Launch: Launch,
     Auth: AuthStack,
@@ -64,9 +64,6 @@ const RootStack = FluidNavigator(
   },
   {
     initialRouteName: 'Launch',
-    navigationOptions: {
-      gesturesEnabled: false
-    }
   }
 )
 
