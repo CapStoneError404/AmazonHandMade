@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View } from 'react-native'
-import { createStackNavigator, createBottomTabNavigator } from 'react-navigation'
+import { createStackNavigator, createSwitchNavigator, createBottomTabNavigator } from 'react-navigation'
 import { FluidNavigator } from 'react-navigation-fluid-transitions'
 import DropdownAlert from 'react-native-dropdownalert'
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -12,19 +12,20 @@ import { ArtisanList, AddArtisan, ArtisanDetail } from '@screens/ArtisanHub'
 
 const ArtisanHubStack = createStackNavigator(
   {
-    ArtisanList: { screen: ArtisanList },
-    AddArtisan: { screen: AddArtisan },
-    ArtisanDetail: { screen: ArtisanDetail }
+    ArtisanList: ArtisanList,
+    AddArtisan: AddArtisan,
+    ArtisanDetail:ArtisanDetail 
   }
 )
 
 const TabNavigator = createBottomTabNavigator(
   {
-    ArtisanHub: { screen: ArtisanHubStack },
-    Settings: { screen: Settings }
+    ArtisanHub: ArtisanHubStack,
+    Settings: Settings
   },
   {
     initialRouteName: "ArtisanHub",
+    order: ['ArtisanHub', 'Settings'],
     navigationOptions: ({navigation}) => ({
       tabBarIcon: ({ focused, tintColor }) => {
         const { routeName } = navigation.state
@@ -44,9 +45,9 @@ const TabNavigator = createBottomTabNavigator(
 
 const AuthStack = createStackNavigator(
   {
-    Login: { screen: Login },
-    Register: { screen: Register },
-    ForgotPassword: { screen: ForgotPassword }
+    Login: Login,
+    Register: Register,
+    ForgotPassword: ForgotPassword
   },
   {
     initialRouteName: 'Login',
@@ -56,17 +57,14 @@ const AuthStack = createStackNavigator(
   }
 )
 
-const RootStack = FluidNavigator(
+const RootStack = createSwitchNavigator(
   {
-    Launch: { screen: Launch },
-    Auth: { screen: AuthStack },
-    Home: { screen: TabNavigator }
+    Launch: Launch,
+    Auth: AuthStack,
+    Home: TabNavigator 
   },
   {
     initialRouteName: 'Launch',
-    navigationOptions: {
-      gesturesEnabled: false
-    }
   }
 )
 
