@@ -13,7 +13,7 @@ https://facebook.github.io/react-native/docs/getting-started.html#installing-dep
 
 ### Set Up This Project
 
-Run the following commands in a termainl to download, set-up, and run this project.
+Run the following commands in a terminal to download, set-up, and run this project.
 
 ```
 git clone git@github.com:PBeninga/CapstoneError404.git
