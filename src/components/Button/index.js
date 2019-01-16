@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 30,
     marginTop: 5,
-    marginBottom: 10
+    marginBottom: 5
   },
   icon: {
     fontSize: 20,

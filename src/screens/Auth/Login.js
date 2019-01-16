@@ -1,4 +1,11 @@
-import { AsyncButton, Logo, UserInput, Wallpaper } from '@components';
+import { 
+  AsyncButton, 
+  Logo, 
+  UserInput, 
+  Wallpaper, 
+  AmazonSignInButton, 
+  Divider 
+} from '@components';
 import React, { Component } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
@@ -16,6 +23,7 @@ export default class Login extends Component {
     this.submit = this.submit.bind(this)
     this.createAccount = this.createAccount.bind(this)
     this.forgotPassword = this.forgotPassword.bind(this)
+    this.loginWithAmazon = this.loginWithAmazon.bind(this)
   }
 
   submit() {
@@ -35,10 +43,20 @@ export default class Login extends Component {
     this.props.navigation.navigate('ForgotPassword')
   }
 
+  loginWithAmazon() {
+
+  }
+
   render() {
     return (
       <Wallpaper style={{padding: '10%'}}>
         <Logo />
+        <AmazonSignInButton onPress={this.loginWithAmazon}/>
+        <View style={styles.socialDiv}>
+          <Divider />
+          <Text style={styles.divText}>or</Text>
+          <Divider />
+        </View>
         <UserInput
           iconName="envelope"
           placeholder="Email"
@@ -103,8 +121,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    alignItems: 'center',
-    marginTop: 20
+    alignItems: 'center'
   },
   divText: {
     color: '#444444',
