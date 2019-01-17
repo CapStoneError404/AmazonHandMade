@@ -1,4 +1,14 @@
 import firebase from 'react-native-firebase'
+import LoginWithAmazon from 'react-native-login-with-amazon'
+
+export function amazonLogin(email, password) {
+  return (dispatch, prevState) => {
+    console.log("Trying to call RNLoginWithAmazon")
+    LoginWithAmazon.login(() => {
+      console.log("Callback called!!!!")
+    })
+  }
+}
 
 export function emailLogin(email, password) {
   return (dispatch, prevState) => {
