@@ -35,10 +35,10 @@
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)
-url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
-  
-  return [AMZNAuthorizationManager handleOpenURL:url
-                               sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]];
-}
+        url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+
+        	return [AMZNAuthorizationManager handleOpenURL:url 	
+            sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]];
+      }
 
 @end

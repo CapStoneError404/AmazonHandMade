@@ -3,10 +3,16 @@ import LoginWithAmazon from 'react-native-login-with-amazon'
 
 export function amazonLogin(email, password) {
   return (dispatch, prevState) => {
-    console.log("Trying to call RNLoginWithAmazon")
-    LoginWithAmazon.login(() => {
-      console.log("Callback called!!!!")
-    })
+    return new Promise(async (resolve, reject) => {
+      LoginWithAmazon.login((accessToken, profileData) => {
+        console.log("Login with Amazon successful!")
+        console.log(accessToken)
+        console.log(profileData)
+      }).catch(error => {
+        resolve()
+        dispatch({ type: 'ERROR', error: error })
+      })
+    }
   }
 }
 
