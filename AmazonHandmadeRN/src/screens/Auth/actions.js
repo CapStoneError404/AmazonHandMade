@@ -22,10 +22,26 @@ export function emailLogin(email, password) {
   }
 }
 
-export function register(email, password) {
+export function register(email, userName, picture, password) {
   return (dispatch, prevState) => {
     return new Promise((resolve, reject) => {
       firebase.auth().createUserWithEmailAndPassword(email, password).then(currentUser => {
+        currentUser.user.updateProfile({
+              displayName: userName,
+              photoURL: picture
+        })
+
+        {/*
+        firebase.auth().onAuthStateChanged(function(user) {
+          if (user) {
+            user.updateProfile({
+              displayName: userName,
+              photoURL: picture
+            })
+          } 
+        })
+        */}
+        
         user = {
           email: currentUser.user.email,
           displayName: currentUser.user.displayName,

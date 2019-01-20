@@ -43,7 +43,7 @@ export default class Login extends Component {
           iconName="envelope"
           placeholder="Email"
           value={this.state.email}
-          onChangeText={(newText) => this.setState({ email: newText })}
+          onChangeText={(newText) => this.setState({ email: newText.trim() })}
           keyboardType="email-address"
         />
         <UserInput

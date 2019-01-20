@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 
 import { Login, Register, ForgotPassword } from '@screens/Auth'
 import Settings from '@screens/Settings'
+import CGAHome from '@screens/CGAHome'
 import Launch from '@screens/Launch'
 import { ArtisanList, AddArtisan, ArtisanDetail } from '@screens/ArtisanHub'
 
@@ -20,17 +21,21 @@ const ArtisanHubStack = createStackNavigator(
 
 const TabNavigator = createBottomTabNavigator(
   {
+    CGAHome: CGAHome,
     ArtisanHub: ArtisanHubStack,
     Settings: Settings
   },
   {
-    initialRouteName: "ArtisanHub",
-    order: ['ArtisanHub', 'Settings'],
+    initialRouteName: "CGAHome",
+    order: ['CGAHome', 'ArtisanHub', 'Settings'],
     navigationOptions: ({navigation}) => ({
       tabBarIcon: ({ focused, tintColor }) => {
         const { routeName } = navigation.state
         var iconName
-        if(routeName === 'ArtisanHub') {
+        if(routeName === 'CGAHome') {
+          iconName = "user"
+        }
+        else if(routeName === 'ArtisanHub') {
           iconName = "users"
         }
         else if(routeName === 'Settings') {

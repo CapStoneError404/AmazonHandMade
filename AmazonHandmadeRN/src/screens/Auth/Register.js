@@ -9,6 +9,8 @@ export default class Register extends Component {
 
     this.state = {
       email: "",
+      userName: "",
+      profilePicture: "",
       password: "",
       confirm: "",
       waiting: false
@@ -16,12 +18,22 @@ export default class Register extends Component {
 
     this.submit = this.submit.bind(this)
     this.handleEmailChange = this.handleEmailChange.bind(this)
+    this.handleUserNameChange = this.handleUserNameChange.bind(this)
+    this.handleProfilePictureChange = this.handleProfilePictureChange.bind(this)
     this.handlePasswordChange = this.handlePasswordChange.bind(this)
     this.handleConfirmChange = this.handleConfirmChange.bind(this)
   }
 
   handleEmailChange(newText) {
-    this.setState({ email: newText })
+    this.setState({ email: newText.trim() })
+  }
+
+  handleUserNameChange(newText) {
+    this.setState({ userName: newText.trim() })
+  }
+
+  handleProfilePictureChange(newText) {
+    this.setState({ profilePicture: newText })
   }
 
   handlePasswordChange(newText) {
@@ -44,7 +56,7 @@ export default class Register extends Component {
   submit() {
     if(this.verifyFields()) {
       this.setState({waiting: true})
-      this.props.register(this.state.email, this.state.password).then(() => {
+      this.props.register(this.state.email, this.state.userName, this.state.profilePicture, this.state.password).then(() => {
         this.setState({waiting: false})
         if(this.props.User)
           this.props.navigation.navigate("Home")
@@ -54,13 +66,25 @@ export default class Register extends Component {
 
   render() {
     return (
-      <Wallpaper style={{padding: '10%'}}>
+      <Wallpaper style={{padding: '5%'}}>
         <Text style={styles.logo}>Register</Text>
         <UserInput
           iconName="envelope"
           placeholder="Email"
           value={this.state.email}
           onChangeText={this.handleEmailChange}
+        />
+        <UserInput
+          iconName="user"
+          placeholder="User Name"
+          value={this.state.userName}
+          onChangeText={this.handleUserNameChange}
+        />
+        <UserInput
+          iconName="image"
+          placeholder="Profile Pic URL"
+          value={this.state.profilePicture}
+          onChangeText={this.handleProfilePictureChange}
         />
         <UserInput
           iconName="key"
@@ -95,7 +119,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 60,
     color: 'white',
-    marginTop: 60
+    marginTop: 30
   },
   email: {
     flex: 1,
