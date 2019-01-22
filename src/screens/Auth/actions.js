@@ -12,7 +12,7 @@ export function amazonLogin(email, password) {
         resolve()
         dispatch({ type: 'ERROR', error: error })
       })
-    }
+    })
   }
 }
 
