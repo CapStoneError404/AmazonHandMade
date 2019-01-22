@@ -44,8 +44,12 @@ export default class ArtisanList extends Component {
     this.props.navigation.navigate('ArtisanDetail', {...artisan})
   }
 
-  _renderArtisanItem = ({item}) => (
+  _renderArtisanItem = ({item, index}) => {
+     console.log(`listItem${index}`);
+     return (
+
     <TouchableOpacity 
+      testID={`listItem${index}`}
       style={styles.artisanView}
       onPress={() => this.navigateToArtisan(item)}
       key={item.key}
@@ -59,7 +63,9 @@ export default class ArtisanList extends Component {
         <Text style={styles.text}>{item.phoneNumber}</Text>
       </View>
     </TouchableOpacity>
-  )
+     );
+     
+  }
 
   _keyExtractor = (item, index) => item.uid
 
@@ -84,6 +90,7 @@ export default class ArtisanList extends Component {
 
   render() {
     return (
+
       <Wallpaper>
         {(this.props.Artisans != [] && this.state.fetchingArtisans) ?
         <ActivityIndicator 
@@ -92,7 +99,8 @@ export default class ArtisanList extends Component {
           color='white'
         />
         :
-        <FlatList 
+        <FlatList
+          testID='artisan_list'
           data={this.sortedArtisans()}
           keyExtractor={this._keyExtractor}
           renderItem={this._renderArtisanItem}
