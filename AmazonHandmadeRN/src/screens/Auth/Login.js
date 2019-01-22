@@ -70,6 +70,7 @@ export default class Login extends Component {
             <Text style={styles.createForgotText}>Create Account</Text>
           </TouchableOpacity>
           <TouchableOpacity
+            testID='forgot_password_button'
             onPress={this.forgotPassword}>
             <Text style={styles.createForgotText}>Forgot Password?</Text>
           </TouchableOpacity>
