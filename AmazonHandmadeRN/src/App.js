@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import { createStackNavigator, createSwitchNavigator, createBottomTabNavigator } from 'react-navigation'
 import { FluidNavigator } from 'react-navigation-fluid-transitions'
 import DropdownAlert from 'react-native-dropdownalert'
@@ -72,6 +72,7 @@ class Main extends Component {
   constructor(props) {
     super(props)
     this.props.clearErrors()
+
   }
 
   render() {
@@ -85,9 +86,14 @@ class Main extends Component {
           ref={ref => this.dropdown = ref}
         />
       </View>
+      
     )
   }
 }
+
+{/* <TouchableOpacity testID='greetings' onPress={() => this.setState({ greetings: 'new text now' })}>
+           <Text testID='new_greetings'>{this.state.greetings}</Text>
+        </TouchableOpacity> */}
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
