@@ -4,10 +4,30 @@ describe('Example', () => {
     //await device.launchApp({newInstance: true});
   });
 
+  it('HandMade logo is visible', async () => {
+   //await expect(element(by.id('create_account'))).toBeVisible();
+   await expect(element(by.id('handmade_logo'))).toBeVisible();
+  })
+
   it('create account is visible', async () => {
    //await expect(element(by.id('create_account'))).toBeVisible();
    await expect(element(by.id('create_account'))).toBeVisible();
-   
+  })
+
+  it('forgot password button is visible', async () => {
+   await expect(element(by.id('forgot_password_button'))).toBeVisible();
+  })
+
+  it('email text input is visible', async () => {
+   await expect(element(by.id('email_login'))).toBeVisible();
+  })
+
+  it('password text input is visible', async () => {
+   await expect(element(by.id('password_login'))).toBeVisible();
+  })
+
+  it('submit button is visible', async () => {
+   await expect(element(by.id('submit_login'))).toBeVisible();
   })
 
   it('enter login information and submit', async () => {
