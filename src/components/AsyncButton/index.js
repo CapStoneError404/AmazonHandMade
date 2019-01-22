@@ -22,6 +22,7 @@ export default class AsyncButton extends Component {
     else {
       return (
         <TouchableOpacity
+          testID={this.props.testID}
           style={[styles.buttonWrapper, this.props.style, {backgroundColor: (this.props.color) ? this.props.color : 'black'}]}
           onPress={this.props.onPress}>
           {(this.props.iconName) ?
@@ -43,7 +44,8 @@ AsyncButton.propTypes = {
   title: PropTypes.string,
   textColor: PropTypes.string,
   style: PropTypes.object,
-  spinning: PropTypes.bool
+  spinning: PropTypes.bool,
+  testID: PropTypes.string
 };
 
 const styles = StyleSheet.create({

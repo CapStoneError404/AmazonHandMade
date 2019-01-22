@@ -4,7 +4,7 @@ import { Image, StyleSheet } from 'react-native';
 export default class Logo extends Component {
   render() {
     return (
-      <Image style={styles.logo} resizeMode='contain' source={require('../../../assets/images/1x/HandmadeLogo.png')} />
+      <Image testID='handmade_logo' style={styles.logo} resizeMode='contain' source={require('../../../assets/images/1x/HandmadeLogo.png')} />
     );
   }
 }

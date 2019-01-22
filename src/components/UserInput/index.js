@@ -13,6 +13,7 @@ export default class UserInput extends Component {
         {(this.props.iconName) ?
           <Icon name={this.props.iconName} style={styles.icon} /> : null}
         <TextInput
+          testID={this.props.testID}
           {...this.props}
           style={[styles.input, this.props.style]}
         />
@@ -23,7 +24,8 @@ export default class UserInput extends Component {
 
 UserInput.propTypes = {
   iconName: PropTypes.string,
-  style: PropTypes.object
+  style: PropTypes.object,
+  testID: PropTypes.string
 };
 
 const styles = StyleSheet.create({
