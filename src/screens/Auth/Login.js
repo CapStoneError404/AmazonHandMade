@@ -17,7 +17,8 @@ export default class Login extends Component {
     this.state = {
       email: "",
       password: "",
-      waiting: false
+      submitWaiting: false,
+      amazonWaiting: false
     }
 
     this.submit = this.submit.bind(this)
@@ -26,10 +27,19 @@ export default class Login extends Component {
     this.loginWithAmazon = this.loginWithAmazon.bind(this)
   }
 
+  loginWithAmazon() {
+    this.setState({amazonWaiting: true})
+    this.props.amazonLogin().then(() => {
+      this.setState({amazonWaiting: false})
+      if(this.props.User)
+        this.props.navigation.navigate("Home")
+    })
+  }
+
   submit() {
-    this.setState({waiting: true})
+    this.setState({submitWaiting: true})
     this.props.emailLogin(this.state.email, this.state.password).then(() => {
-      this.setState({waiting: false})
+      this.setState({submitWaiting: false})
       if(this.props.User)
         this.props.navigation.navigate("Home")
     })
@@ -43,15 +53,14 @@ export default class Login extends Component {
     this.props.navigation.navigate('ForgotPassword')
   }
 
-  loginWithAmazon() {
-    this.props.amazonLogin()
-  }
-
   render() {
     return (
       <Wallpaper style={{padding: '10%'}}>
         <Logo />
-        <AmazonSignInButton onPress={this.loginWithAmazon}/>
+        <AmazonSignInButton 
+          onPress={this.loginWithAmazon} 
+          spinning={this.state.amazonWaiting}
+        />
         <View style={styles.socialDiv}>
           <Divider />
           <Text style={styles.divText}>or</Text>
@@ -76,7 +85,7 @@ export default class Login extends Component {
           color="#c14700"
           textColor="white"
           onPress={this.submit}
-          spinning={this.state.waiting}
+          spinning={this.state.submitWaiting}
         />
         <View style={styles.createForgot}>
           <TouchableOpacity
