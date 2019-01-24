@@ -40,6 +40,5 @@ describe('Login Screen', () => {
     await element(by.text('Settings')).tap();
     await element(by.id('logout_button')).tap();
     await expect(element(by.id('handmade_logo'))).toBeVisible();
-
-   })
+  })
 });
