@@ -89,10 +89,6 @@ export default class Login extends Component {
         />
         <View style={styles.createForgot}>
           <TouchableOpacity
-            onPress={this.createAccount}>
-            <Text style={styles.createForgotText}>Create Account</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
             onPress={this.forgotPassword}>
             <Text style={styles.createForgotText}>Forgot Password?</Text>
           </TouchableOpacity>
@@ -121,7 +117,7 @@ const styles = StyleSheet.create({
     height: 20,
     width: '100%',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
     paddingLeft: 5,
     paddingRight: 5
