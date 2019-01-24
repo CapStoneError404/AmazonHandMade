@@ -91,10 +91,6 @@ class Main extends Component {
   }
 }
 
-{/* <TouchableOpacity testID='greetings' onPress={() => this.setState({ greetings: 'new text now' })}>
-           <Text testID='new_greetings'>{this.state.greetings}</Text>
-        </TouchableOpacity> */}
-
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import * as actions from '@actions'
