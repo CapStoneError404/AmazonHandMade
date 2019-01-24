@@ -18,10 +18,25 @@ Run the following commands in a terminal to download, set-up, and run this proje
 ```
 git clone git@github.com:PBeninga/CapstoneError404.git
 cd CapstoneError404
-cd AmazonHandmadeRN
+cd AmazonHandMade
 npm i
 ```
 
+### Testing for IOS (Android soon to come)
+
+Run the following commands in terminal to get testing set up and run current test for project
+
+``` 
+brew tap wix/brew
+brew install applesimutils
+npm install -g detox-cli
+detox build --configuration ios.sim.debug
+detox test --configuration ios.sim.debug
+```
+
+
+
+### To run app without testing
 To Run:
 ```
 react-native run-ios
