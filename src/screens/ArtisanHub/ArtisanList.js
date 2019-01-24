@@ -46,12 +46,12 @@ export default class ArtisanList extends Component {
 
   _renderArtisanItem = ({item, index}) => {
      return (
-      <TouchableOpacity 
+       <TouchableOpacity 
          testID={`listItem${index}`}
          style={styles.artisanView}
          onPress={() => this.navigateToArtisan(item)}
          key={item.key}
-      >
+       >
          <ProfilePicture
             source={{uri: item.profilePictureURL}}
             style={styles.image}
@@ -60,34 +60,33 @@ export default class ArtisanList extends Component {
             <Text style={styles.text}>{item.name}</Text>
             <Text style={styles.text}>{item.phoneNumber}</Text>
          </View>
-      </TouchableOpacity>
+       </TouchableOpacity>
      );
   }
 
   _keyExtractor = (item, index) => item.uid
 
   sortedArtisans() {
-      if(this.props.Artisans != []) {
-        sortedArtisans = Array.from(this.props.Artisans)
-        sortedArtisans.sort((first, second) => {
-          name1 = first.name.toLowerCase()
-          name2 = second.name.toLowerCase()
-          if (name1 < name2)
-            return -1
-          else if(name1 > name2)
+    if(this.props.Artisans != []) {
+      sortedArtisans = Array.from(this.props.Artisans)
+      sortedArtisans.sort((first, second) => {
+        name1 = first.name.toLowerCase()
+        name2 = second.name.toLowerCase()
+        if (name1 < name2)
+          return -1
+        else if(name1 > name2)
           return 1
-          else
-            return 0
-        })
-        return sortedArtisans
-      } else {
-        return []
-      }
+        else
+          return 0
+      })
+      return sortedArtisans
+    } else {
+      return []
+    }
   }
 
   render() {
     return (
-
       <Wallpaper>
         {(this.props.Artisans != [] && this.state.fetchingArtisans) ?
         <ActivityIndicator 
