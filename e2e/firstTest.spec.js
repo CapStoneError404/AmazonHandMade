@@ -31,10 +31,10 @@ describe('Login Screen', () => {
   })
 
   it('enter login information and submit', async () => {
-     await element(by.id('email_login')).replaceText('user@user.com');
-     await element(by.id('password_login')).replaceText('password');
-     await element(by.id('submit_login')).tap();
-     await expect(element(by.id('artisan_list'))).toBeVisible();
+   await element(by.id('email_login')).replaceText('user@user.com');
+   await element(by.id('password_login')).replaceText('password');
+   await element(by.id('submit_login')).tap();
+   await expect(element(by.id('artisan_list'))).toBeVisible();
   })
 
   it('logout successfully', async () => {
