@@ -64,3 +64,4 @@ package-lock.json
 
 .watchman-cookie*
 .editorconfig
+handmade-error-404-service-account.json
