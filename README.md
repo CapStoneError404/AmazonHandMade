@@ -39,4 +39,21 @@ To contribute to our firebase cloud functions, you need to install some dependen
 
 The documentation is here: https://firebase.google.com/docs/functions/get-started
 
+Badically, to get set up, do the following:
+```
+npm install -g firebase-tools
+firebase login
+```
+
+To deploy your changes to the cloud:
+```
+firebase deploy --only functions
+```
+
+To test your changes locally:
+```
+firebase serve
+```
+and then modify any URLs in the source code refering to the cloud to your machine instead.
+
 All of the code for the cloud functions is in the "functions" folder
