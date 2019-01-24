@@ -1,6 +1,10 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin')
-const serviceAccount = require("./handmade-error-404-service-account.json");
+
+// This file needs to be retrieved from
+// https://console.firebase.google.com/u/0/project/handmade-error-404/settings/serviceaccounts/adminsdk
+// it should NOT be uploaded to github!!!!!!!!!!!!
+const serviceAccount = require("./service-account.json");
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
