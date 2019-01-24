@@ -53,12 +53,12 @@ export default class ArtisanList extends Component {
          key={item.key}
       >
          <ProfilePicture
-         source={{uri: item.profilePictureURL}}
-         style={styles.image}
+            source={{uri: item.profilePictureURL}}
+            style={styles.image}
          />
          <View style={styles.namePhone}>
-         <Text style={styles.text}>{item.name}</Text>
-         <Text style={styles.text}>{item.phoneNumber}</Text>
+            <Text style={styles.text}>{item.name}</Text>
+            <Text style={styles.text}>{item.phoneNumber}</Text>
          </View>
       </TouchableOpacity>
      );
