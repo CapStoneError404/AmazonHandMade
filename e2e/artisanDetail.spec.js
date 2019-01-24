@@ -11,18 +11,6 @@ describe('Artisan list and Details', () => {
       await expect(element(by.id('artisan_list'))).toBeVisible();
    })
 
-   it('check artisan list is present after login', async () => {
-      await expect(element(by.id('artisan_list'))).toBeVisible();
-      await expect(element(by.id('listItem0'))).toBeVisible();
-      await expect(element(by.id('listItem1'))).toBeVisible();
-      await expect(element(by.id('listItem2'))).toBeVisible();
-      await expect(element(by.id('listItem3'))).toBeVisible();
-      await expect(element(by.id('listItem4'))).toBeVisible();
-      await element(by.id('artisan_list')).scrollTo('bottom');
-      await expect(element(by.id('listItem5'))).toBeVisible();
-     
-     })
-  
    it('Check artisan Alan Bard details ', async () => {
     await expect(element(by.id('artisan_list'))).toBeVisible();
     await expect(element(by.id('listItem0'))).toBeVisible();
