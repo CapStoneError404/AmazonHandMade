@@ -38,3 +38,5 @@ react-native run-android
 To contribute to our firebase cloud functions, you need to install some dependenices on your machine.
 
 The documentation is here: https://firebase.google.com/docs/functions/get-started
+
+All of the code for the cloud functions is in the "functions" folder
