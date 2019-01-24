@@ -1,7 +1,6 @@
 describe('Artisan list and Details', () => {
    beforeEach(async () => {
-   //   await device.reloadReactNative();
-     //await device.launchApp({newInstance: true});
+    
    });
 
    it('enter login information and submit', async () => {
