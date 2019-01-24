@@ -16,8 +16,7 @@ https://facebook.github.io/react-native/docs/getting-started.html#installing-dep
 Run the following commands in a terminal to download, set-up, and run this project.
 
 ```
-git clone git@github.com:PBeninga/CapstoneError404.git
-cd CapstoneError404
+git clone git@github.com:CapStoneError404/AmazonHandMade.git
 cd AmazonHandMade
 npm i
 ```
