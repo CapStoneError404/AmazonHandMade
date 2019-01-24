@@ -32,3 +32,9 @@ or
 ```
 react-native run-android
 ```
+
+## Firebase Cloud Functions
+
+To contribute to our firebase cloud functions, you need to install some dependenices on your machine.
+
+The documentation is here: https://firebase.google.com/docs/functions/get-started
