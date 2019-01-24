@@ -86,7 +86,6 @@ class Main extends Component {
           ref={ref => this.dropdown = ref}
         />
       </View>
-      
     )
   }
 }
