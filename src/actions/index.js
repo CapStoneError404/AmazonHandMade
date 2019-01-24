@@ -1,8 +1,18 @@
 import firebase from 'react-native-firebase'
+import LoginWithAmazon from 'react-native-login-with-amazon'
 
 export function authLogout() {
   return (dispatch, prevState) => {
     return new Promise(async (resolve, reject) => {
+      LoginWithAmazon.logout((error) => {
+        console.log("Loggin out of amazon")
+        if(error) {
+          console.log(error)
+        } else {
+          console.log("Logged out")
+        }
+      })
+
       firebase.auth().signOut()
         .then(() => {
           resolve()

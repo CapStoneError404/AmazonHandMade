@@ -1,30 +1,49 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import LinearGradient from 'react-native-linear-gradient'
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { ActivityIndicator, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 export default class AmazonSignInButton extends Component {
   render() {
-    return (
-      <TouchableOpacity
-        style={styles.touchable}
-        onPress={this.props.onPress}>
-        <LinearGradient 
-          colors={['#FEE9AC', '#F5C543']}
-          style={styles.buttonWrapper}>
-          <Icon name='amazon' style={styles.icon} />
-          <Text style={styles.text}>
-            Login with Amazon
-              </Text>
-        </LinearGradient>
-      </TouchableOpacity>
-    );
+    if(this.props.spinning) {
+      return (
+        <TouchableOpacity
+          style={styles.touchable}
+          onPress={this.props.onPress}>
+          <LinearGradient 
+            colors={['#FEE9AC', '#F5C543']}
+            style={styles.buttonWrapper}>
+            <ActivityIndicator 
+              size='small'
+              animating={this.props.spinning}
+              color='white'
+            />
+          </LinearGradient>
+        </TouchableOpacity>
+      )
+    } else {
+      return (
+        <TouchableOpacity
+          style={styles.touchable}
+          onPress={this.props.onPress}>
+          <LinearGradient 
+            colors={['#FEE9AC', '#F5C543']}
+            style={styles.buttonWrapper}>
+            <Icon name='amazon' style={styles.icon} />
+            <Text style={styles.text}>
+              Login with Amazon
+                </Text>
+          </LinearGradient>
+        </TouchableOpacity>
+      );
+    }
   }
 }
 
 AmazonSignInButton.propTypes = {
-  onPress: PropTypes.func.isRequired
+  onPress: PropTypes.func.isRequired,
+  spinning: PropTypes.bool
 };
 
 const styles = StyleSheet.create({
