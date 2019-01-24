@@ -54,7 +54,7 @@ export default class ArtisanList extends Component {
       onPress={() => this.navigateToArtisan(item)}
       key={item.key}
     >
-      <ProfilePicture 
+      <ProfilePicture
         source={{uri: item.profilePictureURL}}
         style={styles.image}
       />

@@ -26,7 +26,7 @@ export default class Settings extends Component {
           </ScrollView>
         </View>
         <Button
-          testID='settings_button'
+          testID='logout_button'
           style={styles.button}
           title="Return to Login"
           color="#c14700"
