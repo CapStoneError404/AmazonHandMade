@@ -1,15 +1,15 @@
 describe('create account test', () => {
   beforeEach(async () => {
-    await device.reloadReactNative();
+    //await device.reloadReactNative();
     //await device.launchApp({newInstance: true});
   });
   it('Hits create account button', async () => {
     await expect(element(by.id('create_account'))).toBeVisible();
     await element(by.id('create_account')).tap();
   })
-  it('sees if register text is visible', async () => {
-    await expect(element(by.id('register_text'))).toBeVisible();
-  })
+  // it('sees if register text is visible', async () => {
+  //   // await expect(element(by.id('register_text'))).toBeVisible();
+  // })
   it('sees if email field is visible', async () => {
     await expect(element(by.id("email_field"))).toBeVisible();
   })
