@@ -65,3 +65,4 @@ package-lock.json
 .watchman-cookie*
 .editorconfig
 service-account.json
+api_key.txt
