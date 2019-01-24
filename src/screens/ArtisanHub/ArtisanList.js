@@ -45,26 +45,23 @@ export default class ArtisanList extends Component {
   }
 
   _renderArtisanItem = ({item, index}) => {
-     console.log(`listItem${index}`);
      return (
-
-    <TouchableOpacity 
-      testID={`listItem${index}`}
-      style={styles.artisanView}
-      onPress={() => this.navigateToArtisan(item)}
-      key={item.key}
-    >
-      <ProfilePicture
-        source={{uri: item.profilePictureURL}}
-        style={styles.image}
-      />
-      <View style={styles.namePhone}>
-        <Text style={styles.text}>{item.name}</Text>
-        <Text style={styles.text}>{item.phoneNumber}</Text>
-      </View>
-    </TouchableOpacity>
+      <TouchableOpacity 
+         testID={`listItem${index}`}
+         style={styles.artisanView}
+         onPress={() => this.navigateToArtisan(item)}
+         key={item.key}
+      >
+         <ProfilePicture
+         source={{uri: item.profilePictureURL}}
+         style={styles.image}
+         />
+         <View style={styles.namePhone}>
+         <Text style={styles.text}>{item.name}</Text>
+         <Text style={styles.text}>{item.phoneNumber}</Text>
+         </View>
+      </TouchableOpacity>
      );
-     
   }
 
   _keyExtractor = (item, index) => item.uid
