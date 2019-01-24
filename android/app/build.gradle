@@ -161,20 +161,12 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-login-with-amazon')
+  implementation project(':react-native-login-with-amazon')
   implementation project(':react-native-vector-icons')
   implementation project(':react-native-login-with-amazon')
   implementation project(':react-native-linear-gradient')
   implementation project(':react-native-image-crop-picker')
   implementation project(':react-native-firebase')
-  implementation project(':react-native-login-with-amazon')
-  implementation project(':react-native-image-crop-picker')
-  implementation project(':react-native-vector-icons')
-  implementation project(':react-native-linear-gradient')
-  implementation project(':react-native-firebase')
-  implementation project(':react-native-firebase')
-  implementation project(':react-native-linear-gradient')
-  implementation project(':react-native-vector-icons')
 
   //noinspection GradleDynamicVersion
   implementation 'com.facebook.react:react-native:+'
