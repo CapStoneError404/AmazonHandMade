@@ -10,7 +10,7 @@ export default class AmazonSignInButton extends Component {
       return (
         <TouchableOpacity
           style={styles.touchable}
-          onPress={this.props.onPress}>
+          onPress={}>
           <LinearGradient 
             colors={['#FEE9AC', '#F5C543']}
             style={styles.buttonWrapper}>
