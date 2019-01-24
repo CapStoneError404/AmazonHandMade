@@ -1,3 +1,28 @@
+describe('create account test', () => {
+  beforeEach(async () => {
+    await device.reloadReactNative();
+    //await device.launchApp({newInstance: true});
+  });
+  it('Hits create account button', async () => {
+    await expect(element(by.id('create_account'))).toBeVisible();
+    await element(by.id('create_account')).tap();
+  })
+  it('sees if register text is visible', async () => {
+    await expect(element(by.id('register_text'))).toBeVisible();
+  })
+  it('sees if email field is visible', async () => {
+    await expect(element(by.id("email_field"))).toBeVisible();
+  })
+  it('sees if password field is visible', async () => {
+    await expect(element(by.id("password_field"))).toBeVisible();
+  })
+  it('sees if confirm password field is visible', async () => {
+    await expect(element(by.id("confirm_pass_field"))).toBeVisible();
+  })
+  it('sees if register button is visible', async () => {
+    await expect(element(by.id("register_button"))).toBeVisible()
+  })
+});
 describe('Example', () => {
   beforeEach(async () => {
     await device.reloadReactNative();

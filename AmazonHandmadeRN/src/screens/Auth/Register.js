@@ -55,14 +55,16 @@ export default class Register extends Component {
   render() {
     return (
       <Wallpaper style={{padding: '10%'}}>
-        <Text style={styles.logo}>Register</Text>
+        <Text style={styles.logo} testID='register_text'>Register</Text>
         <UserInput
+          testID='email_field'
           iconName="envelope"
           placeholder="Email"
           value={this.state.email}
           onChangeText={this.handleEmailChange}
         />
         <UserInput
+          testID='password_field'
           iconName="key"
           placeholder="Password"
           value={this.state.password}
@@ -70,6 +72,7 @@ export default class Register extends Component {
           secureTextEntry={true}
         />
         <UserInput
+          testID='confirm_pass_field'
           iconName="key"
           placeholder="Confirm Password"
           value={this.state.confirm}
@@ -77,6 +80,7 @@ export default class Register extends Component {
           secureTextEntry={true}
         />
         <AsyncButton
+          testID='register_button'
           title="Register"
           color="#c14700"
           textColor="white"
