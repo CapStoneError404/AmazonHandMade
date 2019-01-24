@@ -100,11 +100,7 @@ android {
     debug {
       keyAlias 'androiddebugkey'
       keyPassword 'android'
-<<<<<<< HEAD
       storeFile file('../keystores/debug.keystore')
-=======
-      storeFile file('/Users/ianbattin/Development/AmazonHandMade/android/keystores/debug.keystore')
->>>>>>> dfcc03ed7ef8700c468780bede4fc41adc095120
       storePassword 'android'
     }
   }
