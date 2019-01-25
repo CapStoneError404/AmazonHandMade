@@ -7,6 +7,7 @@ export default class Button extends Component {
   render() {
     return (
       <TouchableOpacity
+        testID={this.props.testID}
         style={[styles.buttonWrapper, { backgroundColor: (this.props.color) ? this.props.color : 'white' }]}
         onPress={this.props.onPress}>
         {(this.props.iconName) ?
@@ -25,7 +26,8 @@ Button.propTypes = {
   onPress: PropTypes.func.isRequired,
   title: PropTypes.string,
   color: PropTypes.string,
-  textColor: PropTypes.string
+  textColor: PropTypes.string,
+  testID: PropTypes.string
 };
 
 const styles = StyleSheet.create({

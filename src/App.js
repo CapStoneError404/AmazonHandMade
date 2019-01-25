@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import { createStackNavigator, createSwitchNavigator, createBottomTabNavigator } from 'react-navigation'
 import { FluidNavigator } from 'react-navigation-fluid-transitions'
 import DropdownAlert from 'react-native-dropdownalert'
@@ -72,6 +72,7 @@ class Main extends Component {
   constructor(props) {
     super(props)
     this.props.clearErrors()
+
   }
 
   render() {

@@ -67,6 +67,7 @@ export default class Login extends Component {
           <Divider />
         </View>
         <UserInput
+          testID='email_login'
           iconName="envelope"
           placeholder="Email"
           value={this.state.email}
@@ -74,6 +75,7 @@ export default class Login extends Component {
           keyboardType="email-address"
         />
         <UserInput
+          testID='password_login'
           iconName="key"
           placeholder="Password"
           value={this.state.password}
@@ -81,6 +83,7 @@ export default class Login extends Component {
           secureTextEntry={true}
         />
         <AsyncButton
+          testID='submit_login'
           title="Submit"
           color="#c14700"
           textColor="white"
@@ -89,6 +92,7 @@ export default class Login extends Component {
         />
         <View style={styles.createForgot}>
           <TouchableOpacity
+            testID='forgot_password_button'
             onPress={this.forgotPassword}>
             <Text style={styles.createForgotText}>Forgot Password?</Text>
           </TouchableOpacity>
