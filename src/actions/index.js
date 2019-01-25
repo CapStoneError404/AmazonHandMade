@@ -5,11 +5,8 @@ export function authLogout() {
   return (dispatch, prevState) => {
     return new Promise(async (resolve, reject) => {
       LoginWithAmazon.logout((error) => {
-        console.log("Loggin out of amazon")
         if(error) {
-          console.log(error)
-        } else {
-          console.log("Logged out")
+          dispatch({ type: 'ERROR', error: error })
         }
       })
 
