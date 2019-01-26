@@ -9,7 +9,7 @@ export default class AsyncButton extends Component {
       return (
         <TouchableOpacity
           style={[styles.buttonWrapper, this.props.style, {backgroundColor: (this.props.color) ? this.props.color : 'black'}]}
-          onPress={this.handleOnPress}
+          onPress={this.props.onPress}
         >
           <ActivityIndicator 
             size='small'

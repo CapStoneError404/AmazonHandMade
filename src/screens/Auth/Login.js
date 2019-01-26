@@ -1,4 +1,11 @@
-import { AsyncButton, Logo, UserInput, Wallpaper } from '@components';
+import { 
+  AsyncButton, 
+  Logo, 
+  UserInput, 
+  Wallpaper, 
+  AmazonSignInButton, 
+  Divider 
+} from '@components';
 import React, { Component } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
@@ -10,18 +17,29 @@ export default class Login extends Component {
     this.state = {
       email: "",
       password: "",
-      waiting: false
+      submitWaiting: false,
+      amazonWaiting: false
     }
 
     this.submit = this.submit.bind(this)
     this.createAccount = this.createAccount.bind(this)
     this.forgotPassword = this.forgotPassword.bind(this)
+    this.loginWithAmazon = this.loginWithAmazon.bind(this)
+  }
+
+  loginWithAmazon() {
+    this.setState({amazonWaiting: true})
+    this.props.amazonLogin().then(() => {
+      this.setState({amazonWaiting: false})
+      if(this.props.User)
+        this.props.navigation.navigate("Home")
+    })
   }
 
   submit() {
-    this.setState({waiting: true})
+    this.setState({submitWaiting: true})
     this.props.emailLogin(this.state.email, this.state.password).then(() => {
-      this.setState({waiting: false})
+      this.setState({submitWaiting: false})
       if(this.props.User)
         this.props.navigation.navigate("Home")
     })
@@ -39,6 +57,15 @@ export default class Login extends Component {
     return (
       <Wallpaper style={{padding: '10%'}}>
         <Logo />
+        <AmazonSignInButton 
+          onPress={this.loginWithAmazon} 
+          spinning={this.state.amazonWaiting}
+        />
+        <View style={styles.socialDiv}>
+          <Divider />
+          <Text style={styles.divText}>or</Text>
+          <Divider />
+        </View>
         <UserInput
           testID='email_login'
           iconName="envelope"
@@ -61,14 +88,9 @@ export default class Login extends Component {
           color="#c14700"
           textColor="white"
           onPress={this.submit}
-          spinning={this.state.waiting}
+          spinning={this.state.submitWaiting}
         />
         <View style={styles.createForgot}>
-          <TouchableOpacity
-            testID='create_account'
-            onPress={this.createAccount}>
-            <Text style={styles.createForgotText}>Create Account</Text>
-          </TouchableOpacity>
           <TouchableOpacity
             testID='forgot_password_button'
             onPress={this.forgotPassword}>
@@ -99,7 +121,7 @@ const styles = StyleSheet.create({
     height: 20,
     width: '100%',
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
     paddingLeft: 5,
     paddingRight: 5
@@ -108,8 +130,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    alignItems: 'center',
-    marginTop: 20
+    alignItems: 'center'
   },
   divText: {
     color: '#444444',
