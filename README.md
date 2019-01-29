@@ -53,7 +53,7 @@ To contribute to our firebase cloud functions, you need to install some dependen
 
 The documentation is here: https://firebase.google.com/docs/functions/get-started
 
-Badically, to get set up, do the following:
+Basically, to get set up, do the following:
 ```
 npm install -g firebase-tools
 firebase login
