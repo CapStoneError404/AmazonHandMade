@@ -21,10 +21,10 @@ const ArtisanHubStack = createStackNavigator({
   ArtisanDetail: ArtisanDetail
 });
 
-const MessageNavigator = createStackNavigator({
-  Message: Message,
-  MessageList: MessageList
-});
+// const MessageNavigator = createStackNavigator({
+//   Message: Message,
+//   MessageList: MessageList
+// });
 
 const TabNavigator = createBottomTabNavigator(
   {

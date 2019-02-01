@@ -9,21 +9,54 @@ import {
   View
 } from 'react-native';
 import { ProfilePicture } from '../../components';
+import MessageData from './MessageData.json';
 
 export default class MessageList extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      showAddMessage: false,
-      fetchingMessages: false
+      fetchingMessages: false,
+      messages: []
     };
   }
+
+  componentDidMount() {
+    //this is where we will update state with the json data 
+    //Set fetchingMessage to true
+    this.setState({ messages: MessageData, fetchingMessages: true });
+
+  }
+
+  navigateToMessage(message) {
+    //Here we are going to navigate to message page
+    console.log("We are trying to navigate to message: " +  message);
+  }
+
+  _renderMessageItem = ({ item }) => {
+   return (
+     <TouchableOpacity 
+       style={styles.ArtisanView}
+       onPress={() => this.navigateToArtisan(item)}
+       key={item.key}
+     >
+       <ProfilePicture
+          source={{uri: item.profilePictureURL}}
+          style={styles.image}
+       />
+       <View style={styles.namePhone}>
+          <Text style={styles.text}>{item.artisan}</Text>
+       </View>
+     </TouchableOpacity>
+    );
+   }
+
+   _keyExtractor = (item) => item.id
 
   render() {
     return (
       <Wallpaper>
-        {this.props.Messages != [] && this.state.fetchingMessages ? (
+        {( this.state.messages != [] && this.state.fetchingMessages ) ? (
           <ActivityIndicator
             size="large"
             animating={this.props.spinning}
@@ -31,10 +64,9 @@ export default class MessageList extends Component {
           />
         ) : (
           <FlatList
-            testID="artisan_list"
-            data={this.sortedArtisans()}
+            data={this.state.messages}
             keyExtractor={this._keyExtractor}
-            renderItem={this._renderArtisanItem}
+            renderItem={this._renderMessageItem}
           />
         )}
       </Wallpaper>

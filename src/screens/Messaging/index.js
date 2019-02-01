@@ -18,13 +18,11 @@ function mapDispatchToProps(dispatch) {
 import { default as UnconnectedMessageList } from './MessageList';
 import { default as UnconnectedMessage } from './Message';
 
-const ArtisanList = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(UnconnectedMessageList);
-const AddArtisan = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(UnconnectedMessage);
+const MessageList = connect(mapStateToProps, mapDispatchToProps)(UnconnectedMessageList)
+const Message = connect(mapStateToProps, mapDispatchToProps)(UnconnectedMessage)
 
-export { MessageList, Message };
+
+export {
+  MessageList,
+  Message
+}
