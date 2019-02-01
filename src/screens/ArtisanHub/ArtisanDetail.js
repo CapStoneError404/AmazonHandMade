@@ -1,4 +1,4 @@
-import { ProfilePicture, Wallpaper } from '@components';
+import { ProfilePicture, Wallpaper, Button } from '@components';
 import React, { Component } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { withMappedNavigationProps } from 'react-navigation-props-mapper';
@@ -29,6 +29,11 @@ class ArtisanDetail extends Component {
           <View style={styles.description}>
             <Text style={styles.text}>{this.props.description}</Text>
           </View>
+          <Button 
+            color="red"
+            onPress={() => console.log("Delete this artisan!")}
+            title="DELETE Artisan"
+        />
         </ScrollView>
       </Wallpaper>
     )
