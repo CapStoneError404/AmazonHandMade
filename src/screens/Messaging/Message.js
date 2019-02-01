@@ -1,24 +1,13 @@
 import React, { Component } from 'react';
 import { Modal, View, Image, Text, Button, StyleSheet } from 'react-native';
-import { ProfilePicture } from '../../components';
+import { ProfilePicture, Wallpaper } from '../../components';
 import { GiftedChat } from 'react-native-gifted-chat';
 
 export default class Message extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      messages: [
-        {
-          _id: 1,
-          text: 'Hello developer',
-          createdAt: new Date(),
-          user: {
-            _id: 1,
-            name: 'React Native',
-            avatar: 'https://placeimg.com/140/140/any'
-          }
-        }
-      ]
+      messages: this.props.messages
     };
   }
 
@@ -28,14 +17,19 @@ export default class Message extends Component {
     }));
   }
 
-  rendor() {
-    <GiftedChat
-      messages={this.state.messages}
-      onSend={messages => this.onSend(messages)}
-      user={{
-        _id: 1
-      }}
-    />;
+  render() {
+      return (
+        <Wallpaper>
+           <GiftedChat
+            messages={this.props.messages}
+            onSend={messages => this.onSend(messages)}
+            user={{
+              _id: 1
+            }}
+           />
+        </Wallpaper>
+      );
+    
   }
 }
 

@@ -21,19 +21,20 @@ const ArtisanHubStack = createStackNavigator({
   ArtisanDetail: ArtisanDetail
 });
 
-// const MessageNavigator = createStackNavigator({
-//   Message: Message,
-//   MessageList: MessageList
-// });
+const MessageNavigator = createStackNavigator({
+  MessageList: MessageList,
+  Message: Message
+});
 
 const TabNavigator = createBottomTabNavigator(
   {
     ArtisanHub: ArtisanHubStack,
-    Settings: Settings
+    Settings: Settings,
+    Messages: MessageNavigator
   },
   {
     initialRouteName: 'ArtisanHub',
-    order: ['ArtisanHub', 'Settings'],
+    order: ['ArtisanHub', 'Messages' ,'Settings'],
     navigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ focused, tintColor }) => {
         const { routeName } = navigation.state;
@@ -42,6 +43,8 @@ const TabNavigator = createBottomTabNavigator(
           iconName = 'users';
         } else if (routeName === 'Settings') {
           iconName = 'cog';
+        } else if (routeName === 'Messages') {
+           iconName = 'comments';
         }
 
         return <Icon name={iconName} size={25} color={tintColor} />;

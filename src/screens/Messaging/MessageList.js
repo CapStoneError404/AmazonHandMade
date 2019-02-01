@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View
 } from 'react-native';
-import { ProfilePicture } from '../../components';
+import { ProfilePicture , Wallpaper} from '../../components';
 import MessageData from './MessageData.json';
 
 export default class MessageList extends Component {
@@ -30,14 +30,14 @@ export default class MessageList extends Component {
 
   navigateToMessage(message) {
     //Here we are going to navigate to message page
-    console.log("We are trying to navigate to message: " +  message);
+    this.props.navigation.navigate('Message', { ...message });
   }
 
   _renderMessageItem = ({ item }) => {
    return (
      <TouchableOpacity 
        style={styles.ArtisanView}
-       onPress={() => this.navigateToArtisan(item)}
+       onPress={() => this.navigateToMessage(item)}
        key={item.key}
      >
        <ProfilePicture
@@ -56,19 +56,11 @@ export default class MessageList extends Component {
   render() {
     return (
       <Wallpaper>
-        {( this.state.messages != [] && this.state.fetchingMessages ) ? (
-          <ActivityIndicator
-            size="large"
-            animating={this.props.spinning}
-            color="white"
-          />
-        ) : (
           <FlatList
             data={this.state.messages}
             keyExtractor={this._keyExtractor}
             renderItem={this._renderMessageItem}
           />
-        )}
       </Wallpaper>
     );
   }
@@ -83,7 +75,7 @@ const styles = StyleSheet.create({
     borderRadius: 45,
     margin: 5
   },
-  MessageView: {
+  ArtisanView: {
     height: 100,
     flexDirection: 'row',
     alignItems: 'center',
