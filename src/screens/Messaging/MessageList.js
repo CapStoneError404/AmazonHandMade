@@ -9,7 +9,7 @@ import {
   View
 } from 'react-native';
 import { ProfilePicture , Wallpaper} from '../../components';
-import MessageData from './MessageData.json';
+import  MessageData from './MessageData.json';
 
 export default class MessageList extends Component {
   constructor(props) {
@@ -24,7 +24,16 @@ export default class MessageList extends Component {
   componentDidMount() {
     //this is where we will update state with the json data 
     //Set fetchingMessage to true
-    this.setState({ messages: MessageData, fetchingMessages: true });
+    // let data = JSON.parse(MessageData);
+    // console.log("Trying to output data: " + data);
+    // //this.setState({ messages: MessageData, fetchingMessages: true });
+    // console.log(this.state.messages);
+    console.log("Printing out Message data to screen");
+    console.log(MessageData);
+    this.setState({ messages: [ ...this.state.messages ,...MessageData ], fetchingMessages: true});
+    const someStuff = [ ...MessageData ];
+    console.log(`some stuff ${someStuff}`);
+    console.log("printout out state messages: " + this.state.messages);
 
   }
 
@@ -57,7 +66,7 @@ export default class MessageList extends Component {
     return (
       <Wallpaper>
           <FlatList
-            data={this.state.messages}
+            data={MessageData}
             keyExtractor={this._keyExtractor}
             renderItem={this._renderMessageItem}
           />

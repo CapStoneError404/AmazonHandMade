@@ -11,6 +11,10 @@ export default class Message extends Component {
     };
   }
 
+  componentDidMount() {
+     console.log(this.props);
+  }
+
   onSend(messages = []) {
     this.setState(previousState => ({
       messages: GiftedChat.append(previousState.messages, messages)
@@ -21,10 +25,10 @@ export default class Message extends Component {
       return (
         <Wallpaper>
            <GiftedChat
-            messages={this.props.messages}
+            messages={this.state.messages}
             onSend={messages => this.onSend(messages)}
             user={{
-              _id: 1
+              _id: this.props.id
             }}
            />
         </Wallpaper>
