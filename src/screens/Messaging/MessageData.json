@@ -50,7 +50,7 @@
       "profilePictureURL" : "https://firebasestorage.googleapis.com/v0/b/handmade-error-404.appspot.com/o/artisanFiles%2F-LSrXXi02Of7-bdo604B%2Fimages%2FprofilePicture?alt=media&token=299bf085-7601-4313-af0d-f044248f3ec6",
       "messages": [
         {
-           "_id": "Math.round(Math.random() * 1000000)",
+           "_id": "1",
            "text": "Hello This is team Error404 how are you doing Daniel Jones",
            "createdAt": "new Date()",
            "user": {
@@ -59,7 +59,7 @@
            }
          },
          {
-           "_id": "Math.round(Math.random() * 1000000)",
+           "_id": "2",
            "text": "Great thank you Team Error404 ",
            "createdAt": "new Date()",
            "user": {
@@ -76,7 +76,7 @@
       "profilePictureURL" : "https://firebasestorage.googleapis.com/v0/b/handmade-error-404.appspot.com/o/artisanFiles%2F-LSrY-YBygi3zq2vbWXY%2Fimages%2FprofilePicture?alt=media&token=1220de06-c92d-45e9-ab18-d6d689180775",
       "messages": [
         {
-           "_id": "Math.round(Math.random() * 1000000)",
+           "_id": "1",
            "text": "Hello This is team Error404 how are you doing Emily Robinson",
            "createdAt": "new Date()",
            "user": {
@@ -85,7 +85,7 @@
            }
          },
          {
-           "_id": "Math.round(Math.random() * 1000000)",
+           "_id": "2",
            "text": "Hello I am doing great have I sold any products??",
            "createdAt": "new Date()",
            "user": {
@@ -102,7 +102,7 @@
       "profilePictureURL" : "https://firebasestorage.googleapis.com/v0/b/handmade-error-404.appspot.com/o/artisanFiles%2F-LSrYbENuBwcIsjtVpaJ%2Fimages%2FprofilePicture?alt=media&token=63d59209-442a-4a82-a5bf-da70f252fe72",
       "messages": [
         {
-           "_id": "Math.round(Math.random() * 1000000)",
+           "_id": "1",
            "text": "Hello This is team Error404 how are you doing David Gonzalez?",
            "createdAt": "new Date()",
            "user": {
@@ -111,7 +111,7 @@
            }
          },
          {
-           "_id": "Math.round(Math.random() * 1000000)",
+           "_id": "2",
            "text": "Hello I am doing great have I sold any products??",
            "createdAt": "new Date()",
            "user": {
@@ -128,7 +128,7 @@
       "profilePictureURL" : "https://firebasestorage.googleapis.com/v0/b/handmade-error-404.appspot.com/o/artisanFiles%2F-LSrgp6H47WPnP2xQPHC%2Fimages%2FprofilePicture?alt=media&token=3978eed4-a8c0-4096-86af-10eec33e5a47",
       "messages": [
         {
-           "_id": "Math.round(Math.random() * 1000000)",
+           "_id": "1",
            "text": "Hello This is team Error404 how are you doing Alan Bard ",
            "createdAt": "new Date()",
            "user": {
@@ -137,7 +137,7 @@
            }
          },
          {
-           "_id": "Math.round(Math.random() * 1000000)",
+           "_id": "2",
            "text": "I am doing good thank you!",
            "createdAt": "new Date()",
            "user": {
@@ -154,7 +154,7 @@
       "profilePictureURL" : "https://firebasestorage.googleapis.com/v0/b/handmade-error-404.appspot.com/o/artisanFiles%2F-LSrhUMgHCLjnovkdiQD%2Fimages%2FprofilePicture?alt=media&token=457f83fd-6327-483d-ba0c-61f7cc5183d1",
       "messages": [
         {
-           "_id": "Math.round(Math.random() * 1000000)",
+           "_id": "1",
            "text": "Hello This is team Error404 how are you doing Emma Bird ",
            "createdAt": "new Date()",
            "user": {
@@ -163,7 +163,7 @@
            }
          },
          {
-           "_id": "Math.round(Math.random() * 1000000)",
+           "_id": "2",
            "text": "I am doing good thank you!",
            "createdAt": "new Date()",
            "user": {

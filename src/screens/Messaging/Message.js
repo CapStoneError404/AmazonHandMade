@@ -13,6 +13,11 @@ class Message extends Component {
     };
   }
 
+  componentDidMount() {
+     this.setState({ messages: this.props.messages.reverse() })
+
+  }
+
   onSend(messages = []) {
     this.setState(previousState => ({
       messages: GiftedChat.append(previousState.messages, messages)
@@ -23,7 +28,7 @@ class Message extends Component {
       return (
         <Wallpaper>
            <GiftedChat
-            messages={this.props.messages}
+            messages={this.state.messages}
             onSend={messages => this.onSend(messages)}
             user={{
               _id: 1
