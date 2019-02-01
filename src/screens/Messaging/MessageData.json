@@ -25,7 +25,7 @@
           },
           {
             "_id": "3",
-            "text": "I am not sure let me check and see how things are going... Yep looks like some things sold",
+            "text": "Hello This is team Error404 how are you doing Jamie Smith",
             "createdAt": "new Date()",
             "user": {
               "_id": "amazon:amzn1-account-AGSPZM7ZHUJG4RJWMRHCMUWGFXIA",

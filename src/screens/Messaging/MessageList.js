@@ -1,17 +1,30 @@
 import React, { Component } from 'react';
 import {
   ActivityIndicator,
-  Button,
   FlatList,
   StyleSheet,
   Text,
   TouchableOpacity,
   View
 } from 'react-native';
+import { Button } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import { ProfilePicture , Wallpaper} from '../../components';
 import  MessageData from './MessageData.json';
 
 export default class MessageList extends Component {
+  static navigationOptions = ({navigation, tintColor}) => {
+    var iconName = 'edit';
+    return {
+      title: 'Messages',
+      headerRight: (
+        <Button 
+          icon={<Icon name={iconName} size={25} color={tintColor} />}
+          type="clear"
+        />
+      )
+    }
+  }
 
   constructor(props) {
     super(props)

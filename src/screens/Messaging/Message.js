@@ -7,17 +7,18 @@ import { withMappedNavigationProps } from 'react-navigation-props-mapper';
 class Message extends Component {
   constructor(props) {
     super(props);
-    console.log("What is thsi here:" + this.props);
+
     this.state = {
       messages: []
     };
   }
 
+  
   componentDidMount() {
-     this.setState({ messages: this.props.messages.reverse() })
+     this.setState({ messages: this.props.messages })
 
   }
-
+  
   onSend(messages = []) {
     this.setState(previousState => ({
       messages: GiftedChat.append(previousState.messages, messages)
@@ -31,8 +32,9 @@ class Message extends Component {
             messages={this.state.messages}
             onSend={messages => this.onSend(messages)}
             user={{
-              _id: 1
+              _id: this.props.messages[1].user._id
             }}
+            
            />
         </Wallpaper>
       );
