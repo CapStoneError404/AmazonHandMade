@@ -12,32 +12,20 @@ import { ProfilePicture , Wallpaper} from '../../components';
 import  MessageData from './MessageData.json';
 
 export default class MessageList extends Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      fetchingMessages: false,
-      messages: []
-    };
+  constructor(props) {
+    super(props)
   }
+  
 
   componentDidMount() {
-    //this is where we will update state with the json data 
-    //Set fetchingMessage to true
-    // let data = JSON.parse(MessageData);
-    // console.log("Trying to output data: " + data);
-    // //this.setState({ messages: MessageData, fetchingMessages: true });
-    // console.log(this.state.messages);
-    console.log("Printing out Message data to screen");
+    
     console.log(MessageData);
-    this.setState({ messages: [ ...this.state.messages ,...MessageData ], fetchingMessages: true});
-    const someStuff = [ ...MessageData ];
-    console.log(`some stuff ${someStuff}`);
-    console.log("printout out state messages: " + this.state.messages);
 
   }
 
   navigateToMessage(message) {
+    console.log("message: " + message);
     //Here we are going to navigate to message page
     this.props.navigation.navigate('Message', { ...message });
   }

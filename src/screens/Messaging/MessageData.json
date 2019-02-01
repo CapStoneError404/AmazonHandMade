@@ -5,7 +5,7 @@
        "profilePictureURL" : "https://firebasestorage.googleapis.com/v0/b/handmade-error-404.appspot.com/o/artisanFiles%2F-LSrSfiilQUAZuNP6nWD%2Fimages%2FprofilePicture?alt=media&token=91e16822-6d03-47ab-a559-046c79ccf27b",
        "messages": [
          {
-            "_id": "Math.round(Math.random() * 1000000)",
+            "_id": "1",
             "text": "Hello This is team Error404 how are you doing Jamie Smith",
             "createdAt": "new Date()",
             "user": {
@@ -14,7 +14,7 @@
             }
           },
           {
-            "_id": "Math.round(Math.random() * 1000000)",
+            "_id": "2",
             "text": "Hello I am doing great have I sold any products??",
             "createdAt": "new Date()",
             "user": {
@@ -24,7 +24,7 @@
             }
           },
           {
-            "_id": "Math.round(Math.random() * 1000000)",
+            "_id": "3",
             "text": "I am not sure let me check and see how things are going... Yep looks like some things sold",
             "createdAt": "new Date()",
             "user": {
@@ -33,7 +33,7 @@
             }
           },
           {
-            "_id": "Math.round(Math.random() * 1000000)",
+            "_id": "4",
             "text": "Oh that is great news",
             "createdAt": "new Date()",
             "user": {

@@ -10,6 +10,7 @@ class ArtisanDetail extends Component {
 
   constructor(props) {
     super(props)
+    console.log("props:" + this.props.name)
   }
 
   render() {

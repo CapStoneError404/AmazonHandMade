@@ -2,17 +2,15 @@ import React, { Component } from 'react';
 import { Modal, View, Image, Text, Button, StyleSheet } from 'react-native';
 import { ProfilePicture, Wallpaper } from '../../components';
 import { GiftedChat } from 'react-native-gifted-chat';
+import { withMappedNavigationProps } from 'react-navigation-props-mapper';
 
-export default class Message extends Component {
+class Message extends Component {
   constructor(props) {
     super(props);
+    console.log("What is thsi here:" + this.props);
     this.state = {
-      messages: this.props.messages
+      messages: []
     };
-  }
-
-  componentDidMount() {
-     console.log(this.props);
   }
 
   onSend(messages = []) {
@@ -25,10 +23,10 @@ export default class Message extends Component {
       return (
         <Wallpaper>
            <GiftedChat
-            messages={this.state.messages}
+            messages={this.props.messages}
             onSend={messages => this.onSend(messages)}
             user={{
-              _id: this.props.id
+              _id: 1
             }}
            />
         </Wallpaper>
@@ -44,3 +42,5 @@ const styles = StyleSheet.create({
     marginLeft: 5
   }
 });
+
+export default withMappedNavigationProps()(Message)
