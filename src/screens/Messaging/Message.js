@@ -5,24 +5,28 @@ import { GiftedChat } from 'react-native-gifted-chat';
 import { withMappedNavigationProps } from 'react-navigation-props-mapper';
 
 class Message extends Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: navigation.getParam('artisan')
+    };
+  };
+
+
   constructor(props) {
     super(props);
-
+    console.log("Got inside constructor");
     this.state = {
-      messages: []
+      messages: [ ...this.props.messages ].reverse()
     };
   }
 
-  
-  componentDidMount() {
-     this.setState({ messages: this.props.messages })
 
-  }
-  
+
   onSend(messages = []) {
     this.setState(previousState => ({
       messages: GiftedChat.append(previousState.messages, messages)
     }));
+    
   }
 
   render() {
@@ -32,7 +36,7 @@ class Message extends Component {
             messages={this.state.messages}
             onSend={messages => this.onSend(messages)}
             user={{
-              _id: this.props.messages[1].user._id
+              _id: this.props.messages[0].user._id
             }}
             
            />

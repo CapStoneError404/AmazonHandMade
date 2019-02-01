@@ -31,12 +31,6 @@ export default class MessageList extends Component {
   }
   
 
-  componentDidMount() {
-    
-    console.log(MessageData);
-
-  }
-
   navigateToMessage(message) {
     console.log("message: " + message);
     //Here we are going to navigate to message page
