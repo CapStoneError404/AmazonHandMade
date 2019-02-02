@@ -62,13 +62,12 @@ export function fetchArtisans() {
 
 export function deleteArtisan(artisan) {
   
-  return (dispatch, prevState) => {
-    return new Promise(async (resolve, reject) => {
-      console.log("PRINTING OUT CURRENT USER ID: " + artisan);
-      firebase.database().ref(`artisans/${artisan}`)
-      .remove()
-
-      resolve()
-    })
-  }
-}
+   return (dispatch, prevState) => {
+     return new Promise(async (resolve, reject) => {
+       console.log("PRINTING OUT CURRENT USER ID: " + artisan);
+       firebase.database().ref(`artisans/${artisan}`)
+       .remove()
+       .then(resolve());
+     })
+   }
+ }
