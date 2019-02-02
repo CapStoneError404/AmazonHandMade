@@ -59,3 +59,15 @@ export function fetchArtisans() {
     })
   }
 }
+
+export function deleteArtisan() {
+  const { currentUser } = firebase.auth();
+  
+  return (dispatch, prevState) => {
+    return new Promise(async (resolve, reject) => {
+      console.log("PRINTING OUT CURRENT USER ID: " + currentUser.uid);
+      resolve()
+      
+    })
+  }
+}

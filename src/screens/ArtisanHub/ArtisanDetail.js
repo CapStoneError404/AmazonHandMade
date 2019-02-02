@@ -17,6 +17,7 @@ class ArtisanDetail extends Component {
 
     this.onAccept = this.onAccept.bind(this);
     this.onDecline = this.onDecline.bind(this);
+    this.deleteArtisan = this.deleteArtisan.bind(this);
   }
 
    onAccept() {
@@ -25,6 +26,10 @@ class ArtisanDetail extends Component {
 
    onDecline() {
       this.setState({ showModel: false });
+   }
+
+   deleteArtisan() {
+      this.props.deleteArtisan().then(console.log("We deleted artisans"))
    }
 
   render() {
@@ -47,7 +52,7 @@ class ArtisanDetail extends Component {
           <View>
             <Button 
               color="red"
-              onPress={() => this.setState({ showModel: !this.state.showModel})}
+              onPress={() => this.deleteArtisan()}
               title="DELETE Artisan"
             />
           </View>
@@ -57,7 +62,7 @@ class ArtisanDetail extends Component {
                onAccept={this.onAccept}
                onDecline={this.onDecline}
             >
-               Are you sure you want to delete this?
+               Are you sure you want to delete this Artisan?
           </Confirm> */}
         </ScrollView>
       </Wallpaper>
