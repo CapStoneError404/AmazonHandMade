@@ -1,4 +1,4 @@
-import { ProfilePicture, Wallpaper, Button } from '@components';
+import { ProfilePicture, Wallpaper, Button, Confirm} from '@components';
 import React, { Component } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { withMappedNavigationProps } from 'react-navigation-props-mapper';
@@ -10,7 +10,22 @@ class ArtisanDetail extends Component {
 
   constructor(props) {
     super(props)
+
+    this.state = {
+       showModel: false
+    }
+
+    this.onAccept = this.onAccept.bind(this);
+    this.onDecline = this.onDecline.bind(this);
   }
+
+   onAccept() {
+      console.log("pressed this button");
+   }
+
+   onDecline() {
+      this.setState({ showModel: false });
+   }
 
   render() {
     return (
@@ -29,11 +44,21 @@ class ArtisanDetail extends Component {
           <View style={styles.description}>
             <Text style={styles.text}>{this.props.description}</Text>
           </View>
-          <Button 
-            color="red"
-            onPress={() => console.log("Delete this artisan!")}
-            title="DELETE Artisan"
-        />
+          <View>
+            <Button 
+              color="red"
+              onPress={() => this.setState({ showModel: !this.state.showModel})}
+              title="DELETE Artisan"
+            />
+          </View>
+          
+          {/* <Confirm 
+               visible={this.state.showModel}
+               onAccept={this.onAccept}
+               onDecline={this.onDecline}
+            >
+               Are you sure you want to delete this?
+          </Confirm> */}
         </ScrollView>
       </Wallpaper>
     )
