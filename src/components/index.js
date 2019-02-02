@@ -10,4 +10,4 @@ export { default as ProfilePicture } from './ProfilePicture';
 export { default as UserInput } from './UserInput';
 export { default as Wallpaper } from './Wallpaper';
 export { default as Confirm } from './Confirm';
-export { default as Button2 } from './Button/Button2';
+

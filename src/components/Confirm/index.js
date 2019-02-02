@@ -1,5 +1,5 @@
 import React from 'react';
-import {  Button, Button2 } from '@components';
+import {  Button } from '@components';
 import { View, Text, Modal, StyleSheet } from 'react-native';
 
 
@@ -8,7 +8,7 @@ import { View, Text, Modal, StyleSheet } from 'react-native';
 //reusability
 const Confirm = ({ children, onAccept, onDecline, visible }) => {
    const { cardSectionStyle, textStyle, containerStyle } = styles;
-
+   console.log("Got inside confirm component");
    return (
       //modal is a big wrapper
       <Modal
@@ -23,8 +23,8 @@ const Confirm = ({ children, onAccept, onDecline, visible }) => {
             </View>
 
             <View>
-               <Button2 onPress={onAccept}>Yes</Button2>
-               <Button2 onPress={onDecline}>No</Button2>
+               <Button onPress={onAccept}>Yes</Button>
+               <Button onPress={onDecline}>No</Button>
             </View>
          </View>
       </Modal>

@@ -21,10 +21,8 @@ class ArtisanDetail extends Component {
   }
 
    onAccept() {
-      console.log("pressed this button");
-      const { uid } = this.props;
-      this.props.deleteArtisan(uid)
-      .then(console.log("we deleted artisans"));
+      this.props.deleteArtisan(id)
+      .then(this.props.navigation.navigate('ArtisanList'));
    }
 
    onDecline() {
@@ -33,7 +31,7 @@ class ArtisanDetail extends Component {
 
    deleteArtisan(id) {
       this.props.deleteArtisan(id)
-      .then(console.log("We deleted artisans"))
+      .then(this.props.navigation.navigate('ArtisanList'));
    }
 
   render() {
@@ -56,18 +54,18 @@ class ArtisanDetail extends Component {
           <View>
             <Button 
               color="red"
-              onPress={() => this.deleteArtisan(this.props.uid)}
-              title="DELETE Artisan"
+              onPress={() => this.setState({ showModel: !this.state.showModel })}
+              title="Delete Artisan"
             />
           </View>
           
-          {/* <Confirm 
+          <Confirm 
                visible={this.state.showModel}
                onAccept={this.onAccept}
                onDecline={this.onDecline}
             >
                Are you sure you want to delete this Artisan?
-          </Confirm> */}
+          </Confirm>
         </ScrollView>
       </Wallpaper>
     )
