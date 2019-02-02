@@ -60,12 +60,11 @@ export function fetchArtisans() {
   }
 }
 
-export function deleteArtisan() {
-  const { currentUser } = firebase.auth();
+export function deleteArtisan(artisan) {
   
   return (dispatch, prevState) => {
     return new Promise(async (resolve, reject) => {
-      console.log("PRINTING OUT CURRENT USER ID: " + currentUser.uid);
+      console.log("PRINTING OUT CURRENT USER ID: " + artisan);
       resolve()
       
     })

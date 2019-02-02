@@ -1,5 +1,5 @@
 import React from 'react';
-import {  Button } from '@components';
+import {  Button, Button2 } from '@components';
 import { View, Text, Modal, StyleSheet } from 'react-native';
 
 
@@ -23,8 +23,8 @@ const Confirm = ({ children, onAccept, onDecline, visible }) => {
             </View>
 
             <View>
-               <Button onPress={onAccept} title="Yes">Yes</Button>
-               <Button onPress={onDecline} title="No">No</Button>
+               <Button2 onPress={onAccept}>Yes</Button2>
+               <Button2 onPress={onDecline}>No</Button2>
             </View>
          </View>
       </Modal>

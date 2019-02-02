@@ -22,14 +22,18 @@ class ArtisanDetail extends Component {
 
    onAccept() {
       console.log("pressed this button");
+      const { uid } = this.props;
+      this.props.deleteArtisan(uid)
+      .then(console.log("we deleted artisans"));
    }
 
    onDecline() {
       this.setState({ showModel: false });
    }
 
-   deleteArtisan() {
-      this.props.deleteArtisan().then(console.log("We deleted artisans"))
+   deleteArtisan(id) {
+      this.props.deleteArtisan(id)
+      .then(console.log("We deleted artisans"))
    }
 
   render() {
@@ -52,7 +56,7 @@ class ArtisanDetail extends Component {
           <View>
             <Button 
               color="red"
-              onPress={() => this.deleteArtisan()}
+              onPress={() => this.deleteArtisan(this.props.uid)}
               title="DELETE Artisan"
             />
           </View>
