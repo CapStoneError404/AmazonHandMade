@@ -8,7 +8,7 @@ export default class AsyncButton extends Component {
     if(this.props.spinning) {
       return (
         <TouchableOpacity
-          style={[styles.buttonWrapper, this.props.style, {backgroundColor: (this.props.color) ? this.props.color : 'black'}]}
+          style={[styles.buttonWrapper,  {backgroundColor: (this.props.color) ? this.props.color : 'black'}, this.props.style]}
           onPress={this.props.onPress}
         >
           <ActivityIndicator 
@@ -23,7 +23,7 @@ export default class AsyncButton extends Component {
       return (
         <TouchableOpacity
           testID={this.props.testID}
-          style={[styles.buttonWrapper, this.props.style, {backgroundColor: (this.props.color) ? this.props.color : 'black'}]}
+          style={[styles.buttonWrapper, {backgroundColor: (this.props.color) ? this.props.color : 'black'}, this.props.style, ]}
           onPress={this.props.onPress}>
           {(this.props.iconName) ?
             <Icon name={this.props.iconName} style={styles.icon} color={(this.props.iconColor) ? this.props.iconColor : styles.icon.color} /> : null}

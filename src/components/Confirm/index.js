@@ -1,16 +1,12 @@
 import React from 'react';
-import {  Button } from '@components';
+import {  Button, AsyncButton } from '@components';
 import { View, Text, Modal, StyleSheet } from 'react-native';
 
-
-//What do we need to give this functional component
-//passing in props to give the user more control and giving this component great
-//reusability
-const Confirm = ({ children, onAccept, onDecline, visible }) => {
-   const { cardSectionStyle, textStyle, containerStyle } = styles;
-   console.log("Got inside confirm component");
+const Confirm = ({ children, onAccept, onDecline, visible, spinning }) => {
+   const { cardSectionStyle, textStyle, containerStyle, buttonContainerStyle, buttonStyle } = styles;
+   
    return (
-      //modal is a big wrapper
+      
       <Modal
          visible={visible}
          transparent
@@ -22,21 +18,37 @@ const Confirm = ({ children, onAccept, onDecline, visible }) => {
                <Text style={textStyle}>{ children }</Text>
             </View>
 
-            <View>
-               <Button onPress={onAccept}>Yes</Button>
-               <Button onPress={onDecline}>No</Button>
+            <View style={buttonContainerStyle}>
+               <AsyncButton 
+                  style={buttonStyle}
+                  onPress={onAccept} 
+                  title="Yes"
+                  textColor="red"
+                  color="white"
+                  spinning={spinning}
+               />
+               <Button 
+                  style={buttonStyle}
+                  onPress={onDecline} 
+                  title='No'
+                  textColor="red"
+               />
             </View>
          </View>
       </Modal>
    );
 };
 
-//lineHeight gives a little bit of spacing when having to wrap around the page
-// rgba-the a is the opacity of the background
-//flex 1 says take up whole screen
 const styles = StyleSheet.create({
    cardSectionStyle: {
-      justifyContent: 'center'
+      justifyContent: 'center',
+      borderBottomWidth: 1,
+      padding: 5,
+      backgroundColor: '#fff',
+      flexDirection: 'row',
+      borderColor: '#ddd',
+      position: 'relative'
+
    },
    textStyle: {
       flex: 1,
@@ -49,8 +61,28 @@ const styles = StyleSheet.create({
       position: 'relative',
       flex: 1,
       justifyContent: 'center'
-   }
+   },
+   buttonContainerStyle: {
+      borderBottomWidth: 1,
+      padding: 5,
+      backgroundColor: '#fff',
+      justifyContent: 'flex-start',
+      flexDirection: 'row',
+      borderColor: '#ddd',
+      position: 'relative'
+    },
+    buttonStyle: {
+      flexDirection: 'column',
+      flex: 1,
+      alignSelf: 'stretch',
+      borderRadius: 5,
+      borderWidth: 1,
+      borderColor: '#007aff',
+      marginLeft: 5,
+      marginRight: 5 
+    }
 });
 
 export default Confirm;
+
 

@@ -12,26 +12,25 @@ class ArtisanDetail extends Component {
     super(props)
 
     this.state = {
-       showModel: false
+       showModel: false,
+       adding: false
     }
 
     this.onAccept = this.onAccept.bind(this);
     this.onDecline = this.onDecline.bind(this);
-    this.deleteArtisan = this.deleteArtisan.bind(this);
   }
 
    onAccept() {
-      this.props.deleteArtisan(id)
-      .then(this.props.navigation.navigate('ArtisanList'));
+      this.setState({ adding: true })
+      this.props.deleteArtisan(this.props.uid)
+      .then(() => {
+        this.setState({ adding: false })
+        this.props.navigation.navigate("ArtisanList")
+      });
    }
 
    onDecline() {
       this.setState({ showModel: false });
-   }
-
-   deleteArtisan(id) {
-      this.props.deleteArtisan(id)
-      .then(this.props.navigation.navigate('ArtisanList'));
    }
 
   render() {
@@ -54,17 +53,20 @@ class ArtisanDetail extends Component {
           <View>
             <Button 
               color="red"
+              textColor="white"
               onPress={() => this.setState({ showModel: !this.state.showModel })}
               title="Delete Artisan"
+              style={styles.buttonStyle}
             />
           </View>
-          
           <Confirm 
-               visible={this.state.showModel}
-               onAccept={this.onAccept}
-               onDecline={this.onDecline}
-            >
-               Are you sure you want to delete this Artisan?
+            visible={this.state.showModel}
+            onAccept={this.onAccept}
+            onDecline={this.onDecline}
+            spinning={this.state.adding}
+
+          >
+            Are you sure you want to delete this Artisan?
           </Confirm>
         </ScrollView>
       </Wallpaper>
@@ -103,6 +105,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#444444',
     marginLeft: 5
+  },
+  buttonStyle: {
+     marginLeft:10,
+     marginRight: 10
   }
 })
 

@@ -62,13 +62,27 @@ export function fetchArtisans() {
 
 export function deleteArtisan(artisan) {
   
-   return (dispatch, prevState) => {
+   return (dispatch) => {
      return new Promise(async (resolve, reject) => {
-       console.log("PRINTING OUT CURRENT USER ID: " + artisan);
-      //  firebase.database().ref(`artisans/${artisan}`)
-      //  .remove()
-      //  .then(resolve());
-      resolve()
-     })
+        console.log("artisan id: " + artisan)
+       firebase.database().ref(`artisans/${artisan}`)
+       .remove()
+       .then(async () => {
+         snapshot = await firebase.database().ref('artisans').once('value')
+         
+         artisanArray = []
+         artisanObject = snapshot.val()
+               
+         for(var uid in artisanObject) {
+           artisanArray.push({
+             ...artisanObject[uid],
+                  uid: uid
+            })
+         }
+               
+         resolve()
+         dispatch({type: 'GET_ARTISANS', artisans: artisanArray})
+       })
+     })  
    }
  }
