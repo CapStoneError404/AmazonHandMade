@@ -11,7 +11,6 @@ class Message extends Component {
     };
   };
 
-
   constructor(props) {
     super(props);
     console.log("Got inside constructor");
@@ -20,15 +19,13 @@ class Message extends Component {
     };
   }
 
-
-
   onSend(messages = []) {
     this.setState(previousState => ({
       messages: GiftedChat.append(previousState.messages, messages)
     }));
-    
   }
 
+  //this.props.messages[0].user._id will be changed with the person ID who is currently Logged in and needs to be unique
   render() {
       return (
         <Wallpaper>
@@ -38,11 +35,9 @@ class Message extends Component {
             user={{
               _id: this.props.messages[0].user._id
             }}
-            
            />
         </Wallpaper>
       );
-    
   }
 }
 

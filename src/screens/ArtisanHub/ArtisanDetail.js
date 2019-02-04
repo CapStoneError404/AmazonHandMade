@@ -1,16 +1,25 @@
 import { ProfilePicture, Wallpaper } from '@components';
 import React, { Component } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View, Button } from 'react-native';
 import { withMappedNavigationProps } from 'react-navigation-props-mapper';
 
 class ArtisanDetail extends Component {
-  static navigationOptions = {
-    title: "Artisan Details"
+  static navigationOptions = ({navigation}) => {
+   return {
+     title: 'Artisan Details',
+     headerRight: (
+       <Button 
+         transparent
+         onPress={() => navigation.navigate("MessageList")}
+         title="Send Message"
+         style={styles.text}
+       />
+      )
+    }
   }
 
   constructor(props) {
     super(props)
-    console.log("props:" + this.props.name)
   }
 
   render() {
