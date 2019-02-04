@@ -64,7 +64,6 @@ class ArtisanDetail extends Component {
             onAccept={this.onAccept}
             onDecline={this.onDecline}
             spinning={this.state.adding}
-
           >
             Are you sure you want to delete this Artisan?
           </Confirm>
