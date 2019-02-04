@@ -10,6 +10,7 @@
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 #import <Firebase.h>
+#import <LoginWithAmazon/LoginWithAmazon.h>
 
 @implementation AppDelegate
 
@@ -32,5 +33,12 @@
   [self.window makeKeyAndVisible];
   return YES;
 }
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)
+        url options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options {
+
+        	return [AMZNAuthorizationManager handleOpenURL:url 	
+            sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]];
+      }
 
 @end

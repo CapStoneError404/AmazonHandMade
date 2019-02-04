@@ -4,16 +4,11 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.reactlibrary.RNLoginWithAmazonPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
+import com.BV.LinearGradient.LinearGradientPackage;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
-import com.oblador.vectoricons.VectorIconsPackage;
-import com.BV.LinearGradient.LinearGradientPackage;
 import io.invertase.firebase.RNFirebasePackage;
-import com.oblador.vectoricons.VectorIconsPackage;
-import com.BV.LinearGradient.LinearGradientPackage;
-import io.invertase.firebase.RNFirebasePackage;
-import io.invertase.firebase.RNFirebasePackage;
-import com.BV.LinearGradient.LinearGradientPackage;
-import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -53,10 +48,11 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.asList(
         new MainReactPackage(),
+            new RNLoginWithAmazonPackage(),
+            new VectorIconsPackage(),
+            new LinearGradientPackage(),
             new PickerPackage(),
             new RNFirebasePackage(),
-            new LinearGradientPackage(),
-            new VectorIconsPackage(),
         // add/remove these packages as appropriate
         //new RNFirebaseAdMobPackage(),
         new RNFirebaseAnalyticsPackage(),

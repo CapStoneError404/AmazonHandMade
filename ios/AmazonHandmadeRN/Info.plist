@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>APIKey</key>
+	<string>eyJhbGciOiJSU0EtU0hBMjU2IiwidmVyIjoiMSJ9.eyJ2ZXIiOiIzIiwiZW5kcG9pbnRzIjp7ImF1dGh6IjoiaHR0cHM6Ly93d3cuYW1hem9uLmNvbS9hcC9vYSIsInRva2VuRXhjaGFuZ2UiOiJodHRwczovL2FwaS5hbWF6b24uY29tL2F1dGgvbzIvdG9rZW4ifSwiY2xpZW50SWQiOiJhbXpuMS5hcHBsaWNhdGlvbi1vYTItY2xpZW50LmJhMzAwNzJmZmFjMjQwNzdhYjk1NDc3NTgzYzBjMTgwIiwiYXBwRmFtaWx5SWQiOiJhbXpuMS5hcHBsaWNhdGlvbi4xNWVlODg1ZTJjNGQ0ZTNjODc1ZmY2ZTQ3MmE0MzQwYiIsImJ1bmRsZVNlZWRJZCI6ImNvbS5lcnJvci5hbWF6b25oYW5kbWFkZXJuIiwiYnVuZGxlSWQiOiJjb20uZXJyb3IuYW1hem9uaGFuZG1hZGVybiIsImlzcyI6IkFtYXpvbiIsInR5cGUiOiJBUElLZXkiLCJhcHBWYXJpYW50SWQiOiJhbXpuMS5hcHBsaWNhdGlvbi1jbGllbnQuZGU0OWEyYzRiYmZmNGRkZmJiZjg1N2YyNTQwMjFkOTYiLCJ0cnVzdFBvb2wiOm51bGwsImFwcElkIjoiYW16bjEuYXBwbGljYXRpb24tY2xpZW50LmRlNDlhMmM0YmJmZjRkZGZiYmY4NTdmMjU0MDIxZDk2IiwiaWQiOiJiMTVjMjJhNC0xODdiLTExZTktYjkzNi0xOWUxY2M1Y2MyYzEiLCJpYXQiOiIxNTQ3NTI1NTE0NzI0In0=.cqJf9HhuFq77tsoDumJ8pZEPUlZjZbupnwE1LUQuAA+24UUloYBtsTTFu+iMk3NJ86baEVbCi4qwd0gb50vKZN78X7HcQZPJIfsVfZSZkwAOuP69PmphGODYUuhvjNppoAlBxU8hgeYMYsZN2gC67wiszCLrHhvolGfRGzac5xgRBA9X20cT2rlgC3GMN4IWDHyF4Hnsv18Annvy8wgyCzK3xL4PgAMbCuX8KT07RGw9Q095tHI65NVhO4oM+Mqof9Omk6mPqxQ7c4IyxRudNrR3/EsNqS31VLpcWhsWvs72XnE/U1vt4CUronuTIGI3AYgGeu45tewFNqvN088+fg==</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
@@ -20,26 +22,23 @@
 	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>com.error.amazonhandmadern</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>amzn-com.error.amazonhandmadern</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
-	<key>UIRequiredDeviceCapabilities</key>
-	<array>
-		<string>armv7</string>
-	</array>
-	<key>UISupportedInterfaceOrientations</key>
-	<array>
-		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -53,6 +52,10 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string> We need access to your photo library to allow you to upload pictures. </string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
@@ -78,7 +81,19 @@
 		<string>Roboto.ttf</string>
 		<string>rubicon-icon-font.ttf</string>
 	</array>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string> We need access to your photo library to allow you to upload pictures. </string>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>armv7</string>
+	</array>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>

@@ -46,6 +46,8 @@ target 'AmazonHandmadeRN' do
 
   pod 'RNImageCropPicker', :path => '../node_modules/react-native-image-crop-picker'
 
+  pod 'RNLoginWithAmazon', :path => '../node_modules/react-native-login-with-amazon'
+
 end
 
 post_install do |installer|
