@@ -5,21 +5,21 @@ import { withMappedNavigationProps } from 'react-navigation-props-mapper';
 
 class ArtisanDetail extends Component {
   static navigationOptions = ({navigation}) => {
-   return {
-     title: 'Artisan Details',
-     headerRight: (
-       <Button 
-         transparent
-         onPress={() => navigation.navigate("MessageList")}
-         title="Send Message"
-         style={styles.text}
-       />
-      )
-    }
-  }
+    return {
+      title: 'Artisan Details',
+      headerRight: (
+        <Button 
+          transparent
+          onPress={() => navigation.navigate("MessageList")}
+          title="Send Message"
+        />
+       )
+     }
+   }
 
   constructor(props) {
     super(props)
+
   }
 
   render() {

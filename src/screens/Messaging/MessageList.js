@@ -32,8 +32,6 @@ export default class MessageList extends Component {
   
 
   navigateToMessage(message) {
-    console.log("message: " + message);
-    //Here we are going to navigate to message page
     this.props.navigation.navigate('Message', { ...message });
   }
 
