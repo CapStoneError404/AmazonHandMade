@@ -1,6 +1,6 @@
-import { ProfilePicture, Wallpaper } from '@components';
+import { ProfilePicture, Wallpaper, AsyncButton} from '@components';
 import React, { Component } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View, Alert } from 'react-native';
 import { withMappedNavigationProps } from 'react-navigation-props-mapper';
 
 class ArtisanDetail extends Component {
@@ -10,7 +10,45 @@ class ArtisanDetail extends Component {
 
   constructor(props) {
     super(props)
+
+    this.state = {
+       showModel: false,
+       adding: false
+    }
+
+    this.onCancel = this.onCancel.bind(this);
+    this.deletePressed = this.deletePressed.bind(this);
+    this.showAlert = this.showAlert.bind(this);
   }
+
+   onCancel() {
+      this.setState({ adding: false });
+   }
+
+   deletePressed() {
+      this.setState({ adding: true });
+      this.props.deleteArtisan(this.props.Artisans, this.props.uid)
+      .then(() => {
+        this.setState({ adding: false })
+        this.props.navigation.navigate("ArtisanList")
+      });
+   }
+
+   showAlert() {
+      Alert.alert(
+         'Are you sure want delete Artisan?',
+         'Delete Artisan',
+         [
+           {
+              text: 'Cancel',
+              onPress: () => this.onCancel(),
+              style: 'cancel',
+           },
+          {text: 'OK', onPress: () => this.deletePressed()},
+         ],
+         {cancelable: false},
+      );
+   }
 
   render() {
     return (
@@ -28,6 +66,16 @@ class ArtisanDetail extends Component {
           </View>
           <View style={styles.description}>
             <Text style={styles.text}>{this.props.description}</Text>
+          </View>
+          <View>
+            <AsyncButton
+              title="Delete Artisan"
+              color="red"
+              textColor="white"
+              onPress={this.showAlert}
+              style={styles.buttonStyle}
+              spinning={this.state.adding}
+            />
           </View>
         </ScrollView>
       </Wallpaper>
@@ -66,6 +114,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#444444',
     marginLeft: 5
+  },
+  buttonStyle: {
+     marginLeft:10,
+     marginRight: 10
   }
 })
 

@@ -8,7 +8,7 @@ export default class Button extends Component {
     return (
       <TouchableOpacity
         testID={this.props.testID}
-        style={[styles.buttonWrapper, { backgroundColor: (this.props.color) ? this.props.color : 'white' }]}
+        style={[styles.buttonWrapper, { backgroundColor: (this.props.color) ? this.props.color : 'white' }, this.props.style]}
         onPress={this.props.onPress}>
         {(this.props.iconName) ?
           <Icon name={this.props.iconName} style={styles.icon} color={(this.props.iconColor) ? this.props.iconColor : styles.icon.color} /> : null}
