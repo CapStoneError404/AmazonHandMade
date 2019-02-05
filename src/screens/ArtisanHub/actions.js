@@ -60,8 +60,8 @@ export function fetchArtisans() {
   }
 }
 
-//action takes in current list of artisans and artisan to be deleted
-//filters that artisan out of current list and dispatches to reducer
+// action takes in current list of artisans and artisan to be deleted
+// sends that artisan to reducer to be filtered out of state
 export function deleteArtisan(artisans, artisan) {
   return (dispatch) => {
     return new Promise(async (resolve, reject) => {
