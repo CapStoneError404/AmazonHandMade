@@ -1,6 +1,6 @@
-import { ProfilePicture, Wallpaper, Button, Confirm} from '@components';
+import { ProfilePicture, Wallpaper, AsyncButton} from '@components';
 import React, { Component } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View, Alert } from 'react-native';
 import { withMappedNavigationProps } from 'react-navigation-props-mapper';
 
 class ArtisanDetail extends Component {
@@ -16,21 +16,38 @@ class ArtisanDetail extends Component {
        adding: false
     }
 
-    this.onAccept = this.onAccept.bind(this);
-    this.onDecline = this.onDecline.bind(this);
+    this.onCancel = this.onCancel.bind(this);
+    this.deletePressed = this.deletePressed.bind(this);
+    this.showAlert = this.showAlert.bind(this);
   }
 
-   onAccept() {
-      this.setState({ adding: true })
-      this.props.deleteArtisan(this.props.uid)
+   onCancel() {
+      this.setState({ adding: false });
+   }
+
+   deletePressed() {
+      this.setState({ adding: true });
+      this.props.deleteArtisan(this.props.Artisans, this.props.uid)
       .then(() => {
         this.setState({ adding: false })
         this.props.navigation.navigate("ArtisanList")
       });
    }
 
-   onDecline() {
-      this.setState({ showModel: false });
+   showAlert() {
+      Alert.alert(
+         'Are you sure want delete Artisan?',
+         'Delete Artisan',
+         [
+           {
+              text: 'Cancel',
+              onPress: () => this.onCancel(),
+              style: 'cancel',
+           },
+          {text: 'OK', onPress: () => this.deletePressed()},
+         ],
+         {cancelable: false},
+      );
    }
 
   render() {
@@ -51,22 +68,15 @@ class ArtisanDetail extends Component {
             <Text style={styles.text}>{this.props.description}</Text>
           </View>
           <View>
-            <Button 
+            <AsyncButton
+              title="Delete Artisan"
               color="red"
               textColor="white"
-              onPress={() => this.setState({ showModel: !this.state.showModel })}
-              title="Delete Artisan"
+              onPress={this.showAlert}
               style={styles.buttonStyle}
+              spinning={this.state.adding}
             />
           </View>
-          <Confirm 
-            visible={this.state.showModel}
-            onAccept={this.onAccept}
-            onDecline={this.onDecline}
-            spinning={this.state.adding}
-          >
-            Are you sure you want to delete this Artisan?
-          </Confirm>
         </ScrollView>
       </Wallpaper>
     )

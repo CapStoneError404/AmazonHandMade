@@ -60,27 +60,17 @@ export function fetchArtisans() {
   }
 }
 
-//I am re-using the fetchartisan code because
-export function deleteArtisan(artisan) {
+//action takes in current list of artisans and artisan to be deleted
+//filters that artisan out of current list and dispatches to reducer
+export function deleteArtisan(artisans, artisan) {
   return (dispatch) => {
     return new Promise(async (resolve, reject) => {
       firebase.database().ref(`artisans/${artisan}`)
       .remove()
-      .then(async () => {
-        snapshot = await firebase.database().ref('artisans').once('value')
-        artisanArray = []
-        artisanObject = snapshot.val()
-          
-        for(var uid in artisanObject) {
-          artisanArray.push({
-            ...artisanObject[uid],
-            uid: uid
-          })
-        }
-
-        resolve();
-        dispatch({type: 'GET_ARTISANS', artisans: artisanArray});
-      })
+      
+      const artisanDeleted = artisans.filter((item) => item.uid !== artisan);
+      resolve();
+      dispatch({type: 'DELETE_ARTISAN', payload: artisanDeleted });
     })  
   }
 }
