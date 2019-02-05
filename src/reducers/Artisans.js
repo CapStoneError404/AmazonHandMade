@@ -1,6 +1,5 @@
 export default function Artisans(state = [], action) {
-  console.log("Artisans reducing action " + action.type);
-  console.log("State: " + state)
+  console.log("Artisans reducing action " + action.type)
   switch (action.type) {
     case 'ADD_ARTISAN':
       return state.concat([action.artisan])

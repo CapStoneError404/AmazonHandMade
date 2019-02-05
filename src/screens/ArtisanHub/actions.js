@@ -66,8 +66,8 @@ export function deleteArtisan(artisans, artisan) {
   return (dispatch) => {
     return new Promise(async (resolve, reject) => {
       await firebase.database().ref(`artisans/${artisan}`).remove()
-      resolve();
-      dispatch({type: 'DELETE_ARTISAN', artisan: artisan});
+      resolve()
+      dispatch({type: 'DELETE_ARTISAN', artisan: artisan})
     })  
   }
 }
