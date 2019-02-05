@@ -9,5 +9,3 @@ export { default as Logo } from './Logo';
 export { default as ProfilePicture } from './ProfilePicture';
 export { default as UserInput } from './UserInput';
 export { default as Wallpaper } from './Wallpaper';
-export { default as Confirm } from './Confirm';
-
