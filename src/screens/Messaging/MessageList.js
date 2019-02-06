@@ -11,6 +11,7 @@ import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { ProfilePicture , Wallpaper} from '../../components';
 import  MessageData from './MessageData.json';
+import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
 
 
 export default class MessageList extends Component {
@@ -19,16 +20,43 @@ export default class MessageList extends Component {
     return {
       title: 'Messages',
       headerRight: (
-        <Button 
-          icon={<Icon name={iconName} size={25} color={tintColor} />}
-          type="clear"
-        />
+         <Button 
+           icon={<Icon name={iconName} size={25} color={tintColor} />}
+           type="clear"
+           onPress={navigation.getParam('chatButton')}
+         />
       )
     }
+   }
+
+  componentDidMount() {
+     this.props.navigation.setParams({ chatButton: this.chatButton, cancelChat: this.cancelChat, getGroupChat: this.getGroupChat })
   }
 
   constructor(props) {
     super(props)
+
+    this.state = {
+       groupChat: false
+    }
+
+    this.chatButton = this.chatButton.bind(this);
+    this.cancelChat = this.cancelChat.bind(this);
+    this.getGroupChat = this.getGroupChat.bind(this);
+  }
+
+  chatButton = () => {
+     console.log('chat button pressed');
+     this.setState({ groupChat: true });
+  }
+
+  cancelChat = () => {
+     console.log("cancel chat");
+     this.setState({ groupChat: false });
+  }
+
+  getGroupChat = () => {
+     return this.state.groupChat;
   }
   
   navigateToMessage(message) {
