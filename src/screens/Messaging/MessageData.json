@@ -15,7 +15,7 @@
           },
           {
             "_id": "2",
-            "text": "Hello I am doing great have I sold any products??",
+            "text": "Hello I am doing great have I sold any products?? I'd really love to meet sometime soon! This is purposely a long message to test layout issues!",
             "createdAt": "new Date()",
             "user": {
               "_id": "-LSrSfiilQUAZuNP6nWD",
@@ -112,7 +112,7 @@
          },
          {
            "_id": "2",
-           "text": "Hello I am doing great have I sold any products??",
+           "text": "Hello I am doing great have I sold any products?? I'd really love to meet sometime soon! This is purposely a long message to test layout issues!",
            "createdAt": "new Date()",
            "user": {
              "_id": "-LSrYbENuBwcIsjtVpaJ",

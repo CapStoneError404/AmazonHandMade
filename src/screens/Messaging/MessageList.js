@@ -38,7 +38,7 @@ export default class MessageList extends Component {
   _renderMessageItem = ({ item }) => {
    return (
      <TouchableOpacity 
-       style={styles.ArtisanView}
+       style={styles.artisanView}
        onPress={() => this.navigateToMessage(item)}
        key={item.key}
      >
@@ -46,8 +46,9 @@ export default class MessageList extends Component {
           source={{uri: item.profilePictureURL}}
           style={styles.image}
        />
-       <View style={styles.namePhone}>
-          <Text style={styles.text}>{item.artisan}</Text>
+       <View style={styles.text}>
+          <Text style={styles.name}>{item.artisan}</Text>
+          <Text numberOfLines={2} style={styles.lastMessage}>{item.messages.slice(-1)[0].text}</Text>
        </View>
      </TouchableOpacity>
     );
@@ -77,7 +78,7 @@ const styles = StyleSheet.create({
     borderRadius: 45,
     margin: 5
   },
-  ArtisanView: {
+  artisanView: {
     height: 100,
     flexDirection: 'row',
     alignItems: 'center',
@@ -88,8 +89,22 @@ const styles = StyleSheet.create({
     marginRight: 10
   },
   text: {
+    flex: 1,
+    height: '100%',
+    flexDirection: 'column',
+    alignItems: 'stretch',
+    justifyContent: 'space-evenly',
+    width: '100%',
+  },
+  name: {
     fontSize: 20,
     color: '#444444',
     marginLeft: 5
+  },
+  lastMessage: {
+    fontSize: 15,
+    color: 'lightgray',
+    marginLeft: 5,
+    marginRight: 5
   }
 });
