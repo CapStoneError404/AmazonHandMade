@@ -6,19 +6,18 @@ import MessageData from '../Messaging/MessageData.json';
 
 class ArtisanDetail extends Component {
   static navigationOptions = ({navigation}) => {
-     const uid = navigation.getParam('uid');
+    const uid = navigation.getParam('uid');
     return {
       title: 'Artisan Details',
       headerRight: (
         <Button 
           transparent
           onPress={() => {
-               const foundArtisan =  MessageData.find((message) => message.id === uid);
-               return foundArtisan !== [] ? navigation.navigate('Message', { ...foundArtisan }) :
-                  navigation.navigate('MessageList')
-            }
-          }
-          title="Send Message"
+            const foundArtisan =  MessageData.find((message) => message.id === uid);
+            return foundArtisan !== [] ? navigation.navigate('Message', { ...foundArtisan }) :
+              navigation.navigate('MessageList')
+         }}
+         title="Send Message"
         />
        )
      }
