@@ -22,7 +22,7 @@ const ArtisanHubStack = createStackNavigator({
 });
 
 const MessageNavigator = createStackNavigator({
-  MessageList: MessageList,
+  Messages: MessageList,
   Message: Message
 });
 

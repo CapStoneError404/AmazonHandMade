@@ -1,8 +1,10 @@
 import { ProfilePicture, Wallpaper } from '@components';
 import React, { Component } from 'react';
-import { ScrollView, StyleSheet, Text, View, Button } from 'react-native';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { withMappedNavigationProps } from 'react-navigation-props-mapper';
 import MessageData from '../Messaging/MessageData.json';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+import { Button } from 'react-native-elements';
 
 class ArtisanDetail extends Component {
   static navigationOptions = ({navigation}) => {
@@ -11,13 +13,13 @@ class ArtisanDetail extends Component {
       title: 'Artisan Details',
       headerRight: (
         <Button 
-          transparent
           onPress={() => {
-            const foundArtisan =  MessageData.find((message) => message.id === uid);
-            return foundArtisan !== [] ? navigation.navigate('Message', { ...foundArtisan }) :
-              navigation.navigate('MessageList')
+            const foundArtisan = MessageData.find((message) => message.id === uid);
+            return (foundArtisan !== undefined) ? navigation.navigate('Message', { ...foundArtisan }) :
+              navigation.navigate('Messages')
          }}
-         title="Send Message"
+         icon={<Icon name={'comment'} size={30} color='gray' />}
+         type="clear"
         />
        )
      }

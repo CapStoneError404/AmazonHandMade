@@ -12,6 +12,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { ProfilePicture , Wallpaper} from '../../components';
 import  MessageData from './MessageData.json';
 
+
 export default class MessageList extends Component {
   static navigationOptions = ({navigation, tintColor}) => {
     var iconName = 'edit';
@@ -30,7 +31,6 @@ export default class MessageList extends Component {
     super(props)
   }
   
-
   navigateToMessage(message) {
     this.props.navigation.navigate('Message', { ...message });
   }
@@ -47,8 +47,8 @@ export default class MessageList extends Component {
           style={styles.image}
        />
        <View style={styles.text}>
-          <Text style={styles.name}>{item.artisan}</Text>
-          <Text numberOfLines={2} style={styles.lastMessage}>{item.messages.slice(-1)[0].text}</Text>
+         <Text style={styles.name}>{item.artisan}</Text> 
+         <Text numberOfLines={2} style={styles.lastMessage}>{item.messages.slice(-1)[0].text}</Text>
        </View>
      </TouchableOpacity>
     );
@@ -108,3 +108,5 @@ const styles = StyleSheet.create({
     marginRight: 5
   }
 });
+
+

@@ -4,6 +4,7 @@ import { ProfilePicture, Wallpaper } from '../../components';
 import { GiftedChat } from 'react-native-gifted-chat';
 import { withMappedNavigationProps } from 'react-navigation-props-mapper';
 
+
 class Message extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
@@ -13,7 +14,7 @@ class Message extends Component {
 
   constructor(props) {
     super(props);
-    console.log("Got inside constructor");
+    
     this.state = {
       messages: [ ...this.props.messages ].reverse()
     };
