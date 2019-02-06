@@ -27,6 +27,7 @@ export default class ArtisanList extends Component {
 
     this.fetchArtisans = this.fetchArtisans.bind(this)
     this.navigateToArtisan = this.navigateToArtisan.bind(this)
+    
   }
 
   componentDidMount() {
@@ -40,6 +41,7 @@ export default class ArtisanList extends Component {
     })
   }
 
+  
   navigateToArtisan(artisan) {
      console.log("artisan: " + artisan)
     this.props.navigation.navigate('ArtisanDetail', {...artisan})

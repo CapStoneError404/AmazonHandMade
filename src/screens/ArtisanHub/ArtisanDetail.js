@@ -2,15 +2,22 @@ import { ProfilePicture, Wallpaper } from '@components';
 import React, { Component } from 'react';
 import { ScrollView, StyleSheet, Text, View, Button } from 'react-native';
 import { withMappedNavigationProps } from 'react-navigation-props-mapper';
+import MessageData from '../Messaging/MessageData.json';
 
 class ArtisanDetail extends Component {
   static navigationOptions = ({navigation}) => {
+     const uid = navigation.getParam('uid');
     return {
       title: 'Artisan Details',
       headerRight: (
         <Button 
           transparent
-          onPress={() => navigation.navigate("MessageList")}
+          onPress={() => {
+               const foundArtisan =  MessageData.find((message) => message.id === uid);
+               return foundArtisan !== [] ? navigation.navigate('Message', { ...foundArtisan }) :
+                  navigation.navigate('MessageList')
+            }
+          }
           title="Send Message"
         />
        )
@@ -20,7 +27,13 @@ class ArtisanDetail extends Component {
   constructor(props) {
     super(props)
 
+    this.findArtisan = this.findArtisan.bind(this);
+
   }
+
+findArtisan() {
+   console.log("artisan id: " + this.props.uid);
+}
 
   render() {
     return (

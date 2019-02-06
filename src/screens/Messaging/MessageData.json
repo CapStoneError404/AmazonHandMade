@@ -81,7 +81,8 @@
            "createdAt": "new Date()",
            "user": {
              "_id": "amazon:amzn1-account-AGSPZM7ZHUJG4RJWMRHCMUWGFXIA",
-             "name": "Error404"
+             "name": "Team Error404"
+             
            }
          },
          {
@@ -93,7 +94,16 @@
              "name": "Emily Robinson",
              "avatar": "https://firebasestorage.googleapis.com/v0/b/handmade-error-404.appspot.com/o/artisanFiles%2F-LSrY-YBygi3zq2vbWXY%2Fimages%2FprofilePicture?alt=media&token=1220de06-c92d-45e9-ab18-d6d689180775"
            }
-         }
+         },
+         {
+            "_id": "3",
+            "text": "Hey mind David joins this convo?",
+            "createdAt": "new Date()",
+            "user": {
+              "_id": "-LSrYbENuBwcIsjtVpaJ",
+              "name": "David Gonzalez"
+            }
+          }
       ]
     },
     {
