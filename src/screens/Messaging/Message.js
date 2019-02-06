@@ -29,13 +29,14 @@ class Message extends Component {
   render() {
       return (
         <Wallpaper>
-           <GiftedChat
+          <GiftedChat
             messages={this.state.messages}
             onSend={messages => this.onSend(messages)}
             user={{
               _id: this.props.messages[0].user._id
             }}
-           />
+            placeholder="Type a message..."
+          />
         </Wallpaper>
       );
   }
