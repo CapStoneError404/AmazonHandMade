@@ -8,6 +8,7 @@ var fs = require("fs");
 // it should NOT be uploaded to github!!!!!!!!!!!!
 const twilioInfo = JSON.parse(fs.readFileSync("twilio.json"));
 const client = twilio(twilioInfo.accountSid, twilioInfo.authToken);
+const MessagingResponse = twilio.twiml.MessagingResponse;
 // This file needs to be retrieved from
 // https://console.firebase.google.com/u/0/project/handmade-error-404/settings/serviceaccounts/adminsdk
 // it should NOT be uploaded to github!!!!!!!!!!!!
@@ -90,6 +91,19 @@ exports.loginWithAmazon = functions.https.onRequest((req, res) => {
 
 // });
 //https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/sns-examples-sending-sms.html
+exports.recievedMessage = functions.https.onRequest((req, res) => {
+  var text = req.body.Body;
+  const twiml = new MessagingResponse();
+  handleMessage(text, req.body.From, res, twiml);
+
+});
+respondToText = function(res, twiml){
+  twiml.message(text + " : " + req.body.From + " : " + req.From);
+
+  res.writeHead(200, {'Content-Type': 'text/xml'});
+  res.end(twiml.toString());
+}
+
 exports.sendMessage = functions.https.onRequest((req, res) => {
   var db = admin.database()
   var phone_numbers = []
@@ -99,44 +113,37 @@ exports.sendMessage = functions.https.onRequest((req, res) => {
   var msg = {author: req.body.sender, content:req.body.message, timeCreated:req.body.timeCreated}
   console.log(req.body.recipients)
   var participants = {}
-  for(var i = 0; i < req.body.recipients.length; i++){
+  var i = 0
+  for(i = 0; i < req.body.recipients.length; i++){
       participants[req.body.recipients[i]] = true
   }
   console.log(participants)
-  if(cnvRef.key !== null){
-    console.log("here")
+  if(cnvRef.toJSON() === {} ){
     cnvRef.child("messages").push(msg);
   }else{
     cnvRef.push({
       messages:[
         msg
       ],
-      participants: participants
+      participants:req.body.recipients
     });
-    cnvRef.child("participants").push(participants)
     db.ref("amazonUsers").child(req.body.sender).child("conversations").child(cnvId).push(true)
   }
-  for(var i = 0; i < req.body.recipients.length; i++){
+  for(i = 0; i < req.body.recipients.length; i++){
       phone_numbers.push(db.ref("artisans").child(req.body.recipients[i]).child("phoneNumber").toJSON().replace(/\D/g,''));
   }
-  
+  ////works
   var x = 0
-  for(var i = 0; i < phone_numbers.length; i++){
-    sendText(phone_numbers[i], req.body.message).then(function(){
-      x++
-      if(x === phone_numbers.length){
-          res.status(200).send({cnv:cnvId, msg:{msg}});
-      }
-    });
+  for(i = 0; i < phone_numbers.length; i++){
+    sendText(phone_numbers[i], req.body);
   }
 });
 
 sendText = function(number, msg){
-  return client.messages
+  client.messages
   .create({
      body: msg,
      from: '+15304884220',
      to: "+"+number
    })
-  .then(message => console.log(message.sid))
 }
