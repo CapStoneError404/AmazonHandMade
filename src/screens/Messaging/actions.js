@@ -3,23 +3,19 @@ import firebase from 'react-native-firebase'
 export function sendMessage(sender, message, recipients) {
   return (dispatch, prevState) => { 
     return new Promise(async (resolve, reject) => {
-      fetch('https://us-central1-handmade-error-404.cloudfunctions.net/sendMessage', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          sender: sender,
-          message: message,
-          timeCreated: (new Date()).toDateString(),
-          recipients: recipients
-        })
-      }).then(res => {
-        return res.json()
-      }).then(res => {
+      let functionCall = firebase.functions().httpsCallable('sendMessage')
+          
+      functionCall({
+        sender: sender,
+        recipients: recipients,
+        message: {
+          contents: message,
+          timeCreated: Date.now()
+        }
+      }).then(({ data }) => {
+        console.log(data)
         resolve()
-        dispatch({type: 'SEND_MESSAGE', conversation: res.conversation, message: res.message})
+        //dispatch({type: 'SEND_MESSAGE', conversation: data})
       })
     })
   }
@@ -31,9 +27,16 @@ export function fetchConversations() {
       console.log("Fetching all conversations")
       snapshot = await firebase.database().ref('conversations').once('value')
       
-      conversations = snapshot.val()
+      conversationArray = []
+      conversationsObject = snapshot.val()
+      for(var uid in conversationsObject) {
+        conversationArray.push({
+          ...conversationsObject[uid],
+          uid: uid
+        })
+      }
       resolve()
-      dispatch({type: 'GET_CONVERSATIONS', conversations: conversations})
+      dispatch({type: 'GET_CONVERSATIONS', conversations: conversationArray})
     })
   }
 }

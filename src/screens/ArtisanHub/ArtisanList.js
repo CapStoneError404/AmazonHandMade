@@ -41,9 +41,7 @@ export default class ArtisanList extends Component {
     })
   }
 
-  
   navigateToArtisan(artisan) {
-     console.log("artisan: " + artisan)
     this.props.navigation.navigate('ArtisanDetail', {...artisan})
   }
 

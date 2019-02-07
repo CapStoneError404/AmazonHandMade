@@ -29,20 +29,30 @@ export default class MessageList extends Component {
     }
    }
 
-  componentDidMount() {
-     this.props.navigation.setParams({ chatButton: this.chatButton, cancelChat: this.cancelChat, getGroupChat: this.getGroupChat })
-  }
-
   constructor(props) {
     super(props)
 
     this.state = {
-       groupChat: false
+       groupChat: false,
+       fetchingConversations: false
     }
 
     this.chatButton = this.chatButton.bind(this);
     this.cancelChat = this.cancelChat.bind(this);
     this.getGroupChat = this.getGroupChat.bind(this);
+    this.fetchConversations = this.fetchConversations.bind(this)
+  }
+
+  componentDidMount() {
+    this.props.navigation.setParams({ chatButton: this.chatButton, cancelChat: this.cancelChat, getGroupChat: this.getGroupChat })
+    this.fetchConversations()
+  }
+
+  fetchConversations() {
+    this.setState({fetchingConversations: true})
+    this.props.fetchConversations().then(() => {
+      this.setState({fetchingConversations: false})
+    })
   }
 
   chatButton = () => {
@@ -63,35 +73,46 @@ export default class MessageList extends Component {
     this.props.navigation.navigate('Message', { ...message });
   }
 
-  _renderMessageItem = ({ item }) => {
-   return (
-     <TouchableOpacity 
-       style={styles.artisanView}
-       onPress={() => this.navigateToMessage(item)}
-       key={item.key}
-     >
-       <ProfilePicture
-          source={{uri: item.profilePictureURL}}
+  _renderConversationItem = ({item, index}) => {
+    const artisan = this.props.Artisans.filter(artisan => {
+      return artisan.uid == Object.keys(item.participants)[0]
+    })[0]
+
+    return (
+      <TouchableOpacity 
+        style={styles.artisanView}
+        onPress={() => this.navigateToMessage(item)}
+        key={item.key}
+      >
+        <ProfilePicture
+          source={{uri: artisan.profilePictureURL}}
           style={styles.image}
-       />
-       <View style={styles.text}>
-         <Text style={styles.name}>{item.artisan}</Text> 
-         <Text numberOfLines={2} style={styles.lastMessage}>{item.messages.slice(-1)[0].text}</Text>
-       </View>
-     </TouchableOpacity>
+        />
+        <View style={styles.text}>
+          <Text style={styles.name}>{artisan.name}</Text> 
+          <Text numberOfLines={2} style={styles.lastMessage}>{Object.values(item.messages).slice(-1)[0].contents}</Text>
+        </View>
+      </TouchableOpacity>
     );
    }
 
-   _keyExtractor = (item) => item.id
+   _keyExtractor = (item) => item.uid
 
   render() {
     return (
       <Wallpaper>
-          <FlatList
-            data={MessageData}
-            keyExtractor={this._keyExtractor}
-            renderItem={this._renderMessageItem}
-          />
+        {(this.props.Conversations != [] && this.state.fetchingConversations) ?
+        <ActivityIndicator 
+          size='large'
+          animating={this.props.spinning}
+          color='white'
+        />
+        :
+        <FlatList
+          data={this.props.Conversations}
+          keyExtractor={this._keyExtractor}
+          renderItem={this._renderConversationItem}
+        />}
       </Wallpaper>
     );
   }

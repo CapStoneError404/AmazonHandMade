@@ -14,13 +14,34 @@ class Message extends Component {
 
   constructor(props) {
     super(props);
+
+    console.log("Yep")
+    console.log(props)
+
+    var messages = []
+    if(this.props.messages != []) {
+      messages = Object.keys(this.props.messages).map(key => {
+        return {
+          _id: key,
+          text: this.props.messages[key].content,
+          createdAt: this.props.messages[key].timeCreated,
+          user: {
+            _id: this.props.messages[key].author,
+            name: "Ian Battin"
+          }
+        }
+      })
+    }
     
     this.state = {
-      messages: [ ...this.props.messages ].reverse()
+      messages: messages
     };
   }
 
   onSend(messages = []) {
+    this.props.sendMessage(this.props.User.uid, messages[0].text, {
+      "-LY5sXBRKkiRLom8giUR": "18056804033"
+    })
     this.setState(previousState => ({
       messages: GiftedChat.append(previousState.messages, messages)
     }));
@@ -34,7 +55,7 @@ class Message extends Component {
             messages={this.state.messages}
             onSend={messages => this.onSend(messages)}
             user={{
-              _id: this.props.messages[0].user._id
+              _id: this.props.User.uid
             }}
             placeholder="Type a message..."
           />

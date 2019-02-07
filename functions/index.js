@@ -64,12 +64,12 @@ exports.loginWithAmazon = functions.https.onCall((data, context) => {
   })
 })
 
-exports.sendMessage = functions.https.onCall((data, context) => {
+exports.sendMessage = functions.https.onRequest((data, context) => {
   console.log(data)
-  const sender = data.sender
-  const recipients = Object.keys(data.recipients)
-  const phoneNumbers = Object.values(data.recipients)
-  const message = data.message
+  const sender = data.body.sender
+  const recipients = Object.keys(data.body.recipients)
+  const phoneNumbers = Object.keys(data.body.recipients).map(key => data.body.recipients[key])
+  const message = data.body.message
 
   // Generate conversation
   let participants = [sender]
@@ -124,7 +124,11 @@ exports.sendMessage = functions.https.onCall((data, context) => {
     promises.push(sendText(phoneNumbers[i], message.contents))
   }
 
-  return Promise.all(promises)
+  return Promise.all(promises).then(() => {
+    return conversationRef.once('value')
+  }).then(snapshot => {
+    return snapshot.val()
+  })
 })
 
 function sendText(number, msg) {
