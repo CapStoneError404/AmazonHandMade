@@ -97,8 +97,8 @@ exports.recievedMessage = functions.https.onRequest((req, res) => {
   handleMessage(text, req.body.From, res, twiml);
 
 });
-respondToText = function(res, twiml){
-  twiml.message(text + " : " + req.body.From + " : " + req.From);
+respondToText = function(res, text, twiml){
+  twiml.message(text);
 
   res.writeHead(200, {'Content-Type': 'text/xml'});
   res.end(twiml.toString());
