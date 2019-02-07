@@ -96,20 +96,28 @@ exports.sendMessage = functions.https.onRequest((req, res) => {
   req.body.recipients.sort();
   var cnvId = req.body.recipients.join("")
   var cnvRef = db.ref("conversations").child(cnvId)
-  var msg = {author: req.body.sender, content:req.body.message}
+  var msg = {author: req.body.sender, content:req.body.message, timeCreated:req.body.timeCreated}
+  console.log(req.body.recipients)
+  var participants = {}
+  for(var i = 0; i < req.body.recipients.length; i++){
+      participants[req.body.recipients[i]] = true
+  }
+  console.log(participants)
   if(cnvRef.key !== null){
-    cnvRef.child("messages").child(req.body.timeCreated).push(msg);
+    console.log("here")
+    cnvRef.child("messages").push(msg);
   }else{
     cnvRef.push({
-                  messages:{
-                    [req.body.timeCreated]:msg
-                  },
-                  participants: req.body.recipients
-                });
-    db.ref("amazonUsers").child(req.body.sender).child("conversations").child(cnvId).push()
+      messages:[
+        msg
+      ],
+      participants: participants
+    });
+    cnvRef.child("participants").push(participants)
+    db.ref("amazonUsers").child(req.body.sender).child("conversations").child(cnvId).push(true)
   }
   for(var i = 0; i < req.body.recipients.length; i++){
-      phone_numbers.push(db.ref("artisans").child(req.body.recipients[i]).child(phoneNumber).replace(/\D/g,''));
+      phone_numbers.push(db.ref("artisans").child(req.body.recipients[i]).child("phoneNumber").toJSON().replace(/\D/g,''));
   }
   
   var x = 0
@@ -118,7 +126,7 @@ exports.sendMessage = functions.https.onRequest((req, res) => {
       x++
       if(x === phone_numbers.length){
           res.status(200).send({cnv:cnvId, msg:{msg}});
-        }
+      }
     });
   }
 });
