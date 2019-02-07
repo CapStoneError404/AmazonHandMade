@@ -25,24 +25,33 @@ export default class MessageList extends Component {
            type="clear"
            onPress={navigation.getParam('chatButton')}
          />
+      ),
+      headerLeft: (
+         <Button 
+           title='Cancel' 
+           onPress={navigation.getParam('cancelChat')}
+           type='clear'
+         />
       )
     }
    }
 
   componentDidMount() {
-     this.props.navigation.setParams({ chatButton: this.chatButton, cancelChat: this.cancelChat, getGroupChat: this.getGroupChat })
+     this.props.navigation.setParams({ chatButton: this.chatButton, cancelChat: this.cancelChat })
   }
 
   constructor(props) {
     super(props)
 
     this.state = {
-       groupChat: false
+       groupChat: false,
+       radioTracker: [],
     }
 
     this.chatButton = this.chatButton.bind(this);
     this.cancelChat = this.cancelChat.bind(this);
-    this.getGroupChat = this.getGroupChat.bind(this);
+    this.radioButtonSelected = this.radioButtonSelected.bind(this);
+    
   }
 
   chatButton = () => {
@@ -51,38 +60,66 @@ export default class MessageList extends Component {
   }
 
   cancelChat = () => {
-     console.log("cancel chat");
-     this.setState({ groupChat: false });
+     this.setState({ groupChat: false, radioTracker: this.state.radioTracker.map((obj) => obj.isSelected == false)});
   }
 
-  getGroupChat = () => {
-     return this.state.groupChat;
+  radioButtonSelected(radioObj) {
+    const tracker = this.state.radioTracker.slice();
+    tracker[radioObj.value].isSelected = !tracker[radioObj.value].isSelected;
+    this.setState({ radioTracker: tracker });
+    
   }
-  
+
   navigateToMessage(message) {
     this.props.navigation.navigate('Message', { ...message });
   }
 
-  _renderMessageItem = ({ item }) => {
-   return (
-     <TouchableOpacity 
-       style={styles.artisanView}
-       onPress={() => this.navigateToMessage(item)}
-       key={item.key}
-     >
-       <ProfilePicture
-          source={{uri: item.profilePictureURL}}
-          style={styles.image}
-       />
-       <View style={styles.text}>
-         <Text style={styles.name}>{item.artisan}</Text> 
-         <Text numberOfLines={2} style={styles.lastMessage}>{item.messages.slice(-1)[0].text}</Text>
-       </View>
-     </TouchableOpacity>
-    );
+  
+  _renderMessageItem = ({ item, index }) => {
+     if(this.state.groupChat === true) {
+       let obj = {label: `${item.id}`, value: index, isSelected: false }
+       this.state.radioTracker.push(obj)
+       return (
+         <View style={styles.artisanView} key={item.key}>
+           <RadioButton labelHorizontal={true} >
+            <RadioButtonInput
+              obj={obj}
+              index={index}
+              isSelected={this.state.radioTracker[obj.value].isSelected}
+              onPress={() => this.radioButtonSelected(obj)}  
+            />
+           </RadioButton>
+           <ProfilePicture
+             source={{uri: item.profilePictureURL}}
+             style={styles.image}
+            />
+           <View style={styles.text}>
+             <Text style={styles.name}>{item.artisan}</Text> 
+             <Text numberOfLines={2} style={styles.lastMessage}>{item.messages.slice(-1)[0].text}</Text>
+           </View>
+         </View>
+       );
+     } else {
+      return (
+         <TouchableOpacity 
+           style={styles.artisanView}
+           onPress={() => this.navigateToMessage(item)}
+           key={item.key}
+         >
+           <ProfilePicture
+              source={{uri: item.profilePictureURL}}
+              style={styles.image}
+           />
+           <View style={styles.text}>
+             <Text style={styles.name}>{item.artisan}</Text> 
+             <Text numberOfLines={2} style={styles.lastMessage}>{item.messages.slice(-1)[0].text}</Text>
+           </View>
+         </TouchableOpacity>
+        );
+     }
    }
 
-   _keyExtractor = (item) => item.id
+   _keyExtractor = (item) => item.id;
 
   render() {
     return (
@@ -91,6 +128,7 @@ export default class MessageList extends Component {
             data={MessageData}
             keyExtractor={this._keyExtractor}
             renderItem={this._renderMessageItem}
+            extraData={this.state}
           />
       </Wallpaper>
     );
