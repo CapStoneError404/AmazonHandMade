@@ -53,14 +53,14 @@ export default class MessageList extends Component {
     this.radioButtonSelected = this.radioButtonSelected.bind(this);
     
   }
-
+//this.state.radioTracker.map((obj) => obj.isSelected == false)
   chatButton = () => {
      console.log('chat button pressed');
      this.setState({ groupChat: true });
   }
 
   cancelChat = () => {
-     this.setState({ groupChat: false, radioTracker: this.state.radioTracker.map((obj) => obj.isSelected == false)});
+     this.setState({ groupChat: false, radioTracker: []});
   }
 
   radioButtonSelected(radioObj) {
