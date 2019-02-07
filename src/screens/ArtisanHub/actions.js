@@ -4,24 +4,28 @@ export function createArtisan(data) {
   return (dispatch, prevState) => { 
     return new Promise(async (resolve, reject) => {
       console.log("Pushing artisan to db")
-      var db_ref = await firebase.database().ref('artisans/').push({
+      const newArtisan = await firebase.database().ref('artisans/').push({
         name: data.name,
         phoneNumber: data.phoneNumber,
         description: data.description
       })
       console.log("Done")
 
+      const newPhone = await firebase.database()
+        .ref(`phoneMap/${data.phoneNumber}`)
+        .set(newArtisan.key)
+
       artisanObject = {
         name: data.name,
         phoneNumber: data.phoneNumber,
         description: data.description,
-        uid: db_ref.key
+        uid: newArtisan.key
       }
 
       if(data.profilePicturePath) {
         console.log("Pushing photo to storage")
         var st_ref = await firebase.storage()
-          .ref(`artisanFiles/${db_ref.key}/images/profilePicture`)
+          .ref(`artisanFiles/${newArtisan.key}/images/profilePicture`)
           .putFile(data.profilePicturePath)
           console.log("Done")
 
