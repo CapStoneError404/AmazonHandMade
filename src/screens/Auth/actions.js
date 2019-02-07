@@ -9,25 +9,18 @@ export function amazonLogin(email, password) {
           resolve()
           dispatch({ type: 'ERROR', error: error })
         } else {
-          fetch('https://us-central1-handmade-error-404.cloudfunctions.net/loginWithAmazon', {
-            method: 'POST',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              accessToken: accessToken,
-              userInfo: {
-                email: profileData.email,
-                name: profileData.name,
-                user_id: profileData.user_id
-              }
-            })
-          }).then(res => {
-            return res.json()
-          }).then(body => {
-            console.log("Received response with token: " + body.token)
-            firebase.auth().signInWithCustomToken(body.token).then(currentUser => {
+          let functionCall = firebase.functions().httpsCallable('loginWithAmazon')
+          
+          functionCall({
+            accessToken: accessToken,
+            userInfo: {
+              email: profileData.email,
+              name: profileData.name,
+              user_id: profileData.user_id
+            }
+          }).then(({ data }) => {
+            console.log("Received response with token: " + data.token)
+            firebase.auth().signInWithCustomToken(data.token).then(currentUser => {
               user = {
                 email: currentUser.user.email,
                 displayName: currentUser.user.displayName,
