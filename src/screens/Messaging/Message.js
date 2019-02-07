@@ -31,7 +31,7 @@ class Message extends Component {
     
     this.state = {
       messages: [ ...this.props.messages ].reverse(),
-      profilePicturePath: ''
+      url: ''
     };
     this.pickImage = this.pickImage.bind(this);
     this.addImage = this.addImage.bind(this);
@@ -43,32 +43,31 @@ class Message extends Component {
      height: 100,
      cropping: true
    }).then(image => {
-     this.setState({profilePicturePath: image.path})
+     this.setState({url: image.path})
      this.addImage();
    });
  }
  
  addImage() {
-   const message = {};
-   message._id = 100;
-   message.createdAt = Date.now();
-   message.user = {
-     _id: this.props.messages[0].user._id,
-     name: `${this.props.messages[0].user.name} `,
+   let message = {
+      _id: Math.round(Math.random() * 1000000),
+      text: '',
+      createdAt: new Date(),
+      user: {
+         _id: this.props.messages[0].user._id
+      },
+      image: this.state.url
    };
-   message.image = this.state.profilePicturePath;
-   this.setState(previousState => ({
-      messages: GiftedChat.append(previousState.messages, message)
-    }));
+   this.onSend(message);
       
  }
 
-  onSend(messages = []) {
+  onSend(messages) {
     this.setState(previousState => ({
       messages: GiftedChat.append(previousState.messages, messages)
     }));
   }
-
+  
   //this.props.messages[0].user._id will be changed with the person ID who is currently Logged in and needs to be unique
   render() {
       return (

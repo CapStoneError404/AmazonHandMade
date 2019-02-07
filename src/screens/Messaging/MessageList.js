@@ -15,13 +15,13 @@ import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-
 
 
 export default class MessageList extends Component {
-  static navigationOptions = ({navigation, tintColor}) => {
+  static navigationOptions = ({ navigation }) => {
     var iconName = 'edit';
     return {
       title: 'Messages',
       headerRight: (
          <Button 
-           icon={<Icon name={iconName} size={25} color={tintColor} />}
+           icon={<Icon name={iconName} size={25} color='gray' />}
            type="clear"
            onPress={navigation.getParam('chatButton')}
          />
