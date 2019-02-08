@@ -99,7 +99,7 @@ configurations.all {
   resolutionStrategy.eachDependency { details ->
     if (details.requested.group == 'com.andoid.support' && !details.requested.name.contains('multidex')) {
 	details.useVersion "26.1.0"
-    }		
+    }
   }
 }
 
@@ -121,7 +121,7 @@ android {
     javaMaxHeapSize "4g"
   }
   compileSdkVersion rootProject.ext.compileSdkVersion
-  buildToolsVersion rootProject.ext.buildToolsVersion
+  buildToolsVersion '28.0.3'
   defaultConfig {
     applicationId "com.error.amazonhandmadern"
     minSdkVersion rootProject.ext.minSdkVersion
