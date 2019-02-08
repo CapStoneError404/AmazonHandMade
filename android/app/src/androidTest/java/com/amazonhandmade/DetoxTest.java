@@ -1,4 +1,6 @@
-package com.error.amazonhandmadern;
+package com.amazonhandmade;
+
+import com.error.amazonhandmadern.*;
 
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
