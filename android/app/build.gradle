@@ -164,6 +164,11 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-vector-icons')
+    compile project(':react-native-login-with-amazon')
+    compile project(':react-native-linear-gradient')
+    compile project(':react-native-image-crop-picker')
+    compile project(':react-native-firebase')
   implementation project(':react-native-login-with-amazon')
   implementation project(':react-native-vector-icons')
   implementation project(':react-native-login-with-amazon')

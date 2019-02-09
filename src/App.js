@@ -4,7 +4,7 @@ import { createStackNavigator, createSwitchNavigator, createBottomTabNavigator }
 import { FluidNavigator } from 'react-navigation-fluid-transitions'
 import DropdownAlert from 'react-native-dropdownalert'
 import Icon from 'react-native-vector-icons/FontAwesome'
-
+import TabBar from '@components/TabBar'
 import { Login, Register, ForgotPassword } from '@screens/Auth'
 import Settings from '@screens/Settings'
 import Launch from '@screens/Launch'
@@ -26,7 +26,10 @@ const TabNavigator = createBottomTabNavigator(
   {
     initialRouteName: "ArtisanHub",
     order: ['ArtisanHub', 'Settings'],
-    navigationOptions: ({navigation}) => ({
+    animationEnabled: true,
+    navigationOptions: ({navigation}) => {
+      //const showTabBar = navigation.state && navigation.state.routes && navigation.state.routes[1] && navigation.state.routes[1].params ? navigation.state.routes[1].params.showTabBar : true;
+      return {
       tabBarIcon: ({ focused, tintColor }) => {
         const { routeName } = navigation.state
         var iconName
@@ -38,8 +41,11 @@ const TabNavigator = createBottomTabNavigator(
         }
         
         return <Icon name={iconName} size={25} color={tintColor} />
-      }
-    })
+      },
+      tabBarVisible: true
+      
+     }
+    }
   }
 )
 
