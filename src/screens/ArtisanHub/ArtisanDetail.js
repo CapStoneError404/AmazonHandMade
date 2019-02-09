@@ -12,29 +12,29 @@ class ArtisanDetail extends Component {
     return {
        title: "Artisan Details",
     }
-   
-
   }
-
-//   componentDidMount() {
-//    const setParamsAction = NavigationActions.setParams({
-//       params: { showTabBar: false },
-//       key: this.props.navigation.state.key,
-//     });
-//     this.props.navigation.dispatch(setParamsAction);
-//   }
 
   constructor(props) {
     super(props)
 
     this.state = {
        showModel: false,
-       adding: false
+       adding: false,
+       drawerOpen: false,
+       images: [
+         { id: 0, productUrl: 'https://i.pinimg.com/originals/87/2c/83/872c83322f27c9527a255149b03d4dfe.jpg'},
+         { id: 1, productUrl: 'https://images-na.ssl-images-amazon.com/images/I/51jzNmEmiIL._AC_US400_QL65_.jpg'},
+         { id: 2, productUrl: 'https://images-na.ssl-images-amazon.com/images/I/51svf2meabL._AC_US400_QL65_.jpg'},
+         { id: 3, productUrl: 'https://images-na.ssl-images-amazon.com/images/I/417u2WxNYZL._AC_US400_QL65_.jpg'},
+         { id: 4, productUrl: 'https://images-na.ssl-images-amazon.com/images/I/51nXE7AcuYL._AC_US400_QL65_.jpg'},
+         { id: 5, productUrl: 'https://m.media-amazon.com/images/I/71DSpZ0ZQbL._AC_UL640_QL65_.jpg'},
+       ]
     }
 
     this.onCancel = this.onCancel.bind(this);
     this.deletePressed = this.deletePressed.bind(this);
     this.showAlert = this.showAlert.bind(this);
+    //this.navigateToArtisan = this.navigateToArtisan.bind(this)
   }
 
    onCancel() {
@@ -67,14 +67,6 @@ class ArtisanDetail extends Component {
    }
 
   render() {
-    const images = [
-       { url: 'https://i.pinimg.com/originals/87/2c/83/872c83322f27c9527a255149b03d4dfe.jpg'},
-       { url: 'https://images-na.ssl-images-amazon.com/images/I/51jzNmEmiIL._AC_US400_QL65_.jpg'},
-       { url: 'https://images-na.ssl-images-amazon.com/images/I/51svf2meabL._AC_US400_QL65_.jpg'},
-       { url: 'https://images-na.ssl-images-amazon.com/images/I/417u2WxNYZL._AC_US400_QL65_.jpg'},
-       { url: 'https://images-na.ssl-images-amazon.com/images/I/51nXE7AcuYL._AC_US400_QL65_.jpg'},
-       { url: 'https://m.media-amazon.com/images/I/71DSpZ0ZQbL._AC_UL640_QL65_.jpg'},
-    ]
     return (
       <Wallpaper style={styles.container}>
         <ScrollView style={{ flex: 1.8 }}>
@@ -91,33 +83,25 @@ class ArtisanDetail extends Component {
           <View style={styles.description}>
             <Text style={styles.text}>{this.props.description}</Text>
           </View>
-          {/* <View>
-             <Text>Products</Text>
-          </View> */}
             <SectionGrid
-               //horizontal={true}
                itemDimension={110}
-               //items={images}
-               // staticDimension={300}
-               // fixed
-               //spacing={20}
                sections={[
                   {
                     title: 'Products',
-                    data: images.slice(0, 12),
+                    data: this.state.images.slice(0, 6),
                   }
                 ]}
 
-               //  renderSectionHeader={({ section }) => (
-               //    <Text style={styles.sectionHeader}>{section.title}</Text>
-               // )}
+                renderSectionHeader={({ section }) => (
+                  <Text style={styles.sectionHeader}>{section.title}</Text>
+               )}
                style={styles.gridView}
                renderItem={({ item, section, index }) => {
                   
                   console.log(item);
                   return (
-                     <TouchableOpacity style={styles.itemContainer}>
-                        <Image style={styles.itemContainer} source={{uri: item.url} }/>
+                     <TouchableOpacity style={styles.itemContainer} onPress={() => this.props.navigation.navigate('ProductDetail', {...item})}>
+                        <Image style={styles.itemContainer} source={{uri: item.productUrl} }/>
                      </TouchableOpacity>
                   )
                }}
@@ -129,7 +113,7 @@ class ArtisanDetail extends Component {
                <ActionButton.Item buttonColor='red' title="Delete Artisan" onPress={this.showAlert}>
                  <Icon name="user-minus" style={styles.actionButtonIcon} />
                </ActionButton.Item>
-               <ActionButton.Item buttonColor='green' title="Add Product" onPress={this.showAlert}>
+               <ActionButton.Item buttonColor='green' title="Add Product" onPress={() => this.props.navigation.navigate('AddProduct')}>
                  <Icon name="plus" style={styles.actionButtonIcon} />
                </ActionButton.Item>
                <ActionButton.Item buttonColor='blue' title="View Product List" onPress={() => console.log('navigate to product list page')}>
@@ -207,7 +191,7 @@ const styles = StyleSheet.create({
    backgroundColor: 'rgba(250, 250, 250, 0.2)',
    color: 'black',
    padding: 10,
- },
+ }
 })
 
 export default withMappedNavigationProps()(ArtisanDetail)
