@@ -67,15 +67,8 @@ export function deleteArtisan(artisans, artisan) {
   return (dispatch) => {
     return new Promise(async (resolve, reject) => {
       await firebase.database().ref(`artisans/${artisan}`).remove()
-
-      let foundArtisanImage = artisans.find((item) => item.uid === artisan);
-      if(foundArtisanImage.profilePictureURL) {
-         await firebase.storage().ref(`artisanFiles/${artisan}/images/profilePicture`).delete()
-      } else {
-         console.log("no image was found")
-      }
+      await firebase.storage().ref(`artisanFiles/${artisan}/images/profilePicture`).delete()
       
-
       resolve()
       dispatch({type: 'DELETE_ARTISAN', artisan: artisan})
     })  
