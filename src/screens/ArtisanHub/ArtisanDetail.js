@@ -66,6 +66,12 @@ class ArtisanDetail extends Component {
       );
    }
 
+   sortedTopProducts() {
+      //if products array is not empty then sort by
+      //how many of that item has been sold
+      //The top 6 will be displayed on screen
+   }
+
   render() {
     return (
       <Wallpaper style={styles.container}>
