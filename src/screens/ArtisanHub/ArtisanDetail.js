@@ -87,13 +87,13 @@ class ArtisanDetail extends Component {
                itemDimension={110}
                sections={[
                   {
-                    title: 'Products',
+                    title: 'Top Products',
                     data: this.state.images.slice(0, 6),
                   }
                 ]}
 
                 renderSectionHeader={({ section }) => (
-                  <Text style={styles.sectionHeader}>{section.title}</Text>
+                  <Text style={styles.sectionHeader2}>{section.title}</Text>
                )}
                style={styles.gridView}
                renderItem={({ item, section, index }) => {
@@ -101,7 +101,7 @@ class ArtisanDetail extends Component {
                   console.log(item);
                   return (
                      <TouchableOpacity style={styles.itemContainer} onPress={() => this.props.navigation.navigate('ProductDetail', {...item})}>
-                        <Image style={styles.itemContainer} source={{uri: item.productUrl} }/>
+                        <Image style={styles.itemContainer2} source={{uri: item.productUrl} }/>
                      </TouchableOpacity>
                   )
                }}
@@ -180,18 +180,26 @@ const styles = StyleSheet.create({
  itemContainer: {
    justifyContent: 'space-evenly',
    borderRadius: 5,
-   height: 110,
-   width: 110
+   height: 117,
+   width: 117,
+   backgroundColor: 'rgb(71, 77, 84)'
  },
- sectionHeader: {
+ itemContainer2: {
+   justifyContent: 'space-evenly',
+   borderRadius: 5,
+   height: 110,
+   width: 110,
+   alignSelf: 'center'
+ },
+ sectionHeader2: {
    flex: 1,
    fontSize: 15,
    fontWeight: '600',
    alignItems: 'center',
-   backgroundColor: 'rgba(250, 250, 250, 0.2)',
-   color: 'black',
+   backgroundColor: 'rgb(71, 77, 84)',
+   color: 'white',
    padding: 10,
- }
+ },
 })
 
 export default withMappedNavigationProps()(ArtisanDetail)
