@@ -20,10 +20,16 @@
     "rename": "node ./bin/rename.js",
     "start": "react-native start",
     "test": "jest",
+    "test-coverage": "jest --coverage --collectCoverageFrom=src/**/*.{js,jsx}",
     "test:e2e": "detox test -c ios.sim.debug"
   },
   "jest": {
     "preset": "react-native",
+    "coverageReporters": [
+      "html",
+      "text",
+      "text-summary"
+    ],
     "transform": {
       "^.+\\.js$": "<rootDir>/node_modules/react-native/jest/preprocessor.js"
     }
