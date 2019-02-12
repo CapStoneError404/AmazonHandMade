@@ -34,8 +34,9 @@ export function createProduct(data, artisanID) {
 
       if(data.productMainPicture) {
         console.log("Pushing main photo to storage")
+        
         var st_ref = await firebase.storage()
-          .ref(`productFiles/${db_ref.key}/images/MainProductPicture`)
+          .ref(`productFiles/images/${db_ref.key}/MainProductPicture`)
           .putFile(data.productMainPicture)
         console.log("Finished pushing main picture to storage")
 
@@ -47,12 +48,11 @@ export function createProduct(data, artisanID) {
       }
 
       console.log("Connecting product to artisan in db...")
-      var snapshot = firebase.database().ref('artisan/${artisanID}/products').once('value')
-      if (!snapshot.contains(db_ref.key)) {
-        await firebase.database().ref('artisan/${artisanID}/products').push({
-          id: db_ref.key
-        })
-      }
+      var snapshot = firebase.database().ref(`artisans/${artisanID}/products`).once('value')
+      await firebase.database().ref(`artisans/${artisanID}/products`).update({
+        [db_ref.key]: true
+      })
+      
       console.log("Finished connecting")
 
       resolve()
@@ -61,7 +61,7 @@ export function createProduct(data, artisanID) {
   }
 }
 
-//Fetch all products (so CGA products) or associated with specific artisan
+//Fetch all products (so all CGA products) or associated with specific artisan
 export function fetchProducts(artisanID = "") {
   return (dispatch, prevState) => {
     return new Promise(async (resolve, reject) => {
@@ -79,8 +79,8 @@ export function fetchProducts(artisanID = "") {
       }
 
       //if artisanID is provided, narrow the products list
-      if (artisan !== ""){
-        let artisanProds = await firebase.database().ref('artisan/${artisanID}/products').once('value').val()
+      if (artisanID !== ""){
+        let artisanProds = await firebase.database().ref(`artisan/${artisanID}/products`).once('value').val()
         productArray = productArray.filter(obj => artisanProds.includes(obj.ProductID))
       }
 
@@ -95,8 +95,19 @@ export function fetchProducts(artisanID = "") {
 export function deleteProduct(products, product) {
   return (dispatch) => {
     return new Promise(async (resolve, reject) => {
-      //Delete storage for product
+      //remove all artisans linked to this product
+      {/*
+      var artisansRef = await firebase.database().ref(`artisans`)
+      for(DataSnapshot data: artisansRef.getChildren()){
+        if (data.child('products/${product.productID}').exists()) {
+            await artisansRef(`products/${product.productID}`).remove()
+        } 
+      }
+    */}
+      //Remove product
       await firebase.database().ref(`products/${product.productID}`).remove()
+      //Remove product storage
+      await firebase.storage().ref(`productFiles/images/${product.productID}/MainProductPicture`).delete() 
       resolve()
       dispatch({type: 'DELETE_PRODUCT', product: product})
     })  

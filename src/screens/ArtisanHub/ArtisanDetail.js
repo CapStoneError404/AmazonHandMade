@@ -82,7 +82,7 @@ class ArtisanDetail extends Component {
               title="Add Product"
               color="green"
               textColor="white"
-              onPress={()=>{this.props.navigation.navigate('AddProduct')}}
+              onPress={()=>{this.props.navigation.navigate('AddProduct', {currentUID: this.props.uid})}}
               style={styles.buttonStyle}
               spinning={this.state.adding}
             />
