@@ -125,7 +125,7 @@ class ArtisanDetail extends Component {
                   type='clear'
 								 type='material-community'
 								 underlayColor={'rgb(71, 77, 84)'}
-                  onPress={() => this.setState({ editExpanded: !this.state.editExpanded})}
+                 onPress={() => this.setState({ editExpanded: !this.state.editExpanded})}
                 />
              </CardSection>
 
@@ -172,7 +172,7 @@ class ArtisanDetail extends Component {
 										  style={styles.elevationLow} 
 					    	 			onPress={() => this.props.navigation.navigate('ProductDetail', {...item})}
 					    	 		>
-                			<Image style={styles.itemContainer2} source={{uri: item.productUrl} }/>
+                			<Image style={styles.imageContainer} source={{uri: item.productUrl} }/>
                 		</TouchableOpacity>
                 	)
                 }}   
@@ -186,7 +186,7 @@ class ArtisanDetail extends Component {
             color="red"
             textColor="white"
             onPress={this.showAlert}
-            style={styles.buttonStyle}
+            style={{marginLeft: 10, marginRight: 10}}
             spinning={this.state.adding}
           />
         </ScrollView>
@@ -196,11 +196,11 @@ class ArtisanDetail extends Component {
 }
 
 const styles = StyleSheet.create({
-   container: {
+  container: {
       flexDirection: 'column',
       justifyContent: 'flex-start',
       flex: 1
-    },
+  },
   image: {
     height: 120,
     aspectRatio: 1,
@@ -208,16 +208,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 60,
     margin: 5
-  },
-  firstSection: {
-    height: 200,
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    borderRadius: 5,
-    marginTop: 10,
-    marginLeft: 10,
-    marginRight: 10
   },
   nameStyle: {
    flex: 1,
@@ -253,24 +243,13 @@ const styles = StyleSheet.create({
 		fontSize: 20,
 		color: 'rgb(71, 77, 84)',
 		marginLeft: 5
-	 },
-  buttonStyle: {
-     marginLeft:10,
-     marginRight: 10
-  },
+	},
  gridView: {
    marginTop: 0,
    flex: 1,
    flexDirection: 'row'
  },
- itemContainer: {
-   justifyContent: 'space-evenly',
-   borderRadius: 5,
-   height: 110,
-   width: 110,
-   backgroundColor: 'rgb(71, 77, 84)'
- },
- itemContainer2: {
+ imageContainer: {
    justifyContent: 'space-evenly',
    borderRadius: 5,
    height: 110,

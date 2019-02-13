@@ -1,14 +1,6 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 
-// const Card = (props) => {
-//   return (
-//     <View style={styles.containerStyle}>
-//       {props.children}
-//     </View>
-//   );
-// };
-
 export default class Card extends Component {
    render() {
       return (
@@ -36,4 +28,3 @@ const styles = {
   }
 };
 
-// export { Card };
