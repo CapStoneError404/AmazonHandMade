@@ -1,8 +1,8 @@
 import { ProfilePicture, Wallpaper, AsyncButton, Card, CardSection, Button } from '@components';
 import React, { Component } from 'react';
-import { ScrollView, StyleSheet, Text, View, Alert, Image, TouchableOpacity, LayoutAnimation } from 'react-native';
+import { ScrollView, StyleSheet, Text, View, Alert, Image, TouchableOpacity, LayoutAnimation, Platform } from 'react-native';
 import { withMappedNavigationProps } from 'react-navigation-props-mapper';
-import ActionButton from 'react-native-action-button';
+//import ActionButton from 'react-native-action-button';
 //import Icon from 'react-native-vector-icons/FontAwesome5';
 import { FlatGrid, SectionGrid } from 'react-native-super-grid';
 import { Icon } from 'react-native-elements';
@@ -54,9 +54,11 @@ class ArtisanDetail extends Component {
       if(this.state.editExpanded) {
          return(
            <CardSection style={{backgroundColor: 'orange'}}>
-             <Button style={{ height: 20, backgroundColor: 'orange'}} title='Edit' textColor='white' onPress={() => console.log("Pressed edit button")}/>
-             {/* <Button trasparent title="Edit" color="white" onPress={() => console.log("edit something")}/> */}
-             {/* <Button title="Edit" type="clear" buttonStyle={alignSelf='center'}/> */}
+						 <Button 
+							 style={{ height: 20, backgroundColor: 'orange'}} 
+							 title='Edit' 
+							 textColor='white' 
+							 onPress={() => console.log("Pressed edit button")}/>
            </CardSection>
          );
       }
@@ -65,9 +67,19 @@ class ArtisanDetail extends Component {
    renderProductButton() {
       if(this.state.productsExpanded) {
          return(
-           <CardSection style={{backgroundColor: 'orange'}}>
-             <Button style={{ height: 20, backgroundColor: 'orange' }} title='Add' textColor='white' onPress={() => this.props.navigation.navigate('AddProduct')}/>
-             <Button style={{ height: 20, backgroundColor: 'orange' }} title='View All' textColor='white' onPress={() => console.log("Pressed edit button")}/>
+           <CardSection style={{backgroundColor: 'white'}}>
+						 <Button 	
+							 style={{ height: 20, backgroundColor: 'white' }} 
+							 title='Add' 
+							 textColor='orange' 
+							 onPress={() => this.props.navigation.navigate('AddProduct')}
+						 />
+						 <Button 
+							 style={{ height: 20, backgroundColor: 'white' }} 
+							 title='View All' 
+							 textColor='orange' 
+							 onPress={() => console.log("Pressed edit button")}
+						 />
            </CardSection>
          );
       }
@@ -106,22 +118,21 @@ class ArtisanDetail extends Component {
           <Card>
              <CardSection style={{ backgroundColor: 'rgb(71, 77, 84)', justifyContent: 'space-between'}}>
                 <Text style={styles.headerText}>Artisan info</Text>
-                {/* <Button iconName='ellipsis-v' iconColor='orange' onPress={() => console.log('pressed this button')}/> */}
-                
-                   <Icon 
-                     name= "ellipsis-v"
-                     size= {30}
-                     color="orange"
-                     type='clear'
-                     type='font-awesome'
-                     onPress={() => this.setState({ editExpanded: !this.state.editExpanded})}
-                   />
+                <Icon 
+                  name= "dots-vertical"
+                  size= {30}
+                  color="orange"
+                  type='clear'
+								 type='material-community'
+								 underlayColor={'rgb(71, 77, 84)'}
+                  onPress={() => this.setState({ editExpanded: !this.state.editExpanded})}
+                />
              </CardSection>
 
              <CardSection>
                   <ProfilePicture 
-                  source={{uri: this.props.profilePictureURL}}
-                  style={styles.image}
+                    source={{uri: this.props.profilePictureURL}}
+                    style={styles.image}
                   />
                   <View style={{flex: 1, flexDirection: 'column'}}>
                     <Text style={styles.nameStyle}>{this.props.name}</Text>
@@ -135,66 +146,50 @@ class ArtisanDetail extends Component {
                <Text style={styles.descriptionStyle}>{this.props.description}</Text>
              </CardSection>
              {this.renderEditButton()}
-             {/* <CardSection>
-               <Button style={{ height: 20 }} title='Edit' textColor='orange' onPress={() => console.log("Pressed edit button")}/>
-             </CardSection> */}
           </Card>
           
           <Card>
-             <CardSection style={{ backgroundColor: 'rgb(71, 77, 84)', justifyContent: 'space-between'}}>
-                <Text style={styles.headerText}>Top Products</Text>
-                <Icon 
-                     name= "ellipsis-v"
-                     size= {30}
-                     color="orange"
-                     type='clear'
-                     type='font-awesome'
-                     onPress={() => this.setState({ productsExpanded: !this.state.productsExpanded})}
-                   />
-             </CardSection>
-
-             <CardSection>
-               <FlatGrid
-                 itemDimension={90}
-                 items={this.state.images}
-                 style={styles.gridView}
-                 renderItem={({ item, section, index }) => {
-                    return (
-                       <TouchableOpacity style={styles.itemContainer} onPress={() => this.props.navigation.navigate('ProductDetail', {...item})}>
-                          <Image style={styles.itemContainer2} source={{uri: item.productUrl} }/>
-                       </TouchableOpacity>
-                    )
-                 }}   
-               />
-             </CardSection>
+            <CardSection style={{ backgroundColor: 'rgb(71, 77, 84)', justifyContent: 'space-between'}}>
+              <Text style={styles.headerText}>Top Products</Text>
+              <Icon 
+              	name= "dots-vertical"
+              	size= {30}
+              	color="orange"
+              	type='clear'
+						  	type='material-community'
+		  			  	underlayColor={'rgb(71, 77, 84)'}
+              	onPress={() => this.setState({ productsExpanded: !this.state.productsExpanded})}
+              />
+            </CardSection>
+            <CardSection>
+              <FlatGrid
+                itemDimension={90}
+                items={this.state.images}
+                style={styles.gridView}
+                renderItem={({ item, section, index }) => {
+                	return (
+                		<TouchableOpacity 
+										  style={styles.elevationLow} 
+					    	 			onPress={() => this.props.navigation.navigate('ProductDetail', {...item})}
+					    	 		>
+                			<Image style={styles.itemContainer2} source={{uri: item.productUrl} }/>
+                		</TouchableOpacity>
+                	)
+                }}   
+              />
+            </CardSection>
              {this.renderProductButton()}
-             {/* <CardSection> 
-               <Button style={{ height: 20 }} title='Add' textColor='orange' onPress={() => this.props.navigation.navigate('AddProduct')}/>
-               <Button style={{ height: 20 }} title='View All' textColor='orange' onPress={() => console.log("Pressed edit button")}/>
-             </CardSection> */}
           </Card>
+
           <AsyncButton
-              title="Delete Artisan"
-              color="red"
-              textColor="white"
-              onPress={this.showAlert}
-              style={styles.buttonStyle}
-              spinning={this.state.adding}
-            />
+            title="Delete Artisan"
+            color="red"
+            textColor="white"
+            onPress={this.showAlert}
+            style={styles.buttonStyle}
+            spinning={this.state.adding}
+          />
         </ScrollView>
-        
-            {/* <ActionButton buttonColor='orange' verticalOrientation='up' position='left' spacing={10} style={{ flex: 0.2}} >
-               <ActionButton.Item buttonColor='red' title="Delete Artisan" onPress={this.showAlert}>
-                 <Icon name="user-minus" style={styles.actionButtonIcon} />
-               </ActionButton.Item>
-               <ActionButton.Item buttonColor='green' title="Add Product" onPress={() => this.props.navigation.navigate('AddProduct')}>
-                 <Icon name="plus" style={styles.actionButtonIcon} />
-               </ActionButton.Item>
-               <ActionButton.Item buttonColor='blue' title="View Product List" onPress={() => console.log('navigate to product list page')}>
-                 <Icon name="list-ul" style={styles.actionButtonIcon} />
-               </ActionButton.Item>
-            </ActionButton> */}
-         
       </Wallpaper>
     )
   }
@@ -236,22 +231,7 @@ const styles = StyleSheet.create({
    color: '#444444',
    marginLeft: 5
   },
-  namePhone: {
-   flex: 2,
-   height: '100%',
-   flexDirection: 'column',
-   alignItems: 'stretch',
-   justifyContent: 'space-evenly',
-   width: '100%',
-  },
   descriptionStyle: {
-   //  flex: 1,
-   //  flexDirection: 'column',
-   //  backgroundColor: 'white',
-   //  borderRadius: 5,
-   //  margin: 10,
-   //  padding: 10
-   flex: 2,
    fontSize: 20,
    color: '#444444',
    marginLeft: 5,
@@ -264,27 +244,22 @@ const styles = StyleSheet.create({
    color: '#444444',
    marginLeft: 5
   },
-  text: {
-    fontSize: 20,
-    color: '#444444',
-    marginLeft: 5
-  },
   headerText: {
    fontSize: 20,
    color: 'white',
    marginLeft: 5
-  },
+	},
+	headerText2: {
+		fontSize: 20,
+		color: 'rgb(71, 77, 84)',
+		marginLeft: 5
+	 },
   buttonStyle: {
      marginLeft:10,
      marginRight: 10
   },
-  actionButtonIcon: {
-   fontSize: 20,
-   height: 22,
-   color: 'white',
- },
  gridView: {
-   marginTop: 10,
+   marginTop: 0,
    flex: 1,
    flexDirection: 'row'
  },
@@ -298,18 +273,15 @@ const styles = StyleSheet.create({
  itemContainer2: {
    justifyContent: 'space-evenly',
    borderRadius: 5,
-   height: 105,
-   width: 105,
-   alignSelf: 'center'
+   height: 110,
+   width: 110,
+   alignSelf: 'center' 
  },
- sectionHeader2: {
-   flex: 1,
-   fontSize: 15,
-   fontWeight: '600',
-   alignItems: 'center',
-   backgroundColor: 'rgb(71, 77, 84)',
-   color: 'white',
-   padding: 10,
+ elevationLow: {
+	shadowColor: '#000',
+	shadowOffset: { width: 0, height: 2 },
+	shadowOpacity: 0.8,
+	shadowRadius: 2,    
  },
 })
 
