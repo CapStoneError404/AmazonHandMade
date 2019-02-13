@@ -1,4 +1,4 @@
-import { ProfilePicture, Wallpaper, AsyncButton} from '@components';
+import { ProfilePicture, Wallpaper, AsyncButton, Card, CardSection, Button } from '@components';
 import React, { Component } from 'react';
 import { ScrollView, StyleSheet, Text, View, Alert, Image, TouchableOpacity } from 'react-native';
 import { withMappedNavigationProps } from 'react-navigation-props-mapper';
@@ -76,7 +76,7 @@ class ArtisanDetail extends Component {
     return (
       <Wallpaper style={styles.container}>
         <ScrollView style={{ flex: 1.8 }}>
-          <View style={styles.firstSection}>
+          {/* <View style={styles.firstSection}>
             <ProfilePicture 
               source={{uri: this.props.profilePictureURL}}
               style={styles.image}
@@ -85,37 +85,75 @@ class ArtisanDetail extends Component {
               <Text style={styles.text}>{this.props.name}</Text>
               <Text style={styles.text}>{this.props.phoneNumber}</Text>
             </View>
-          </View>
-          <View style={styles.description}>
-            <Text style={styles.text}>{this.props.description}</Text>
-          </View>
-            <SectionGrid
-               itemDimension={110}
-               sections={[
-                  {
-                    title: 'Top Products',
-                    data: this.state.images.slice(0, 6),
-                  }
-                ]}
+            <View style={styles.description}>
+              <Text style={styles.text}>{this.props.description}</Text>
+            </View>
+          </View> */}
+          <Card>
+             <CardSection style={{ backgroundColor: 'rgb(71, 77, 84)'}}>
+                <Text style={styles.headerText}>Artisan info</Text>
+             </CardSection>
+             <CardSection>
+                  <ProfilePicture 
+                  source={{uri: this.props.profilePictureURL}}
+                  style={styles.image}
+                  />
+                  <View style={{flexGrow: 1}}>
+                    <Text style={styles.nameStyle}>{this.props.name}</Text>
+                    <Text style={styles.phoneStyle}>{this.props.phoneNumber}</Text>
+                    <Text style={styles.phoneStyle}>Location</Text>
+                  </View>
+             </CardSection>
 
-                renderSectionHeader={({ section }) => (
-                  <Text style={styles.sectionHeader2}>{section.title}</Text>
-               )}
-               style={styles.gridView}
-               renderItem={({ item, section, index }) => {
-                  
-                  console.log(item);
-                  return (
-                     <TouchableOpacity style={styles.itemContainer} onPress={() => this.props.navigation.navigate('ProductDetail', {...item})}>
-                        <Image style={styles.itemContainer2} source={{uri: item.productUrl} }/>
-                     </TouchableOpacity>
-                  )
-               }}
-               
-            />
+             <CardSection>
+               <Text style={styles.descriptionTitle}>Description</Text>
+               <Text style={styles.descriptionStyle}>{this.props.description}</Text>
+             </CardSection>
+             <CardSection>
+               <Button style={{ height: 20 }} title='Edit' textColor='orange' onPress={() => console.log("Pressed edit button")}/>
+             </CardSection>
+          </Card>
+          
+          <Card>
+             <CardSection style={{ backgroundColor: 'rgb(71, 77, 84)'}}>
+                <Text style={styles.headerText}>Top Products</Text>
+             </CardSection>
+             <CardSection>
+               <FlatGrid
+                 itemDimension={110}
+                 items={this.state.images}
+                 //   sections={[
+                 //      {
+                 //        title: 'Top Products',
+                 //        data: this.state.images.slice(0, 6),
+                 //      }
+                 //    ]}
+                    
+                 //    renderSectionHeader={({ section }) => (
+                 //      <Text style={styles.sectionHeader2}>{section.title}</Text>
+                 //   )}
+                 style={styles.gridView}
+                 renderItem={({ item, section, index }) => {
+                    
+                    console.log(item);
+                    return (
+                       <TouchableOpacity style={styles.itemContainer} onPress={() => this.props.navigation.navigate('ProductDetail', {...item})}>
+                          <Image style={styles.itemContainer2} source={{uri: item.productUrl} }/>
+                       </TouchableOpacity>
+                    )
+                 }}   
+               />
+             </CardSection>
+             <CardSection>
+               <Button style={{ height: 20 }} title='Add' textColor='orange' onPress={() => console.log("Pressed edit button")}/>
+               <Button style={{ height: 20 }} title='View All' textColor='orange' onPress={() => console.log("Pressed edit button")}/>
+             </CardSection>
+            
+          </Card>
+            
         </ScrollView>
         
-            <ActionButton buttonColor='orange' verticalOrientation='up' position='left' spacing={10} style={{ flex: 0.2}} >
+            {/* <ActionButton buttonColor='orange' verticalOrientation='up' position='left' spacing={10} style={{ flex: 0.2}} >
                <ActionButton.Item buttonColor='red' title="Delete Artisan" onPress={this.showAlert}>
                  <Icon name="user-minus" style={styles.actionButtonIcon} />
                </ActionButton.Item>
@@ -125,7 +163,7 @@ class ArtisanDetail extends Component {
                <ActionButton.Item buttonColor='blue' title="View Product List" onPress={() => console.log('navigate to product list page')}>
                  <Icon name="list-ul" style={styles.actionButtonIcon} />
                </ActionButton.Item>
-            </ActionButton>
+            </ActionButton> */}
          
       </Wallpaper>
     )
@@ -139,15 +177,15 @@ const styles = StyleSheet.create({
       flex: 1
     },
   image: {
-    height: 90,
+    height: 120,
     aspectRatio: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 45,
+    borderRadius: 60,
     margin: 5
   },
   firstSection: {
-    height: 100,
+    height: 200,
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: 'white',
@@ -156,18 +194,55 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10
   },
-  description: {
-    flex: 3,
-    flexDirection: 'column',
-    backgroundColor: 'white',
-    borderRadius: 5,
-    margin: 10,
-    padding: 10
+  nameStyle: {
+   flex: 1,
+   fontSize: 30,
+   color: '#444444',
+   marginLeft: 5,
+  },
+  phoneStyle: {
+   flex: 2,
+   fontSize: 20,
+   color: '#444444',
+   marginLeft: 5
+  },
+  namePhone: {
+   flex: 2,
+   height: '100%',
+   flexDirection: 'column',
+   alignItems: 'stretch',
+   justifyContent: 'space-evenly',
+   width: '100%',
+  },
+  descriptionStyle: {
+   //  flex: 1,
+   //  flexDirection: 'column',
+   //  backgroundColor: 'white',
+   //  borderRadius: 5,
+   //  margin: 10,
+   //  padding: 10
+   flex: 2,
+   fontSize: 20,
+   color: '#444444',
+   marginLeft: 5,
+   flexDirection: 'row',
+  },
+  descriptionTitle: {
+   flexDirection: 'row',
+   flex: 1,
+   fontSize: 20,
+   color: '#444444',
+   marginLeft: 5
   },
   text: {
     fontSize: 20,
     color: '#444444',
     marginLeft: 5
+  },
+  headerText: {
+   fontSize: 20,
+   color: 'white',
+   marginLeft: 5
   },
   buttonStyle: {
      marginLeft:10,
@@ -186,15 +261,15 @@ const styles = StyleSheet.create({
  itemContainer: {
    justifyContent: 'space-evenly',
    borderRadius: 5,
-   height: 117,
-   width: 117,
+   height: 160,
+   width: 160,
    backgroundColor: 'rgb(71, 77, 84)'
  },
  itemContainer2: {
    justifyContent: 'space-evenly',
    borderRadius: 5,
-   height: 110,
-   width: 110,
+   height: 155,
+   width: 155,
    alignSelf: 'center'
  },
  sectionHeader2: {
