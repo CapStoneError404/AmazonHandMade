@@ -1,10 +1,11 @@
 import { ProfilePicture, Wallpaper, AsyncButton, Card, CardSection, Button } from '@components';
 import React, { Component } from 'react';
-import { ScrollView, StyleSheet, Text, View, Alert, Image, TouchableOpacity } from 'react-native';
+import { ScrollView, StyleSheet, Text, View, Alert, Image, TouchableOpacity, LayoutAnimation } from 'react-native';
 import { withMappedNavigationProps } from 'react-navigation-props-mapper';
 import ActionButton from 'react-native-action-button';
-import Icon from 'react-native-vector-icons/FontAwesome5';
+//import Icon from 'react-native-vector-icons/FontAwesome5';
 import { FlatGrid, SectionGrid } from 'react-native-super-grid';
+import { Icon } from 'react-native-elements';
 import { NavigationActions } from 'react-navigation';
 
 class ArtisanDetail extends Component {
@@ -12,6 +13,10 @@ class ArtisanDetail extends Component {
     return {
        title: "Artisan Details",
     }
+  }
+
+  componentWillUpdate() {
+    LayoutAnimation.spring();
   }
 
   constructor(props) {
@@ -28,17 +33,44 @@ class ArtisanDetail extends Component {
          { id: 3, productUrl: 'https://images-na.ssl-images-amazon.com/images/I/417u2WxNYZL._AC_US400_QL65_.jpg'},
          { id: 4, productUrl: 'https://images-na.ssl-images-amazon.com/images/I/51nXE7AcuYL._AC_US400_QL65_.jpg'},
          { id: 5, productUrl: 'https://m.media-amazon.com/images/I/71DSpZ0ZQbL._AC_UL640_QL65_.jpg'},
-       ]
+       ],
+       editExpanded: false,
+       productsExpanded: false
     }
 
     this.onCancel = this.onCancel.bind(this);
     this.deletePressed = this.deletePressed.bind(this);
     this.showAlert = this.showAlert.bind(this);
+    this.renderEditButton = this.renderEditButton.bind(this);
+    this.renderProductButton = this.renderProductButton.bind(this);
     //this.navigateToArtisan = this.navigateToArtisan.bind(this)
   }
 
    onCancel() {
       this.setState({ adding: false });
+   }
+
+   renderEditButton() {
+      if(this.state.editExpanded) {
+         return(
+           <CardSection style={{backgroundColor: 'orange'}}>
+             <Button style={{ height: 20, backgroundColor: 'orange'}} title='Edit' textColor='white' onPress={() => console.log("Pressed edit button")}/>
+             {/* <Button trasparent title="Edit" color="white" onPress={() => console.log("edit something")}/> */}
+             {/* <Button title="Edit" type="clear" buttonStyle={alignSelf='center'}/> */}
+           </CardSection>
+         );
+      }
+   }
+
+   renderProductButton() {
+      if(this.state.productsExpanded) {
+         return(
+           <CardSection style={{backgroundColor: 'orange'}}>
+             <Button style={{ height: 20, backgroundColor: 'orange' }} title='Add' textColor='white' onPress={() => this.props.navigation.navigate('AddProduct')}/>
+             <Button style={{ height: 20, backgroundColor: 'orange' }} title='View All' textColor='white' onPress={() => console.log("Pressed edit button")}/>
+           </CardSection>
+         );
+      }
    }
 
    deletePressed() {
@@ -66,76 +98,67 @@ class ArtisanDetail extends Component {
       );
    }
 
-   sortedTopProducts() {
-      //if products array is not empty then sort by
-      //how many of that item has been sold
-      //The top 6 will be displayed on screen
-   }
-
   render() {
     return (
       <Wallpaper style={styles.container}>
         <ScrollView style={{ flex: 1.8 }}>
-          {/* <View style={styles.firstSection}>
-            <ProfilePicture 
-              source={{uri: this.props.profilePictureURL}}
-              style={styles.image}
-            />
-            <View style={styles.namePhone}>
-              <Text style={styles.text}>{this.props.name}</Text>
-              <Text style={styles.text}>{this.props.phoneNumber}</Text>
-            </View>
-            <View style={styles.description}>
-              <Text style={styles.text}>{this.props.description}</Text>
-            </View>
-          </View> */}
+
           <Card>
-             <CardSection style={{ backgroundColor: 'rgb(71, 77, 84)'}}>
+             <CardSection style={{ backgroundColor: 'rgb(71, 77, 84)', justifyContent: 'space-between'}}>
                 <Text style={styles.headerText}>Artisan info</Text>
+                {/* <Button iconName='ellipsis-v' iconColor='orange' onPress={() => console.log('pressed this button')}/> */}
+                
+                   <Icon 
+                     name= "ellipsis-v"
+                     size= {30}
+                     color="orange"
+                     type='clear'
+                     type='font-awesome'
+                     onPress={() => this.setState({ editExpanded: !this.state.editExpanded})}
+                   />
              </CardSection>
+
              <CardSection>
                   <ProfilePicture 
                   source={{uri: this.props.profilePictureURL}}
                   style={styles.image}
                   />
-                  <View style={{flexGrow: 1}}>
+                  <View style={{flex: 1, flexDirection: 'column'}}>
                     <Text style={styles.nameStyle}>{this.props.name}</Text>
                     <Text style={styles.phoneStyle}>{this.props.phoneNumber}</Text>
                     <Text style={styles.phoneStyle}>Location</Text>
                   </View>
              </CardSection>
 
-             <CardSection>
-               <Text style={styles.descriptionTitle}>Description</Text>
+             <CardSection style={{flex: 1, flexDirection: 'column'}}>
+               {/* <Text style={styles.descriptionTitle}>Description</Text> */}
                <Text style={styles.descriptionStyle}>{this.props.description}</Text>
              </CardSection>
-             <CardSection>
+             {this.renderEditButton()}
+             {/* <CardSection>
                <Button style={{ height: 20 }} title='Edit' textColor='orange' onPress={() => console.log("Pressed edit button")}/>
-             </CardSection>
+             </CardSection> */}
           </Card>
           
           <Card>
-             <CardSection style={{ backgroundColor: 'rgb(71, 77, 84)'}}>
+             <CardSection style={{ backgroundColor: 'rgb(71, 77, 84)', justifyContent: 'space-between'}}>
                 <Text style={styles.headerText}>Top Products</Text>
+                <Icon 
+                     name= "ellipsis-v"
+                     size= {30}
+                     color="orange"
+                     type='clear'
+                     type='font-awesome'
+                     onPress={() => this.setState({ productsExpanded: !this.state.productsExpanded})}
+                   />
              </CardSection>
+
              <CardSection>
                <FlatGrid
-                 itemDimension={110}
+                 itemDimension={90}
                  items={this.state.images}
-                 //   sections={[
-                 //      {
-                 //        title: 'Top Products',
-                 //        data: this.state.images.slice(0, 6),
-                 //      }
-                 //    ]}
-                    
-                 //    renderSectionHeader={({ section }) => (
-                 //      <Text style={styles.sectionHeader2}>{section.title}</Text>
-                 //   )}
                  style={styles.gridView}
                  renderItem={({ item, section, index }) => {
-                    
-                    console.log(item);
                     return (
                        <TouchableOpacity style={styles.itemContainer} onPress={() => this.props.navigation.navigate('ProductDetail', {...item})}>
                           <Image style={styles.itemContainer2} source={{uri: item.productUrl} }/>
@@ -144,13 +167,20 @@ class ArtisanDetail extends Component {
                  }}   
                />
              </CardSection>
-             <CardSection>
-               <Button style={{ height: 20 }} title='Add' textColor='orange' onPress={() => console.log("Pressed edit button")}/>
+             {this.renderProductButton()}
+             {/* <CardSection> 
+               <Button style={{ height: 20 }} title='Add' textColor='orange' onPress={() => this.props.navigation.navigate('AddProduct')}/>
                <Button style={{ height: 20 }} title='View All' textColor='orange' onPress={() => console.log("Pressed edit button")}/>
-             </CardSection>
-            
+             </CardSection> */}
           </Card>
-            
+          <AsyncButton
+              title="Delete Artisan"
+              color="red"
+              textColor="white"
+              onPress={this.showAlert}
+              style={styles.buttonStyle}
+              spinning={this.state.adding}
+            />
         </ScrollView>
         
             {/* <ActionButton buttonColor='orange' verticalOrientation='up' position='left' spacing={10} style={{ flex: 0.2}} >
@@ -261,15 +291,15 @@ const styles = StyleSheet.create({
  itemContainer: {
    justifyContent: 'space-evenly',
    borderRadius: 5,
-   height: 160,
-   width: 160,
+   height: 110,
+   width: 110,
    backgroundColor: 'rgb(71, 77, 84)'
  },
  itemContainer2: {
    justifyContent: 'space-evenly',
    borderRadius: 5,
-   height: 155,
-   width: 155,
+   height: 105,
+   width: 105,
    alignSelf: 'center'
  },
  sectionHeader2: {
