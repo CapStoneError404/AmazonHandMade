@@ -77,17 +77,17 @@ export default class AddProduct extends Component {
     if(this.verifyFields()) {
       this.setState({adding: true})
       this.props.createProduct({
-        productMainCategory: this.state.productMainCategory.trim(),
-        productSubCategory: this.state.productSubCategory.trim(),
-        productMainPicture: this.state.productMainPicture.trim(),
-        productTitle: this.state.productTitle.trim(),
-        productDescription: this.state.productDescription.trim(),
-        productGender: this.state.productGender.trim(),
-        productStandardPrice: this.state.productStandardPrice,
-        productSellerSKU: this.state.productSellerSKU.trim(),
-        productQuantity: this.state.productQuantity,
-        productTime: this.state.productTime,
-        productTimesSold: this.state.productTimesSold
+        mainCategory: this.state.productMainCategory.trim(),
+        subCategory: this.state.productSubCategory.trim(),
+        mainPicture: this.state.productMainPicture.trim(),
+        title: this.state.productTitle.trim(),
+        description: this.state.productDescription.trim(),
+        gender: this.state.productGender.trim(),
+        standardPrice: this.state.productStandardPrice,
+        sellerSKU: this.state.productSellerSKU.trim(),
+        quantity: this.state.productQuantity,
+        productionTime: this.state.productTime,
+        timesSold: this.state.productTimesSold
       }, this.props.navigation.getParam('currentUID')).then(() => {
         this.setState({adding: false})
         this.props.navigation.goBack()
@@ -228,7 +228,7 @@ export default class AddProduct extends Component {
           /> 
         </View>
 
-        <Text style={styles.labelText}>Production Time</Text>
+        <Text style={styles.labelText}>Production Time (days)</Text>
         <View style={this.state.focusedInputs.time? [styles.focusedInputSection, styles.InputWrapper] :styles.InputWrapper}>
           <TextInput
             keyboardType='numeric'
