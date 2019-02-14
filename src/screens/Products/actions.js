@@ -92,22 +92,15 @@ export function fetchProducts(artisanID = "") {
 
 // action takes in current list of products and product to be deleted
 // sends that product to reducer to be filtered out of state
-export function deleteProduct(products, product) {
+export function deleteProduct(products, product, artisan) {
   return (dispatch) => {
     return new Promise(async (resolve, reject) => {
-      //remove all artisans linked to this product
-      {/*
-      var artisansRef = await firebase.database().ref(`artisans`)
-      for(DataSnapshot data: artisansRef.getChildren()){
-        if (data.child('products/${product.productID}').exists()) {
-            await artisansRef(`products/${product.productID}`).remove()
-        } 
-      }
-    */}
+      //Remove Product from Artisan 
+      await firebase.database().ref(`artisans/${artisan.artisanID}/products/${product.ProductID}`).remove()
       //Remove product
-      await firebase.database().ref(`products/${product.productID}`).remove()
+      await firebase.database().ref(`products/${product.ProductID}`).remove()
       //Remove product storage
-      await firebase.storage().ref(`productFiles/images/${product.productID}/MainProductPicture`).delete() 
+      await firebase.storage().ref(`productFiles/images/${product.ProductID}/MainProductPicture`).delete() 
       resolve()
       dispatch({type: 'DELETE_PRODUCT', product: product})
     })  
