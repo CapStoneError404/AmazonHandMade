@@ -106,5 +106,5 @@ export function deleteProduct(products, product, artisan) {
       dispatch({type: 'DELETE_PRODUCT', product: product})
     })  
   }
-*/}
 }
+*/}
