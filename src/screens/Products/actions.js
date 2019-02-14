@@ -29,7 +29,7 @@ export function createProduct(data, artisanID) {
         quantity: data.quantity,
         productionTime: data.productionTime,
         timesSold: data.timesSold,
-        id: db_ref.key
+        productID: db_ref.key
       }
 
       if(data.mainPicture) {
