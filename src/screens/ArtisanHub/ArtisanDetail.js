@@ -77,6 +77,7 @@ class ArtisanDetail extends Component {
               spinning={this.state.adding}
             />
           </View>
+          {/*
           <View>
             <AsyncButton
               title="Add Product"
@@ -87,6 +88,7 @@ class ArtisanDetail extends Component {
               spinning={this.state.adding}
             />
           </View>
+          */}
         </ScrollView>
       </Wallpaper>
     )

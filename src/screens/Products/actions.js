@@ -60,8 +60,8 @@ export function createProduct(data, artisanID) {
     })
   }
 }
-
-//Fetch all products (so all CGA products) or associated with specific artisan
+{/*
+//Fetch all products (so all CGA products) or the ones associated with a specific artisan
 export function fetchProducts(artisanID = "") {
   return (dispatch, prevState) => {
     return new Promise(async (resolve, reject) => {
@@ -92,6 +92,7 @@ export function fetchProducts(artisanID = "") {
 
 // action takes in current list of products and product to be deleted
 // sends that product to reducer to be filtered out of state
+
 export function deleteProduct(products, product, artisan) {
   return (dispatch) => {
     return new Promise(async (resolve, reject) => {
@@ -105,4 +106,5 @@ export function deleteProduct(products, product, artisan) {
       dispatch({type: 'DELETE_PRODUCT', product: product})
     })  
   }
+*/}
 }
