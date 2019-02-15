@@ -5,9 +5,10 @@ import storage from 'redux-persist/lib/storage'
 import Errors from './Errors'
 import User from './User'
 import Artisans from './Artisans'
+import Products from './Products'
 
 //Then combine them all here
-const appReducer = combineReducers({ User, Errors, Artisans });
+const appReducer = combineReducers({ User, Errors, Artisans, Products });
 
 const rootReducer = (state, action) => {
   if(action.type == 'RESET_STORE' || (__DEV__ && action.type == 'LOGOUT')) {

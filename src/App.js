@@ -9,15 +9,15 @@ import { Login, Register, ForgotPassword } from '@screens/Auth'
 import Settings from '@screens/Settings'
 import Launch from '@screens/Launch'
 import { ArtisanList, AddArtisan, ArtisanDetail } from '@screens/ArtisanHub'
-import { ProductDetail, AddProduct } from '@screens/Products';
+import { AddProduct, ProductDetail } from '@screens/Products'
 
 const ArtisanHubStack = createStackNavigator(
   {
     ArtisanList: ArtisanList,
     AddArtisan: AddArtisan,
     ArtisanDetail:ArtisanDetail,
-    ProductDetail: ProductDetail,
-    AddProduct: AddProduct
+    AddProduct: AddProduct,
+    ProductDetail: ProductDetail
   }
 )
 

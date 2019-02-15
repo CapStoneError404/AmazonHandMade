@@ -122,9 +122,9 @@ class ArtisanDetail extends Component {
                   name= "dots-vertical"
                   size= {30}
                   color="orange"
-                  type='clear'
-								 type='material-community'
-								 underlayColor={'rgb(71, 77, 84)'}
+                  // type='clear'
+						type='material-community'
+						underlayColor={'rgb(71, 77, 84)'}
                  onPress={() => this.setState({ editExpanded: !this.state.editExpanded})}
                 />
              </CardSection>
@@ -155,9 +155,9 @@ class ArtisanDetail extends Component {
               	name= "dots-vertical"
               	size= {30}
               	color="orange"
-              	type='clear'
-						  	type='material-community'
-		  			  	underlayColor={'rgb(71, 77, 84)'}
+              	// type='clear'
+					type='material-community'
+		  			underlayColor={'rgb(71, 77, 84)'}
               	onPress={() => this.setState({ productsExpanded: !this.state.productsExpanded})}
               />
             </CardSection>
@@ -169,9 +169,9 @@ class ArtisanDetail extends Component {
                 renderItem={({ item, section, index }) => {
                 	return (
                 		<TouchableOpacity 
-										  style={styles.elevationLow} 
-					    	 			onPress={() => this.props.navigation.navigate('ProductDetail', {...item})}
-					    	 		>
+								style={styles.elevationLow} 
+					    	 	onPress={() => this.props.navigation.navigate('ProductDetail', {...item})}
+					    	>
                 			<Image style={styles.imageContainer} source={{uri: item.productUrl} }/>
                 		</TouchableOpacity>
                 	)
