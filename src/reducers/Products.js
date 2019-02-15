@@ -1,4 +1,4 @@
-export default function Artisans(state = [], action) {
+export default function Products(state = [], action) {
   console.log("Products reducing action " + action.type)
   switch (action.type) {
     case 'ADD_PRODUCT':
