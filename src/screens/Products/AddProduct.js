@@ -122,9 +122,8 @@ export default class AddProduct extends Component {
           onPress={() => this.pickImage()}
           style={styles.image}
         />
-        <View>
+        <View style={styles.categorySection}>
           <Picker
-            style={styles.categorySection} 
             itemStyle={styles.PickerItem}
             selectedValue={this.state.productMainCategory}
             testID="MainCategorySelectorID"
@@ -137,9 +136,8 @@ export default class AddProduct extends Component {
           </Picker>
         </View>
 
-        <View>
+        <View style={styles.categorySection}>
           <Picker
-            style={styles.categorySection} 
             itemStyle={styles.PickerItem}
             enabled={this.state.productMainCategory != ''}
             selectedValue={this.state.productSubCategory}
@@ -160,6 +158,7 @@ export default class AddProduct extends Component {
         <Text style={styles.labelText}>Title</Text>
         <View style={this.state.focusedInputs.title? [styles.focusedInputSection, styles.InputWrapper] :styles.InputWrapper}>
           <TextInput
+            style={styles.textInputStyle}
             placeholder= "Ex: Rawhide Leather Jacket"
             value={this.state.productTitle}
             onChangeText={(newText) => this.setState({productTitle: newText})}
@@ -171,6 +170,7 @@ export default class AddProduct extends Component {
         <Text style={styles.labelText}>Product Description</Text>
         <View style={this.state.focusedInputs.desc? [styles.focusedInputSection, styles.InputWrapper] :styles.InputWrapper}>
           <TextInput
+            style={styles.textInputStyle}
             placeholder="Ex: Please see Amazon Site for an example"
             value={this.state.productDescription}
             onChangeText={(newText) => this.setState({productDescription: newText})}
@@ -179,9 +179,8 @@ export default class AddProduct extends Component {
           />
         </View>
 
-        <View>
+        <View style={styles.categorySection}>
           <Picker
-            style={styles.categorySection} 
             itemStyle={styles.PickerItem}
             selectedValue={this.state.productGender}
             testID="genderSelectorID"
@@ -201,6 +200,7 @@ export default class AddProduct extends Component {
         <Text style={styles.labelText}>Standard Price</Text>
         <View style={this.state.focusedInputs.price? [styles.focusedInputSection, styles.InputWrapper] :styles.InputWrapper}>
           <TextInput
+            style={styles.textInputStyle}
             keyboardType='numeric'
             placeholder="Ex: 49.99"
             value={this.state.productStandardPrice}
@@ -213,6 +213,7 @@ export default class AddProduct extends Component {
         <Text style={styles.labelText}>Seller SKU</Text>
         <View style={this.state.focusedInputs.sku? [styles.focusedInputSection, styles.InputWrapper] :styles.InputWrapper}>
           <TextInput
+            style={styles.textInputStyle}
             placeholder="Ex: MyProduct123"
             value={this.state.productSellerSKU}
             onChangeText={(newText) => this.setState({productSellerSKU: newText})}
@@ -224,6 +225,7 @@ export default class AddProduct extends Component {
         <Text style={styles.labelText}>Quantity</Text>
         <View style={this.state.focusedInputs.quantity? [styles.focusedInputSection, styles.InputWrapper] :styles.InputWrapper}>
           <TextInput
+            style={styles.textInputStyle}
             keyboardType='numeric'
             placeholder="Ex. 4"
             value={this.state.productQuantity}
@@ -236,6 +238,7 @@ export default class AddProduct extends Component {
         <Text style={styles.labelText}>Production Time (days)</Text>
         <View style={this.state.focusedInputs.time? [styles.focusedInputSection, styles.InputWrapper] :styles.InputWrapper}>
           <TextInput
+            style={styles.textInputStyle}
             keyboardType='numeric'
             placeholder="Ex: 5"
             value={this.state.productTime}
@@ -302,7 +305,7 @@ const styles = StyleSheet.create({
   },
   InputWrapper: {
     alignSelf: 'center',
-    height: 'auto',
+    height: 50,
     backgroundColor: 'rgba(255,255,255,0.85)',
     paddingHorizontal: 20,
     borderRadius: 5,
@@ -315,5 +318,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     //marginTop: '10%',
     width: '80%'
+  },
+  textInputStyle: {
+     height: 50
   }
 })
