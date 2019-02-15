@@ -99,11 +99,13 @@ export default class AddProduct extends Component {
     return (
       <Wallpaper style={styles.container}>
       <ScrollView>
-        <AddImage 
-          imageUri={this.state.productMainPicture}
-          onPress={() => this.pickImage()}
-          style={styles.image}
-        />
+        <View style={styles.imageWrapper}>
+          <AddImage 
+            imageUri={this.state.productMainPicture}
+            onPress={() => this.pickImage()}
+            style={styles.image}
+          />
+        </View>
 
         <Text style={styles.labelText}>Product Main Category</Text>
         <View style={styles.categorySection}>
@@ -263,10 +265,15 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: 'bold' 
   },
+  imageWrapper: {
+    padding: '5%'
+  },
   image: {
     alignSelf: 'center',
-    padding: '25%',
-    borderRadius: 5
+    //padding: '25%',
+    borderRadius: 5,
+    width: 200,
+    height: 200
   },
   categorySection: {
     alignSelf: 'center',
