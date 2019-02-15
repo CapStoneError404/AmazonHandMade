@@ -77,6 +77,20 @@ class ArtisanDetail extends Component {
               spinning={this.state.adding}
             />
           </View>
+          
+          {/* 
+          <View>
+            <AsyncButton
+              title="Add Product"
+              color="green"
+              textColor="white"
+              onPress={()=>{this.props.navigation.navigate('AddProduct', {currentUID: this.props.uid})}}
+              style={styles.buttonStyle}
+              spinning={this.state.adding}
+            />
+          </View> 
+          */}
+         
         </ScrollView>
       </Wallpaper>
     )
