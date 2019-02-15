@@ -78,7 +78,7 @@ class ArtisanDetail extends Component {
             />
           </View>
           
-          <View>
+          {/* <View>
             <AsyncButton
               title="Add Product"
               color="green"
@@ -87,7 +87,7 @@ class ArtisanDetail extends Component {
               style={styles.buttonStyle}
               spinning={this.state.adding}
             />
-          </View>
+          </View> */}
          
         </ScrollView>
       </Wallpaper>
