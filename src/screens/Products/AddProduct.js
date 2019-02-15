@@ -13,13 +13,12 @@ export default class AddProduct extends Component {
     super(props)
 
     this.state = {
-      productMainCategory: 'Handmade Apparel',
-      productSubCategory: 'Activewear',
-
+      productMainCategory: '', 
+      productSubCategory: '', 
+      productGender: '',
       productMainPicture: "",
       productTitle: "",
       productDescription: "",
-      productGender: 'Women',
       productStandardPrice: "",
       productSellerSKU: "",
       productQuantity: "",
@@ -105,13 +104,16 @@ export default class AddProduct extends Component {
           onPress={() => this.pickImage()}
           style={styles.image}
         />
+
+        <Text style={styles.labelText}>Product Main Category</Text>
         <View style={styles.categorySection}>
           <Picker
             itemStyle={styles.PickerItem}
             selectedValue={this.state.productMainCategory}
             testID="MainCategorySelectorID"
             onValueChange={(itemValue, itemIndex) =>
-              this.setState({productMainCategory: itemValue})
+              (itemIndex !=0) && this.setState({productMainCategory: itemValue}) 
+                && this.setState({productSubCategory: ''})
             }>
             {Object.keys(ProductCategories).map(m => {
               return <Picker.Item key={m} label={m} value={m} />
@@ -119,6 +121,7 @@ export default class AddProduct extends Component {
           </Picker>
         </View>
 
+        <Text style={styles.labelText}>Product Subcategory</Text>
         <View style={styles.categorySection}>
           <Picker
             itemStyle={styles.PickerItem}
@@ -127,7 +130,7 @@ export default class AddProduct extends Component {
             testID="SubCategorySelectorID"
             //style={styles.categorySection}
             onValueChange={(itemValue, itemIndex) =>
-              this.setState({productSubCategory: itemValue})
+              (itemIndex !=0) && this.setState({productSubCategory: itemValue})
             }>
             {
               (this.state.productMainCategory != "")? 
@@ -162,6 +165,7 @@ export default class AddProduct extends Component {
           />
         </View>
 
+        <Text style={styles.labelText}>Gender Type</Text>
         <View style={styles.categorySection}>
           <Picker
             itemStyle={styles.PickerItem}
@@ -169,8 +173,9 @@ export default class AddProduct extends Component {
             testID="genderSelectorID"
             //style={{height: 50, width: 200}}
             onValueChange={(itemValue, itemIndex) =>
-              this.setState({productGender: itemValue})
+              (itemIndex !=0) && this.setState({productGender: itemValue})
             }>
+            <Picker.Item label="Pick a gender type..." value="pick-one" />
             <Picker.Item label="Women" value="women" />
             <Picker.Item label="Men" value="men" />
             <Picker.Item label="Girls" value="girls" />
