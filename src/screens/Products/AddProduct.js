@@ -1,6 +1,6 @@
 import { AddImage, AsyncButton, UserInput, Wallpaper } from '@components';
 import React, { Component } from 'react';
-import { StyleSheet, ScrollView, View, Text, TextInput, Picker } from 'react-native';
+import { StyleSheet, ScrollView, View, Text, TextInput, Picker, Platform } from 'react-native';
 import ImagePicker from 'react-native-image-crop-picker';
 
 export default class AddProduct extends Component {
@@ -122,11 +122,12 @@ export default class AddProduct extends Component {
           onPress={() => this.pickImage()}
           style={styles.image}
         />
-        <View style={styles.categorySection}>
+        <View>
           <Picker
+            style={styles.categorySection} 
+            itemStyle={styles.PickerItem}
             selectedValue={this.state.productMainCategory}
             testID="MainCategorySelectorID"
-            //style={styles.categoryText}
             onValueChange={(itemValue, itemIndex) =>
               this.setState({productMainCategory: itemValue})
             }>
@@ -136,8 +137,10 @@ export default class AddProduct extends Component {
           </Picker>
         </View>
 
-        <View style={styles.categorySection}>
+        <View>
           <Picker
+            style={styles.categorySection} 
+            itemStyle={styles.PickerItem}
             enabled={this.state.productMainCategory != ''}
             selectedValue={this.state.productSubCategory}
             testID="SubCategorySelectorID"
@@ -148,7 +151,7 @@ export default class AddProduct extends Component {
             {
               (this.state.productMainCategory != "")? 
               categories[this.state.productMainCategory].map(s => {
-                return <Picker.Item label={s} value={s} key={s}/>
+                 return <Picker.Item label={s} value={s} key={s}/>
               }) : null 
             }
           </Picker>
@@ -176,8 +179,10 @@ export default class AddProduct extends Component {
           />
         </View>
 
-        <View style={styles.categorySection}>
+        <View>
           <Picker
+            style={styles.categorySection} 
+            itemStyle={styles.PickerItem}
             selectedValue={this.state.productGender}
             testID="genderSelectorID"
             //style={{height: 50, width: 200}}
@@ -274,13 +279,17 @@ const styles = StyleSheet.create({
   },
   categorySection: {
     alignSelf: 'center',
-    width: '80%',
-    height: 50,
+    width: '90%',
+    height: 60,
     color: '#808080',
     backgroundColor: 'white',
     margin: '4%',
-    borderRadius: 10, 
+    borderRadius: 10,
   },
+  PickerItem: {
+   height: 60,
+   color: 'black'
+ },
   categoryText: {
     //width: '100%',
     color: 'red',
