@@ -42,7 +42,7 @@ export function createProduct(data, artisanID) {
 
         productObject.mainPictureURL = st_ref.downloadURL
         
-        console.log("Fetching photo download url")
+        console.log("Put photo download url into db")
         firebase.database().ref(`products/${productObject.productID}`).update(
           { mainPictureURL: st_ref.downloadURL })
       }
