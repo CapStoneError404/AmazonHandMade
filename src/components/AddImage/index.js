@@ -16,7 +16,7 @@ export default class AddImage extends Component {
             source={{uri: this.props.imageUri}}
           />
           :
-          <View style={[styles.default, styles.addImage]}>
+          <View style={[styles.default, styles.addImage, this.props.style]}>
             <Text style={styles.text}>Add Image</Text>
             <Icon
               name="plus"
