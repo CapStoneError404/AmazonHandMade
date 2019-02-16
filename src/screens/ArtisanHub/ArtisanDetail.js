@@ -24,6 +24,7 @@ class ArtisanDetail extends Component {
     LayoutAnimation.spring();
   }
 
+
   constructor(props) {
     super(props)
 
@@ -46,6 +47,7 @@ class ArtisanDetail extends Component {
     this.renderProductButton = this.renderProductButton.bind(this);
     this.navigateToEditArtisan = this.navigateToEditArtisan.bind(this)
     this.fetchProducts = this.fetchProducts.bind(this)
+    
   }
 
   fetchProducts() {
@@ -189,6 +191,7 @@ class ArtisanDetail extends Component {
               	onPress={() => this.setState({ productsExpanded: !this.state.productsExpanded})}
               />
             </CardSection>
+
             <CardSection>
               <FlatGrid
                 itemDimension={90}

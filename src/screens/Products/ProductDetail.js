@@ -18,7 +18,7 @@ class ProductDetail extends Component {
           <ScrollView style={{ flex: 1.8 }}>
             <View style={styles.firstSection}>
               <ProfilePicture 
-                source={{uri: this.props.productUrl}}
+                source={{uri: this.props.mainPictureURL}}
                 style={styles.image}
               />
               <View style={styles.namePhone}>
