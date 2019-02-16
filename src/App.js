@@ -8,7 +8,7 @@ import TabBar from '@components/TabBar'
 import { Login, Register, ForgotPassword } from '@screens/Auth'
 import Settings from '@screens/Settings'
 import Launch from '@screens/Launch'
-import { ArtisanList, AddArtisan, ArtisanDetail } from '@screens/ArtisanHub'
+import { ArtisanList, AddArtisan, ArtisanDetail, EditArtisan } from '@screens/ArtisanHub'
 import { AddProduct, ProductDetail } from '@screens/Products'
 
 const ArtisanHubStack = createStackNavigator(
@@ -16,6 +16,7 @@ const ArtisanHubStack = createStackNavigator(
     ArtisanList: ArtisanList,
     AddArtisan: AddArtisan,
     ArtisanDetail:ArtisanDetail,
+    EditArtisan: EditArtisan,
     AddProduct: AddProduct,
     ProductDetail: ProductDetail
   }

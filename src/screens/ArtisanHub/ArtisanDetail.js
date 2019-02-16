@@ -15,6 +15,12 @@ class ArtisanDetail extends Component {
     }
   }
 
+  componentDidMount() {
+      //going to fetch products data that we need for this artisan
+      let newArray = this.props.Artisans.find((item) => item.uid === this.props.uid);
+      console.log("component did mount" + newArray.name);
+  }
+
   componentWillUpdate() {
     LayoutAnimation.spring();
   }
@@ -35,7 +41,9 @@ class ArtisanDetail extends Component {
          { id: 5, productUrl: 'https://m.media-amazon.com/images/I/71DSpZ0ZQbL._AC_UL640_QL65_.jpg'},
        ],
        editExpanded: false,
-       productsExpanded: false
+       productsExpanded: false,
+       currentArtisan: this.props.Artisans.find((item) => item.uid === this.props.uid)
+       
     }
 
     this.onCancel = this.onCancel.bind(this);
@@ -43,22 +51,40 @@ class ArtisanDetail extends Component {
     this.showAlert = this.showAlert.bind(this);
     this.renderEditButton = this.renderEditButton.bind(this);
     this.renderProductButton = this.renderProductButton.bind(this);
-    //this.navigateToArtisan = this.navigateToArtisan.bind(this)
+    this.navigateToEditArtisan = this.navigateToEditArtisan.bind(this)
   }
 
    onCancel() {
       this.setState({ adding: false });
    }
 
+   navigateToEditArtisan() {
+      const { name, phoneNumber, description, profilePictureURL, uid } = this.props;
+      this.props.navigation.navigate('EditArtisan', {name, phoneNumber, description, uid, onNavigateBack: this.handleOnNavigateBack});
+   }
+
+   handleOnNavigateBack = () => {
+      this.setState({
+         currentArtisan: this.props.Artisans.find((item) => item.uid === this.props.uid)
+      })
+    }
+
    renderEditButton() {
       if(this.state.editExpanded) {
          return(
-           <CardSection style={{backgroundColor: 'orange'}}>
-						 <Button 
-							 style={{ height: 20, backgroundColor: 'orange'}} 
-							 title='Edit' 
-							 textColor='white' 
-							 onPress={() => console.log("Pressed edit button")}/>
+           <CardSection style={{backgroundColor: 'white'}}>
+             <Button 
+                style={{ height: 20, backgroundColor: 'white'}} 
+                title='Edit' 
+                textColor='orange' 
+                onPress={() => this.navigateToEditArtisan()}
+             />
+             <Button 
+                style={{ height: 25, backgroundColor: 'white'}} 
+                title='Message' 
+                textColor='orange' 
+                onPress={() => console.log("Pressed message button")}
+             />
            </CardSection>
          );
       }
@@ -68,18 +94,18 @@ class ArtisanDetail extends Component {
       if(this.state.productsExpanded) {
          return(
            <CardSection style={{backgroundColor: 'white'}}>
-						 <Button 	
-							 style={{ height: 20, backgroundColor: 'white' }} 
-							 title='Add' 
-							 textColor='orange' 
-							 onPress={() => this.props.navigation.navigate('AddProduct')}
-						 />
-						 <Button 
-							 style={{ height: 20, backgroundColor: 'white' }} 
-							 title='View All' 
-							 textColor='orange' 
-							 onPress={() => console.log("Pressed edit button")}
-						 />
+			    <Button 	
+		    	   style={{ height: 20, backgroundColor: 'white' }} 
+		    	   title='Add' 
+		    	   textColor='orange' 
+		    	   onPress={() => this.props.navigation.navigate('AddProduct', {currentUID: this.props.uid})}
+			    />
+			    <Button 
+		    	   style={{ height: 20, backgroundColor: 'white' }} 
+		    	   title='View All' 
+		    	   textColor='orange' 
+		    	   onPress={() => console.log("view all products")}
+			    />
            </CardSection>
          );
       }
@@ -111,6 +137,7 @@ class ArtisanDetail extends Component {
    }
 
   render() {
+     const { name, phoneNumber, description, profilePictureURL } = this.state.currentArtisan;
     return (
       <Wallpaper style={styles.container}>
         <ScrollView style={{ flex: 1.8 }}>
@@ -122,7 +149,6 @@ class ArtisanDetail extends Component {
                   name= "dots-vertical"
                   size= {30}
                   color="orange"
-                  // type='clear'
 						type='material-community'
 						underlayColor={'rgb(71, 77, 84)'}
                  onPress={() => this.setState({ editExpanded: !this.state.editExpanded})}
@@ -131,19 +157,18 @@ class ArtisanDetail extends Component {
 
              <CardSection>
                   <ProfilePicture 
-                    source={{uri: this.props.profilePictureURL}}
+                    source={{uri: profilePictureURL}}
                     style={styles.image}
                   />
                   <View style={{flex: 1, flexDirection: 'column'}}>
-                    <Text style={styles.nameStyle}>{this.props.name}</Text>
-                    <Text style={styles.phoneStyle}>{this.props.phoneNumber}</Text>
+                    <Text style={styles.nameStyle}>{name}</Text>
+                    <Text style={styles.phoneStyle}>{phoneNumber}</Text>
                     <Text style={styles.phoneStyle}>Location</Text>
                   </View>
              </CardSection>
 
              <CardSection style={{flex: 1, flexDirection: 'column'}}>
-               {/* <Text style={styles.descriptionTitle}>Description</Text> */}
-               <Text style={styles.descriptionStyle}>{this.props.description}</Text>
+               <Text style={styles.descriptionStyle}>{description}</Text>
              </CardSection>
              {this.renderEditButton()}
           </Card>
@@ -155,7 +180,6 @@ class ArtisanDetail extends Component {
               	name= "dots-vertical"
               	size= {30}
               	color="orange"
-              	// type='clear'
 					type='material-community'
 		  			underlayColor={'rgb(71, 77, 84)'}
               	onPress={() => this.setState({ productsExpanded: !this.state.productsExpanded})}
@@ -186,7 +210,7 @@ class ArtisanDetail extends Component {
             color="red"
             textColor="white"
             onPress={this.showAlert}
-            style={{marginLeft: 10, marginRight: 10}}
+            style={{marginLeft: 10, marginRight: 10, marginTop: 20}}
             spinning={this.state.adding}
           />
         </ScrollView>
