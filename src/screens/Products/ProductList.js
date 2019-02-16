@@ -1,15 +1,16 @@
 import { Wallpaper } from '@components';
 import React, { Component } from 'react';
 import { ActivityIndicator, Button, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ProfilePicture } from '../../components';
 
 export default class ProductList extends Component {
   static navigationOptions = ({navigation}) => {
     return { 
-      title: 'Product',
+      title: 'Product List',
       headerRight: (
         <Button
           transparent
-          onPress={() => console.log("Add Product Pressed")}
+          onPress={() => console.log("View Product List Pressed")}
           title="Add"
         />
       )
@@ -21,13 +22,25 @@ export default class ProductList extends Component {
 
     this.state = { 
       showProductList: false,
+      //fetchingProductList: false,
       ProductListData: [
-        {id: 0, productName: "chocolate"}
-        {id: 1, productName: "sombrero"}
-      ],  
-      fetchingProductList: false
+        {id: 0, productName: "Painted Pot", productURL: "https://images-na.ssl-images-amazon.com/images/I/51QSbi7H%2BvL.jpg"},
+        {id: 1, productName: "Poncho", productURL: "https://thumbs4.ebaystatic.com/d/l225/m/mQjoqxfxjWICeCKJiKbNdAA.jpg"},
+        {id: 2, productName: "Rancher Hat", productURL: "https://images-na.ssl-images-amazon.com/images/I/6198MgqxZ8L._UX679_.jpg"}, 
+        {id: 3, productName: "Dress", productURL: "https://i.pinimg.com/originals/24/90/cb/2490cb95a0ad1a1945321744a45fad99.jpg"}
+      ]
     }
+
+    //this.fetchProductList = this.fetchProductList.bind(this)
   }
+
+  /*
+  fetchProductList() { 
+    this.setState({fetchingProductList: true})
+    this.props.fetchProductList().then(() => {
+      this.setState({fetchingProductList: false})
+    })
+  }*/
 
   _renderProductListItem = ({item, index}) => {
       return (
@@ -37,13 +50,13 @@ export default class ProductList extends Component {
           onPress={() => console.log("pressed item")}
           key={item.key}
         >
-          {/* <ProfilePicture
-            source={{uri: item.profilePictureURL}}
+          <ProfilePicture
+            source={{uri: item.productURL}}
             style={styles.image}
-          /> */}
-          <View style={styles.namePhone}>
-            <Text style={styles.text}>{item.name}</Text>
-            <Text style={styles.text}>{item.phoneNumber}</Text>
+          />
+          
+          <View style={styles.nameItem}>
+            <Text style={styles.text}>{item.productName}</Text>
           </View>
         </TouchableOpacity>
       )
@@ -51,9 +64,10 @@ export default class ProductList extends Component {
 
   _keyExtractor = (item, index) => item.uid
 
+  /*
   sortedProducts() { 
     if(this.props.Products != []) {
-      sortedProducts = Array.from(this.props.Artisans)
+      sortedProducts = Array.from(this.props.ProductList)
       sortedProducts.sort((first, second) => {
         name1 = first.name.toLowerCase()
         name2 = second.name.toLowerCase()
@@ -68,17 +82,25 @@ export default class ProductList extends Component {
     } else {
       return []
     }
-  }
+  }*/
 
   render() {
     return (
       <Wallpaper>
+        {(this.props.Products != [] && this.state.fetchingProductList) ? 
+        <ActivityIndicator 
+          size='large'
+          animating={this.props.spinning}
+          color='white'
+        />
+        :
         <FlatList
           testID='product_list'
-          data={this.sortedProducts()}
+          data={this.state.ProductListData}
           keyExtractor={this._keyExtractor}
           renderItem={this._renderProductListItem}
         />
+        }
       </Wallpaper>
     )
   }  
@@ -103,7 +125,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10
   },
-  namePhone: {
+  nameItem: {
     flex: 1,
     height: '100%',
     flexDirection: 'column',

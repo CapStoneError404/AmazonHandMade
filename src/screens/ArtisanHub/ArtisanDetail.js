@@ -78,7 +78,7 @@ class ArtisanDetail extends Component {
             />
           </View>
           
-          {/* 
+          
           <View>
             <AsyncButton
               title="Add Product"
@@ -89,7 +89,18 @@ class ArtisanDetail extends Component {
               spinning={this.state.adding}
             />
           </View> 
-          */}
+          
+          <View>
+            <AsyncButton
+              title="View All Products"
+              color="green"
+              textColor="white"
+              onPress={()=>{this.props.navigation.navigate('ProductList')}}
+              style={styles.buttonStyle}
+              spinning={this.state.adding}
+            />
+          </View> 
+          
          
         </ScrollView>
       </Wallpaper>
