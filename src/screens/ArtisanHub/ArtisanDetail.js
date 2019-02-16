@@ -17,8 +17,7 @@ class ArtisanDetail extends Component {
 
   componentDidMount() {
       //going to fetch products data that we need for this artisan
-      let newArray = this.props.Artisans.find((item) => item.uid === this.props.uid);
-      console.log("component did mount" + newArray.name);
+      this.fetchProducts();
   }
 
   componentWillUpdate() {
@@ -32,17 +31,11 @@ class ArtisanDetail extends Component {
        showModel: false,
        adding: false,
        drawerOpen: false,
-       images: [
-         { id: 0, productUrl: 'https://i.pinimg.com/originals/87/2c/83/872c83322f27c9527a255149b03d4dfe.jpg'},
-         { id: 1, productUrl: 'https://images-na.ssl-images-amazon.com/images/I/51jzNmEmiIL._AC_US400_QL65_.jpg'},
-         { id: 2, productUrl: 'https://images-na.ssl-images-amazon.com/images/I/51svf2meabL._AC_US400_QL65_.jpg'},
-         { id: 3, productUrl: 'https://images-na.ssl-images-amazon.com/images/I/417u2WxNYZL._AC_US400_QL65_.jpg'},
-         { id: 4, productUrl: 'https://images-na.ssl-images-amazon.com/images/I/51nXE7AcuYL._AC_US400_QL65_.jpg'},
-         { id: 5, productUrl: 'https://m.media-amazon.com/images/I/71DSpZ0ZQbL._AC_UL640_QL65_.jpg'},
-       ],
+       fetchingProducts: false,
        editExpanded: false,
        productsExpanded: false,
-       currentArtisan: this.props.Artisans.find((item) => item.uid === this.props.uid)
+       currentArtisan: this.props.Artisans.find((item) => item.uid === this.props.uid),
+       currentProducts: []
        
     }
 
@@ -52,7 +45,16 @@ class ArtisanDetail extends Component {
     this.renderEditButton = this.renderEditButton.bind(this);
     this.renderProductButton = this.renderProductButton.bind(this);
     this.navigateToEditArtisan = this.navigateToEditArtisan.bind(this)
+    this.fetchProducts = this.fetchProducts.bind(this)
   }
+
+  fetchProducts() {
+   const { uid } = this.props;
+   this.setState({fetchingProducts: true})
+   this.props.fetchProducts(uid).then(() => {
+     this.setState({fetchingProducts: false, currentProducts: this.props.Products})
+   })
+ }
 
    onCancel() {
       this.setState({ adding: false });
@@ -64,8 +66,10 @@ class ArtisanDetail extends Component {
    }
 
    handleOnNavigateBack = () => {
+      this.fetchProducts()
       this.setState({
-         currentArtisan: this.props.Artisans.find((item) => item.uid === this.props.uid)
+         currentArtisan: this.props.Artisans.find((item) => item.uid === this.props.uid),
+         // currentProducts: this.props.Products
       })
     }
 
@@ -98,7 +102,7 @@ class ArtisanDetail extends Component {
 		    	   style={{ height: 20, backgroundColor: 'white' }} 
 		    	   title='Add' 
 		    	   textColor='orange' 
-		    	   onPress={() => this.props.navigation.navigate('AddProduct', {currentUID: this.props.uid})}
+		    	   onPress={() => this.props.navigation.navigate('AddProduct', {currentUID: this.props.uid, onNavigateBack: this.handleOnNavigateBack})}
 			    />
 			    <Button 
 		    	   style={{ height: 20, backgroundColor: 'white' }} 
@@ -188,15 +192,16 @@ class ArtisanDetail extends Component {
             <CardSection>
               <FlatGrid
                 itemDimension={90}
-                items={this.state.images}
+                items={this.state.currentProducts.slice(0, 6)}
                 style={styles.gridView}
+                extraData={this.state}
                 renderItem={({ item, section, index }) => {
                 	return (
                 		<TouchableOpacity 
 								style={styles.elevationLow} 
 					    	 	onPress={() => this.props.navigation.navigate('ProductDetail', {...item})}
 					    	>
-                			<Image style={styles.imageContainer} source={{uri: item.productUrl} }/>
+                			<Image style={styles.imageContainer} source={{uri: item.mainPictureURL} }/>
                 		</TouchableOpacity>
                 	)
                 }}   

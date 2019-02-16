@@ -90,6 +90,7 @@ class AddProduct extends Component {
         timesSold: this.state.productTimesSold
       }, this.props.navigation.getParam('currentUID')).then(() => {
         this.setState({adding: false})
+        this.props.navigation.state.params.onNavigateBack();
         this.props.navigation.goBack()
       })
     }

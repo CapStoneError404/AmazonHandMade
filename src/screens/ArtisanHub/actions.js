@@ -90,34 +90,31 @@ export function fetchArtisans() {
   }
 }
 
-//Fetch all products (so all CGA products) or the ones associated with a specific artisan
-// export function fetchProducts(artisanID = "") {
-//    return (dispatch, prevState) => {
-//      return new Promise(async (resolve, reject) => {
-//        console.log("Fetching products")
-//        let snapshot = await firebase.database().ref('products').once('value')
-//        console.log("Done")
-//        let productArray = []
-//        let productObject = snapshot.val()
+//Fetch all products associated with the specfic artisan we current viewing
+export function fetchProducts(artisanID) {
+   console.log("Fetching Products artisan ID" + artisanID);
+   return (dispatch, prevState) => {
+     return new Promise(async (resolve, reject) => {
+       let snapshot = await firebase.database().ref('products').once('value')
+       let productArray = []
+       let productObject = snapshot.val()
        
-//        for(var productID in productObject) {
-//          productArray.push({
-//            ...productObject[productID],
-//            productID: productID
-//          })
-//        }
- 
-//        //if artisanID is provided, narrow the products list
-//        if (artisanID !== ""){
-//          let artisanProds = await firebase.database().ref(`artisan/${artisanID}/products`).once('value').val()
-//          productArray = productArray.filter(obj => artisanProds.includes(obj.productID))
-//        }
- 
-//        resolve()
-//        dispatch({type: 'GET_PRODUCTS', products: productArray})
-//      })
-//    }
-//  }
+       for(var productID in productObject) {
+         productArray.push({
+           ...productObject[productID],
+           productID: productID
+         })
+       }
+       
+       let productSnapshot = await firebase.database().ref(`artisans/${artisanID}/products`).once('value');
+       let productKeys = Object.keys(productSnapshot.val());
+       productArray = productArray.filter(obj => productKeys.includes(obj.productID))
+       
+       resolve()
+       dispatch({type: 'GET_PRODUCTS', products: productArray})
+     })
+   }
+ }
 
 // action takes in current list of artisans and artisan to be deleted
 // sends that artisan to reducer to be filtered out of state

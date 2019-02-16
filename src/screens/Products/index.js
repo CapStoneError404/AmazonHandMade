@@ -7,7 +7,8 @@ function mapStateToProps(state) {
   return {
     User: state.User,
     Artisans: state.Artisans,
-    Errors: state.Errors
+    Errors: state.Errors,
+    Products: state.Products
   }
 }
 

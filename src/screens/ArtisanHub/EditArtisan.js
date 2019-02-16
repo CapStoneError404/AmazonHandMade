@@ -51,9 +51,8 @@ class EditArtisan extends Component {
       this.props.displayError("Phone field required")
     else if(!this.state.description)
       this.props.displayError("Please provide a brief description")
-    //else if(!this.state.profilePicturePath)
-    //  this.props.displayError("Please upload a profile picture")
-
+    
+      
     return this.state.name && this.state.phoneNumber && this.state.description// && this.state.profilePicturePath
   }
   
