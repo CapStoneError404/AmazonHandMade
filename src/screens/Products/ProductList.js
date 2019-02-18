@@ -31,16 +31,8 @@ export default class ProductList extends Component {
       ]
     }
 
-    //this.fetchProductList = this.fetchProductList.bind(this)
   }
 
-  /*
-  fetchProductList() { 
-    this.setState({fetchingProductList: true})
-    this.props.fetchProductList().then(() => {
-      this.setState({fetchingProductList: false})
-    })
-  }*/
 
   _renderProductListItem = ({item, index}) => {
       return (
