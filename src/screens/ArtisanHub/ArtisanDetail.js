@@ -165,7 +165,7 @@ class ArtisanDetail extends Component {
                   <View style={{flex: 1, flexDirection: 'column'}}>
                     <Text style={styles.nameStyle}>{name}</Text>
                     <Text style={styles.phoneStyle}>{phoneNumber}</Text>
-                    <Text style={styles.phoneStyle}>Location</Text>
+                    <Text style={styles.phoneStyle}>Location: Mexico</Text>
                   </View>
              </CardSection>
 
