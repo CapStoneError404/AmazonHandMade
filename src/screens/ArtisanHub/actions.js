@@ -38,6 +38,8 @@ export function createArtisan(data) {
   }
 }
 
+//Updates artisan info and if image is passed in than delete current one in storage,
+//update it with new image picked in both storage and database
 export const saveArtisan = ({ name, phoneNumber, description, profilePicturePath, uid }) => {
    return (dispatch) => {
       return new Promise(async (resolve, reject) => {
@@ -50,9 +52,8 @@ export const saveArtisan = ({ name, phoneNumber, description, profilePicturePath
             description,
             uid
          };
-         console.log("artisan object name" + artisanObject.name);
+         
          if(profilePicturePath) {
-            console.log("Pushing photo to storage")
             await firebase.storage().ref(`artisanFiles/${uid}/images/profilePicture`).delete()
             let st_ref = await firebase.storage()
                .ref(`artisanFiles/${uid}/images/profilePicture`)

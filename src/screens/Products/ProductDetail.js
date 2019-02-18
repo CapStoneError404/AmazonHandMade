@@ -21,13 +21,15 @@ class ProductDetail extends Component {
                 source={{uri: this.props.mainPictureURL}}
                 style={styles.image}
               />
-              <View style={styles.namePhone}>
-                <Text style={styles.text}>Product Name</Text>
-                <Text style={styles.text}>Some Other product info</Text>
+              <View style={{flex: 1, flexDirection: 'column'}}>
+                <Text style={styles.text}>Title:</Text>
+                <Text style={styles.text}>{this.props.Title}</Text>
+                <Text style={styles.text}>Category:</Text>
+                <Text style={styles.text}>{this.props.MainCategory}</Text>
               </View>
             </View>
             <View style={styles.description}>
-              <Text style={styles.text}>product description</Text>
+              <Text style={styles.text}>{this.props.Description}</Text>
             </View>
           </ScrollView>
         </Wallpaper> 

@@ -2,11 +2,8 @@ import { ProfilePicture, Wallpaper, AsyncButton, Card, CardSection, Button } fro
 import React, { Component } from 'react';
 import { ScrollView, StyleSheet, Text, View, Alert, Image, TouchableOpacity, LayoutAnimation, Platform } from 'react-native';
 import { withMappedNavigationProps } from 'react-navigation-props-mapper';
-//import ActionButton from 'react-native-action-button';
-//import Icon from 'react-native-vector-icons/FontAwesome5';
 import { FlatGrid, SectionGrid } from 'react-native-super-grid';
 import { Icon } from 'react-native-elements';
-import { NavigationActions } from 'react-navigation';
 
 class ArtisanDetail extends Component {
   static navigationOptions = ({ navigation }) => {
@@ -16,12 +13,11 @@ class ArtisanDetail extends Component {
   }
 
   componentDidMount() {
-      //going to fetch products data that we need for this artisan
       this.fetchProducts();
   }
 
   componentWillUpdate() {
-    LayoutAnimation.spring();
+    LayoutAnimation.easeInEaseOut();
   }
 
 
@@ -71,7 +67,7 @@ class ArtisanDetail extends Component {
       this.fetchProducts()
       this.setState({
          currentArtisan: this.props.Artisans.find((item) => item.uid === this.props.uid),
-         // currentProducts: this.props.Products
+         
       })
     }
 
