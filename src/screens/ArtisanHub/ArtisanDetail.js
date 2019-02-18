@@ -266,30 +266,30 @@ const styles = StyleSheet.create({
    fontSize: 20,
    color: 'white',
    marginLeft: 5
-	},
-	headerText2: {
-		fontSize: 20,
-		color: 'rgb(71, 77, 84)',
-		marginLeft: 5
-	},
- gridView: {
+  },
+  headerText2: {
+   fontSize: 20,
+	color: 'rgb(71, 77, 84)',
+	marginLeft: 5
+  },
+  gridView: {
    marginTop: 0,
    flex: 1,
    flexDirection: 'row'
- },
- imageContainer: {
+  },
+  imageContainer: {
    justifyContent: 'space-evenly',
    borderRadius: 5,
    height: 110,
    width: 110,
    alignSelf: 'center' 
- },
- elevationLow: {
+  },
+  elevationLow: {
 	shadowColor: '#000',
 	shadowOffset: { width: 0, height: 2 },
 	shadowOpacity: 0.8,
 	shadowRadius: 2,    
- },
+  },
 })
 
 export default withMappedNavigationProps()(ArtisanDetail)
