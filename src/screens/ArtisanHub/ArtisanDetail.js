@@ -140,8 +140,8 @@ class ArtisanDetail extends Component {
    }
 
    sortedProducts() {
-      if(this.props.Products !== []) {
-        sortedProducts = Array.from(this.props.Products)
+      if(this.state.currentProducts !== []) {
+        sortedProducts = Array.from(this.state.currentProducts)
         sortedProducts.sort((first, second) => {
           p1 = first.TimesSold;
           p2 = second.TimesSold;
