@@ -1,6 +1,17 @@
 import { ProfilePicture, Wallpaper, AsyncButton, Card, CardSection, Button } from '@components';
 import React, { Component } from 'react';
-import { ScrollView, StyleSheet, Text, View, Alert, Image, TouchableOpacity, LayoutAnimation, Platform } from 'react-native';
+import { 
+   ScrollView, 
+   StyleSheet, 
+   Text, 
+   View, 
+   Alert, 
+   Image, 
+   TouchableOpacity, 
+   LayoutAnimation, 
+   Platform, 
+   ActivityIndicator 
+} from 'react-native';
 import { withMappedNavigationProps } from 'react-navigation-props-mapper';
 import { FlatGrid, SectionGrid } from 'react-native-super-grid';
 import { Icon } from 'react-native-elements';
@@ -211,6 +222,13 @@ class ArtisanDetail extends Component {
             </CardSection>
 
             <CardSection>
+            {(this.props.Products != [] && this.state.fetchingProducts) ?
+               <ActivityIndicator 
+                  size='large'
+                  animating={this.props.spinning}
+                  color='white'
+               />
+               :
               <FlatGrid
                 itemDimension={90}
                 items={this.sortedProducts().slice(0, 6)}
@@ -228,6 +246,7 @@ class ArtisanDetail extends Component {
                 	)
                 }}   
               />
+              }
             </CardSection>
              {this.renderProductButton()}
           </Card>
