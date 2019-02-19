@@ -29,8 +29,8 @@ class ArtisanDetail extends Component {
        adding: false,
        drawerOpen: false,
        fetchingProducts: false,
-       editExpanded: false,
-       productsExpanded: false,
+       editExpanded: true,
+       productsExpanded: true,
        currentArtisan: this.props.Artisans.find((item) => item.uid === this.props.uid),
        currentProducts: []
        
