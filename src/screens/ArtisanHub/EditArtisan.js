@@ -6,16 +6,10 @@ import { withMappedNavigationProps } from 'react-navigation-props-mapper';
 
 class EditArtisan extends Component {
   static navigationOptions = ({ navigation }) => {
-    title: 'Edit Artisan'
-  }
-
-  componentDidMount() {
-     console.log("We are inside Edit Artisan and going to display props");
-     console.log("name: " + this.props.name);
-     console.log("phonenumber: " + this.props.phoneNumber);
-     console.log("description: " + this.props.description);
-     console.log("description: " + this.props.uid);
-
+     return {
+      title: 'Edit Artisan'
+     }
+    
   }
 
   constructor(props) {

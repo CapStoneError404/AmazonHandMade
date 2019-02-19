@@ -64,6 +64,7 @@ class ArtisanDetail extends Component {
       this.props.navigation.navigate('EditArtisan', {name, phoneNumber, description, uid, onNavigateBack: this.handleOnNavigateBack});
    }
 
+   //This method is needed to update artisan detail on the fly if using react navigation
    handleOnNavigateBack = () => {
       this.fetchProducts()
       this.setState({
@@ -72,6 +73,7 @@ class ArtisanDetail extends Component {
       })
     }
 
+   //Renders the edit button and message button when button is clicked
    renderEditButton() {
       if(this.state.editExpanded) {
          return(
@@ -92,7 +94,7 @@ class ArtisanDetail extends Component {
          );
       }
    }
-
+   
    renderProductButton() {
       if(this.state.productsExpanded) {
          return(
