@@ -9,7 +9,7 @@ import { Login, Register, ForgotPassword } from '@screens/Auth'
 import Settings from '@screens/Settings'
 import Launch from '@screens/Launch'
 import { ArtisanList, AddArtisan, ArtisanDetail, EditArtisan } from '@screens/ArtisanHub'
-import { AddProduct, ProductDetail } from '@screens/Products'
+import { AddProduct } from '@screens/Products'
 
 const ArtisanHubStack = createStackNavigator(
   {
@@ -18,7 +18,7 @@ const ArtisanHubStack = createStackNavigator(
     ArtisanDetail:ArtisanDetail,
     EditArtisan: EditArtisan,
     AddProduct: AddProduct,
-    ProductDetail: ProductDetail
+    
   }
 )
 
@@ -32,7 +32,6 @@ const TabNavigator = createBottomTabNavigator(
     order: ['ArtisanHub', 'Settings'],
     animationEnabled: true,
     navigationOptions: ({navigation}) => {
-      //const showTabBar = navigation.state && navigation.state.routes && navigation.state.routes[1] && navigation.state.routes[1].params ? navigation.state.routes[1].params.showTabBar : true;
       return {
       tabBarIcon: ({ focused, tintColor }) => {
         const { routeName } = navigation.state
