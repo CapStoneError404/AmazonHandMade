@@ -4,7 +4,6 @@ import { createStackNavigator, createSwitchNavigator, createBottomTabNavigator }
 import { FluidNavigator } from 'react-navigation-fluid-transitions'
 import DropdownAlert from 'react-native-dropdownalert'
 import Icon from 'react-native-vector-icons/FontAwesome'
-import TabBar from '@components/TabBar'
 import { Login, Register, ForgotPassword } from '@screens/Auth'
 import Settings from '@screens/Settings'
 import Launch from '@screens/Launch'
