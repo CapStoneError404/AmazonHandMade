@@ -19,12 +19,10 @@ function mapDispatchToProps(dispatch) {
 //We all need to add our own connect methods like it has been done under screens/ArtisanHub/index.js
 
 import { default as UnconnectedAddProduct } from './AddProduct'
-import { default as UnconnectedProductDetail } from './ProductDetail'
 
 const AddProduct = connect(mapStateToProps, mapDispatchToProps)(UnconnectedAddProduct)
-const ProductDetail = connect(mapStateToProps, mapDispatchToProps)(UnconnectedProductDetail)
 
 export {
   AddProduct,
-  ProductDetail
+  
 }

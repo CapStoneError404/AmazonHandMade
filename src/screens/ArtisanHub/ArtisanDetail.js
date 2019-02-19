@@ -218,7 +218,8 @@ class ArtisanDetail extends Component {
                 	return (
                 		<TouchableOpacity 
 								style={styles.elevationLow} 
-					    	 	onPress={() => this.props.navigation.navigate('ProductDetail', {...item})}
+                          // onPress={() => this.props.navigation.navigate('ProductDetail', {...item})}
+                          onPress={() => console.log("navigate to product detail")}
 					    	>
                 			<Image style={styles.imageContainer} source={{uri: item.mainPictureURL} }/>
                 		</TouchableOpacity>
