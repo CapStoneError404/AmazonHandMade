@@ -42,7 +42,8 @@ class ArtisanDetail extends Component {
     this.renderEditButton = this.renderEditButton.bind(this);
     this.renderProductButton = this.renderProductButton.bind(this);
     this.navigateToEditArtisan = this.navigateToEditArtisan.bind(this)
-    this.fetchProducts = this.fetchProducts.bind(this)
+    this.fetchProducts = this.fetchProducts.bind(this);
+    this.sortedProducts = this.sortedProducts.bind(this);
     
   }
 
@@ -138,6 +139,25 @@ class ArtisanDetail extends Component {
       );
    }
 
+   sortedProducts() {
+      if(this.props.Products !== []) {
+        sortedProducts = Array.from(this.props.Products)
+        sortedProducts.sort((first, second) => {
+          p1 = first.TimesSold;
+          p2 = second.TimesSold;
+          if (p1 < p2)
+            return -1
+          else if(p1 > p2)
+            return 1
+          else
+            return 0
+        })
+        return sortedProducts
+      } else {
+        return []
+      }
+   }
+   
   render() {
      const { name, phoneNumber, description, profilePictureURL } = this.state.currentArtisan;
     return (
@@ -191,7 +211,7 @@ class ArtisanDetail extends Component {
             <CardSection>
               <FlatGrid
                 itemDimension={90}
-                items={this.state.currentProducts.slice(0, 6)}
+                items={this.sortedProducts().slice(0, 6)}
                 style={styles.gridView}
                 extraData={this.state}
                 renderItem={({ item, section, index }) => {
