@@ -146,9 +146,9 @@ class ArtisanDetail extends Component {
           p1 = first.TimesSold;
           p2 = second.TimesSold;
           if (p1 < p2)
-            return -1
-          else if(p1 > p2)
             return 1
+          else if(p1 > p2)
+            return -1
           else
             return 0
         })
