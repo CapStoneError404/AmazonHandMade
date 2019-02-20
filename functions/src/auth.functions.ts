@@ -13,7 +13,7 @@ export function loginWithAmazon(data, context) {
   const uid = (`amazon:${amazonId}`).replace(/\./g, "-")
 
   // Add cga tp amazonUsers root
-  const databaseTask = admin.database().ref(`/amazonUsers/${uid}`).set({
+  const databaseTask = admin.database().ref(`/amazonUsers/${uid}`).update({
     name: name,
     email: email,
     amazonId: amazonId,
