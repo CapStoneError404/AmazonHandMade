@@ -32,9 +32,9 @@ class ArtisanDetail extends Component {
 
   }
 
-findArtisan() {
-   console.log("artisan id: " + this.props.uid);
-}
+  findArtisan() {
+    console.log("artisan id: " + this.props.uid);
+  }
 
   render() {
     return (

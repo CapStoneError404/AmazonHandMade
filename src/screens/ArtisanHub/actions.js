@@ -1,43 +1,17 @@
 import firebase from 'react-native-firebase'
 
-export function createArtisan(data) {
+export function createArtisan(artisanInfo, cgaID) {
   return (dispatch, prevState) => { 
     return new Promise(async (resolve, reject) => {
-      console.log("Pushing artisan to db")
-      const newArtisan = await firebase.database().ref('artisans/').push({
-        name: data.name,
-        phoneNumber: data.phoneNumber,
-        description: data.description
+      let addArtisan = firebase.functions().httpsCallable('addArtisan')
+          
+      addArtisan({
+        artisanInfo: artisanInfo,
+        cgaID: cgaID
+      }).then(({ data }) => {
+        resolve()
+        dispatch({type: 'ADD_ARTISAN', artisan: data})
       })
-      console.log("Done")
-
-      const newPhone = await firebase.database()
-        .ref(`phoneMap/${data.phoneNumber}`)
-        .set(newArtisan.key)
-
-      artisanObject = {
-        name: data.name,
-        phoneNumber: data.phoneNumber,
-        description: data.description,
-        uid: newArtisan.key
-      }
-
-      if(data.profilePicturePath) {
-        console.log("Pushing photo to storage")
-        var st_ref = await firebase.storage()
-          .ref(`artisanFiles/${newArtisan.key}/images/profilePicture`)
-          .putFile(data.profilePicturePath)
-          console.log("Done")
-
-        artisanObject.profilePictureURL = st_ref.downloadURL
-        
-        console.log("Fetching photo download url")
-        firebase.database().ref(`artisans/${artisanObject.uid}`).update(
-          { profilePictureURL: st_ref.downloadURL })
-      }
-
-      resolve()
-      dispatch({type: 'ADD_ARTISAN', artisan: artisanObject})
     })
   }
 }
