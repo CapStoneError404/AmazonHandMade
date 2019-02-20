@@ -2,10 +2,27 @@ import { ProfilePicture, Wallpaper, AsyncButton} from '@components';
 import React, { Component } from 'react';
 import { ScrollView, StyleSheet, Text, View, Alert } from 'react-native';
 import { withMappedNavigationProps } from 'react-navigation-props-mapper';
+import MessageData from '../Messaging/MessageData.json';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+import { Button } from 'react-native-elements';
 
 class ArtisanDetail extends Component {
-  static navigationOptions = {
-    title: "Artisan Details"
+  static navigationOptions = ({navigation}) => {
+    const uid = navigation.getParam('uid');
+    return {
+      title: 'Artisan Details',
+      headerRight: (
+        <Button 
+          onPress={() => {
+            const foundArtisan = MessageData.find((message) => message.id === uid);
+            return (foundArtisan !== undefined) ? navigation.navigate('Message', { ...foundArtisan }) :
+              navigation.navigate('Messages')
+         }}
+         icon={<Icon name={'comment'} size={30} color='gray' />}
+         type="clear"
+        />
+      )
+    }
   }
 
   constructor(props) {
@@ -19,36 +36,40 @@ class ArtisanDetail extends Component {
     this.onCancel = this.onCancel.bind(this);
     this.deletePressed = this.deletePressed.bind(this);
     this.showAlert = this.showAlert.bind(this);
+    this.findArtisan = this.findArtisan.bind(this);
   }
 
-   onCancel() {
-      this.setState({ adding: false });
-   }
+  onCancel() {
+    this.setState({ adding: false });
+  }
 
-   deletePressed() {
-      this.setState({ adding: true });
-      this.props.deleteArtisan(this.props.uid)
-      .then(() => {
-        this.setState({ adding: false })
-        this.props.navigation.navigate("ArtisanList")
-      });
-   }
+  deletePressed() {
+    this.setState({ adding: true });
+    this.props.deleteArtisan(this.props.uid).then(() => {
+      this.setState({ adding: false })
+      this.props.navigation.navigate("ArtisanList")
+    });
+  }
 
-   showAlert() {
-      Alert.alert(
-         'Are you sure want delete Artisan?',
-         'Delete Artisan',
-         [
-           {
-              text: 'Cancel',
-              onPress: () => this.onCancel(),
-              style: 'cancel',
-           },
-          {text: 'OK', onPress: () => this.deletePressed()},
-         ],
-         {cancelable: false},
-      );
-   }
+  showAlert() {
+    Alert.alert(
+      'Are you sure want delete Artisan?',
+      'Delete Artisan',
+      [
+        {
+          text: 'Cancel',
+          onPress: () => this.onCancel(),
+          style: 'cancel',
+        },
+        {text: 'OK', onPress: () => this.deletePressed()},
+      ],
+      {cancelable: false},
+    );
+  }
+   
+  findArtisan() {
+    console.log("artisan id: " + this.props.uid);
+  }
 
   render() {
     return (
