@@ -8,11 +8,13 @@ export default class ArtisanList extends Component {
     return {
       title: 'Artisans',
       headerRight: (
-        <Button 
-          transparent
-          onPress={() => navigation.navigate("AddArtisan")}
-          title="Add"
-        />
+        <View style={{paddingRight: 20}}>
+          <Button 
+            transparent
+            onPress={() => navigation.navigate("AddArtisan")}
+            title="Add"
+          />
+        </View>
       )
     }
   }
