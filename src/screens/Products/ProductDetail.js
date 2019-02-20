@@ -58,11 +58,11 @@ class ProductDetail extends Component {
                 justifyContent: 'space-between'
               }}
             >
-              <Text style={styles.headerText}>{this.state.productTitle}</Text>
+              <Text style={styles.headerText}>{this.props.Title}</Text>
             </CardSection>
             <CardSection>
               <ProfilePicture
-                source={{ uri: this.state.images[0].productUrl }}
+                source={{ uri: this.props.mainPictureURL }}
                 style={styles.image}
               />
             </CardSection>
@@ -72,10 +72,11 @@ class ProductDetail extends Component {
                 justifyContent: 'space-between'
               }}
             >
-              <Text style={styles.headerText}>
-                Put product Info in this cardSection
+              <Text style={styles.descriptionStyle}>
+                {this.props.Description}
               </Text>
             </CardSection>
+
             <CardSection style={{ backgroundColor: 'white' }}>
               <Button
                 style={{ height: 20, backgroundColor: 'white' }}
@@ -89,6 +90,18 @@ class ProductDetail extends Component {
                 textColor="orange"
                 onPress={() => console.log('Get Stats')}
               />
+            </CardSection>
+          </Card>
+          <Card>
+            <CardSection
+              style={{
+                backgroundColor: 'rgb(71, 77, 84)',
+                justifyContent: 'space-between'
+              }}
+            >
+              <Text style={styles.headerText}>
+                Put product Info in this cardSection
+              </Text>
             </CardSection>
           </Card>
         </ScrollView>
@@ -106,12 +119,11 @@ const styles = StyleSheet.create({
   image: {
     flex: 1,
     //  alignItems: 'center',
-    //height: 200,
-    //width: 250,
+    height: 200,
+    width: 250,
     borderWidth: 1,
-    //borderRadius: 75
-    // height: 150,
-    aspectRatio: 2,
+
+    aspectRatio: 1,
     //  alignItems: 'stretch',
     //alignItems: 'center',
     justifyContent: 'center'
@@ -133,8 +145,8 @@ const styles = StyleSheet.create({
     marginLeft: 5
   },
   descriptionStyle: {
-    fontSize: 30,
-    color: '#444444',
+    fontSize: 15,
+    color: 'white',
     marginLeft: 5,
     flexDirection: 'row'
   },
