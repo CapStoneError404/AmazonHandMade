@@ -1,25 +1,32 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native'
-import { createStackNavigator, createSwitchNavigator, createBottomTabNavigator } from 'react-navigation'
-import { FluidNavigator } from 'react-navigation-fluid-transitions'
-import DropdownAlert from 'react-native-dropdownalert'
-import Icon from 'react-native-vector-icons/FontAwesome'
-import { Login, Register, ForgotPassword } from '@screens/Auth'
-import Settings from '@screens/Settings'
-import Launch from '@screens/Launch'
-import { ArtisanList, AddArtisan, ArtisanDetail, EditArtisan } from '@screens/ArtisanHub'
-import { AddProduct } from '@screens/Products'
+import { View, Text, TouchableOpacity } from 'react-native';
+import {
+  createStackNavigator,
+  createSwitchNavigator,
+  createBottomTabNavigator
+} from 'react-navigation';
+import { FluidNavigator } from 'react-navigation-fluid-transitions';
+import DropdownAlert from 'react-native-dropdownalert';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { Login, Register, ForgotPassword } from '@screens/Auth';
+import Settings from '@screens/Settings';
+import Launch from '@screens/Launch';
+import {
+  ArtisanList,
+  AddArtisan,
+  ArtisanDetail,
+  EditArtisan
+} from '@screens/ArtisanHub';
+import { AddProduct, ProductDetail } from '@screens/Products';
 
-const ArtisanHubStack = createStackNavigator(
-  {
-    ArtisanList: ArtisanList,
-    AddArtisan: AddArtisan,
-    ArtisanDetail:ArtisanDetail,
-    EditArtisan: EditArtisan,
-    AddProduct: AddProduct,
-    
-  }
-)
+const ArtisanHubStack = createStackNavigator({
+  ArtisanList: ArtisanList,
+  AddArtisan: AddArtisan,
+  ArtisanDetail: ArtisanDetail,
+  EditArtisan: EditArtisan,
+  AddProduct: AddProduct,
+  ProductDetail: ProductDetail
+});
 
 const TabNavigator = createBottomTabNavigator(
   {
@@ -27,29 +34,27 @@ const TabNavigator = createBottomTabNavigator(
     Settings: Settings
   },
   {
-    initialRouteName: "ArtisanHub",
+    initialRouteName: 'ArtisanHub',
     order: ['ArtisanHub', 'Settings'],
     animationEnabled: true,
-    navigationOptions: ({navigation}) => {
+    navigationOptions: ({ navigation }) => {
       return {
-      tabBarIcon: ({ focused, tintColor }) => {
-        const { routeName } = navigation.state
-        var iconName
-        if(routeName === 'ArtisanHub') {
-          iconName = "users"
-        }
-        else if(routeName === 'Settings') {
-          iconName = 'cog'
-        }
-        
-        return <Icon name={iconName} size={25} color={tintColor} />
-      },
-      tabBarVisible: true
-      
-     }
+        tabBarIcon: ({ focused, tintColor }) => {
+          const { routeName } = navigation.state;
+          var iconName;
+          if (routeName === 'ArtisanHub') {
+            iconName = 'users';
+          } else if (routeName === 'Settings') {
+            iconName = 'cog';
+          }
+
+          return <Icon name={iconName} size={25} color={tintColor} />;
+        },
+        tabBarVisible: true
+      };
     }
   }
-)
+);
 
 const AuthStack = createStackNavigator(
   {
@@ -63,49 +68,50 @@ const AuthStack = createStackNavigator(
       headerTransparent: true
     }
   }
-)
+);
 
 const RootStack = createSwitchNavigator(
   {
     Launch: Launch,
     Auth: AuthStack,
-    Home: TabNavigator 
+    Home: TabNavigator
   },
   {
-    initialRouteName: 'Launch',
+    initialRouteName: 'Launch'
   }
-)
+);
 
 class Main extends Component {
   constructor(props) {
-    super(props)
-    this.props.clearErrors()
-
+    super(props);
+    this.props.clearErrors();
   }
 
   render() {
     if (this.props.Errors.length > 0 && this.dropdown)
-      this.dropdown.alertWithType('error', 'Error', this.props.Errors.join("\n\n"))
+      this.dropdown.alertWithType(
+        'error',
+        'Error',
+        this.props.Errors.join('\n\n')
+      );
 
     return (
       <View style={{ flex: 1 }}>
         <RootStack />
-        <DropdownAlert
-          ref={ref => this.dropdown = ref}
-        />
+        <DropdownAlert ref={ref => (this.dropdown = ref)} />
       </View>
-    )
+    );
   }
 }
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import * as actions from '@actions'
+import * as actions from '@actions';
 
 function mapStateToProps(state) {
   return {
     Errors: state.Errors
-  }
+  };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -115,6 +121,6 @@ function mapDispatchToProps(dispatch) {
 const App = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Main)
+)(Main);
 
-export default App
+export default App;
