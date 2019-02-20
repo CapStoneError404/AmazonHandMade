@@ -1,46 +1,64 @@
 import firebase from 'react-native-firebase'
 
-export function createArtisan(artisanInfo, cgaID) {
+export function createArtisan(artisanInfo, cgaID, profilePicturePath) {
+  console.log("Creating an artisan with the following info:")
+  console.log(artisanInfo)
+  console.log("CGA ID: " + cgaID)
+  console.log("Profile Picture Path: " + profilePicturePath)
+
   return (dispatch, prevState) => { 
     return new Promise(async (resolve, reject) => {
       let addArtisan = firebase.functions().httpsCallable('addArtisan')
 
-      addArtisan({
+      let response = await addArtisan({
         artisanInfo: artisanInfo,
         cgaID: cgaID
-      }).then(({ data }) => {
-        let artisan = {
-          name: data.name,
-          phoneNumber: data.phoneNumber,
-          description: data.description,
-          uid: data.uid,
-          profilePictureURL: data.profilePictureURL
-        }
-
-        resolve()
-        dispatch({type: 'ADD_ARTISAN', artisan: artisan})
-      }).catch( error => {
-        resolve()
-        dispatch({type: 'ERROR', message: error})
       })
+
+      console.log("Received data from cloud function:")
+      console.log(response)
+
+      let artisan = {
+        name: response.data.name,
+        phoneNumber: response.data.phoneNumber,
+        description: response.data.description,
+        uid: response.data.uid
+      }
+
+      if(profilePicturePath) {
+        var st_ref = await firebase.storage()
+          .ref(`artisanFiles/${artisan.uid}/images/profilePicture`)
+          .putFile(profilePicturePath)
+
+          artisan.profilePictureURL = st_ref.downloadURL
+        
+        firebase.database().ref(`artisans/${artisan.uid}`).update(
+          { profilePictureURL: st_ref.downloadURL })
+      }
+
+      resolve()
+      dispatch({type: 'ADD_ARTISAN', artisan: artisan})
     })
   }
 }
 
-export function fetchArtisans() {
+export function fetchArtisans(cgaID) {
+  console.log("Fetching Artisans")
   return (dispatch, prevState) => {
     return new Promise(async (resolve, reject) => {
-      console.log("Fetching artisans")
-      snapshot = await firebase.database().ref('artisans').once('value')
-      console.log("Done")
+      let snapshot = await firebase.database().ref(`amazonUsers/${cgaID}/artisans`).once('value')
+      let artisanIds = snapshot.val() ? Object.keys(snapshot.val()) : []
+      let artisans = (await firebase.database().ref('artisans').once('value')).val()
+
       artisanArray = []
-      artisanObject = snapshot.val()
       
-      for(var uid in artisanObject) {
-        artisanArray.push({
-          ...artisanObject[uid],
-          uid: uid
-        })
+      for(var uid in artisans) {
+        if(artisanIds.includes(uid)) {
+          artisanArray.push({
+            ...artisans[uid],
+            uid: uid
+          })
+        }
       }
       
       resolve()
@@ -57,15 +75,11 @@ export function deleteArtisan(uid) {
     return new Promise(async (resolve, reject) => {
       let deleteArtisan = firebase.functions().httpsCallable('deleteArtisan')
       
-      deleteArtisan({
-        uid: artisan
-      }).then(() => {
-        resolve()
-        dispatch({type: 'DELETE_ARTISAN', artisan: artisan})
-      }).catch(error => {
-        resolve()
-        dispatch({type: 'ERROR', message: error})
-      })
+      await deleteArtisan({uid: uid})
+      await firebase.storage().ref(`artisanFiles/${uid}/images/profilePicture`).delete()
+      
+      resolve()
+      dispatch({type: 'DELETE_ARTISAN', artisanId: uid})
     })  
   }
 }

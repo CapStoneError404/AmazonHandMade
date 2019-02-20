@@ -1,7 +1,9 @@
-const admin = require('firebase-admin')
+import * as admin from 'firebase-admin'
 
-exports.loginWithAmazon = (data, context) => {
+export function loginWithAmazon(data, context) {
+  console.log("Logging in with Amazon with the following data:")
   console.log(data)
+
   const email = data.userInfo.email
   const name = data.userInfo.name
   const amazonId = data.userInfo.user_id
@@ -39,9 +41,10 @@ exports.loginWithAmazon = (data, context) => {
   return Promise.all([userCreationTask, databaseTask]).then(() => {
     return admin.auth().createCustomToken(uid)
   }).then((token) => {
-    console.log(`Created custom token for UID "${uid}", Token: ${token}`)
+    console.log(`Returning custom token for UID "${uid}", Token: ${token}`)
     return {
-      token: token
+      token: token,
+      cgaID: uid
     }
   })
 }

@@ -26,7 +26,8 @@ export function amazonLogin(email, password) {
                 displayName: currentUser.user.displayName,
                 emailVerified: currentUser.user.emailVerified,
                 photoURL: currentUser.user.photoURL,
-                phoneNumber: currentUser.user.phoneNumber
+                phoneNumber: currentUser.user.phoneNumber,
+                uid: data.cgaID
               }
 
               resolve()

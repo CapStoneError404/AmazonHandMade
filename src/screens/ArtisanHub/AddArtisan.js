@@ -54,11 +54,10 @@ export default class AddArtisan extends Component {
       let artisanInfo = {
         name: this.state.name,
         phoneNumber: this.state.phoneNumber,
-        profilePicturePath: this.state.profilePicturePath,
         description: this.state.description
       }
 
-      this.props.createArtisan(artisanInfo, this.props.User.uid).then(() => {
+      this.props.createArtisan(artisanInfo, this.props.User.uid, this.state.profilePicturePath).then(() => {
         this.setState({adding: false})
         this.props.navigation.goBack()
       })

@@ -1,5 +1,5 @@
 {
   "projects": {
-    "dev": "handmade-error-404"
+    "default": "handmade-error-404"
   }
 }

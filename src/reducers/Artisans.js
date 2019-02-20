@@ -6,7 +6,7 @@ export default function Artisans(state = [], action) {
     case 'GET_ARTISANS':
       return action.artisans
     case 'DELETE_ARTISAN':
-      return state.filter(artisan => artisan.uid !== action.artisan)
+      return state.filter(artisan => artisan.uid !== action.artisanId)
     default:
       return state;
   }

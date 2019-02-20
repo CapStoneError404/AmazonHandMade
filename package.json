@@ -11,7 +11,8 @@
     "mocha": "^5.2.0",
     "react-test-renderer": "16.5.0",
     "redux-immutable-state-invariant": "^2.1.0",
-    "replace-in-file": "^3.4.0"
+    "replace-in-file": "^3.4.0",
+    "schedule": "^0.4.0"
   },
   "scripts": {
     "android": "react-native run-android",
@@ -49,14 +50,19 @@
   },
   "dependencies": {
     "native-base": "^2.8.1",
-    "react": "16.5.0",
-    "react-native": "0.57.1",
+    "react": "16.6.3",
+    "react-native": "0.58.5",
+    "react-native-action-button": "^2.8.5",
     "react-native-dropdownalert": "^3.7.0",
+    "react-native-elements": "^1.0.0",
     "react-native-firebase": "^5.1.0",
     "react-native-image-crop-picker": "^0.21.3",
     "react-native-keyboard-aware-scrollview": "^2.0.0",
     "react-native-linear-gradient": "^2.4.3",
     "react-native-login-with-amazon": "^1.1.0",
+    "react-native-motion": "^1.0.0",
+    "react-native-side-drawer": "^1.0.9",
+    "react-native-super-grid": "^3.0.1",
     "react-native-vector-icons": "^6.0.2",
     "react-navigation": "^2.18.2",
     "react-navigation-fluid-transitions": "^0.2.73",

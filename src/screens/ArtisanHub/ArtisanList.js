@@ -35,7 +35,7 @@ export default class ArtisanList extends Component {
 
   fetchArtisans() {
     this.setState({fetchingArtisans: true})
-    this.props.fetchArtisans().then(() => {
+    this.props.fetchArtisans(this.props.User.uid).then(() => {
       this.setState({fetchingArtisans: false})
     })
   }
