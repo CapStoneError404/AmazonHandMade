@@ -7,7 +7,8 @@ function mapStateToProps(state) {
   return {
     User: state.User,
     Artisans: state.Artisans,
-    Errors: state.Errors
+    Errors: state.Errors,
+    Products: state.Products
   }
 }
 
@@ -16,6 +17,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 //We all need to add our own connect methods like it has been done under screens/ArtisanHub/index.js
+
 import { default as UnconnectedAddProduct } from './AddProduct'
 import { default as UnconnectedProductList } from './ProductList'
 
@@ -25,5 +27,5 @@ const ProductList = connect(mapStateToProps, mapDispatchToProps)(UnconnectedProd
 export {
   AddProduct,
   ProductList
+  
 }
-

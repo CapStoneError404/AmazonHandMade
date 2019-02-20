@@ -2,8 +2,9 @@ import { Wallpaper } from '@components';
 import React, { Component } from 'react';
 import { ActivityIndicator, Button, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { ProfilePicture } from '../../components';
+import { withMappedNavigationProps } from 'react-navigation-props-mapper';
 
-export default class ProductList extends Component {
+class ProductList extends Component {
   static navigationOptions = ({navigation}) => {
     return { 
       title: 'Product List',
@@ -131,3 +132,5 @@ const styles = StyleSheet.create({
     marginLeft: 5
   }
 })
+
+export default withMappedNavigationProps()(ProductList)
