@@ -3,6 +3,7 @@ import * as admin from 'firebase-admin'
 
 import { loginWithAmazon } from './auth.functions'
 import { addArtisan, deleteArtisan } from './artisan.functions'
+import { sendMessage, receiveMessage } from './messaging.functions'
 
 // This file needs to be retrieved from
 // https://console.firebase.google.com/u/0/project/handmade-error-404/settings/serviceaccounts/adminsdk
@@ -18,3 +19,5 @@ admin.initializeApp({
 exports.loginWithAmazon = functions.https.onCall(loginWithAmazon)
 exports.addArtisan = functions.https.onCall(addArtisan)
 exports.deleteArtisan = functions.https.onCall(deleteArtisan)
+exports.sendMessage = functions.https.onCall(sendMessage)
+exports.receiveMessage = functions.https.onRequest(receiveMessage)
