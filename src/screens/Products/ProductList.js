@@ -11,7 +11,7 @@ class ProductList extends Component {
       headerRight: (
         <Button
           transparent
-          onPress={() => console.log("View Product List Pressed")}
+          onPress={() => navigation.navigate('AddProduct', {currentUID: navigation.getParam('currentUID')})}
           title="Add"
         />
       )
@@ -22,21 +22,14 @@ class ProductList extends Component {
     super(props) 
 
     this.state = { 
-      showProductList: false,
-      //fetchingProductList: false,
-      ProductListData: [
-        {id: 0, productName: "Painted Pot", productURL: "https://images-na.ssl-images-amazon.com/images/I/51QSbi7H%2BvL.jpg"},
-        {id: 1, productName: "Poncho", productURL: "https://thumbs4.ebaystatic.com/d/l225/m/mQjoqxfxjWICeCKJiKbNdAA.jpg"},
-        {id: 2, productName: "Rancher Hat", productURL: "https://images-na.ssl-images-amazon.com/images/I/6198MgqxZ8L._UX679_.jpg"}, 
-        {id: 3, productName: "Dress", productURL: "https://i.pinimg.com/originals/24/90/cb/2490cb95a0ad1a1945321744a45fad99.jpg"}
-      ]
+      showProductList: false
     }
 
   }
 
-
   _renderProductListItem = ({item, index}) => {
       return (
+         
         <TouchableOpacity
           testID={`listItem${index}`}
           style={styles.productListView}
@@ -44,39 +37,22 @@ class ProductList extends Component {
           key={item.key}
         >
           <ProfilePicture
-            source={{uri: item.productURL}}
+            source={{uri: item.mainPictureURL}}
             style={styles.image}
           />
           
           <View style={styles.nameItem}>
-            <Text style={styles.text}>{item.productName}</Text>
+            <Text style={styles.text}>{item.Title}</Text>
+            <Text style={styles.text}>{`Price: $${item.StandardPrice}`}</Text>
+            <Text style={styles.text}>{`Quantity: ${item.Quantity}`}</Text>
           </View>
         </TouchableOpacity>
       )
   }
 
-  _keyExtractor = (item, index) => item.uid
+  _keyExtractor = (item, index) => item.productID
 
-  /*
-  sortedProducts() { 
-    if(this.props.Products != []) {
-      sortedProducts = Array.from(this.props.ProductList)
-      sortedProducts.sort((first, second) => {
-        name1 = first.name.toLowerCase()
-        name2 = second.name.toLowerCase()
-        if (name1 < name2)
-          return -1
-        else if(name1 > name2)
-          return 1
-        else
-          return 0
-      })
-      return sortedProducts
-    } else {
-      return []
-    }
-  }*/
-
+  
   render() {
     return (
       <Wallpaper>
@@ -89,7 +65,7 @@ class ProductList extends Component {
         :
         <FlatList
           testID='product_list'
-          data={this.state.ProductListData}
+          data={this.props.currentProducts}
           keyExtractor={this._keyExtractor}
           renderItem={this._renderProductListItem}
         />

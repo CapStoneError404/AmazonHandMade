@@ -71,7 +71,7 @@ class ArtisanDetail extends Component {
    }
 
    navigateToEditArtisan() {
-      const { name, phoneNumber, description, profilePictureURL, uid } = this.props;
+      const { name, phoneNumber, description, profilePictureURL, uid } = this.state.currentArtisan;
       this.props.navigation.navigate('EditArtisan', {name, phoneNumber, description, uid, onNavigateBack: this.handleOnNavigateBack});
    }
 
@@ -80,7 +80,6 @@ class ArtisanDetail extends Component {
       this.fetchProducts()
       this.setState({
          currentArtisan: this.props.Artisans.find((item) => item.uid === this.props.uid),
-         
       })
     }
 
@@ -120,7 +119,8 @@ class ArtisanDetail extends Component {
 		    	   style={{ height: 20, backgroundColor: 'white' }} 
 		    	   title='View All' 
 		    	   textColor='orange' 
-		    	   onPress={() => this.props.navigation.navigate('ProductList')}
+                onPress={() => this.props.navigation.navigate('ProductList', {currentProducts: this.sortedProducts(), currentUID: this.props.uid})}
+                //onPress={() => console.log(this.state.currentProducts)}
 			    />
            </CardSection>
          );
