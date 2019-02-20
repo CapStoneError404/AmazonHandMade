@@ -27,7 +27,7 @@ class ArtisanDetail extends Component {
 
    deletePressed() {
       this.setState({ adding: true });
-      this.props.deleteArtisan(this.props.Artisans, this.props.uid)
+      this.props.deleteArtisan(this.props.uid)
       .then(() => {
         this.setState({ adding: false })
         this.props.navigation.navigate("ArtisanList")
