@@ -52,10 +52,13 @@ class ProductDetail extends Component {
       <Wallpaper style={styles.container}>
         <ScrollView style={{ flex: 1.8 }}>
           <Card>
-            <CardSection>
-              <Text style={styles.descriptionTitle}>
-                {this.state.productTitle}
-              </Text>
+            <CardSection
+              style={{
+                backgroundColor: 'rgb(71, 77, 84)',
+                justifyContent: 'space-between'
+              }}
+            >
+              <Text style={styles.headerText}>{this.state.productTitle}</Text>
             </CardSection>
             <CardSection>
               <ProfilePicture
@@ -63,8 +66,15 @@ class ProductDetail extends Component {
                 style={styles.image}
               />
             </CardSection>
-            <CardSection>
-              <Text>Put product Info in this cardSection</Text>
+            <CardSection
+              style={{
+                backgroundColor: 'rgb(71, 77, 84)',
+                justifyContent: 'space-between'
+              }}
+            >
+              <Text style={styles.headerText}>
+                Put product Info in this cardSection
+              </Text>
             </CardSection>
             <CardSection style={{ backgroundColor: 'white' }}>
               <Button

@@ -286,9 +286,6 @@ class ArtisanDetail extends Component {
                             ...item
                           })
                         }
-                        onPress={() =>
-                          console.log('navigate to product detail')
-                        }
                       >
                         <Image
                           style={styles.imageContainer}
