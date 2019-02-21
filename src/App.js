@@ -12,7 +12,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { Login, Register, ForgotPassword } from '@screens/Auth'
 import Settings from '@screens/Settings'
 import Launch from '@screens/Launch'
-import { ArtisanList, AddArtisan, ArtisanDetail } from '@screens/ArtisanHub'
+import { ArtisanList, AddArtisan, ArtisanDetail, EditArtisan } from '@screens/ArtisanHub'
 import { Conversation, ConversationList } from '@screens/Messaging';
 import { AddProduct } from '@screens/Products'
 
@@ -21,7 +21,9 @@ const ArtisanHubStack = createStackNavigator(
     ArtisanList: ArtisanList,
     AddArtisan: AddArtisan,
     ArtisanDetail:ArtisanDetail,
-    AddProduct: AddProduct 
+    EditArtisan: EditArtisan,
+    AddProduct: AddProduct,
+    
   }
 )
 
@@ -41,21 +43,25 @@ const TabNavigator = createBottomTabNavigator(
   {
     initialRouteName: 'ArtisanHub',
     order: ['ArtisanHub', 'Messages' ,'Settings'],
+    animationEnabled: true,
     navigationOptions: ({ navigation }) => ({
-      tabBarIcon: ({ focused, tintColor }) => {
-        const { routeName } = navigation.state;
-        var iconName;
-        if (routeName === 'ArtisanHub') {
-          iconName = 'users';
-        } else if (routeName === 'Settings') {
-          iconName = 'cog';
-        } else if (routeName === 'Messages') {
-           iconName = 'comments';
-        }
+      return {
+        tabBarIcon: ({ focused, tintColor }) => {
+          const { routeName } = navigation.state;
+          var iconName;
+          if (routeName === 'ArtisanHub') {
+            iconName = 'users';
+          } else if (routeName === 'Settings') {
+            iconName = 'cog';
+          } else if (routeName === 'Messages') {
+             iconName = 'comments';
+          }
 
-        return <Icon name={iconName} size={25} color={tintColor} />;
+          return <Icon name={iconName} size={25} color={tintColor} />
+        },
+        tabBarVisible: true
       }
-    })
+    }
   }
 );
 
