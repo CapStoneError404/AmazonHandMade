@@ -2,13 +2,13 @@ import { AddImage, AsyncButton, Wallpaper } from '@components'
 import React, { Component } from 'react'
 import { StyleSheet, ScrollView, View, Text, TextInput, Picker } from 'react-native'
 import ImagePicker from 'react-native-image-crop-picker'
+import { withMappedNavigationProps } from 'react-navigation-props-mapper'
 import { ProductCategories } from './ProductCategories'
 
-export default class AddProduct extends Component {
+class AddProduct extends Component {
   static navigationOptions = {
-    title: 'Add a Handmade Product'
+    title: 'Add Product'
   }
-
   constructor(props) {
     super(props)
 
@@ -90,6 +90,7 @@ export default class AddProduct extends Component {
         timesSold: this.state.productTimesSold
       }, this.props.navigation.getParam('currentUID')).then(() => {
         this.setState({adding: false})
+        this.props.navigation.state.params.onNavigateBack()
         this.props.navigation.goBack()
       })
     }
@@ -318,3 +319,5 @@ const styles = StyleSheet.create({
     height: 50
   }
 })
+
+export default withMappedNavigationProps()(AddProduct)

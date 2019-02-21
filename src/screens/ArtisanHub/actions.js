@@ -38,6 +38,37 @@ export function createArtisan(data) {
   }
 }
 
+//Updates artisan info and if image is passed in than delete current one in storage,
+//update it with new image picked in both storage and database
+export const saveArtisan = ({ name, phoneNumber, description, profilePicturePath, uid }) => {
+  return (dispatch) => {
+    return new Promise(async (resolve) => {
+      await firebase.database().ref(`/artisans/${uid}`)
+        .update({ name, phoneNumber, description })
+
+      artisanObject = {
+        name,
+        phoneNumber,
+        description,
+        uid
+      }
+         
+      if(profilePicturePath) {
+        await firebase.storage().ref(`artisanFiles/${uid}/images/profilePicture`).delete()
+        let st_ref = await firebase.storage()
+          .ref(`artisanFiles/${uid}/images/profilePicture`)
+          .putFile(profilePicturePath)
+
+        artisanObject.profilePictureURL = st_ref.downloadURL
+        await firebase.database().ref(`/artisans/${uid}`).update({ profilePictureURL: st_ref.downloadURL })
+      }
+          
+      resolve()
+      dispatch({ type: 'SAVE_ARTISAN', artisan: artisanObject })
+    })
+  }
+}
+
 export function fetchArtisans() {
   return (dispatch) => {
     return new Promise(async (resolve) => {
@@ -56,6 +87,32 @@ export function fetchArtisans() {
       
       resolve()
       dispatch({type: 'GET_ARTISANS', artisans: artisanArray})
+    })
+  }
+}
+
+//Fetch all products associated with the specfic artisan we current viewing
+export function fetchProducts(artisanID) {
+  console.log("Fetching Products artisan ID" + artisanID)
+  return (dispatch) => {
+    return new Promise(async (resolve) => {
+      let snapshot = await firebase.database().ref('products').once('value')
+      let productArray = []
+      let productObject = snapshot.val()
+       
+      for(var productID in productObject) {
+        productArray.push({
+          ...productObject[productID],
+          productID: productID
+        })
+      }
+       
+      let productSnapshot = await firebase.database().ref(`artisans/${artisanID}/products`).once('value')
+      let productKeys = Object.keys(productSnapshot.val())
+      productArray = productArray.filter(obj => productKeys.includes(obj.productID))
+       
+      resolve()
+      dispatch({type: 'GET_PRODUCTS', products: productArray})
     })
   }
 }

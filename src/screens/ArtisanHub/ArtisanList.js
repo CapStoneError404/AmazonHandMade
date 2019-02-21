@@ -100,6 +100,7 @@ export default class ArtisanList extends Component {
             data={this.sortedArtisans()}
             keyExtractor={this._keyExtractor}
             renderItem={this._renderArtisanItem}
+            extraData={this.state}
           />
         }
       </Wallpaper>
