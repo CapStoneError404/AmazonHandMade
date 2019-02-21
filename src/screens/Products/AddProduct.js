@@ -1,8 +1,8 @@
-import { AddImage, AsyncButton, UserInput, Wallpaper } from '@components';
-import React, { Component } from 'react';
-import { StyleSheet, ScrollView, View, Text, TextInput, Picker, Platform } from 'react-native';
-import ImagePicker from 'react-native-image-crop-picker';
-import { ProductCategories } from './ProductCategories';
+import { AddImage, AsyncButton, Wallpaper } from '@components'
+import React, { Component } from 'react'
+import { StyleSheet, ScrollView, View, Text, TextInput, Picker } from 'react-native'
+import ImagePicker from 'react-native-image-crop-picker'
+import { ProductCategories } from './ProductCategories'
 
 export default class AddProduct extends Component {
   static navigationOptions = {
@@ -42,7 +42,7 @@ export default class AddProduct extends Component {
       cropping: true
     }).then(image => {
       this.setState({productMainPicture: image.path})
-    });
+    })
   }
 
   verifyFields() {
@@ -98,155 +98,155 @@ export default class AddProduct extends Component {
   render() {
     return (
       <Wallpaper style={styles.container}>
-      <ScrollView>
-        <View style={styles.imageWrapper}>
-          <AddImage 
-            imageUri={this.state.productMainPicture}
-            onPress={() => this.pickImage()}
-            style={styles.image}
-          />
-        </View>
+        <ScrollView>
+          <View style={styles.imageWrapper}>
+            <AddImage 
+              imageUri={this.state.productMainPicture}
+              onPress={() => this.pickImage()}
+              style={styles.image}
+            />
+          </View>
 
-        <Text style={styles.labelText}>Product Main Category</Text>
-        <View style={styles.categorySection}>
-          <Picker
-            itemStyle={styles.PickerItem}
-            selectedValue={this.state.productMainCategory}
-            testID="MainCategorySelectorID"
-            onValueChange={(itemValue, itemIndex) =>
-              (itemIndex !=0) && this.setState({productMainCategory: itemValue}) 
+          <Text style={styles.labelText}>Product Main Category</Text>
+          <View style={styles.categorySection}>
+            <Picker
+              itemStyle={styles.PickerItem}
+              selectedValue={this.state.productMainCategory}
+              testID="MainCategorySelectorID"
+              onValueChange={(itemValue, itemIndex) =>
+                (itemIndex !=0) && this.setState({productMainCategory: itemValue}) 
                 && this.setState({productSubCategory: ''})
-            }>
-            {Object.keys(ProductCategories).map(m => {
-              return <Picker.Item key={m} label={m} value={m} />
-            })}
-          </Picker>
-        </View>
+              }>
+              {Object.keys(ProductCategories).map(m => {
+                return <Picker.Item key={m} label={m} value={m} />
+              })}
+            </Picker>
+          </View>
 
-        <Text style={styles.labelText}>Product Subcategory</Text>
-        <View style={styles.categorySection}>
-          <Picker
-            itemStyle={styles.PickerItem}
-            enabled={this.state.productMainCategory != ''}
-            selectedValue={this.state.productSubCategory}
-            testID="SubCategorySelectorID"
-            //style={styles.categorySection}
-            onValueChange={(itemValue, itemIndex) =>
-              (itemIndex !=0) && this.setState({productSubCategory: itemValue})
-            }>
-            {
-              (this.state.productMainCategory != "")? 
-              ProductCategories[this.state.productMainCategory].map(s => {
-                 return <Picker.Item label={s} value={s} key={s}/>
-              }) : null 
-            }
-          </Picker>
-         </View>
+          <Text style={styles.labelText}>Product Subcategory</Text>
+          <View style={styles.categorySection}>
+            <Picker
+              itemStyle={styles.PickerItem}
+              enabled={this.state.productMainCategory != ''}
+              selectedValue={this.state.productSubCategory}
+              testID="SubCategorySelectorID"
+              //style={styles.categorySection}
+              onValueChange={(itemValue, itemIndex) =>
+                (itemIndex !=0) && this.setState({productSubCategory: itemValue})
+              }>
+              {
+                (this.state.productMainCategory != "")? 
+                  ProductCategories[this.state.productMainCategory].map(s => {
+                    return <Picker.Item label={s} value={s} key={s}/>
+                  }) : null 
+              }
+            </Picker>
+          </View>
 
-        <Text style={styles.labelText}>Title</Text>
-        <View style={this.state.focusedInputs.title? [styles.focusedInputSection, styles.InputWrapper] :styles.InputWrapper}>
-          <TextInput
-            style={styles.textInputStyle}
-            placeholder= "Ex: Rawhide Leather Jacket"
-            value={this.state.productTitle}
-            onChangeText={(newText) => this.setState({productTitle: newText})}
-            onFocus={()=> this.setState({focusedInputs: {...this.state.focusedInputs, title: true}})}
-            onBlur={()=> this.setState({focusedInputs: {...this.state.focusedInputs, title: false}})}
+          <Text style={styles.labelText}>Title</Text>
+          <View style={this.state.focusedInputs.title? [styles.focusedInputSection, styles.InputWrapper] :styles.InputWrapper}>
+            <TextInput
+              style={styles.textInputStyle}
+              placeholder= "Ex: Rawhide Leather Jacket"
+              value={this.state.productTitle}
+              onChangeText={(newText) => this.setState({productTitle: newText})}
+              onFocus={()=> this.setState({focusedInputs: {...this.state.focusedInputs, title: true}})}
+              onBlur={()=> this.setState({focusedInputs: {...this.state.focusedInputs, title: false}})}
+            />
+          </View>
+
+          <Text style={styles.labelText}>Product Description</Text>
+          <View style={this.state.focusedInputs.desc? [styles.focusedInputSection, styles.InputWrapper] :styles.InputWrapper}>
+            <TextInput
+              style={styles.textInputStyle}
+              placeholder="Ex: Please see Amazon Site for an example"
+              value={this.state.productDescription}
+              onChangeText={(newText) => this.setState({productDescription: newText})}
+              onFocus={()=> this.setState({focusedInputs: {...this.state.focusedInputs, desc: true}})}
+              onBlur={()=> this.setState({focusedInputs: {...this.state.focusedInputs, desc: false}})}
+            />
+          </View>
+
+          <Text style={styles.labelText}>Gender Type</Text>
+          <View style={styles.categorySection}>
+            <Picker
+              itemStyle={styles.PickerItem}
+              selectedValue={this.state.productGender}
+              testID="genderSelectorID"
+              //style={{height: 50, width: 200}}
+              onValueChange={(itemValue, itemIndex) =>
+                (itemIndex !=0) && this.setState({productGender: itemValue})
+              }>
+              <Picker.Item label="Pick a gender type..." value="pick-one" />
+              <Picker.Item label="Women" value="women" />
+              <Picker.Item label="Men" value="men" />
+              <Picker.Item label="Girls" value="girls" />
+              <Picker.Item label="Boys" value="boys" />
+              <Picker.Item label="Unisex Adult" value="unisex-adult" />
+              <Picker.Item label="Unisex Child" value="unisex-child" />
+            </Picker>
+          </View>
+
+          <Text style={styles.labelText}>Standard Price</Text>
+          <View style={this.state.focusedInputs.price? [styles.focusedInputSection, styles.InputWrapper] :styles.InputWrapper}>
+            <TextInput
+              style={styles.textInputStyle}
+              keyboardType='numeric'
+              placeholder="Ex: 49.99"
+              value={this.state.productStandardPrice}
+              onChangeText={(newText) => this.setState({productStandardPrice: newText})}
+              onFocus={()=> this.setState({focusedInputs: {...this.state.focusedInputs, price: true}})}
+              onBlur={()=> this.setState({focusedInputs: {...this.state.focusedInputs, price: false}})}
+            />
+          </View>
+
+          <Text style={styles.labelText}>Seller SKU</Text>
+          <View style={this.state.focusedInputs.sku? [styles.focusedInputSection, styles.InputWrapper] :styles.InputWrapper}>
+            <TextInput
+              style={styles.textInputStyle}
+              placeholder="Ex: MyProduct123"
+              value={this.state.productSellerSKU}
+              onChangeText={(newText) => this.setState({productSellerSKU: newText})}
+              onFocus={()=> this.setState({focusedInputs: {...this.state.focusedInputs, sku: true}})}
+              onBlur={()=> this.setState({focusedInputs: {...this.state.focusedInputs, sku: false}})}
+            />
+          </View>
+
+          <Text style={styles.labelText}>Quantity</Text>
+          <View style={this.state.focusedInputs.quantity? [styles.focusedInputSection, styles.InputWrapper] :styles.InputWrapper}>
+            <TextInput
+              style={styles.textInputStyle}
+              keyboardType='numeric'
+              placeholder="Ex. 4"
+              value={this.state.productQuantity}
+              onChangeText={(newText) => this.setState({productQuantity: newText})}
+              onFocus={()=> this.setState({focusedInputs: {...this.state.focusedInputs, quantity: true}})}
+              onBlur={()=> this.setState({focusedInputs: {...this.state.focusedInputs, quantity: false}})}
+            /> 
+          </View>
+
+          <Text style={styles.labelText}>Production Time (days)</Text>
+          <View style={this.state.focusedInputs.time? [styles.focusedInputSection, styles.InputWrapper] :styles.InputWrapper}>
+            <TextInput
+              style={styles.textInputStyle}
+              keyboardType='numeric'
+              placeholder="Ex: 5"
+              value={this.state.productTime}
+              onChangeText={(newText) => this.setState({productTime: newText})}
+              onFocus={()=> this.setState({focusedInputs: {...this.state.focusedInputs, time: true}})}
+              onBlur={()=> this.setState({focusedInputs: {...this.state.focusedInputs, time: false}})}
+            />     
+          </View>
+
+          <AsyncButton 
+            title="Save & Publish"
+            color="#c14700"
+            textColor="white"
+            onPress={this.createProduct}
+            style={styles.button}
+            spinning={this.state.adding}
           />
-        </View>
-
-        <Text style={styles.labelText}>Product Description</Text>
-        <View style={this.state.focusedInputs.desc? [styles.focusedInputSection, styles.InputWrapper] :styles.InputWrapper}>
-          <TextInput
-            style={styles.textInputStyle}
-            placeholder="Ex: Please see Amazon Site for an example"
-            value={this.state.productDescription}
-            onChangeText={(newText) => this.setState({productDescription: newText})}
-            onFocus={()=> this.setState({focusedInputs: {...this.state.focusedInputs, desc: true}})}
-            onBlur={()=> this.setState({focusedInputs: {...this.state.focusedInputs, desc: false}})}
-          />
-        </View>
-
-        <Text style={styles.labelText}>Gender Type</Text>
-        <View style={styles.categorySection}>
-          <Picker
-            itemStyle={styles.PickerItem}
-            selectedValue={this.state.productGender}
-            testID="genderSelectorID"
-            //style={{height: 50, width: 200}}
-            onValueChange={(itemValue, itemIndex) =>
-              (itemIndex !=0) && this.setState({productGender: itemValue})
-            }>
-            <Picker.Item label="Pick a gender type..." value="pick-one" />
-            <Picker.Item label="Women" value="women" />
-            <Picker.Item label="Men" value="men" />
-            <Picker.Item label="Girls" value="girls" />
-            <Picker.Item label="Boys" value="boys" />
-            <Picker.Item label="Unisex Adult" value="unisex-adult" />
-            <Picker.Item label="Unisex Child" value="unisex-child" />
-          </Picker>
-        </View>
-
-        <Text style={styles.labelText}>Standard Price</Text>
-        <View style={this.state.focusedInputs.price? [styles.focusedInputSection, styles.InputWrapper] :styles.InputWrapper}>
-          <TextInput
-            style={styles.textInputStyle}
-            keyboardType='numeric'
-            placeholder="Ex: 49.99"
-            value={this.state.productStandardPrice}
-            onChangeText={(newText) => this.setState({productStandardPrice: newText})}
-            onFocus={()=> this.setState({focusedInputs: {...this.state.focusedInputs, price: true}})}
-            onBlur={()=> this.setState({focusedInputs: {...this.state.focusedInputs, price: false}})}
-          />
-        </View>
-
-        <Text style={styles.labelText}>Seller SKU</Text>
-        <View style={this.state.focusedInputs.sku? [styles.focusedInputSection, styles.InputWrapper] :styles.InputWrapper}>
-          <TextInput
-            style={styles.textInputStyle}
-            placeholder="Ex: MyProduct123"
-            value={this.state.productSellerSKU}
-            onChangeText={(newText) => this.setState({productSellerSKU: newText})}
-            onFocus={()=> this.setState({focusedInputs: {...this.state.focusedInputs, sku: true}})}
-            onBlur={()=> this.setState({focusedInputs: {...this.state.focusedInputs, sku: false}})}
-          />
-        </View>
-
-        <Text style={styles.labelText}>Quantity</Text>
-        <View style={this.state.focusedInputs.quantity? [styles.focusedInputSection, styles.InputWrapper] :styles.InputWrapper}>
-          <TextInput
-            style={styles.textInputStyle}
-            keyboardType='numeric'
-            placeholder="Ex. 4"
-            value={this.state.productQuantity}
-            onChangeText={(newText) => this.setState({productQuantity: newText})}
-            onFocus={()=> this.setState({focusedInputs: {...this.state.focusedInputs, quantity: true}})}
-            onBlur={()=> this.setState({focusedInputs: {...this.state.focusedInputs, quantity: false}})}
-          /> 
-        </View>
-
-        <Text style={styles.labelText}>Production Time (days)</Text>
-        <View style={this.state.focusedInputs.time? [styles.focusedInputSection, styles.InputWrapper] :styles.InputWrapper}>
-          <TextInput
-            style={styles.textInputStyle}
-            keyboardType='numeric'
-            placeholder="Ex: 5"
-            value={this.state.productTime}
-            onChangeText={(newText) => this.setState({productTime: newText})}
-            onFocus={()=> this.setState({focusedInputs: {...this.state.focusedInputs, time: true}})}
-            onBlur={()=> this.setState({focusedInputs: {...this.state.focusedInputs, time: false}})}
-          />     
-        </View>
-
-        <AsyncButton 
-          title="Save & Publish"
-          color="#c14700"
-          textColor="white"
-          onPress={this.createProduct}
-          style={styles.button}
-          spinning={this.state.adding}
-        />
-      </ScrollView>
+        </ScrollView>
       </Wallpaper> 
     )
   }
@@ -285,9 +285,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   PickerItem: {
-   height: 60,
-   color: 'black'
- },
+    height: 60,
+    color: 'black'
+  },
   categoryText: {
     //width: '100%',
     color: 'red',
@@ -315,6 +315,6 @@ const styles = StyleSheet.create({
     width: '80%'
   },
   textInputStyle: {
-     height: 50
+    height: 50
   }
 })

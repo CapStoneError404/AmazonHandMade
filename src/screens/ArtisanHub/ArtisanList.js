@@ -1,7 +1,7 @@
-import { Wallpaper } from '@components';
-import React, { Component } from 'react';
-import { ActivityIndicator, Button, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { ProfilePicture } from '../../components';
+import { Wallpaper } from '@components'
+import React, { Component } from 'react'
+import { ActivityIndicator, Button, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { ProfilePicture } from '../../components'
 
 export default class ArtisanList extends Component {
   static navigationOptions = ({navigation}) => {
@@ -45,26 +45,26 @@ export default class ArtisanList extends Component {
   }
 
   _renderArtisanItem = ({item, index}) => {
-     return (
-       <TouchableOpacity 
-         testID={`listItem${index}`}
-         style={styles.artisanView}
-         onPress={() => this.navigateToArtisan(item)}
-         key={item.key}
-       >
-         <ProfilePicture
-            source={{uri: item.profilePictureURL}}
-            style={styles.image}
-         />
-         <View style={styles.namePhone}>
-            <Text style={styles.text}>{item.name}</Text>
-            <Text style={styles.text}>{item.phoneNumber}</Text>
-         </View>
-       </TouchableOpacity>
-     );
+    return (
+      <TouchableOpacity 
+        testID={`listItem${index}`}
+        style={styles.artisanView}
+        onPress={() => this.navigateToArtisan(item)}
+        key={item.key}
+      >
+        <ProfilePicture
+          source={{uri: item.profilePictureURL}}
+          style={styles.image}
+        />
+        <View style={styles.namePhone}>
+          <Text style={styles.text}>{item.name}</Text>
+          <Text style={styles.text}>{item.phoneNumber}</Text>
+        </View>
+      </TouchableOpacity>
+    )
   }
 
-  _keyExtractor = (item, index) => item.uid
+  _keyExtractor = (item) => item.uid
 
   sortedArtisans() {
     if(this.props.Artisans != []) {
@@ -89,18 +89,18 @@ export default class ArtisanList extends Component {
     return (
       <Wallpaper>
         {(this.props.Artisans != [] && this.state.fetchingArtisans) ?
-        <ActivityIndicator 
-          size='large'
-          animating={this.props.spinning}
-          color='white'
-        />
-        :
-        <FlatList
-          testID='artisan_list'
-          data={this.sortedArtisans()}
-          keyExtractor={this._keyExtractor}
-          renderItem={this._renderArtisanItem}
-        />
+          <ActivityIndicator 
+            size='large'
+            animating={this.props.spinning}
+            color='white'
+          />
+          :
+          <FlatList
+            testID='artisan_list'
+            data={this.sortedArtisans()}
+            keyExtractor={this._keyExtractor}
+            renderItem={this._renderArtisanItem}
+          />
         }
       </Wallpaper>
     )

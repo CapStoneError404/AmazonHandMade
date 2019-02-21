@@ -5,14 +5,14 @@ import { Provider } from 'react-redux'
 
 import { store, persistor } from './src/store'
 
-import App from './src/App';
+import App from './src/App'
 
 // Pass the store into the Provider
 const AppWithStore = () => (
   <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-         <App />
-      </PersistGate>
+    <PersistGate loading={null} persistor={persistor}>
+      <App />
+    </PersistGate>
   </Provider>
 )
 

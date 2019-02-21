@@ -1,8 +1,8 @@
 import firebase from 'react-native-firebase'
 
 export function createArtisan(data) {
-  return (dispatch, prevState) => { 
-    return new Promise(async (resolve, reject) => {
+  return (dispatch) => { 
+    return new Promise(async (resolve) => {
       console.log("Pushing artisan to db")
       var db_ref = await firebase.database().ref('artisans/').push({
         name: data.name,
@@ -23,7 +23,7 @@ export function createArtisan(data) {
         var st_ref = await firebase.storage()
           .ref(`artisanFiles/${db_ref.key}/images/profilePicture`)
           .putFile(data.profilePicturePath)
-          console.log("Done")
+        console.log("Done")
 
         artisanObject.profilePictureURL = st_ref.downloadURL
         
@@ -39,8 +39,8 @@ export function createArtisan(data) {
 }
 
 export function fetchArtisans() {
-  return (dispatch, prevState) => {
-    return new Promise(async (resolve, reject) => {
+  return (dispatch) => {
+    return new Promise(async (resolve) => {
       console.log("Fetching artisans")
       snapshot = await firebase.database().ref('artisans').once('value')
       console.log("Done")
@@ -62,10 +62,10 @@ export function fetchArtisans() {
 
 // action takes in current list of artisans and artisan to be deleted
 // sends that artisan to reducer to be filtered out of state
-//Also check that artisan has an image if so delete that from storage
-export function deleteArtisan(artisans, artisan) {
+// Also check that artisan has an image if so delete that from storage
+export function deleteArtisan(artisan) {
   return (dispatch) => {
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async (resolve) => {
       await firebase.database().ref(`artisans/${artisan}`).remove()
       await firebase.storage().ref(`artisanFiles/${artisan}/images/profilePicture`).delete()
       

@@ -1,7 +1,7 @@
-import { ProfilePicture, Wallpaper, AsyncButton} from '@components';
-import React, { Component } from 'react';
-import { ScrollView, StyleSheet, Text, View, Alert } from 'react-native';
-import { withMappedNavigationProps } from 'react-navigation-props-mapper';
+import { ProfilePicture, Wallpaper, AsyncButton} from '@components'
+import React, { Component } from 'react'
+import { ScrollView, StyleSheet, Text, View, Alert } from 'react-native'
+import { withMappedNavigationProps } from 'react-navigation-props-mapper'
 
 class ArtisanDetail extends Component {
   static navigationOptions = {
@@ -12,43 +12,43 @@ class ArtisanDetail extends Component {
     super(props)
 
     this.state = {
-       showModel: false,
-       adding: false
+      showModel: false,
+      adding: false
     }
 
-    this.onCancel = this.onCancel.bind(this);
-    this.deletePressed = this.deletePressed.bind(this);
-    this.showAlert = this.showAlert.bind(this);
+    this.onCancel = this.onCancel.bind(this)
+    this.deletePressed = this.deletePressed.bind(this)
+    this.showAlert = this.showAlert.bind(this)
   }
 
-   onCancel() {
-      this.setState({ adding: false });
-   }
+  onCancel() {
+    this.setState({ adding: false })
+  }
 
-   deletePressed() {
-      this.setState({ adding: true });
-      this.props.deleteArtisan(this.props.Artisans, this.props.uid)
+  deletePressed() {
+    this.setState({ adding: true })
+    this.props.deleteArtisan(this.props.Artisans, this.props.uid)
       .then(() => {
         this.setState({ adding: false })
         this.props.navigation.navigate("ArtisanList")
-      });
-   }
+      })
+  }
 
-   showAlert() {
-      Alert.alert(
-         'Are you sure want delete Artisan?',
-         'Delete Artisan',
-         [
-           {
-              text: 'Cancel',
-              onPress: () => this.onCancel(),
-              style: 'cancel',
-           },
-          {text: 'OK', onPress: () => this.deletePressed()},
-         ],
-         {cancelable: false},
-      );
-   }
+  showAlert() {
+    Alert.alert(
+      'Are you sure want delete Artisan?',
+      'Delete Artisan',
+      [
+        {
+          text: 'Cancel',
+          onPress: () => this.onCancel(),
+          style: 'cancel',
+        },
+        {text: 'OK', onPress: () => this.deletePressed()},
+      ],
+      {cancelable: false},
+    )
+  }
 
   render() {
     return (
@@ -130,8 +130,8 @@ const styles = StyleSheet.create({
     marginLeft: 5
   },
   buttonStyle: {
-     marginLeft:10,
-     marginRight: 10
+    marginLeft:10,
+    marginRight: 10
   }
 })
 

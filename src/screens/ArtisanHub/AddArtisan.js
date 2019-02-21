@@ -1,7 +1,7 @@
-import { AddImage, AsyncButton, UserInput, Wallpaper } from '@components';
-import React, { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
-import ImagePicker from 'react-native-image-crop-picker';
+import { AddImage, AsyncButton, UserInput, Wallpaper } from '@components'
+import React, { Component } from 'react'
+import { StyleSheet, View } from 'react-native'
+import ImagePicker from 'react-native-image-crop-picker'
 
 export default class AddArtisan extends Component {
   static navigationOptions = {
@@ -31,7 +31,7 @@ export default class AddArtisan extends Component {
       cropping: true
     }).then(image => {
       this.setState({profilePicturePath: image.path})
-    });
+    })
   }
 
   verifyFields() {
