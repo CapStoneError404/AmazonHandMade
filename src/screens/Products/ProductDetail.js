@@ -83,7 +83,7 @@ class ProductDetail extends Component {
                 justifyContent: 'space-between'
               }}
             >
-              <Text style={styles.headerText}>Description</Text>
+              <Text style={styles.headerText}>{this.props.MainCategory}</Text>
             </CardSection>
             <CardSection
               style={{
@@ -111,9 +111,9 @@ class ProductDetail extends Component {
                 justifyContent: 'space-between'
               }}
             >
-              <Text style={styles.ProductInfo}>Main Category</Text>
+              <Text style={styles.ProductInfo}>Sub-Cat</Text>
               <Text style={styles.SectionListItemS}>
-                {this.props.MainCategory}
+                {this.props.SubCategory}
               </Text>
             </CardSection>
             <CardSection
