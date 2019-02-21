@@ -1,19 +1,19 @@
 /* eslint-disable global-require */
 /* eslint-disable no-undef */
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware } from 'redux'
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
-import thunk from 'redux-thunk';
-import logger from 'redux-logger';
-import rootReducer from '../reducers';
+import thunk from 'redux-thunk'
+import logger from 'redux-logger'
+import rootReducer from '../reducers'
 
-let middleware = [thunk];
+let middleware = [thunk]
 
 if (__DEV__) {
-  const reduxImmutableStateInvariant = require('redux-immutable-state-invariant').default();
-  middleware = [...middleware, reduxImmutableStateInvariant, logger];
+  const reduxImmutableStateInvariant = require('redux-immutable-state-invariant').default()
+  middleware = [...middleware, reduxImmutableStateInvariant, logger]
 } else {
-  middleware = [...middleware];
+  middleware = [...middleware]
 }
 
 const persistConfig = {

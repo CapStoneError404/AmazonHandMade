@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { StyleSheet, View, Image, TouchableOpacity, Text } from 'react-native';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import { StyleSheet, View, Image, TouchableOpacity, Text } from 'react-native'
+import PropTypes from 'prop-types'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
 export default class AddImage extends Component {
@@ -26,7 +26,7 @@ export default class AddImage extends Component {
           </View>
         }
       </TouchableOpacity>
-    );
+    )
   }
 }
 
@@ -34,7 +34,7 @@ AddImage.propTypes = {
   style: PropTypes.object,
   imageUri: PropTypes.string,
   onPress: PropTypes.func,
-};
+}
 
 const styles = StyleSheet.create({
   default: {
@@ -52,4 +52,4 @@ const styles = StyleSheet.create({
     fontWeight: 'bold', 
     color: 'darkgrey'
   }
-});
+})

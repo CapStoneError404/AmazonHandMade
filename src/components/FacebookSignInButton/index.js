@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
+import { StyleSheet, Text, TouchableOpacity } from 'react-native'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 export default class FacebookSignInButton extends Component {
   render() {
@@ -12,15 +12,15 @@ export default class FacebookSignInButton extends Component {
         <Icon name='facebook' style={styles.icon} />
         <Text style={styles.text}>
           Facebook
-            </Text>
+        </Text>
       </TouchableOpacity>
-    );
+    )
   }
 }
 
 FacebookSignInButton.propTypes = {
   onPress: PropTypes.func.isRequired
-};
+}
 
 const styles = StyleSheet.create({
   buttonWrapper: {
@@ -45,4 +45,4 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white'
   }
-});
+})

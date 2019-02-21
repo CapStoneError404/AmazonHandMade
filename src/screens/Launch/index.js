@@ -1,5 +1,5 @@
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import * as globalActions from '@actions'
 
 function mapStateToProps(state) {
@@ -10,7 +10,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(globalActions, dispatch);
+  return bindActionCreators(globalActions, dispatch)
 }
 
 import Launch from './Launch'

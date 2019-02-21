@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 import LinearGradient from 'react-native-linear-gradient'
-import { ActivityIndicator, StyleSheet, Text, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import { ActivityIndicator, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 export default class AmazonSignInButton extends Component {
   render() {
@@ -33,10 +33,10 @@ export default class AmazonSignInButton extends Component {
             <Icon name='amazon' style={styles.icon} />
             <Text style={styles.text}>
               Login with Amazon
-                </Text>
+            </Text>
           </LinearGradient>
         </TouchableOpacity>
-      );
+      )
     }
   }
 }
@@ -44,7 +44,7 @@ export default class AmazonSignInButton extends Component {
 AmazonSignInButton.propTypes = {
   onPress: PropTypes.func.isRequired,
   spinning: PropTypes.bool
-};
+}
 
 const styles = StyleSheet.create({
   touchable: {
@@ -73,4 +73,4 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: 'black'
   }
-});
+})

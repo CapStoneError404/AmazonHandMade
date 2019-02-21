@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
+import { Image, StyleSheet, Text, TouchableOpacity } from 'react-native'
 
 export default class GoogleSignInButton extends Component {
   render() {
@@ -11,15 +11,15 @@ export default class GoogleSignInButton extends Component {
         <Image source={require('../../../assets/images/GoogleGLogo.png')} style={styles.icon} />
         <Text style={styles.text}>
           Google
-            </Text>
+        </Text>
       </TouchableOpacity>
-    );
+    )
   }
 }
 
 GoogleSignInButton.propTypes = {
   onPress: PropTypes.func.isRequired
-};
+}
 
 const styles = StyleSheet.create({
   buttonWrapper: {
@@ -43,4 +43,4 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'gray'
   }
-});
+})
