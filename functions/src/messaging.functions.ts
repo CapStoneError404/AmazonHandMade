@@ -6,7 +6,6 @@ import * as twilio from 'twilio'
 // it should NOT be uploaded to github!!!!!!!!!!!!
 const twilioInfo = require('../assets/twilio.json')
 const client = twilio(twilioInfo.accountSid, twilioInfo.authToken)
-const MessagingResponse = twilio.twiml.MessagingResponse
 
 // data: {
 //   sender: UID of sender,
@@ -20,7 +19,7 @@ const MessagingResponse = twilio.twiml.MessagingResponse
 //     contents: String
 //   }
 // }
-export async function sendMessage(data, context) {
+export async function sendMessage(data) {
   console.log("Sending text wth the following data:")
   console.log(data)
 
@@ -41,7 +40,7 @@ export async function sendMessage(data, context) {
   }
 }
 
-export async function receiveMessage(req, res) {
+export async function receiveMessage(req) {
   console.log("Receiving text with the following request data:")
   console.log(req.body)
 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
   ActivityIndicator,
   FlatList,
@@ -6,31 +6,31 @@ import {
   Text,
   TouchableOpacity,
   View
-} from 'react-native';
-import { Button } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import { ProfilePicture , Wallpaper} from '../../components';
-import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
+} from 'react-native'
+import { Button } from 'react-native-elements'
+import Icon from 'react-native-vector-icons/FontAwesome'
+import { ProfilePicture , Wallpaper} from '../../components'
+import { RadioButton, RadioButtonInput } from 'react-native-simple-radio-button'
 
 
 export default class ConversationList extends Component {
   static navigationOptions = ({ navigation }) => {
-    var iconName = 'edit';
+    var iconName = 'edit'
     return {
       title: 'Messages',
       headerRight: (
-         <Button 
-           icon={<Icon name={iconName} size={25} color='gray' />}
-           type="clear"
-           onPress={navigation.getParam('chatButton')}
-         />
+        <Button 
+          icon={<Icon name={iconName} size={25} color='gray' />}
+          type="clear"
+          onPress={navigation.getParam('chatButton')}
+        />
       ),
       headerLeft: (
-         <Button 
-           title='Cancel' 
-           onPress={navigation.getParam('cancelChat')}
-           type='clear'
-         />
+        <Button 
+          title='Cancel' 
+          onPress={navigation.getParam('cancelChat')}
+          type='clear'
+        />
       )
     }
   }
@@ -39,14 +39,14 @@ export default class ConversationList extends Component {
     super(props)
 
     this.state = {
-       groupChat: false,
-       radioTracker: [],
-       fetchingConversations: false
+      groupChat: false,
+      radioTracker: [],
+      fetchingConversations: false
     }
 
-    this.chatButton = this.chatButton.bind(this);
-    this.cancelChat = this.cancelChat.bind(this);
-    this.radioButtonSelected = this.radioButtonSelected.bind(this);
+    this.chatButton = this.chatButton.bind(this)
+    this.cancelChat = this.cancelChat.bind(this)
+    this.radioButtonSelected = this.radioButtonSelected.bind(this)
     this.fetchConversations = this.fetchConversations.bind(this)
     this.navigateToConversation = this.navigateToConversation.bind(this)
     this.sortedConversations = this.sortedConversations.bind(this)
@@ -65,22 +65,22 @@ export default class ConversationList extends Component {
   }
 
   navigateToConversation(conversation) {
-    this.props.navigation.navigate('Conversation', { ...conversation });
+    this.props.navigation.navigate('Conversation', { ...conversation })
   }
 
   chatButton = () => {
-    console.log('chat button pressed');
-    this.setState({ groupChat: true });
+    console.log('chat button pressed')
+    this.setState({ groupChat: true })
   }
 
   cancelChat = () => {
-    this.setState({ groupChat: false, radioTracker: []});
+    this.setState({ groupChat: false, radioTracker: []})
   }
 
   radioButtonSelected(radioObj) {
-    const tracker = this.state.radioTracker.slice();
-    tracker[radioObj.value].isSelected = !tracker[radioObj.value].isSelected;
-    this.setState({ radioTracker: tracker });
+    const tracker = this.state.radioTracker.slice()
+    tracker[radioObj.value].isSelected = !tracker[radioObj.value].isSelected
+    this.setState({ radioTracker: tracker })
   }
   
   _renderConversationItem = ({ item, index }) => {
@@ -90,12 +90,12 @@ export default class ConversationList extends Component {
       return (
         <View style={styles.artisanView} key={item.key}>
           <RadioButton labelHorizontal={true} >
-          <RadioButtonInput
-            obj={obj}
-            index={index}
-            isSelected={this.state.radioTracker[obj.value].isSelected}
-            onPress={() => this.radioButtonSelected(obj)}  
-          />
+            <RadioButtonInput
+              obj={obj}
+              index={index}
+              isSelected={this.state.radioTracker[obj.value].isSelected}
+              onPress={() => this.radioButtonSelected(obj)}  
+            />
           </RadioButton>
           <ProfilePicture
             source={{uri: item.profilePictureURL}}
@@ -106,7 +106,7 @@ export default class ConversationList extends Component {
             <Text numberOfLines={2} style={styles.lastMessage}>{item.messages.slice(-1)[0].text}</Text>
           </View>
         </View>
-      );
+      )
     } else {
       let artisan = this.props.Artisans.filter(artisan => {
         return artisan.uid === item.participants.filter(id => id !== this.props.User.uid)[0]
@@ -127,7 +127,7 @@ export default class ConversationList extends Component {
             <Text numberOfLines={2} style={styles.lastMessage}>{item.messages.slice(-1)[0].contents}</Text>
           </View>
         </TouchableOpacity>
-      );
+      )
     }
   }
 
@@ -145,21 +145,21 @@ export default class ConversationList extends Component {
     return (
       <Wallpaper>
         {(this.props.Conversations != [] && this.state.fetchingConversations) ?
-        <ActivityIndicator 
-          size='large'
-          animating={this.props.spinning}
-          color='white'
-        />
-        :
-        <FlatList
-          data={this.sortedConversations()}
-          keyExtractor={this._keyExtractor}
-          renderItem={this._renderConversationItem}
-          extraData={this.state}
-        />
+          <ActivityIndicator 
+            size='large'
+            animating={this.props.spinning}
+            color='white'
+          />
+          :
+          <FlatList
+            data={this.sortedConversations()}
+            keyExtractor={this._keyExtractor}
+            renderItem={this._renderConversationItem}
+            extraData={this.state}
+          />
         }
       </Wallpaper>
-    );
+    )
   }
 }
 
@@ -201,6 +201,6 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     marginRight: 5
   }
-});
+})
 
 

@@ -1,30 +1,28 @@
-import React, { Component } from 'react';
-import { Modal, View, Image, Text, StyleSheet } from 'react-native';
-import { ProfilePicture, Wallpaper } from '../../components';
-import { GiftedChat } from 'react-native-gifted-chat';
-import { withMappedNavigationProps } from 'react-navigation-props-mapper';
-import { Button } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome5';
-import ImagePicker from 'react-native-image-crop-picker';
+import React, { Component } from 'react'
+import { Wallpaper } from '../../components'
+import { GiftedChat } from 'react-native-gifted-chat'
+import { withMappedNavigationProps } from 'react-navigation-props-mapper'
+import { Button } from 'react-native-elements'
+import Icon from 'react-native-vector-icons/FontAwesome5'
+import ImagePicker from 'react-native-image-crop-picker'
 import firebase from 'react-native-firebase'
-
 
 class Conversation extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
       title: navigation.getParam('artisan'),
       headerRight: (
-         <Button 
-         icon={<Icon name='images' size={25} color='gray' />}
-         type="clear"
-         onPress={navigation.getParam('pickImage')}
-         />
+        <Button 
+          icon={<Icon name='images' size={25} color='gray' />}
+          type="clear"
+          onPress={navigation.getParam('pickImage')}
+        />
       )
-    };
+    }
   };
 
   constructor(props) {
-    super(props);
+    super(props)
 
     console.log(props)
     
@@ -97,11 +95,11 @@ class Conversation extends Component {
       text: '',
       createdAt: new Date(),
       user: {
-         _id: this.props.messages[0].user._id
+        _id: this.props.messages[0].user._id
       },
       image: this.state.url
     }
-    this.onSend(message); 
+    this.onSend(message) 
   }
 
   onSend(messages) {
@@ -125,7 +123,7 @@ class Conversation extends Component {
         messages: this.formatMessages(
           this.props.Conversations.filter(cnv => cnv.uid === this.props.uid)[0]
             .messages)
-            .reverse()
+          .reverse()
       })
     })
   }
@@ -145,13 +143,5 @@ class Conversation extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  text: {
-    fontSize: 20,
-    color: '#444444',
-    marginLeft: 5
-  }
-});
 
 export default withMappedNavigationProps()(Conversation)

@@ -1,7 +1,5 @@
-import { Logo, Wallpaper } from '@components';
-import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
-
+import { Logo, Wallpaper } from '@components'
+import React, { Component } from 'react'
 
 export default class Launch extends Component {
   constructor(props) {
@@ -23,12 +21,3 @@ export default class Launch extends Component {
     )
   }
 }
-
-
-const styles = StyleSheet.create({
-   container: {
-     flex: 1,
-     alignItems: 'center',
-     justifyContent: 'center',
-   },
- });

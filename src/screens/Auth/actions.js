@@ -1,9 +1,9 @@
 import firebase from 'react-native-firebase'
 import LoginWithAmazon from 'react-native-login-with-amazon'
 
-export function amazonLogin(email, password) {
-  return (dispatch, prevState) => {
-    return new Promise(async (resolve, reject) => {
+export function amazonLogin() {
+  return (dispatch) => {
+    return new Promise(async (resolve) => {
       LoginWithAmazon.login((error, accessToken, profileData) => {
         if(error) {
           resolve()
@@ -44,8 +44,8 @@ export function amazonLogin(email, password) {
 }
 
 export function emailLogin(email, password) {
-  return (dispatch, prevState) => {
-    return new Promise(async (resolve, reject) => {
+  return (dispatch) => {
+    return new Promise(async (resolve) => {
       firebase.auth().signInWithEmailAndPassword(email, password).then(currentUser => {
         user = {
           email: currentUser.user.email,
@@ -66,8 +66,8 @@ export function emailLogin(email, password) {
 }
 
 export function register(email, password) {
-  return (dispatch, prevState) => {
-    return new Promise((resolve, reject) => {
+  return (dispatch) => {
+    return new Promise((resolve) => {
       firebase.auth().createUserWithEmailAndPassword(email, password).then(currentUser => {
         user = {
           email: currentUser.user.email,

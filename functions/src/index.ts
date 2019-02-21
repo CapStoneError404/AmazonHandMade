@@ -14,7 +14,7 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://handmade-error-404.firebaseio.com",
   storageBucket: "gs://handmade-error-404.appspot.com"
-});
+})
 
 exports.loginWithAmazon = functions.https.onCall(loginWithAmazon)
 exports.addArtisan = functions.https.onCall(addArtisan)
