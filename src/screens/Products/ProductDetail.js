@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
   Button,
   ProfilePicture,
   Wallpaper,
   Card,
   CardSection
-} from '@components';
+} from '@components'
 import {
   View,
   Text,
@@ -13,9 +13,9 @@ import {
   ScrollView,
   StyleSheet,
   FlatList
-} from 'react-native';
-import { withMappedNavigationProps } from 'react-navigation-props-mapper';
-import { Icon, List } from 'react-native-elements';
+} from 'react-native'
+import { withMappedNavigationProps } from 'react-navigation-props-mapper'
+import { Icon, List } from 'react-native-elements'
 
 class ProductDetail extends Component {
   static navigationOptions = {
@@ -23,13 +23,13 @@ class ProductDetail extends Component {
   };
 
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       showModel: false,
       drawerOpen: false,
       editExpanded: true,
       statsExpanded: true
-    };
+    }
   }
 
   render() {
@@ -159,7 +159,7 @@ class ProductDetail extends Component {
           </Card>
         </ScrollView>
       </Wallpaper>
-    );
+    )
   }
 }
 
@@ -250,5 +250,5 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     shadowRadius: 2
   }
-});
-export default withMappedNavigationProps()(ProductDetail);
+})
+export default withMappedNavigationProps()(ProductDetail)

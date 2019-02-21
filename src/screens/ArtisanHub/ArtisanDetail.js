@@ -5,8 +5,8 @@ import {
   Card,
   CardSection,
   Button
-} from '@components';
-import React, { Component } from 'react';
+} from '@components'
+import React, { Component } from 'react'
 import {
   ScrollView,
   StyleSheet,
@@ -17,28 +17,28 @@ import {
   TouchableOpacity,
   LayoutAnimation,
   ActivityIndicator
-} from 'react-native';
-import { withMappedNavigationProps } from 'react-navigation-props-mapper';
-import { FlatGrid } from 'react-native-super-grid';
-import { Icon } from 'react-native-elements';
+} from 'react-native'
+import { withMappedNavigationProps } from 'react-navigation-props-mapper'
+import { FlatGrid } from 'react-native-super-grid'
+import { Icon } from 'react-native-elements'
 
 class ArtisanDetail extends Component {
   static navigationOptions = () => {
     return {
       title: 'Artisan Details'
-    };
+    }
   };
 
   componentDidMount() {
-    this.fetchProducts();
+    this.fetchProducts()
   }
 
   componentDidUpdate() {
-    LayoutAnimation.easeInEaseOut();
+    LayoutAnimation.easeInEaseOut()
   }
 
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       showModel: false,
@@ -51,52 +51,52 @@ class ArtisanDetail extends Component {
         item => item.uid === this.props.uid
       ),
       currentProducts: []
-    };
+    }
 
-    this.onCancel = this.onCancel.bind(this);
-    this.deletePressed = this.deletePressed.bind(this);
-    this.showAlert = this.showAlert.bind(this);
-    this.renderEditButton = this.renderEditButton.bind(this);
-    this.renderProductButton = this.renderProductButton.bind(this);
-    this.navigateToEditArtisan = this.navigateToEditArtisan.bind(this);
-    this.fetchProducts = this.fetchProducts.bind(this);
-    this.sortedProducts = this.sortedProducts.bind(this);
+    this.onCancel = this.onCancel.bind(this)
+    this.deletePressed = this.deletePressed.bind(this)
+    this.showAlert = this.showAlert.bind(this)
+    this.renderEditButton = this.renderEditButton.bind(this)
+    this.renderProductButton = this.renderProductButton.bind(this)
+    this.navigateToEditArtisan = this.navigateToEditArtisan.bind(this)
+    this.fetchProducts = this.fetchProducts.bind(this)
+    this.sortedProducts = this.sortedProducts.bind(this)
   }
 
   fetchProducts() {
-    const { uid } = this.props;
-    this.setState({ fetchingProducts: true });
+    const { uid } = this.props
+    this.setState({ fetchingProducts: true })
     this.props.fetchProducts(uid).then(() => {
       this.setState({
         fetchingProducts: false,
         currentProducts: this.props.Products
-      });
-    });
+      })
+    })
   }
 
   onCancel() {
-    this.setState({ adding: false });
+    this.setState({ adding: false })
   }
 
   navigateToEditArtisan() {
-    const { name, phoneNumber, description, uid } = this.props;
+    const { name, phoneNumber, description, uid } = this.props
     this.props.navigation.navigate('EditArtisan', {
       name,
       phoneNumber,
       description,
       uid,
       onNavigateBack: this.handleOnNavigateBack
-    });
+    })
   }
 
   //This method is needed to update artisan detail on the fly if using react navigation
   handleOnNavigateBack = () => {
-    this.fetchProducts();
+    this.fetchProducts()
     this.setState({
       currentArtisan: this.props.Artisans.find(
         item => item.uid === this.props.uid
       )
-    });
+    })
   };
 
   //Renders the edit button and message button when button is clicked
@@ -117,7 +117,7 @@ class ArtisanDetail extends Component {
             onPress={() => console.log('Pressed message button')}
           />
         </CardSection>
-      );
+      )
     }
   }
 
@@ -143,16 +143,16 @@ class ArtisanDetail extends Component {
             onPress={() => console.log('view all products')}
           />
         </CardSection>
-      );
+      )
     }
   }
 
   deletePressed() {
-    this.setState({ adding: true });
+    this.setState({ adding: true })
     this.props.deleteArtisan(this.props.Artisans, this.props.uid).then(() => {
-      this.setState({ adding: false });
-      this.props.navigation.navigate('ArtisanList');
-    });
+      this.setState({ adding: false })
+      this.props.navigation.navigate('ArtisanList')
+    })
   }
 
   showAlert() {
@@ -168,22 +168,22 @@ class ArtisanDetail extends Component {
         { text: 'OK', onPress: () => this.deletePressed() }
       ],
       { cancelable: false }
-    );
+    )
   }
 
   sortedProducts() {
     if (this.state.currentProducts !== []) {
-      sortedProducts = Array.from(this.state.currentProducts);
+      sortedProducts = Array.from(this.state.currentProducts)
       sortedProducts.sort((first, second) => {
-        p1 = first.TimesSold;
-        p2 = second.TimesSold;
-        if (p1 < p2) return 1;
-        else if (p1 > p2) return -1;
-        else return 0;
-      });
-      return sortedProducts;
+        p1 = first.TimesSold
+        p2 = second.TimesSold
+        if (p1 < p2) return 1
+        else if (p1 > p2) return -1
+        else return 0
+      })
+      return sortedProducts
     } else {
-      return [];
+      return []
     }
   }
 
@@ -193,7 +193,7 @@ class ArtisanDetail extends Component {
       phoneNumber,
       description,
       profilePictureURL
-    } = this.state.currentArtisan;
+    } = this.state.currentArtisan
     return (
       <Wallpaper style={styles.container}>
         <ScrollView style={{ flex: 1.8 }}>
@@ -281,7 +281,7 @@ class ArtisanDetail extends Component {
                           source={{ uri: item.mainPictureURL }}
                         />
                       </TouchableOpacity>
-                    );
+                    )
                   }}
                 />
               )}
@@ -299,7 +299,7 @@ class ArtisanDetail extends Component {
           />
         </ScrollView>
       </Wallpaper>
-    );
+    )
   }
 }
 
@@ -370,6 +370,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     shadowRadius: 2
   }
-});
+})
 
-export default withMappedNavigationProps()(ArtisanDetail);
+export default withMappedNavigationProps()(ArtisanDetail)
