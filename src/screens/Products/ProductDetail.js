@@ -6,8 +6,16 @@ import {
   Card,
   CardSection
 } from '@components';
-import { View, Text, Image, ScrollView, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  ScrollView,
+  StyleSheet,
+  FlatList
+} from 'react-native';
 import { withMappedNavigationProps } from 'react-navigation-props-mapper';
+import { Icon, List } from 'react-native-elements';
 
 class ProductDetail extends Component {
   static navigationOptions = {
@@ -17,33 +25,10 @@ class ProductDetail extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      productMainCategory: '',
-      productSubCategory: '',
-      productGender: '',
-      productMainPicture: '',
-      productTitle: 'Widgets',
-      productDescription: '',
-      productStandardPrice: '',
-      productSellerSKU: '',
-      productQuantity: '',
-      productTime: '',
-      images: [
-        {
-          id: 0,
-          productUrl:
-            'https://i.pinimg.com/originals/87/2c/83/872c83322f27c9527a255149b03d4dfe.jpg'
-        },
-        {
-          id: 1,
-          productUrl:
-            'https://images-na.ssl-images-amazon.com/images/I/51jzNmEmiIL._AC_US400_QL65_.jpg'
-        },
-        {
-          id: 2,
-          productUrl:
-            'https://images-na.ssl-images-amazon.com/images/I/51svf2meabL._AC_US400_QL65_.jpg'
-        }
-      ]
+      showModel: false,
+      drawerOpen: false,
+      editExpanded: true,
+      statsExpanded: true
     };
   }
 
@@ -59,6 +44,16 @@ class ProductDetail extends Component {
               }}
             >
               <Text style={styles.headerText}>{this.props.Title}</Text>
+              <Icon
+                name="dots-vertical"
+                size={30}
+                color="orange"
+                type="material-community"
+                underlayColor={'rgb(71, 77, 84)'}
+                onPress={() =>
+                  this.setState({ editExpanded: !this.state.editExpanded })
+                }
+              />
             </CardSection>
             <CardSection>
               <ProfilePicture
@@ -66,17 +61,6 @@ class ProductDetail extends Component {
                 style={styles.image}
               />
             </CardSection>
-            <CardSection
-              style={{
-                backgroundColor: 'rgb(71, 77, 84)',
-                justifyContent: 'space-between'
-              }}
-            >
-              <Text style={styles.descriptionStyle}>
-                {this.props.Description}
-              </Text>
-            </CardSection>
-
             <CardSection style={{ backgroundColor: 'white' }}>
               <Button
                 style={{ height: 20, backgroundColor: 'white' }}
@@ -99,8 +83,77 @@ class ProductDetail extends Component {
                 justifyContent: 'space-between'
               }}
             >
-              <Text style={styles.headerText}>
-                Put product Info in this cardSection
+              <Text style={styles.headerText}>Description</Text>
+            </CardSection>
+            <CardSection
+              style={{
+                backgroundColor: 'rgb(163, 163, 163)',
+                justifyContent: 'space-between'
+              }}
+            >
+              <Text style={styles.descriptionStyle}>
+                {this.props.Description}
+              </Text>
+            </CardSection>
+          </Card>
+          <Card>
+            <CardSection
+              style={{
+                backgroundColor: 'rgb(71, 77, 84)',
+                justifyContent: 'space-between'
+              }}
+            >
+              <Text style={styles.headerText}>Info</Text>
+            </CardSection>
+            <CardSection
+              style={{
+                backgroundColor: 'rgb(163, 163, 163)',
+                justifyContent: 'space-between'
+              }}
+            >
+              <Text style={styles.ProductInfo}>Main Category</Text>
+              <Text style={styles.SectionListItemS}>
+                {this.props.MainCategory}
+              </Text>
+            </CardSection>
+            <CardSection
+              style={{
+                backgroundColor: 'rgb(163, 163, 163)',
+                justifyContent: 'space-between'
+              }}
+            >
+              <Text style={styles.ProductInfo}>Price</Text>
+              <Text style={styles.SectionListItemS}>
+                {'$' + this.props.StandardPrice}
+              </Text>
+            </CardSection>
+            <CardSection
+              style={{
+                backgroundColor: 'rgb(163, 163, 163)',
+                justifyContent: 'space-between'
+              }}
+            >
+              <Text style={styles.ProductInfo}>In Stock</Text>
+              <Text style={styles.SectionListItemS}>{this.props.Quantity}</Text>
+            </CardSection>
+            <CardSection
+              style={{
+                backgroundColor: 'rgb(163, 163, 163)',
+                justifyContent: 'space-between'
+              }}
+            >
+              <Text style={styles.ProductInfo}>Gender</Text>
+              <Text style={styles.SectionListItemS}>{this.props.Gender}</Text>
+            </CardSection>
+            <CardSection
+              style={{
+                backgroundColor: 'rgb(163, 163, 163)',
+                justifyContent: 'space-between'
+              }}
+            >
+              <Text style={styles.ProductInfo}>Number of Sales</Text>
+              <Text style={styles.SectionListItemS}>
+                {this.props.TimesSold}
               </Text>
             </CardSection>
           </Card>
@@ -171,6 +224,15 @@ const styles = StyleSheet.create({
     marginTop: 0,
     flex: 1,
     flexDirection: 'row'
+  },
+  ProductInfo: {
+    fontSize: 16,
+    color: 'white'
+  },
+  SectionListItemS: {
+    fontSize: 16,
+    padding: 4,
+    color: 'white'
   },
   imageContainer: {
     justifyContent: 'space-evenly',
