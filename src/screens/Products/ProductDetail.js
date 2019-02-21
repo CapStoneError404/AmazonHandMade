@@ -87,7 +87,7 @@ class ProductDetail extends Component {
             </CardSection>
             <CardSection
               style={{
-                backgroundColor: 'rgb(163, 163, 163)',
+                backgroundColor: 'white',
                 justifyContent: 'space-between'
               }}
             >
@@ -107,7 +107,7 @@ class ProductDetail extends Component {
             </CardSection>
             <CardSection
               style={{
-                backgroundColor: 'rgb(163, 163, 163)',
+                backgroundColor: 'white',
                 justifyContent: 'space-between'
               }}
             >
@@ -118,7 +118,7 @@ class ProductDetail extends Component {
             </CardSection>
             <CardSection
               style={{
-                backgroundColor: 'rgb(163, 163, 163)',
+                backgroundColor: 'white',
                 justifyContent: 'space-between'
               }}
             >
@@ -129,7 +129,7 @@ class ProductDetail extends Component {
             </CardSection>
             <CardSection
               style={{
-                backgroundColor: 'rgb(163, 163, 163)',
+                backgroundColor: 'white',
                 justifyContent: 'space-between'
               }}
             >
@@ -138,7 +138,7 @@ class ProductDetail extends Component {
             </CardSection>
             <CardSection
               style={{
-                backgroundColor: 'rgb(163, 163, 163)',
+                backgroundColor: 'white',
                 justifyContent: 'space-between'
               }}
             >
@@ -147,7 +147,7 @@ class ProductDetail extends Component {
             </CardSection>
             <CardSection
               style={{
-                backgroundColor: 'rgb(163, 163, 163)',
+                backgroundColor: 'white',
                 justifyContent: 'space-between'
               }}
             >
@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
   },
   descriptionStyle: {
     fontSize: 15,
-    color: 'white',
+    color: 'black',
     marginLeft: 5,
     flexDirection: 'row'
   },
@@ -227,12 +227,12 @@ const styles = StyleSheet.create({
   },
   ProductInfo: {
     fontSize: 16,
-    color: 'white'
+    color: 'black'
   },
   SectionListItemS: {
     fontSize: 16,
     padding: 4,
-    color: 'white'
+    color: 'black'
   },
   imageContainer: {
     justifyContent: 'space-evenly',
