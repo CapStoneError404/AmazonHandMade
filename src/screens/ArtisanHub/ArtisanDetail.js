@@ -16,32 +16,14 @@ import { withMappedNavigationProps } from 'react-navigation-props-mapper';
 import MessageData from '../Messaging/MessageData.json';
 import { FlatGrid, SectionGrid } from 'react-native-super-grid';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { Button } from 'react-native-elements';
+import { Button as NativeElementButton} from 'react-native-elements';
 
 class ArtisanDetail extends Component {
   static navigationOptions = ({navigation}) => {
     const uid = navigation.getParam('uid');
     return {
-      title: 'Artisan Details',
-      headerRight: (
-        <Button 
-          onPress={() => {
-            const foundArtisan = MessageData.find((message) => message.id === uid);
-            return (foundArtisan !== undefined) ? navigation.navigate('Conversation', { ...foundArtisan }) :
-              navigation.navigate('Messages')
-         }}
-         icon={<Icon name={'comment'} size={30} color='gray' />}
-         type="clear"
-        />
-      )
+      title: 'Artisan Details'
     }
-
-  componentDidMount() {
-      this.fetchProducts();
-  }
-
-  componentWillUpdate() {
-    LayoutAnimation.easeInEaseOut();
   }
 
   constructor(props) {
@@ -68,6 +50,14 @@ class ArtisanDetail extends Component {
     this.navigateToEditArtisan = this.navigateToEditArtisan.bind(this)
     this.fetchProducts = this.fetchProducts.bind(this);
     this.sortedProducts = this.sortedProducts.bind(this);
+  }
+
+  componentDidMount() {
+    this.fetchProducts()
+  }
+
+  componentWillUpdate() {
+    LayoutAnimation.easeInEaseOut()
   }
 
   onCancel() {

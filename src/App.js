@@ -45,23 +45,21 @@ const TabNavigator = createBottomTabNavigator(
     order: ['ArtisanHub', 'Messages' ,'Settings'],
     animationEnabled: true,
     navigationOptions: ({ navigation }) => ({
-      return {
-        tabBarIcon: ({ focused, tintColor }) => {
-          const { routeName } = navigation.state;
-          var iconName;
-          if (routeName === 'ArtisanHub') {
-            iconName = 'users';
-          } else if (routeName === 'Settings') {
-            iconName = 'cog';
-          } else if (routeName === 'Messages') {
-             iconName = 'comments';
-          }
+      tabBarIcon: ({ focused, tintColor }) => {
+        const { routeName } = navigation.state;
+        var iconName;
+        if (routeName === 'ArtisanHub') {
+          iconName = 'users';
+        } else if (routeName === 'Settings') {
+          iconName = 'cog';
+        } else if (routeName === 'Messages') {
+            iconName = 'comments';
+        }
 
-          return <Icon name={iconName} size={25} color={tintColor} />
-        },
-        tabBarVisible: true
-      }
-    }
+        return <Icon name={iconName} size={25} color={tintColor} />
+      },
+      tabBarVisible: true
+    })
   }
 );
 
