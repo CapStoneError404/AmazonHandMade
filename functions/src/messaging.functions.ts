@@ -30,12 +30,15 @@ export async function sendMessage(data, context) {
   const message = data.message
 
   for(var i in phoneNumbers) {
-    sendText(phoneNumbers[i], message.contents)
+    await sendText(phoneNumbers[i], message.contents)
   }
 
   let conversationID = await updateDatabaseWithMessage(message, sender, recipients)
   let conversationSnapshot = await admin.database().ref(`/conversations/${conversationID}`).once('value')
-  return conversationSnapshot.val()
+  return {
+    uid: conversationID,
+    ...conversationSnapshot.val()
+  }
 }
 
 export async function receiveMessage(req, res) {
@@ -56,16 +59,17 @@ export async function receiveMessage(req, res) {
   // Update the database
   let message = {
     contents: text,
-    timeCreated: (new Date()).toDateString()
+    timeCreated: (new Date()).valueOf()
   }
   return updateDatabaseWithMessage(message, artisanId, [cgaId])
 }
 
 function sendText(number, msg) {
+  console.log(`Sending text to ${number} with message: ${msg}`)
   return client.messages.create({
     body: msg,
-    from: '+15304884220',
-    to: "+" + number
+    from: twilioInfo.phoneNumber,
+    to: number
   }).then(message => console.log(message.sid))
 }
 

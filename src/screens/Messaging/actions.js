@@ -12,7 +12,7 @@ export function sendMessage(sender, message, recipients) {
         sender: sender,
         recipients: recipients,
         message: {
-          timeCreated: (new Date()).toDateString(),
+          timeCreated: (new Date()).valueOf(),
           contents: message
         }        
       })
@@ -23,8 +23,7 @@ export function sendMessage(sender, message, recipients) {
       resolve()
       dispatch({
         type: 'SEND_MESSAGE', 
-        conversation: response.data.conversation, 
-        message: response.data.message
+        conversation: convertConversation(response.data)
       })
     })
   }
@@ -48,15 +47,16 @@ export function fetchConversations(cgaID) {
 
       for(var uid in conversations) {
         if(conversationIds.includes(uid)) {
-          conversationArray.push({
+          let conversationObject = {
             uid: uid,
             ...conversations[uid]
-          })
+          }
+          conversationArray.push(convertConversation(conversationObject))
         }
       }
 
       resolve()
-      dispatch({type: 'GET_CONVERSATIONS', conversations: conversationsArray})
+      dispatch({type: 'GET_CONVERSATIONS', conversations: conversationArray})
     })
   }
 }
@@ -70,5 +70,29 @@ export function receiveMessage(message, conversationID) {
       resolve()
       dispatch({type: 'RECEIVE_MESSAGE', message: message, conversation: conversationID})
     })
+  }
+}
+
+function convertConversation(conversationObject) {
+  console.log("Converting conversation object:")
+  console.log(conversationObject)
+  
+  var messages = []
+
+  for(var mUID in conversationObject.messages) {
+    messages.push({
+      uid: mUID,
+      ...conversationObject.messages[mUID]
+    })
+  }
+
+  messages.sort((first, second) => {
+    return first.timeCreated - second.timeCreated
+  })
+
+  return {
+    uid: conversationObject.uid,
+    participants: Object.keys(conversationObject.participants),
+    messages: messages
   }
 }

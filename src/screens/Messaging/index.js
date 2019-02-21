@@ -7,7 +7,8 @@ function mapStateToProps(state) {
   return {
     User: state.User,
     Artisans: state.Artisans,
-    Errors: state.Errors
+    Errors: state.Errors,
+    Conversations: state.Conversations
   };
 }
 
@@ -15,14 +16,14 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ ...actions, ...globalActions }, dispatch);
 }
 
-import { default as UnconnectedMessageList } from './MessageList';
-import { default as UnconnectedMessage } from './Message';
+import { default as UnconnectedConversationList } from './ConversationList';
+import { default as UnconnectedConversation } from './Conversation';
 
-const MessageList = connect(mapStateToProps, mapDispatchToProps)(UnconnectedMessageList)
-const Message = connect(mapStateToProps, mapDispatchToProps)(UnconnectedMessage)
+const ConversationList = connect(mapStateToProps, mapDispatchToProps)(UnconnectedConversationList)
+const Conversation = connect(mapStateToProps, mapDispatchToProps)(UnconnectedConversation)
 
 
 export {
-  MessageList,
-  Message
+  ConversationList,
+  Conversation
 }

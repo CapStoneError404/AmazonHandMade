@@ -27,7 +27,7 @@ export default class ArtisanList extends Component {
 
     this.fetchArtisans = this.fetchArtisans.bind(this)
     this.navigateToArtisan = this.navigateToArtisan.bind(this)
-    
+    this.sortedArtisans = this.sortedArtisans.bind(this)
   }
 
   componentDidMount() {
@@ -40,10 +40,8 @@ export default class ArtisanList extends Component {
       this.setState({fetchingArtisans: false})
     })
   }
-
   
   navigateToArtisan(artisan) {
-     console.log("artisan: " + artisan)
     this.props.navigation.navigate('ArtisanDetail', {...artisan})
   }
 

@@ -15,7 +15,7 @@ class ArtisanDetail extends Component {
         <Button 
           onPress={() => {
             const foundArtisan = MessageData.find((message) => message.id === uid);
-            return (foundArtisan !== undefined) ? navigation.navigate('Message', { ...foundArtisan }) :
+            return (foundArtisan !== undefined) ? navigation.navigate('Conversation', { ...foundArtisan }) :
               navigation.navigate('Messages')
          }}
          icon={<Icon name={'comment'} size={30} color='gray' />}

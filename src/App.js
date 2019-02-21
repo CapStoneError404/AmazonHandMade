@@ -13,7 +13,7 @@ import { Login, Register, ForgotPassword } from '@screens/Auth'
 import Settings from '@screens/Settings'
 import Launch from '@screens/Launch'
 import { ArtisanList, AddArtisan, ArtisanDetail } from '@screens/ArtisanHub'
-import { Message, MessageList } from '@screens/Messaging';
+import { Conversation, ConversationList } from '@screens/Messaging';
 import { AddProduct } from '@screens/Products'
 
 const ArtisanHubStack = createStackNavigator(
@@ -27,8 +27,8 @@ const ArtisanHubStack = createStackNavigator(
 
 const MessageNavigator = createStackNavigator(
   {
-    Messages: MessageList,
-    Message: Message
+    Conversations: ConversationList,
+    Conversation: Conversation
   }
 )
 
