@@ -47,6 +47,19 @@ or
 react-native run-android
 ```
 
+
+## Submitting PRs
+First make sure you are following the style guide by running:
+```
+npm run lint
+```
+
+To try to automatically fix errors:
+```
+npm run lint -- --fix
+```
+
+
 ## Firebase Cloud Functions
 
 To contribute to our firebase cloud functions, you need to install some dependenices on your machine.

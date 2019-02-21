@@ -16,15 +16,14 @@ import {
   Image,
   TouchableOpacity,
   LayoutAnimation,
-  Platform,
   ActivityIndicator
 } from 'react-native';
 import { withMappedNavigationProps } from 'react-navigation-props-mapper';
-import { FlatGrid, SectionGrid } from 'react-native-super-grid';
+import { FlatGrid } from 'react-native-super-grid';
 import { Icon } from 'react-native-elements';
 
 class ArtisanDetail extends Component {
-  static navigationOptions = ({ navigation }) => {
+  static navigationOptions = () => {
     return {
       title: 'Artisan Details'
     };
@@ -34,7 +33,7 @@ class ArtisanDetail extends Component {
     this.fetchProducts();
   }
 
-  componentWillUpdate() {
+  componentDidUpdate() {
     LayoutAnimation.easeInEaseOut();
   }
 
@@ -80,13 +79,7 @@ class ArtisanDetail extends Component {
   }
 
   navigateToEditArtisan() {
-    const {
-      name,
-      phoneNumber,
-      description,
-      profilePictureURL,
-      uid
-    } = this.props;
+    const { name, phoneNumber, description, uid } = this.props;
     this.props.navigation.navigate('EditArtisan', {
       name,
       phoneNumber,
@@ -223,7 +216,6 @@ class ArtisanDetail extends Component {
                 }
               />
             </CardSection>
-
             <CardSection>
               <ProfilePicture
                 source={{ uri: profilePictureURL }}
@@ -235,13 +227,11 @@ class ArtisanDetail extends Component {
                 <Text style={styles.phoneStyle}>Location: Mexico</Text>
               </View>
             </CardSection>
-
             <CardSection style={{ flex: 1, flexDirection: 'column' }}>
               <Text style={styles.descriptionStyle}>{description}</Text>
             </CardSection>
             {this.renderEditButton()}
           </Card>
-
           <Card>
             <CardSection
               style={{
@@ -263,7 +253,6 @@ class ArtisanDetail extends Component {
                 }
               />
             </CardSection>
-
             <CardSection>
               {this.props.Products != [] && this.state.fetchingProducts ? (
                 <ActivityIndicator
@@ -277,7 +266,7 @@ class ArtisanDetail extends Component {
                   items={this.sortedProducts().slice(0, 6)}
                   style={styles.gridView}
                   extraData={this.state}
-                  renderItem={({ item, section, index }) => {
+                  renderItem={({ item }) => {
                     return (
                       <TouchableOpacity
                         style={styles.elevationLow}

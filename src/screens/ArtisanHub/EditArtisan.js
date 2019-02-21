@@ -1,14 +1,14 @@
-import { AddImage, AsyncButton, UserInput, Wallpaper } from '@components';
-import React, { Component } from 'react';
-import { StyleSheet, View } from 'react-native';
-import ImagePicker from 'react-native-image-crop-picker';
-import { withMappedNavigationProps } from 'react-navigation-props-mapper';
+import { AddImage, AsyncButton, UserInput, Wallpaper } from '@components'
+import React, { Component } from 'react'
+import { StyleSheet, View } from 'react-native'
+import ImagePicker from 'react-native-image-crop-picker'
+import { withMappedNavigationProps } from 'react-navigation-props-mapper'
 
 class EditArtisan extends Component {
-  static navigationOptions = ({ navigation }) => {
-     return {
+  static navigationOptions = () => {
+    return {
       title: 'Edit Artisan'
-     }
+    }
     
   }
 
@@ -35,7 +35,7 @@ class EditArtisan extends Component {
       cropping: true
     }).then(image => {
       this.setState({profilePicturePath: image.path})
-    });
+    })
   }
 
   verifyFields() {
@@ -61,8 +61,8 @@ class EditArtisan extends Component {
         description: this.state.description
       }).then(() => {
         this.setState({adding: false})
-        this.props.navigation.state.params.onNavigateBack();
-        this.props.navigation.goBack();
+        this.props.navigation.state.params.onNavigateBack()
+        this.props.navigation.goBack()
       })
     }
   }
@@ -170,4 +170,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default withMappedNavigationProps()(EditArtisan);
+export default withMappedNavigationProps()(EditArtisan)

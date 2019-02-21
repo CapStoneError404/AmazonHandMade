@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View } from 'react-native';
 import {
   createStackNavigator,
   createSwitchNavigator,
   createBottomTabNavigator
 } from 'react-navigation';
-import { FluidNavigator } from 'react-navigation-fluid-transitions';
 import DropdownAlert from 'react-native-dropdownalert';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Login, Register, ForgotPassword } from '@screens/Auth';
@@ -39,7 +38,7 @@ const TabNavigator = createBottomTabNavigator(
     animationEnabled: true,
     navigationOptions: ({ navigation }) => {
       return {
-        tabBarIcon: ({ focused, tintColor }) => {
+        tabBarIcon: ({ tintColor }) => {
           const { routeName } = navigation.state;
           var iconName;
           if (routeName === 'ArtisanHub') {

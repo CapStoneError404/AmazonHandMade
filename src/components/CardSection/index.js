@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import React, { Component } from 'react'
+import { View, StyleSheet } from 'react-native'
 
 export default class CardSection extends Component {
-   render() {
-      return (
-        <View style={[ styles.containerStyle, this.props.style ]}>
-          {this.props.children}
-        </View>
-      )
-   }
+  render() {
+    return (
+      <View style={[ styles.containerStyle, this.props.style ]}>
+        {this.props.children}
+      </View>
+    )
+  }
 }
 
 const styles = StyleSheet.create({
@@ -21,6 +21,6 @@ const styles = StyleSheet.create({
     borderColor: '#ddd',
     position: 'relative'
   }
-});
+})
 
 //export { CardSection };
