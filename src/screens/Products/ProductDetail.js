@@ -6,16 +6,9 @@ import {
   Card,
   CardSection
 } from '@components'
-import {
-  View,
-  Text,
-  Image,
-  ScrollView,
-  StyleSheet,
-  FlatList
-} from 'react-native'
+import { Text, ScrollView, StyleSheet } from 'react-native'
 import { withMappedNavigationProps } from 'react-navigation-props-mapper'
-import { Icon, List } from 'react-native-elements'
+import { Icon } from 'react-native-elements'
 
 class ProductDetail extends Component {
   static navigationOptions = {
