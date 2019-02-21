@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native'
+import React, { Component } from 'react'
+import { View } from 'react-native'
 import { createStackNavigator, createSwitchNavigator, createBottomTabNavigator } from 'react-navigation'
-import { FluidNavigator } from 'react-navigation-fluid-transitions'
 import DropdownAlert from 'react-native-dropdownalert'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import { Login, Register, ForgotPassword } from '@screens/Auth'
@@ -32,7 +31,7 @@ const TabNavigator = createBottomTabNavigator(
     animationEnabled: true,
     navigationOptions: ({navigation}) => {
       return {
-      tabBarIcon: ({ focused, tintColor }) => {
+      tabBarIcon: ({ tintColor }) => {
         const { routeName } = navigation.state
         var iconName
         if(routeName === 'ArtisanHub') {
@@ -98,8 +97,8 @@ class Main extends Component {
   }
 }
 
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
 import * as actions from '@actions'
 
 function mapStateToProps(state) {
@@ -109,7 +108,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(actions, dispatch);
+  return bindActionCreators(actions, dispatch)
 }
 
 const App = connect(

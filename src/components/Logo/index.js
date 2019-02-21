@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { Image, StyleSheet } from 'react-native';
+import React, { Component } from 'react'
+import { Image, StyleSheet } from 'react-native'
 
 export default class Logo extends Component {
   render() {
     return (
       <Image testID='handmade_logo' style={styles.logo} resizeMode='contain' source={require('../../../assets/images/1x/HandmadeLogo.png')} />
-    );
+    )
   }
 }
 
@@ -15,4 +15,4 @@ const styles = StyleSheet.create({
     height: undefined,
     width: undefined
   }
-});
+})

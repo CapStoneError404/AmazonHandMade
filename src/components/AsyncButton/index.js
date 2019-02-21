@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { ActivityIndicator, StyleSheet, Text, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
+import { ActivityIndicator, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 export default class AsyncButton extends Component {
   render() {
@@ -46,7 +46,7 @@ AsyncButton.propTypes = {
   style: PropTypes.object,
   spinning: PropTypes.bool,
   testID: PropTypes.string
-};
+}
 
 const styles = StyleSheet.create({
   buttonWrapper: {
@@ -71,4 +71,4 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold'
   }
-});
+})

@@ -1,8 +1,8 @@
 import firebase from 'react-native-firebase'
 
 export function createProduct(data, artisanID) {
-  return (dispatch, prevState) => { 
-    return new Promise(async (resolve, reject) => {
+  return (dispatch) => { 
+    return new Promise(async (resolve) => {
       console.log("Pushing a new product to db...")
       var db_ref = await firebase.database().ref('products/').push({
         MainCategory: data.mainCategory,

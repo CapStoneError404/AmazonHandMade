@@ -1,7 +1,7 @@
-import { Button } from '@components';
-import React, { Component } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
+import { Button } from '@components'
+import React, { Component } from 'react'
+import { ScrollView, StyleSheet, Text, View } from 'react-native'
+import LinearGradient from 'react-native-linear-gradient'
 
 
 export default class Settings extends Component {

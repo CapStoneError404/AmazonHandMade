@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview';
-import LinearGradient from 'react-native-linear-gradient';
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
+import { StyleSheet } from 'react-native'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
+import LinearGradient from 'react-native-linear-gradient'
 
 export default class Wallpaper extends Component {
   render() {
@@ -12,13 +12,13 @@ export default class Wallpaper extends Component {
           {this.props.children}
         </KeyboardAwareScrollView>
       </LinearGradient>
-    );
+    )
   }
 }
 
 Wallpaper.propTypes = {
   style: PropTypes.object
-};
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -30,4 +30,4 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'space-between'
   }
-});
+})
