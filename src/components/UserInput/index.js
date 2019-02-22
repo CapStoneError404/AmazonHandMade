@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { StyleSheet, TextInput, View } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
+import { StyleSheet, TextInput, View } from 'react-native'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 export default class UserInput extends Component {
   render() {
@@ -18,7 +18,7 @@ export default class UserInput extends Component {
           style={[styles.input, this.props.style]}
         />
       </View>
-    );
+    )
   }
 }
 
@@ -26,7 +26,7 @@ UserInput.propTypes = {
   iconName: PropTypes.string,
   style: PropTypes.object,
   testID: PropTypes.string
-};
+}
 
 const styles = StyleSheet.create({
   singleLineInputWrapper: {
@@ -63,4 +63,4 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 20
   }
-});
+})
