@@ -147,7 +147,10 @@ class ArtisanDetail extends Component {
             style={{ height: 20, backgroundColor: 'white' }}
             title="View All"
             textColor="orange"
-            onPress={() => this.props.navigation.navigate('ProductList', { currentProducts: this.sortedProducts(), currentUID: this.props.uid })}
+            onPress={() => this.props.navigation.navigate('ProductList', { 
+              currentProducts: this.sortedProducts(), 
+              currentUID: this.props.uid 
+            })}
           />
         </CardSection>
       )

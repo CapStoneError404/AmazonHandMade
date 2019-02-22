@@ -33,7 +33,7 @@ class ProductList extends Component {
       <TouchableOpacity
         testID={`listItem${index}`}
         style={styles.productListView}
-        onPress={() => console.log("pressed item")}
+        onPress={() => this.props.navigation.navigate('ProductDetail', {...item})}
         key={item.key}
       >
         <ProfilePicture
