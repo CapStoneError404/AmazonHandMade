@@ -66,3 +66,4 @@ package-lock.json
 .watchman-cookie*
 .editorconfig
 service-account.json
+twilio.json
