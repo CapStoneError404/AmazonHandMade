@@ -22,7 +22,8 @@ class ProductList extends Component {
     super(props) 
 
     this.state = { 
-      showProductList: false
+      showProductList: false,
+      currentProducts: this.props.currentProducts
     }
 
   }

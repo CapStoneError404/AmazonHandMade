@@ -190,12 +190,7 @@ class ArtisanDetail extends Component {
   }
 
   render() {
-    const {
-      name,
-      phoneNumber,
-      description,
-      profilePictureURL
-    } = this.state.currentArtisan
+    const { name, phoneNumber, description, profilePictureURL } = this.state.currentArtisan
     return (
       <Wallpaper style={styles.container}>
         <ScrollView style={{ flex: 1.8 }}>
