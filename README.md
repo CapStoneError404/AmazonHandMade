@@ -21,6 +21,17 @@ cd AmazonHandMade
 npm i
 ```
 
+#### Download API key files
+There are certain files that shouldn't be hosted on GitHub and so they must be manually downloaded.
+
+There are two Firebase files: google-services.json and GoogleService-Info.plist. These can be downloaded by going to https://console.firebase.google.com/u/0/project/handmade-error-404/settings/general/ and scrolling down to "Your apps". You'll see a download button in the top right of this window, click it for both the Android app and iOS app.
+
+GoogleServices-Info.plist should be placed at /AmazonHandmade/ios/
+
+google-services.json should be placed at /AmazonHandmade/android/app/
+
+Other files may exist, such as for cloud functions, that have instructions in the source code where they are used.
+
 ### Testing for IOS (Android soon to come)
 
 Run the following commands in terminal to get testing set up and run current test for project

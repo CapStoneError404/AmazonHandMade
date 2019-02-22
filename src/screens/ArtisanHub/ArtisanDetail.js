@@ -1,5 +1,12 @@
-import { ProfilePicture, Wallpaper, AsyncButton, Card, CardSection, Button } from '@components'
 import React, { Component } from 'react'
+import {
+  ProfilePicture,
+  Wallpaper,
+  AsyncButton,
+  Card,
+  CardSection,
+  Button
+} from '@components'
 import {
   ScrollView,
   StyleSheet,
@@ -14,22 +21,12 @@ import {
 import { withMappedNavigationProps } from 'react-navigation-props-mapper'
 import { FlatGrid } from 'react-native-super-grid'
 import { Icon } from 'react-native-elements'
-
 class ArtisanDetail extends Component {
   static navigationOptions = () => {
     return {
-      title: "Artisan Details",
+      title: 'Artisan Details'
     }
-  }
-
-  componentDidMount() {
-    this.fetchProducts()
-  }
-
-  componentDidUpdate() {
-    LayoutAnimation.easeInEaseOut()
-  }
-
+  };
 
   constructor(props) {
     super(props)
@@ -41,9 +38,10 @@ class ArtisanDetail extends Component {
       fetchingProducts: false,
       editExpanded: true,
       productsExpanded: true,
-      currentArtisan: this.props.Artisans.find((item) => item.uid === this.props.uid),
+      currentArtisan: this.props.Artisans.find(
+        item => item.uid === this.props.uid
+      ),
       currentProducts: []
-
     }
 
     this.onCancel = this.onCancel.bind(this)
@@ -54,34 +52,59 @@ class ArtisanDetail extends Component {
     this.navigateToEditArtisan = this.navigateToEditArtisan.bind(this)
     this.fetchProducts = this.fetchProducts.bind(this)
     this.sortedProducts = this.sortedProducts.bind(this)
-
   }
 
-  fetchProducts() {
-    const { uid } = this.props
-    this.setState({ fetchingProducts: true })
-    this.props.fetchProducts(uid).then(() => {
-      this.setState({ fetchingProducts: false, currentProducts: this.props.Products })
-    })
+  componentDidMount() {
+    this.fetchProducts()
+  }
+
+  componentDidUpdate() {
+    LayoutAnimation.easeInEaseOut()
   }
 
   onCancel() {
     this.setState({ adding: false })
   }
 
+  deletePressed() {
+    this.setState({ adding: true })
+    this.props.deleteArtisan(this.props.Artisans, this.props.uid).then(() => {
+      this.setState({ adding: false })
+      this.props.navigation.navigate('ArtisanList')
+    })
+  }
+
+  fetchProducts() {
+    const { uid } = this.props
+    this.setState({ fetchingProducts: true })
+    this.props.fetchProducts(uid).then(() => {
+      this.setState({
+        fetchingProducts: false,
+        currentProducts: this.props.Products
+      })
+    })
+  }
+
   navigateToEditArtisan() {
-    const { name, phoneNumber, description, uid } = this.props
-    this.props.navigation.navigate('EditArtisan', { name, phoneNumber, description, uid, onNavigateBack: this.handleOnNavigateBack })
+    const { name, phoneNumber, description, uid } = this.state.currentArtisan
+    this.props.navigation.navigate('EditArtisan', {
+      name,
+      phoneNumber,
+      description,
+      uid,
+      onNavigateBack: this.handleOnNavigateBack
+    })
   }
 
   //This method is needed to update artisan detail on the fly if using react navigation
   handleOnNavigateBack = () => {
     this.fetchProducts()
     this.setState({
-      currentArtisan: this.props.Artisans.find((item) => item.uid === this.props.uid),
-
+      currentArtisan: this.props.Artisans.find(
+        item => item.uid === this.props.uid
+      )
     })
-  }
+  };
 
   //Renders the edit button and message button when button is clicked
   renderEditButton() {
@@ -90,15 +113,15 @@ class ArtisanDetail extends Component {
         <CardSection style={{ backgroundColor: 'white' }}>
           <Button
             style={{ height: 20, backgroundColor: 'white' }}
-            title='Edit'
-            textColor='orange'
+            title="Edit"
+            textColor="orange"
             onPress={() => this.navigateToEditArtisan()}
           />
           <Button
             style={{ height: 25, backgroundColor: 'white' }}
-            title='Message'
-            textColor='orange'
-            onPress={() => console.log("Pressed message button")}
+            title="Message"
+            textColor="orange"
+            onPress={() => console.log('Pressed message button')}
           />
         </CardSection>
       )
@@ -111,29 +134,24 @@ class ArtisanDetail extends Component {
         <CardSection style={{ backgroundColor: 'white' }}>
           <Button
             style={{ height: 20, backgroundColor: 'white' }}
-            title='Add'
-            textColor='orange'
-            onPress={() => this.props.navigation.navigate('AddProduct', { currentUID: this.props.uid, onNavigateBack: this.handleOnNavigateBack })}
+            title="Add"
+            textColor="orange"
+            onPress={() =>
+              this.props.navigation.navigate('AddProduct', {
+                currentUID: this.props.uid,
+                onNavigateBack: this.handleOnNavigateBack
+              })
+            }
           />
           <Button
             style={{ height: 20, backgroundColor: 'white' }}
-            title='View All'
-            textColor='orange'
+            title="View All"
+            textColor="orange"
             onPress={() => this.props.navigation.navigate('ProductList', { currentProducts: this.sortedProducts(), currentUID: this.props.uid })}
-          //onPress={() => console.log(this.state.currentProducts)}
           />
         </CardSection>
       )
     }
-  }
-
-  deletePressed() {
-    this.setState({ adding: true })
-    this.props.deleteArtisan(this.props.Artisans, this.props.uid)
-      .then(() => {
-        this.setState({ adding: false })
-        this.props.navigation.navigate("ArtisanList")
-      })
   }
 
   showAlert() {
@@ -144,11 +162,11 @@ class ArtisanDetail extends Component {
         {
           text: 'Cancel',
           onPress: () => this.onCancel(),
-          style: 'cancel',
+          style: 'cancel'
         },
-        { text: 'OK', onPress: () => this.deletePressed() },
+        { text: 'OK', onPress: () => this.deletePressed() }
       ],
-      { cancelable: false },
+      { cancelable: false }
     )
   }
 
@@ -158,12 +176,9 @@ class ArtisanDetail extends Component {
       sortedProducts.sort((first, second) => {
         p1 = first.TimesSold
         p2 = second.TimesSold
-        if (p1 < p2)
-          return 1
-        else if (p1 > p2)
-          return -1
-        else
-          return 0
+        if (p1 < p2) return 1
+        else if (p1 > p2) return -1
+        else return 0
       })
       return sortedProducts
     } else {
@@ -172,20 +187,32 @@ class ArtisanDetail extends Component {
   }
 
   render() {
-    const { name, phoneNumber, description, profilePictureURL } = this.state.currentArtisan
+    const {
+      name,
+      phoneNumber,
+      description,
+      profilePictureURL
+    } = this.state.currentArtisan
     return (
       <Wallpaper style={styles.container}>
         <ScrollView style={{ flex: 1.8 }}>
           <Card>
-            <CardSection style={{ backgroundColor: 'rgb(71, 77, 84)', justifyContent: 'space-between' }}>
+            <CardSection
+              style={{
+                backgroundColor: 'rgb(71, 77, 84)',
+                justifyContent: 'space-between'
+              }}
+            >
               <Text style={styles.headerText}>Artisan info</Text>
               <Icon
                 name="dots-vertical"
                 size={30}
                 color="orange"
-                type='material-community'
+                type="material-community"
                 underlayColor={'rgb(71, 77, 84)'}
-                onPress={() => this.setState({ editExpanded: !this.state.editExpanded })}
+                onPress={() =>
+                  this.setState({ editExpanded: !this.state.editExpanded })
+                }
               />
             </CardSection>
             <CardSection>
@@ -205,25 +232,34 @@ class ArtisanDetail extends Component {
             {this.renderEditButton()}
           </Card>
           <Card>
-            <CardSection style={{ backgroundColor: 'rgb(71, 77, 84)', justifyContent: 'space-between' }}>
+            <CardSection
+              style={{
+                backgroundColor: 'rgb(71, 77, 84)',
+                justifyContent: 'space-between'
+              }}
+            >
               <Text style={styles.headerText}>Top Products</Text>
               <Icon
                 name="dots-vertical"
                 size={30}
                 color="orange"
-                type='material-community'
+                type="material-community"
                 underlayColor={'rgb(71, 77, 84)'}
-                onPress={() => this.setState({ productsExpanded: !this.state.productsExpanded })}
+                onPress={() =>
+                  this.setState({
+                    productsExpanded: !this.state.productsExpanded
+                  })
+                }
               />
             </CardSection>
             <CardSection>
-              {(this.props.Products != [] && this.state.fetchingProducts) ?
+              {this.props.Products != [] && this.state.fetchingProducts ? (
                 <ActivityIndicator
-                  size='large'
+                  size="large"
                   animating={this.props.spinning}
-                  color='white'
+                  color="white"
                 />
-                :
+              ) : (
                 <FlatGrid
                   itemDimension={90}
                   items={this.sortedProducts().slice(0, 6)}
@@ -233,15 +269,21 @@ class ArtisanDetail extends Component {
                     return (
                       <TouchableOpacity
                         style={styles.elevationLow}
-                        onPress={() => this.props.navigation.navigate('ProductDetail', { ...item })}
-                      //onPress={() => console.log("navigate to product detail")}
+                        onPress={() =>
+                          this.props.navigation.navigate('ProductDetail', {
+                            ...item
+                          })
+                        }
                       >
-                        <Image style={styles.imageContainer} source={{ uri: item.mainPictureURL }} />
+                        <Image
+                          style={styles.imageContainer}
+                          source={{ uri: item.mainPictureURL }}
+                        />
                       </TouchableOpacity>
                     )
                   }}
                 />
-              }
+              )}
             </CardSection>
             {this.renderProductButton()}
           </Card>
@@ -278,7 +320,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 30,
     color: '#444444',
-    marginLeft: 5,
+    marginLeft: 5
   },
   phoneStyle: {
     flex: 2,
@@ -290,7 +332,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#444444',
     marginLeft: 5,
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   descriptionTitle: {
     flexDirection: 'row',
@@ -325,8 +367,8 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.8,
-    shadowRadius: 2,
-  },
+    shadowRadius: 2
+  }
 })
 
 export default withMappedNavigationProps()(ArtisanDetail)
