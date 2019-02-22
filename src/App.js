@@ -7,23 +7,26 @@ import {
 } from 'react-navigation';
 import DropdownAlert from 'react-native-dropdownalert';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { Login, Register, ForgotPassword } from '@screens/Auth'
-import Settings from '@screens/Settings'
-import Launch from '@screens/Launch'
-import { ArtisanList, AddArtisan, ArtisanDetail, EditArtisan } from '@screens/ArtisanHub'
+import { Login, Register, ForgotPassword } from '@screens/Auth';
+import Settings from '@screens/Settings';
+import Launch from '@screens/Launch';
+import {
+  ArtisanList,
+  AddArtisan,
+  ArtisanDetail,
+  EditArtisan
+} from '@screens/ArtisanHub';
 import { Conversation, ConversationList } from '@screens/Messaging';
-import { AddProduct } from '@screens/Products'
+import { AddProduct, ProductDetail } from '@screens/Products';
 
-const ArtisanHubStack = createStackNavigator(
-  {
-    ArtisanList: ArtisanList,
-    AddArtisan: AddArtisan,
-    ArtisanDetail:ArtisanDetail,
-    EditArtisan: EditArtisan,
-    AddProduct: AddProduct,
-    
-  }
-)
+const ArtisanHubStack = createStackNavigator({
+  ArtisanList: ArtisanList,
+  AddArtisan: AddArtisan,
+  ArtisanDetail: ArtisanDetail,
+  EditArtisan: EditArtisan,
+  AddProduct: AddProduct,
+  ProductDetail: ProductDetail
+});
 
 const MessageNavigator = createStackNavigator(
   {
@@ -109,9 +112,9 @@ class Main extends Component {
   }
 }
 
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import * as actions from '@actions'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as actions from '@actions';
 
 function mapStateToProps(state) {
   return {
@@ -120,7 +123,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(actions, dispatch)
+  return bindActionCreators(actions, dispatch);
 }
 
 const App = connect(
