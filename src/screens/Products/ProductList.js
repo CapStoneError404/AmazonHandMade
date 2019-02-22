@@ -1,8 +1,8 @@
-import { Wallpaper } from '@components';
-import React, { Component } from 'react';
-import { ActivityIndicator, Button, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { ProfilePicture } from '../../components';
-import { withMappedNavigationProps } from 'react-navigation-props-mapper';
+import { Wallpaper } from '@components'
+import React, { Component } from 'react'
+import { ActivityIndicator, Button, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { ProfilePicture } from '../../components'
+import { withMappedNavigationProps } from 'react-navigation-props-mapper'
 
 class ProductList extends Component {
   static navigationOptions = ({navigation}) => {
@@ -28,47 +28,47 @@ class ProductList extends Component {
   }
 
   _renderProductListItem = ({item, index}) => {
-      return (
+    return (
          
-        <TouchableOpacity
-          testID={`listItem${index}`}
-          style={styles.productListView}
-          onPress={() => console.log("pressed item")}
-          key={item.key}
-        >
-          <ProfilePicture
-            source={{uri: item.mainPictureURL}}
-            style={styles.image}
-          />
+      <TouchableOpacity
+        testID={`listItem${index}`}
+        style={styles.productListView}
+        onPress={() => console.log("pressed item")}
+        key={item.key}
+      >
+        <ProfilePicture
+          source={{uri: item.mainPictureURL}}
+          style={styles.image}
+        />
           
-          <View style={styles.nameItem}>
-            <Text style={styles.text}>{item.Title}</Text>
-            <Text style={styles.text}>{`Price: $${item.StandardPrice}`}</Text>
-            <Text style={styles.text}>{`Quantity: ${item.Quantity}`}</Text>
-          </View>
-        </TouchableOpacity>
-      )
+        <View style={styles.nameItem}>
+          <Text style={styles.text}>{item.Title}</Text>
+          <Text style={styles.text}>{`Price: $${item.StandardPrice}`}</Text>
+          <Text style={styles.text}>{`Quantity: ${item.Quantity}`}</Text>
+        </View>
+      </TouchableOpacity>
+    )
   }
 
-  _keyExtractor = (item, index) => item.productID
+  _keyExtractor = (item) => item.productID
 
   
   render() {
     return (
       <Wallpaper>
         {(this.props.Products != [] && this.state.fetchingProductList) ? 
-        <ActivityIndicator 
-          size='large'
-          animating={this.props.spinning}
-          color='white'
-        />
-        :
-        <FlatList
-          testID='product_list'
-          data={this.props.currentProducts}
-          keyExtractor={this._keyExtractor}
-          renderItem={this._renderProductListItem}
-        />
+          <ActivityIndicator 
+            size='large'
+            animating={this.props.spinning}
+            color='white'
+          />
+          :
+          <FlatList
+            testID='product_list'
+            data={this.props.currentProducts}
+            keyExtractor={this._keyExtractor}
+            renderItem={this._renderProductListItem}
+          />
         }
       </Wallpaper>
     )

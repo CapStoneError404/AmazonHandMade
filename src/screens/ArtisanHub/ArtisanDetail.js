@@ -123,7 +123,7 @@ class ArtisanDetail extends Component {
           //onPress={() => console.log(this.state.currentProducts)}
           />
         </CardSection>
-      );
+      )
     }
   }
 

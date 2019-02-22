@@ -122,10 +122,10 @@ export function fetchProducts(artisanID) {
 // Also check that artisan has an image if so delete that from storage
 export function deleteArtisan(artisans, artisan) {
   return (dispatch) => {
-    return new Promise(async (resolve, reject) => {
-      const artisanToDelete = artisans.find((item) => item.uid === artisan);
+    return new Promise(async (resolve) => {
+      const artisanToDelete = artisans.find((item) => item.uid === artisan)
       if (artisanToDelete.profilePictureURL) {
-        await firebase.storage().ref(`artisanFiles/${artisan}/images/profilePicture`).delete();
+        await firebase.storage().ref(`artisanFiles/${artisan}/images/profilePicture`).delete()
       }
       await firebase.database().ref(`artisans/${artisan}`).remove()
 
