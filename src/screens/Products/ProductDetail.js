@@ -6,7 +6,7 @@ import {
   Card,
   CardSection
 } from '@components'
-import { Text, ScrollView, StyleSheet } from 'react-native'
+import { Text, ScrollView, StyleSheet, LayoutAnimation } from 'react-native'
 import { withMappedNavigationProps } from 'react-navigation-props-mapper'
 import { Icon } from 'react-native-elements'
 
@@ -23,8 +23,40 @@ class ProductDetail extends Component {
       editExpanded: true,
       statsExpanded: true
     }
+
+    this.renderEditButton = this.renderEditButton.bind(this)
+    this.navigateToEditProduct = this.navigateToEditProduct.bind(this)
   }
 
+  componentDidUpdate() {
+    LayoutAnimation.easeInEaseOut()
+  }
+
+  navigateToEditProduct() {
+    console.log("Button Pressed")
+  }
+
+
+  renderEditButton() {
+    if (this.state.editExpanded) {
+      return (
+        <CardSection style={{ backgroundColor: 'white' }}>
+          <Button
+            style={{ height: 20, backgroundColor: 'white' }}
+            title="Edit"
+            textColor="orange"
+            onPress={() => this.navigateToEditProduct()}
+          />
+          <Button
+            style={{ height: 25, backgroundColor: 'white' }}
+            title="Message"
+            textColor="orange"
+            onPress={() => console.log('Pressed message button')}
+          />
+        </CardSection>
+      )
+    }
+  }
   render() {
     return (
       <Wallpaper style={styles.container}>
@@ -54,20 +86,7 @@ class ProductDetail extends Component {
                 style={styles.image}
               />
             </CardSection>
-            <CardSection style={{ backgroundColor: 'white' }}>
-              <Button
-                style={{ height: 20, backgroundColor: 'white' }}
-                title="Edit"
-                textColor="orange"
-                onPress={() => console.log('Edit Product')}
-              />
-              <Button
-                style={{ height: 20, backgroundColor: 'white' }}
-                title="Stats"
-                textColor="orange"
-                onPress={() => console.log('Get Stats')}
-              />
-            </CardSection>
+            {this.renderEditButton()}
           </Card>
           <Card>
             <CardSection
