@@ -7,9 +7,9 @@ import {
 } from 'react-navigation';
 import DropdownAlert from 'react-native-dropdownalert';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { Login, Register, ForgotPassword } from '@screens/Auth';
-import Settings from '@screens/Settings';
-import Launch from '@screens/Launch';
+import { Login, Register, ForgotPassword } from '@screens/Auth'
+import Settings from '@screens/Settings'
+import Launch from '@screens/Launch'
 import {
   ArtisanList,
   AddArtisan,
@@ -84,7 +84,7 @@ const RootStack = createSwitchNavigator(
 class Main extends Component {
   constructor(props) {
     super(props);
-    this.props.clearErrors();
+    this.props.clearErrors()
   }
 
   render() {
@@ -104,9 +104,9 @@ class Main extends Component {
   }
 }
 
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import * as actions from '@actions';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import * as actions from '@actions'
 
 function mapStateToProps(state) {
   return {
@@ -115,7 +115,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(actions, dispatch);
+  return bindActionCreators(actions, dispatch)
 }
 
 const App = connect(
@@ -123,4 +123,4 @@ const App = connect(
   mapDispatchToProps
 )(Main);
 
-export default App;
+export default App
