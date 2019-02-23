@@ -16,7 +16,7 @@ import {
   ArtisanDetail,
   EditArtisan
 } from '@screens/ArtisanHub'
-import { AddProduct, ProductDetail, ProductList } from '@screens/Products';
+import { AddProduct, ProductDetail, ProductList } from '@screens/Products'
 
 const ArtisanHubStack = createStackNavigator({
   ArtisanList: ArtisanList,
@@ -40,21 +40,21 @@ const TabNavigator = createBottomTabNavigator(
     navigationOptions: ({ navigation }) => {
       return {
         tabBarIcon: ({ tintColor }) => {
-          const { routeName } = navigation.state;
-          var iconName;
+          const { routeName } = navigation.state
+          var iconName
           if (routeName === 'ArtisanHub') {
-            iconName = 'users';
+            iconName = 'users'
           } else if (routeName === 'Settings') {
-            iconName = 'cog';
+            iconName = 'cog'
           }
 
-          return <Icon name={iconName} size={25} color={tintColor} />;
+          return <Icon name={iconName} size={25} color={tintColor} />
         },
         tabBarVisible: true
-      };
+      }
     }
   }
-);
+)
 
 const AuthStack = createStackNavigator(
   {
@@ -68,7 +68,7 @@ const AuthStack = createStackNavigator(
       headerTransparent: true
     }
   }
-);
+)
 
 const RootStack = createSwitchNavigator(
   {
@@ -79,7 +79,7 @@ const RootStack = createSwitchNavigator(
   {
     initialRouteName: 'Launch'
   }
-);
+)
 
 class Main extends Component {
   constructor(props) {
@@ -93,14 +93,14 @@ class Main extends Component {
         'error',
         'Error',
         this.props.Errors.join('\n\n')
-      );
+      )
 
     return (
       <View style={{ flex: 1 }}>
         <RootStack />
         <DropdownAlert ref={ref => (this.dropdown = ref)} />
       </View>
-    );
+    )
   }
 }
 

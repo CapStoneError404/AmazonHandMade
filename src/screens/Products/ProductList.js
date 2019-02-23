@@ -11,7 +11,11 @@ class ProductList extends Component {
       headerRight: (
         <Button
           transparent
-          onPress={() => navigation.navigate('AddProduct', {currentUID: navigation.getParam('currentUID')})}
+          onPress={() => navigation.navigate('AddProduct', {
+            currentUID: navigation.getParam('currentUID'), 
+            onNavigateBack: navigation.getParam('onNavigateBack'),
+            renderArtisanDetail: navigation.state.params.onProductListBack
+          })}
           title="Add"
         />
       )
@@ -28,9 +32,19 @@ class ProductList extends Component {
 
   }
 
+  componentDidMount() {
+    this.props.navigation.setParams({ onNavigateBack: this.handleOnNavigateBack })
+  }
+
+  handleOnNavigateBack = () => {
+    this.setState({
+      currentProducts: this.props.Products
+    })
+  };
+
   _renderProductListItem = ({item, index}) => {
+
     return (
-         
       <TouchableOpacity
         testID={`listItem${index}`}
         style={styles.productListView}
@@ -66,9 +80,10 @@ class ProductList extends Component {
           :
           <FlatList
             testID='product_list'
-            data={this.props.currentProducts}
+            data={this.state.currentProducts}
             keyExtractor={this._keyExtractor}
             renderItem={this._renderProductListItem}
+            extraData={this.state}
           />
         }
       </Wallpaper>
