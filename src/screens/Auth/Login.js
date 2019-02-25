@@ -5,9 +5,9 @@ import {
   Wallpaper, 
   AmazonSignInButton, 
   Divider 
-} from '@components';
-import React, { Component } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+} from '@components'
+import React, { Component } from 'react'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
 
 export default class Login extends Component {

@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { Image, StyleSheet, View } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
+import { Image, StyleSheet, View } from 'react-native'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 export default class ProfilePicture extends Component {
   render() {
@@ -22,7 +22,7 @@ export default class ProfilePicture extends Component {
 ProfilePicture.propTypes = {
   style: PropTypes.object,
   source: PropTypes.object
-};
+}
 
 const styles = StyleSheet.create({
   image: {
@@ -34,6 +34,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'lightgrey'
   }
-});
+})
 
 

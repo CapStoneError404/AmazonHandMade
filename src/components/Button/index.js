@@ -1,7 +1,7 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
+import { StyleSheet, Text, TouchableOpacity } from 'react-native'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 export default class Button extends Component {
   render() {
@@ -16,7 +16,7 @@ export default class Button extends Component {
           {this.props.title}
         </Text>
       </TouchableOpacity>
-    );
+    )
   }
 }
 
@@ -28,7 +28,7 @@ Button.propTypes = {
   color: PropTypes.string,
   textColor: PropTypes.string,
   testID: PropTypes.string
-};
+}
 
 const styles = StyleSheet.create({
   buttonWrapper: {
@@ -53,4 +53,4 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold'
   }
-});
+})

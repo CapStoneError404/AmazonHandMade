@@ -1,39 +1,33 @@
 import firebase from 'react-native-firebase'
 import LoginWithAmazon from 'react-native-login-with-amazon'
 
-export function amazonLogin(email, password) {
-  return (dispatch, prevState) => {
-    return new Promise(async (resolve, reject) => {
+export function amazonLogin() {
+  return (dispatch) => {
+    return new Promise(async (resolve) => {
       LoginWithAmazon.login((error, accessToken, profileData) => {
         if(error) {
           resolve()
           dispatch({ type: 'ERROR', error: error })
         } else {
-          fetch('https://us-central1-handmade-error-404.cloudfunctions.net/loginWithAmazon', {
-            method: 'POST',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              accessToken: accessToken,
-              userInfo: {
-                email: profileData.email,
-                name: profileData.name,
-                user_id: profileData.user_id
-              }
-            })
-          }).then(res => {
-            return res.json()
-          }).then(body => {
-            console.log("Received response with token: " + body.token)
-            firebase.auth().signInWithCustomToken(body.token).then(currentUser => {
+          let functionCall = firebase.functions().httpsCallable('loginWithAmazon')
+          
+          functionCall({
+            accessToken: accessToken,
+            userInfo: {
+              email: profileData.email,
+              name: profileData.name,
+              user_id: profileData.user_id
+            }
+          }).then(({ data }) => {
+            console.log("Received response with token: " + data.token)
+            firebase.auth().signInWithCustomToken(data.token).then(currentUser => {
               user = {
                 email: currentUser.user.email,
                 displayName: currentUser.user.displayName,
                 emailVerified: currentUser.user.emailVerified,
                 photoURL: currentUser.user.photoURL,
-                phoneNumber: currentUser.user.phoneNumber
+                phoneNumber: currentUser.user.phoneNumber,
+                uid: data.cgaID
               }
 
               resolve()
@@ -50,8 +44,8 @@ export function amazonLogin(email, password) {
 }
 
 export function emailLogin(email, password) {
-  return (dispatch, prevState) => {
-    return new Promise(async (resolve, reject) => {
+  return (dispatch) => {
+    return new Promise(async (resolve) => {
       firebase.auth().signInWithEmailAndPassword(email, password).then(currentUser => {
         user = {
           email: currentUser.user.email,
@@ -72,8 +66,8 @@ export function emailLogin(email, password) {
 }
 
 export function register(email, password) {
-  return (dispatch, prevState) => {
-    return new Promise((resolve, reject) => {
+  return (dispatch) => {
+    return new Promise((resolve) => {
       firebase.auth().createUserWithEmailAndPassword(email, password).then(currentUser => {
         user = {
           email: currentUser.user.email,
