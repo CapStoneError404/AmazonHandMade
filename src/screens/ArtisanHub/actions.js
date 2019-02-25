@@ -1,39 +1,43 @@
 import firebase from 'react-native-firebase'
 
-export function createArtisan(data) {
-  return (dispatch) => { 
-    return new Promise(async (resolve) => {
-      console.log("Pushing artisan to db")
-      var db_ref = await firebase.database().ref('artisans/').push({
-        name: data.name,
-        phoneNumber: data.phoneNumber,
-        description: data.description
-      })
-      console.log("Done")
+export function createArtisan(artisanInfo, cgaID, profilePicturePath) {
+  console.log("Creating an artisan with the following info:")
+  console.log(artisanInfo)
+  console.log("CGA ID: " + cgaID)
+  console.log("Profile Picture Path: " + profilePicturePath)
 
-      artisanObject = {
-        name: data.name,
-        phoneNumber: data.phoneNumber,
-        description: data.description,
-        uid: db_ref.key
+  return (dispatch, prevState) => { 
+    return new Promise(async (resolve, reject) => {
+      let addArtisan = firebase.functions().httpsCallable('addArtisan')
+
+      let response = await addArtisan({
+        artisanInfo: artisanInfo,
+        cgaID: cgaID
+      })
+
+      console.log("Received data from cloud function:")
+      console.log(response)
+
+      let artisan = {
+        name: response.data.name,
+        phoneNumber: response.data.phoneNumber,
+        description: response.data.description,
+        uid: response.data.uid
       }
 
-      if(data.profilePicturePath) {
-        console.log("Pushing photo to storage")
+      if(profilePicturePath) {
         var st_ref = await firebase.storage()
-          .ref(`artisanFiles/${db_ref.key}/images/profilePicture`)
-          .putFile(data.profilePicturePath)
-        console.log("Done")
+          .ref(`artisanFiles/${artisan.uid}/images/profilePicture`)
+          .putFile(profilePicturePath)
 
-        artisanObject.profilePictureURL = st_ref.downloadURL
+          artisan.profilePictureURL = st_ref.downloadURL
         
-        console.log("Fetching photo download url")
-        firebase.database().ref(`artisans/${artisanObject.uid}`).update(
+        firebase.database().ref(`artisans/${artisan.uid}`).update(
           { profilePictureURL: st_ref.downloadURL })
       }
 
       resolve()
-      dispatch({type: 'ADD_ARTISAN', artisan: artisanObject})
+      dispatch({type: 'ADD_ARTISAN', artisan: artisan})
     })
   }
 }
@@ -69,20 +73,23 @@ export const saveArtisan = ({ name, phoneNumber, description, profilePicturePath
   }
 }
 
-export function fetchArtisans() {
-  return (dispatch) => {
-    return new Promise(async (resolve) => {
-      console.log("Fetching artisans")
-      snapshot = await firebase.database().ref('artisans').once('value')
-      console.log("Done")
+export function fetchArtisans(cgaID) {
+  console.log("Fetching Artisans")
+  return (dispatch, prevState) => {
+    return new Promise(async (resolve, reject) => {
+      let snapshot = await firebase.database().ref(`amazonUsers/${cgaID}/artisans`).once('value')
+      let artisanIds = snapshot.val() ? Object.keys(snapshot.val()) : []
+      let artisans = (await firebase.database().ref('artisans').once('value')).val()
+
       artisanArray = []
-      artisanObject = snapshot.val()
       
-      for(var uid in artisanObject) {
-        artisanArray.push({
-          ...artisanObject[uid],
-          uid: uid
-        })
+      for(var uid in artisans) {
+        if(artisanIds.includes(uid)) {
+          artisanArray.push({
+            ...artisans[uid],
+            uid: uid
+          })
+        }
       }
       
       resolve()
@@ -119,15 +126,20 @@ export function fetchProducts(artisanID) {
 
 // action takes in current list of artisans and artisan to be deleted
 // sends that artisan to reducer to be filtered out of state
-// Also check that artisan has an image if so delete that from storage
-export function deleteArtisan(artisan) {
+//Also check that artisan has an image if so delete that from storage
+export function deleteArtisan(artisans, uid) {
   return (dispatch) => {
-    return new Promise(async (resolve) => {
-      await firebase.database().ref(`artisans/${artisan}`).remove()
-      await firebase.storage().ref(`artisanFiles/${artisan}/images/profilePicture`).delete()
-      
+    return new Promise(async (resolve, reject) => {
+      let deleteArtisan = firebase.functions().httpsCallable('deleteArtisan')
+      await deleteArtisan({uid: uid})
+
+      const artisanToDelete = artisans.find ((item) => item.uid === uid)
+      if (artisanToDelete.profilePictureURL) {
+      	await firebase.storage().ref(`artisanFiles/${uid}/images/profilePicture`).delete()
+      }
+
       resolve()
-      dispatch({type: 'DELETE_ARTISAN', artisan: artisan})
+      dispatch({type: 'DELETE_ARTISAN', artisanId: uid})
     })  
   }
 }
