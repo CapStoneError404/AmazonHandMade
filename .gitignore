@@ -68,3 +68,5 @@ google-services.json
 GoogleService-Info.plist
 service-account.json
 twilio.json
+.firebaserc
+firebase.json
