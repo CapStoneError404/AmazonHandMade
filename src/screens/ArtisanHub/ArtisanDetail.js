@@ -52,6 +52,7 @@ class ArtisanDetail extends Component {
     this.navigateToEditArtisan = this.navigateToEditArtisan.bind(this)
     this.fetchProducts = this.fetchProducts.bind(this)
     this.sortedProducts = this.sortedProducts.bind(this)
+    this.navigateToProductList = this.navigateToProductList.bind(this)
   }
 
   componentDidMount() {
@@ -96,6 +97,14 @@ class ArtisanDetail extends Component {
     })
   }
 
+  navigateToProductList() {
+    this.props.navigation.navigate('ProductList', { 
+      currentProducts: this.sortedProducts(), 
+      currentUID: this.props.uid,
+      onProductListBack: this.handleOnNavigateBack
+    })
+  }
+
   //This method is needed to update artisan detail on the fly if using react navigation
   handleOnNavigateBack = () => {
     this.fetchProducts()
@@ -105,6 +114,7 @@ class ArtisanDetail extends Component {
       )
     })
   };
+  
 
   //Renders the edit button and message button when button is clicked
   renderEditButton() {
@@ -147,7 +157,7 @@ class ArtisanDetail extends Component {
             style={{ height: 20, backgroundColor: 'white' }}
             title="View All"
             textColor="orange"
-            onPress={() => console.log('view all products')}
+            onPress={() => this.navigateToProductList()}
           />
         </CardSection>
       )
@@ -187,12 +197,7 @@ class ArtisanDetail extends Component {
   }
 
   render() {
-    const {
-      name,
-      phoneNumber,
-      description,
-      profilePictureURL
-    } = this.state.currentArtisan
+    const { name, phoneNumber, description, profilePictureURL } = this.state.currentArtisan
     return (
       <Wallpaper style={styles.container}>
         <ScrollView style={{ flex: 1.8 }}>
@@ -260,30 +265,30 @@ class ArtisanDetail extends Component {
                   color="white"
                 />
               ) : (
-                  <FlatGrid
-                    itemDimension={90}
-                    items={this.sortedProducts().slice(0, 6)}
-                    style={styles.gridView}
-                    extraData={this.state}
-                    renderItem={({ item }) => {
-                      return (
-                        <TouchableOpacity
-                          style={styles.elevationLow}
-                          onPress={() =>
-                            this.props.navigation.navigate('ProductDetail', {
-                              ...item
-                            })
-                          }
-                        >
-                          <Image
-                            style={styles.imageContainer}
-                            source={{ uri: item.mainPictureURL }}
-                          />
-                        </TouchableOpacity>
-                      )
-                    }}
-                  />
-                )}
+                <FlatGrid
+                  itemDimension={90}
+                  items={this.sortedProducts().slice(0, 6)}
+                  style={styles.gridView}
+                  extraData={this.state}
+                  renderItem={({ item }) => {
+                    return (
+                      <TouchableOpacity
+                        style={styles.elevationLow}
+                        onPress={() =>
+                          this.props.navigation.navigate('ProductDetail', {
+                            ...item
+                          })
+                        }
+                      >
+                        <Image
+                          style={styles.imageContainer}
+                          source={{ uri: item.mainPictureURL }}
+                        />
+                      </TouchableOpacity>
+                    )
+                  }}
+                />
+              )}
             </CardSection>
             {this.renderProductButton()}
           </Card>

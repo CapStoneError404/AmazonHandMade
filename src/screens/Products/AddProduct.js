@@ -91,6 +91,7 @@ class AddProduct extends Component {
       }, this.props.navigation.getParam('currentUID')).then(() => {
         this.setState({adding: false})
         this.props.navigation.state.params.onNavigateBack()
+        this.props.navigation.state.params.renderArtisanDetail()
         this.props.navigation.goBack()
       })
     }

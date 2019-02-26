@@ -7,16 +7,16 @@ import {
 } from 'react-navigation';
 import DropdownAlert from 'react-native-dropdownalert';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { Login, Register, ForgotPassword } from '@screens/Auth';
-import Settings from '@screens/Settings';
-import Launch from '@screens/Launch';
+import { Login, Register, ForgotPassword } from '@screens/Auth'
+import Settings from '@screens/Settings'
+import Launch from '@screens/Launch'
 import {
   ArtisanList,
   AddArtisan,
   ArtisanDetail,
   EditArtisan
-} from '@screens/ArtisanHub';
-import { AddProduct, ProductDetail } from '@screens/Products';
+} from '@screens/ArtisanHub'
+import { AddProduct, ProductDetail, ProductList } from '@screens/Products'
 
 const ArtisanHubStack = createStackNavigator({
   ArtisanList: ArtisanList,
@@ -24,8 +24,9 @@ const ArtisanHubStack = createStackNavigator({
   ArtisanDetail: ArtisanDetail,
   EditArtisan: EditArtisan,
   AddProduct: AddProduct,
-  ProductDetail: ProductDetail
-});
+  ProductDetail: ProductDetail,
+  ProductList: ProductList
+})
 
 const TabNavigator = createBottomTabNavigator(
   {
@@ -39,21 +40,21 @@ const TabNavigator = createBottomTabNavigator(
     navigationOptions: ({ navigation }) => {
       return {
         tabBarIcon: ({ tintColor }) => {
-          const { routeName } = navigation.state;
-          var iconName;
+          const { routeName } = navigation.state
+          var iconName
           if (routeName === 'ArtisanHub') {
-            iconName = 'users';
+            iconName = 'users'
           } else if (routeName === 'Settings') {
-            iconName = 'cog';
+            iconName = 'cog'
           }
 
-          return <Icon name={iconName} size={25} color={tintColor} />;
+          return <Icon name={iconName} size={25} color={tintColor} />
         },
         tabBarVisible: true
-      };
+      }
     }
   }
-);
+)
 
 const AuthStack = createStackNavigator(
   {
@@ -67,7 +68,7 @@ const AuthStack = createStackNavigator(
       headerTransparent: true
     }
   }
-);
+)
 
 const RootStack = createSwitchNavigator(
   {
@@ -78,12 +79,12 @@ const RootStack = createSwitchNavigator(
   {
     initialRouteName: 'Launch'
   }
-);
+)
 
 class Main extends Component {
   constructor(props) {
     super(props);
-    this.props.clearErrors();
+    this.props.clearErrors()
   }
 
   render() {
@@ -92,20 +93,20 @@ class Main extends Component {
         'error',
         'Error',
         this.props.Errors.join('\n\n')
-      );
+      )
 
     return (
       <View style={{ flex: 1 }}>
         <RootStack />
         <DropdownAlert ref={ref => (this.dropdown = ref)} />
       </View>
-    );
+    )
   }
 }
 
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import * as actions from '@actions';
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import * as actions from '@actions'
 
 function mapStateToProps(state) {
   return {
@@ -114,7 +115,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(actions, dispatch);
+  return bindActionCreators(actions, dispatch)
 }
 
 const App = connect(
@@ -122,4 +123,4 @@ const App = connect(
   mapDispatchToProps
 )(Main);
 
-export default App;
+export default App

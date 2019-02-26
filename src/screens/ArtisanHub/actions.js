@@ -6,7 +6,7 @@ export function createArtisan(artisanInfo, cgaID, profilePicturePath) {
   console.log("CGA ID: " + cgaID)
   console.log("Profile Picture Path: " + profilePicturePath)
 
-  return (dispatch, prevState) => { 
+  return (dispatch, prevState) => {
     return new Promise(async (resolve, reject) => {
       let addArtisan = firebase.functions().httpsCallable('addArtisan')
 
@@ -25,19 +25,19 @@ export function createArtisan(artisanInfo, cgaID, profilePicturePath) {
         uid: response.data.uid
       }
 
-      if(profilePicturePath) {
+      if (profilePicturePath) {
         var st_ref = await firebase.storage()
           .ref(`artisanFiles/${artisan.uid}/images/profilePicture`)
           .putFile(profilePicturePath)
 
-          artisan.profilePictureURL = st_ref.downloadURL
-        
+        artisan.profilePictureURL = st_ref.downloadURL
+
         firebase.database().ref(`artisans/${artisan.uid}`).update(
           { profilePictureURL: st_ref.downloadURL })
       }
 
       resolve()
-      dispatch({type: 'ADD_ARTISAN', artisan: artisan})
+      dispatch({ type: 'ADD_ARTISAN', artisan: artisan })
     })
   }
 }
@@ -56,8 +56,8 @@ export const saveArtisan = ({ name, phoneNumber, description, profilePicturePath
         description,
         uid
       }
-         
-      if(profilePicturePath) {
+
+      if (profilePicturePath) {
         await firebase.storage().ref(`artisanFiles/${uid}/images/profilePicture`).delete()
         let st_ref = await firebase.storage()
           .ref(`artisanFiles/${uid}/images/profilePicture`)
@@ -66,7 +66,7 @@ export const saveArtisan = ({ name, phoneNumber, description, profilePicturePath
         artisanObject.profilePictureURL = st_ref.downloadURL
         await firebase.database().ref(`/artisans/${uid}`).update({ profilePictureURL: st_ref.downloadURL })
       }
-          
+
       resolve()
       dispatch({ type: 'SAVE_ARTISAN', artisan: artisanObject })
     })
@@ -82,18 +82,18 @@ export function fetchArtisans(cgaID) {
       let artisans = (await firebase.database().ref('artisans').once('value')).val()
 
       artisanArray = []
-      
-      for(var uid in artisans) {
-        if(artisanIds.includes(uid)) {
+
+      for (var uid in artisans) {
+        if (artisanIds.includes(uid)) {
           artisanArray.push({
             ...artisans[uid],
             uid: uid
           })
         }
       }
-      
+
       resolve()
-      dispatch({type: 'GET_ARTISANS', artisans: artisanArray})
+      dispatch({ type: 'GET_ARTISANS', artisans: artisanArray })
     })
   }
 }
@@ -106,20 +106,20 @@ export function fetchProducts(artisanID) {
       let snapshot = await firebase.database().ref('products').once('value')
       let productArray = []
       let productObject = snapshot.val()
-       
-      for(var productID in productObject) {
+
+      for (var productID in productObject) {
         productArray.push({
           ...productObject[productID],
           productID: productID
         })
       }
-       
+
       let productSnapshot = await firebase.database().ref(`artisans/${artisanID}/products`).once('value')
       let productKeys = Object.keys(productSnapshot.val())
       productArray = productArray.filter(obj => productKeys.includes(obj.productID))
-       
+
       resolve()
-      dispatch({type: 'GET_PRODUCTS', products: productArray})
+      dispatch({ type: 'GET_PRODUCTS', products: productArray })
     })
   }
 }
@@ -131,16 +131,16 @@ export function deleteArtisan(artisans, uid) {
   return (dispatch) => {
     return new Promise(async (resolve, reject) => {
       let deleteArtisan = firebase.functions().httpsCallable('deleteArtisan')
-      await deleteArtisan({uid: uid})
+      await deleteArtisan({ uid: uid })
 
-      const artisanToDelete = artisans.find ((item) => item.uid === uid)
+      const artisanToDelete = artisans.find((item) => item.uid === uid)
       if (artisanToDelete.profilePictureURL) {
-      	await firebase.storage().ref(`artisanFiles/${uid}/images/profilePicture`).delete()
+        await firebase.storage().ref(`artisanFiles/${uid}/images/profilePicture`).delete()
       }
 
       resolve()
-      dispatch({type: 'DELETE_ARTISAN', artisanId: uid})
-    })  
+      dispatch({ type: 'DELETE_ARTISAN', artisanId: uid })
+    })
   }
 }
 

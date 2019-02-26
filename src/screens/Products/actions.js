@@ -18,17 +18,17 @@ export function createProduct(data, artisanID) {
       })
       
       productObject = {
-        mainCategory: data.mainCategory,
-        subCategory: data.subCategory,
-        title: data.title,
-        description: data.description,
-        gender: data.gender,
-        standardPrice: data.standardPrice,
-        sellerSKU: data.sellerSKU,
-        quantity: data.quantity,
-        productionTime: data.productionTime,
-        timesSold: data.timesSold,
-        productID: db_ref.key
+        MainCategory: data.mainCategory,
+        SubCategory: data.subCategory,
+        Title: data.title,
+        Description: data.description,
+        Gender: data.gender,
+        StandardPrice: data.standardPrice,
+        SellerSKU: data.sellerSKU,
+        Quantity: data.quantity,
+        ProductionTime: data.productionTime,
+        TimesSold: data.timesSold,
+        ProductID: db_ref.key
       }
 
       if(data.mainPicture) {
@@ -39,7 +39,7 @@ export function createProduct(data, artisanID) {
         productObject.mainPictureURL = st_ref.downloadURL
         
         console.log("Put photo download url into db")
-        firebase.database().ref(`products/${productObject.productID}`).update(
+        firebase.database().ref(`products/${productObject.ProductID}`).update(
           { mainPictureURL: st_ref.downloadURL })
       }
 
