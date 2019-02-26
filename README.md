@@ -88,10 +88,10 @@ Init your local firebase project by running:
 firebase init
 ```
 You'll be guided through set up steps, follow this exactly:
-Select Functions
-Select TypeScript
-Say NO for TSLint
-Then you'll be asked if you want to overwrite files, say NO to all
+* Select Functions
+* Select TypeScript
+* Say NO for TSLint
+* Then you'll be asked if you want to overwrite files, say NO to all
 
 Then, navigate to the /functions folder and run npm install:
 ```
