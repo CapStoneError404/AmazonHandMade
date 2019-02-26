@@ -89,7 +89,7 @@ cd functions
 npm install
 ```
 
-Then, you need to fget a service account api key file for your Firebase project. To do this, open your firebase project in the console, navigate to project settings using the settings wheel. Then, click the service accounts tab and click generate new private key. This should download a json file. Save this file/rename it to "service-account.json". Then, place this file in /funtions/assets in your handmade directory (creating the assets folder if it is not already there).
+Then, you need to get a service account api key file for your Firebase project. To do this, open your firebase project in the console, navigate to project settings using the settings wheel. Then, click the service accounts tab and click generate new private key. This should download a json file. Save this file/rename it to "service-account.json". Then, place this file in /funtions/assets in your handmade directory (creating the assets folder if it is not already there).
 
 To deploy your changes to the cloud:
 ```
