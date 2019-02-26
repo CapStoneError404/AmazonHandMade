@@ -16,7 +16,8 @@
     "mocha": "^5.2.0",
     "react-test-renderer": "16.5.0",
     "redux-immutable-state-invariant": "^2.1.0",
-    "replace-in-file": "^3.4.0"
+    "replace-in-file": "^3.4.0",
+    "schedule": "^0.4.0"
   },
   "scripts": {
     "android": "react-native run-android",
