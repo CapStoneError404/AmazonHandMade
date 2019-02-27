@@ -85,7 +85,7 @@ and then modify any URLs in the source code refering to the cloud to your machin
 
 All of the code for the cloud functions is in the "functions" folder
 
-### Testing for IOS (Android soon to come)
+## Testing for IOS (Android soon to come)
 
 Run the following commands in terminal to get testing set up and run current test for project
 
@@ -99,7 +99,7 @@ detox test --configuration ios.sim.debug
 
 
 
-### To run app without testing
+## To run app
 To Run:
 ```
 react-native run-ios
