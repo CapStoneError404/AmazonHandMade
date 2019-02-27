@@ -11,8 +11,8 @@ const serviceAccount = require("../assets/service-account.json")
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://handmade-error-404.firebaseio.com",
-  storageBucket: "gs://handmade-error-404.appspot.com"
+  databaseURL: `https://${serviceAccount.project_id}.firebaseio.com`,
+  storageBucket: `gs://${serviceAccount.project_id}.appspot.com`
 });
 
 exports.loginWithAmazon = functions.https.onCall(loginWithAmazon)
