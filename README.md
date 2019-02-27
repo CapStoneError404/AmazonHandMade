@@ -21,16 +21,69 @@ cd AmazonHandMade
 npm i
 ```
 
-#### Download API key files
-There are certain files that shouldn't be hosted on GitHub and so they must be manually downloaded.
+#### Set up a Firebase Project
 
-There are two Firebase files: google-services.json and GoogleService-Info.plist. These can be downloaded by going to https://console.firebase.google.com/u/0/project/handmade-error-404/settings/general/ and scrolling down to "Your apps". You'll see a download button in the top right of this window, click it for both the Android app and iOS app.
+To run this app, you should set up your own firebase project as a dev environment. To do this, navigate to https://console.firebase.google.com/ and click new project. Name it whatever you want. Once its created do the following:
+* Add a new iOS app, make sure the bundle id is com.error.amazonhandmadern
+  * You'll download a file GoogleServices-Info.plist, place this in your local repo at /AmazonHandmade/ios/
+  * Skip Steps 3-5
+* Add a new Android app, make sure the package name is com.error.amazonhandmadern
+  * You'll download a file google-services.json, place this in your local repo at /AmazonHandmade/android/app/
+  * Skip Steps 3-4
+* Click the Authentication tab, click the Sign-in method tab, enable Email and Password
+* Click the Database tab, scroll down and create a new Realtime Database
+  * For ease, choose start in test mode (NOTE: THIS WILL OPEN YOUR DATABASE TO ANYONE - IT IS NOT SECURE)
+* Click the Storage tab, click Get Started
+* Click the Function tab, click Get Started
+  * You can skip the instructions, I'll provide them in the README lower
 
-GoogleServices-Info.plist should be placed at /AmazonHandmade/ios/
+Now, follow the set up for firebase functions:
 
-google-services.json should be placed at /AmazonHandmade/android/app/
+##### Firebase Cloud Functions
 
-Other files may exist, such as for cloud functions, that have instructions in the source code where they are used.
+To contribute to our firebase cloud functions, you need to install some dependenices on your machine.
+
+The documentation is here: https://firebase.google.com/docs/functions/get-started
+
+Basically, to get set up, do the following:
+```
+npm install -g firebase-tools
+firebase login
+```
+
+Init your local firebase project by running:
+```
+firebase init functions
+```
+You'll be guided through set up steps, follow this exactly:
+* Select Functions
+* Select TypeScript
+* Say NO for TSLint
+* Then you'll be asked if you want to overwrite files, say NO to all
+* Finally, say yes to install dependencies now
+
+If you missed that last step, navigate to the /functions folder and run npm install:
+```
+cd functions
+npm install
+```
+
+Then, you need to get a service account api key file for your Firebase project. To do this, open your firebase project in the console, navigate to project settings using the settings wheel. Then, click the service accounts tab and click generate new private key. This should download a json file. Save this file/rename it to "service-account.json". Then, place this file in /funtions/assets in your handmade directory (creating the assets folder if it is not already there).
+
+Finally, deploy the functions to your firebase project:
+```
+firebase deploy --only functions
+```
+
+You can verify this was done correctly by going back to the Firebase console in your web browser, clicking the Functions tab, and checking to see if they are there.
+
+If you are working on cloud functions and want to test your changes locally run this:
+```
+firebase serve
+```
+and then modify any URLs in the source code refering to the cloud to your machine instead.
+
+All of the code for the cloud functions is in the "functions" folder
 
 ### Testing for IOS (Android soon to come)
 
@@ -69,47 +122,3 @@ To try to automatically fix errors:
 ```
 npm run lint -- --fix
 ```
-
-
-## Firebase Cloud Functions
-
-To contribute to our firebase cloud functions, you need to install some dependenices on your machine.
-
-The documentation is here: https://firebase.google.com/docs/functions/get-started
-
-Basically, to get set up, do the following:
-```
-npm install -g firebase-tools
-firebase login
-```
-
-Init your local firebase project by running:
-```
-firebase init
-```
-You'll be guided through set up steps, follow this exactly:
-* Select Functions
-* Select TypeScript
-* Say NO for TSLint
-* Then you'll be asked if you want to overwrite files, say NO to all
-
-Then, navigate to the /functions folder and run npm install:
-```
-cd functions
-npm install
-```
-
-Then, you need to get a service account api key file for your Firebase project. To do this, open your firebase project in the console, navigate to project settings using the settings wheel. Then, click the service accounts tab and click generate new private key. This should download a json file. Save this file/rename it to "service-account.json". Then, place this file in /funtions/assets in your handmade directory (creating the assets folder if it is not already there).
-
-To deploy your changes to the cloud:
-```
-firebase deploy --only functions
-```
-
-To test your changes locally:
-```
-firebase serve
-```
-and then modify any URLs in the source code refering to the cloud to your machine instead.
-
-All of the code for the cloud functions is in the "functions" folder
