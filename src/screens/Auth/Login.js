@@ -38,7 +38,7 @@ export default class Login extends Component {
 
   submit() {
     this.setState({submitWaiting: true})
-    this.props.emailLogin(this.state.email, this.state.password).then(() => {
+    this.props.emailLogin(this.state.email.trim(), this.state.password).then(() => {
       this.setState({submitWaiting: false})
       if(this.props.User)
         this.props.navigation.navigate("Home")
