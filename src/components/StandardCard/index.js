@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, LayoutAnimation } from 'react-native'
 import { CardSection, Button } from '@components'
 import PropTypes from 'prop-types'
 import { Icon } from 'react-native-elements'
@@ -8,10 +8,20 @@ export default class StandardCard extends Component {
   constructor(props) {
     super(props)
 
-    this.renderButtons = this.renderButtons.bind(this)
+    this.state = {
+      buttonsExpanded: true,
+    }
+
+    this.renderButton = this.renderButton.bind(this)
+    this.showButtons = this.showButtons.bind(this)
+    this.iconButtonPressed = this.iconButtonPressed.bind(this)
   }
 
-  renderButtons(buttonObject, key) {
+  componentDidUpdate() {
+    LayoutAnimation.easeInEaseOut()
+  }
+
+  renderButton(buttonObject, key) {
     const { title, onPress } = buttonObject
     return (
       <Button
@@ -24,8 +34,28 @@ export default class StandardCard extends Component {
     )
   }
 
+  showButtons() {
+    const { buttonsArray } = this.props
+    
+    if (this.state.buttonsExpanded) {
+      return (
+        <CardSection style={styles.buttonCardSectionStyle}>
+          {buttonsArray ? buttonsArray.map((item, key) => {
+            return this.renderButton(item, key)
+          }) : 
+            () => {throw new Error("Cannot map through empty array")}
+          }
+        </CardSection>
+      )
+    }
+  }
+
+  iconButtonPressed() {
+    this.setState({ buttonsExpanded: !this.state.buttonsExpanded })
+  }
+
   render() {
-    const { title, iconOnPress, buttonsArray } = this.props
+    const { title } = this.props
     return (
       <View style={[styles.containerStyle, this.props.style]}>
         <CardSection
@@ -41,39 +71,17 @@ export default class StandardCard extends Component {
             color="orange"
             type="material-community"
             underlayColor={'rgb(71, 77, 84)'}
-            onPress={iconOnPress}
+            onPress={this.iconButtonPressed}
           />
         </CardSection>
 
         {this.props.children}
+        {this.showButtons()}
 
-        <CardSection style={styles.buttonCardSectionStyle}>
-          {buttonsArray ? buttonsArray.map((item, key) => {
-            return this.renderButtons(item, key)
-          }) : 
-            () => {throw new Error("Missing props buttonArray for StandardCard Component")}
-          }
-        </CardSection>
       </View>
     )
   }  
 }
-
-
-// const THREE_BUTTONS = function(props, propName) {
-//   console.log("got inside THREE BUTTONS")
-//   if (!Array.isArray(props.THREE_BUTTONS) || 
-//     props.THREE_BUTTONS.length > 3 ||
-//     props.THREE_BUTTONS.length < 1 ||
-//     !props.THREE_BUTTONS.every(PropTypes.shape({
-//       title: PropTypes.string.isRequired,
-//       onPress: PropTypes.func.isRequired,
-//     }))) {
-//     return new Error(`${propName} needs to be an array of at least 1 button and no greater than 3`)
-//   }
-//   console.log("PASSED THE THREE BUTTONS TYPES TEST")
-//   return null
-// }
 
 StandardCard.propTypes = {
   title: PropTypes.string.isRequired,
@@ -83,7 +91,6 @@ StandardCard.propTypes = {
       title: PropTypes.string.isRequired,
       onPress: PropTypes.func.isRequired,
     })).isRequired,
-//   buttonsArray: PropTypes.arrayOf(THREE_BUTTONS).isRequired
 }
 
 const styles = StyleSheet.create({
