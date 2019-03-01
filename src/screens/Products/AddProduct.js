@@ -98,16 +98,9 @@ class AddProduct extends Component {
         this.props.navigation.state.params.onNavigateBack()
 
         if(this.state.previousScreen === 'productList') {
-          console.log('Came from productList')
           this.props.navigation.state.params.renderArtisanDetail()
-          this.props.navigation.goBack()
         }
-
-        if(this.state.previousScreen === 'artisanDetail') {
-          console.log('Came from artisanDetail')
-          this.props.navigation.goBack()
-        }
-        
+        this.props.navigation.goBack()
         
       })
     }
