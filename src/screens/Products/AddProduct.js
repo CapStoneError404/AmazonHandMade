@@ -141,7 +141,6 @@ class AddProduct extends Component {
               enabled={this.state.productMainCategory != ''}
               selectedValue={this.state.productSubCategory}
               testID="SubCategorySelectorID"
-              //style={styles.categorySection}
               onValueChange={(itemValue, itemIndex) =>
                 (itemIndex !=0) && this.setState({productSubCategory: itemValue})
               }>
