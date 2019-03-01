@@ -4,7 +4,6 @@ import { CardSection, Button } from '@components'
 import PropTypes from 'prop-types'
 import { Icon } from 'react-native-elements'
 
-
 export default class StandardCard extends Component {
   constructor(props) {
     super(props)
@@ -12,10 +11,11 @@ export default class StandardCard extends Component {
     this.renderButtons = this.renderButtons.bind(this)
   }
 
-  renderButtons(buttonObject) {
+  renderButtons(buttonObject, key) {
     const { title, onPress } = buttonObject
     return (
       <Button
+        key={key}
         style={styles.buttonStyle}
         title={title}
         textColor="orange"
@@ -48,9 +48,11 @@ export default class StandardCard extends Component {
         {this.props.children}
 
         <CardSection style={styles.buttonCardSectionStyle}>
-          {buttonsArray.map((item) => {
-            renderButtons(item)
-          })}
+          {buttonsArray ? buttonsArray.map((item, key) => {
+            return this.renderButtons(item, key)
+          }) : 
+            () => {throw new Error("Missing props buttonArray for StandardCard Component")}
+          }
         </CardSection>
       </View>
     )
@@ -59,9 +61,17 @@ export default class StandardCard extends Component {
 
 
 // const THREE_BUTTONS = function(props, propName) {
-//   if (!Array.isArray(props.THREE_BUTTONS) || props.THREE_BUTTONS.length > 3 || !props.THREE_BUTTONS.every()) {
-//     return new Error(`${propName} needs to be an array of at least button and no greater than 3`)
+//   console.log("got inside THREE BUTTONS")
+//   if (!Array.isArray(props.THREE_BUTTONS) || 
+//     props.THREE_BUTTONS.length > 3 ||
+//     props.THREE_BUTTONS.length < 1 ||
+//     !props.THREE_BUTTONS.every(PropTypes.shape({
+//       title: PropTypes.string.isRequired,
+//       onPress: PropTypes.func.isRequired,
+//     }))) {
+//     return new Error(`${propName} needs to be an array of at least 1 button and no greater than 3`)
 //   }
+//   console.log("PASSED THE THREE BUTTONS TYPES TEST")
 //   return null
 // }
 
@@ -73,6 +83,7 @@ StandardCard.propTypes = {
       title: PropTypes.string.isRequired,
       onPress: PropTypes.func.isRequired,
     })).isRequired,
+//   buttonsArray: PropTypes.arrayOf(THREE_BUTTONS).isRequired
 }
 
 const styles = StyleSheet.create({
@@ -99,9 +110,12 @@ const styles = StyleSheet.create({
     marginLeft: 5
   },
   buttonCardSectionStyle: {
-    backgroundColor: 'white'
+    backgroundColor: 'white',
   },
   buttonStyle: {
-    height: 20, backgroundColor: 'white'
+    height: 30,
+    width: 5,
+    backgroundColor: 'white',
+    paddingHorizontal: 10
   }
 })

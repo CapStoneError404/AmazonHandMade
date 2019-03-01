@@ -5,7 +5,8 @@ import {
   AsyncButton,
   Card,
   CardSection,
-  Button
+  Button,
+  StandardCard
 } from '@components'
 import {
   ScrollView,
@@ -44,15 +45,42 @@ class ArtisanDetail extends Component {
       currentProducts: []
     }
 
+    this.artisanInfoButtons = [
+      {
+        title: 'Edit',
+        onPress: () => this.navigateToEditArtisan()
+      },
+      {
+        title: 'Message',
+        onPress: () => console.log("Message Artisan")
+      }
+    ]
+
+    this.productsButtons = [
+      {
+        title: 'Add',
+        onPress: () =>
+          this.props.navigation.navigate('AddProduct', {
+            currentUID: this.props.uid,
+            onNavigateBack: this.handleOnNavigateBack,
+            previousScreen: 'artisanDetail'
+          })   
+      },
+      {
+        title: 'View All',
+        onPress: () => this.navigateToProductList() 
+      }
+    ]
+
     this.onCancel = this.onCancel.bind(this)
     this.deletePressed = this.deletePressed.bind(this)
     this.showAlert = this.showAlert.bind(this)
-    this.renderEditButton = this.renderEditButton.bind(this)
     this.renderProductButton = this.renderProductButton.bind(this)
     this.navigateToEditArtisan = this.navigateToEditArtisan.bind(this)
     this.fetchProducts = this.fetchProducts.bind(this)
     this.sortedProducts = this.sortedProducts.bind(this)
     this.navigateToProductList = this.navigateToProductList.bind(this)
+    this.onIconPress = this.onIconPress.bind(this)
   }
 
   componentDidMount() {
@@ -117,26 +145,26 @@ class ArtisanDetail extends Component {
   
 
   //Renders the edit button and message button when button is clicked
-  renderEditButton() {
-    if (this.state.editExpanded) {
-      return (
-        <CardSection style={{ backgroundColor: 'white' }}>
-          <Button
-            style={{ height: 20, backgroundColor: 'white' }}
-            title="Edit"
-            textColor="orange"
-            onPress={() => this.navigateToEditArtisan()}
-          />
-          <Button
-            style={{ height: 25, backgroundColor: 'white' }}
-            title="Message"
-            textColor="orange"
-            onPress={() => console.log('Pressed message button')}
-          />
-        </CardSection>
-      )
-    }
-  }
+//   renderEditButton() {
+//     if (this.state.editExpanded) {
+//       return (
+//         <CardSection style={{ backgroundColor: 'white' }}>
+//           <Button
+//             style={{ height: 20, backgroundColor: 'white' }}
+//             title="Edit"
+//             textColor="orange"
+//             onPress={() => this.navigateToEditArtisan()}
+//           />
+//           <Button
+//             style={{ height: 25, backgroundColor: 'white' }}
+//             title="Message"
+//             textColor="orange"
+//             onPress={() => console.log('Pressed message button')}
+//           />
+//         </CardSection>
+//       )
+//     }
+//   }
 
   renderProductButton() {
     if (this.state.productsExpanded) {
@@ -197,12 +225,43 @@ class ArtisanDetail extends Component {
     }
   }
 
+  onIconPress() {
+    this.setState({ editExpanded: !this.state.editExpanded })
+  }
+
+//   artisanInfoButtons = [
+//     {
+//       title: 'Edit',
+//       onPress: () => this.navigateToEditArtisan()
+//     },
+//     {
+//       title: 'Message',
+//       onPress: () => console.log("Message Artisan")
+//     }
+//   ]
+
+//   productsButtons = [
+//     {
+//       title: 'Add',
+//       onPress: () =>
+//         this.props.navigation.navigate('AddProduct', {
+//           currentUID: this.props.uid,
+//           onNavigateBack: this.handleOnNavigateBack,
+//           previousScreen: 'artisanDetail'
+//         })   
+//     },
+//     {
+//       title: 'View All',
+//       onPress: () => this.navigateToProductList() 
+//     }
+//   ]
+
   render() {
     const { name, phoneNumber, description, profilePictureURL } = this.state.currentArtisan
     return (
       <Wallpaper style={styles.container}>
         <ScrollView style={{ flex: 1.8 }}>
-          <Card>
+          {/* <Card>
             <CardSection
               style={{
                 backgroundColor: 'rgb(71, 77, 84)',
@@ -236,7 +295,24 @@ class ArtisanDetail extends Component {
               <Text style={styles.descriptionStyle}>{description}</Text>
             </CardSection>
             {this.renderEditButton()}
-          </Card>
+          </Card> */}
+          {/* buttonsArray={this.artisanInfoButtons} */}
+          <StandardCard title="Artisan Info" iconOnPress={this.onIconPress} buttonsArray={this.artisanInfoButtons} >
+            <CardSection>
+              <ProfilePicture
+                source={{ uri: profilePictureURL }}
+                style={styles.image}
+              />
+              <View style={{ flex: 1, flexDirection: 'column' }}>
+                <Text style={styles.nameStyle}>{name}</Text>
+                <Text style={styles.phoneStyle}>{phoneNumber}</Text>
+                <Text style={styles.phoneStyle}>Location: Mexico</Text>
+              </View>
+            </CardSection>
+            <CardSection style={{ flex: 1, flexDirection: 'column' }}>
+              <Text style={styles.descriptionStyle}>{description}</Text>
+            </CardSection>
+          </StandardCard>
           <Card>
             <CardSection
               style={{
