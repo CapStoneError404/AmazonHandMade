@@ -81,6 +81,7 @@ class ArtisanDetail extends Component {
     this.sortedProducts = this.sortedProducts.bind(this)
     this.navigateToProductList = this.navigateToProductList.bind(this)
     this.onIconPress = this.onIconPress.bind(this)
+    this.renderListOfProducts = this.renderListOfProducts.bind(this)
   }
 
   componentDidMount() {
@@ -143,29 +144,6 @@ class ArtisanDetail extends Component {
     })
   };
   
-
-  //Renders the edit button and message button when button is clicked
-//   renderEditButton() {
-//     if (this.state.editExpanded) {
-//       return (
-//         <CardSection style={{ backgroundColor: 'white' }}>
-//           <Button
-//             style={{ height: 20, backgroundColor: 'white' }}
-//             title="Edit"
-//             textColor="orange"
-//             onPress={() => this.navigateToEditArtisan()}
-//           />
-//           <Button
-//             style={{ height: 25, backgroundColor: 'white' }}
-//             title="Message"
-//             textColor="orange"
-//             onPress={() => console.log('Pressed message button')}
-//           />
-//         </CardSection>
-//       )
-//     }
-//   }
-
   renderProductButton() {
     if (this.state.productsExpanded) {
       return (
@@ -225,36 +203,47 @@ class ArtisanDetail extends Component {
     }
   }
 
+  renderListOfProducts() {
+    return(
+      <CardSection>
+        {this.props.Products != [] && this.state.fetchingProducts ? (
+          <ActivityIndicator
+            size="large"
+            animating={this.props.spinning}
+            color="white"
+          />
+        ) : (
+          <FlatGrid
+            itemDimension={90}
+            items={this.sortedProducts().slice(0, 6)}
+            style={styles.gridView}
+            extraData={this.state}
+            renderItem={({ item }) => {
+              return (
+                <TouchableOpacity
+                  style={styles.elevationLow}
+                  onPress={() =>
+                    this.props.navigation.navigate('ProductDetail', {
+                      ...item
+                    })
+                  }
+                >
+                  <Image
+                    style={styles.imageContainer}
+                    source={{ uri: item.mainPictureURL }}
+                  />
+                </TouchableOpacity>
+              )
+            }}
+          />
+        )}
+      </CardSection>
+    )
+  }
+
   onIconPress() {
     this.setState({ editExpanded: !this.state.editExpanded })
   }
-
-//   artisanInfoButtons = [
-//     {
-//       title: 'Edit',
-//       onPress: () => this.navigateToEditArtisan()
-//     },
-//     {
-//       title: 'Message',
-//       onPress: () => console.log("Message Artisan")
-//     }
-//   ]
-
-//   productsButtons = [
-//     {
-//       title: 'Add',
-//       onPress: () =>
-//         this.props.navigation.navigate('AddProduct', {
-//           currentUID: this.props.uid,
-//           onNavigateBack: this.handleOnNavigateBack,
-//           previousScreen: 'artisanDetail'
-//         })   
-//     },
-//     {
-//       title: 'View All',
-//       onPress: () => this.navigateToProductList() 
-//     }
-//   ]
 
   render() {
     const { name, phoneNumber, description, profilePictureURL } = this.state.currentArtisan
@@ -297,7 +286,11 @@ class ArtisanDetail extends Component {
             {this.renderEditButton()}
           </Card> */}
           {/* buttonsArray={this.artisanInfoButtons} */}
-          <StandardCard title="Artisan Info" iconOnPress={this.onIconPress} buttonsArray={this.artisanInfoButtons} >
+          <StandardCard 
+            title="Artisan Info" 
+            iconOnPress={this.onIconPress} 
+            buttonsArray={this.artisanInfoButtons} 
+          >
             <CardSection>
               <ProfilePicture
                 source={{ uri: profilePictureURL }}
@@ -313,7 +306,17 @@ class ArtisanDetail extends Component {
               <Text style={styles.descriptionStyle}>{description}</Text>
             </CardSection>
           </StandardCard>
-          <Card>
+
+          <StandardCard 
+            title="Top Products" 
+            iconOnPress={() => this.setState({
+              productsExpanded: !this.state.productsExpanded
+            })}
+            buttonsArray={this.productsButtons}
+          >
+            {this.renderListOfProducts()}
+          </StandardCard>
+          {/* <Card>
             <CardSection
               style={{
                 backgroundColor: 'rgb(71, 77, 84)',
@@ -368,7 +371,7 @@ class ArtisanDetail extends Component {
               )}
             </CardSection>
             {this.renderProductButton()}
-          </Card>
+          </Card> */}
 
           <AsyncButton
             title="Delete Artisan"
