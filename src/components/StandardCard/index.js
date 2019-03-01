@@ -1,6 +1,14 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, LayoutAnimation } from 'react-native'
-import { CardSection, Button } from '@components'
+import { 
+  View, 
+  Text, 
+  StyleSheet, 
+  LayoutAnimation 
+} from 'react-native'
+import { 
+  CardSection, 
+  Button 
+} from '@components'
 import PropTypes from 'prop-types'
 import { Icon } from 'react-native-elements'
 
@@ -85,7 +93,6 @@ export default class StandardCard extends Component {
 
 StandardCard.propTypes = {
   title: PropTypes.string.isRequired,
-  iconOnPress: PropTypes.func.isRequired,
   buttonsArray: PropTypes.arrayOf(
     PropTypes.shape({
       title: PropTypes.string.isRequired,
@@ -120,7 +127,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   buttonStyle: {
-    height: 30,
+    height: 25,
     width: 5,
     backgroundColor: 'white',
     paddingHorizontal: 10
