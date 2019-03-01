@@ -149,7 +149,8 @@ class ArtisanDetail extends Component {
             onPress={() =>
               this.props.navigation.navigate('AddProduct', {
                 currentUID: this.props.uid,
-                onNavigateBack: this.handleOnNavigateBack
+                onNavigateBack: this.handleOnNavigateBack,
+                previousScreen: 'artisanDetail'
               })
             }
           />
