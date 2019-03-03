@@ -14,6 +14,7 @@ class ProductList extends Component {
           onPress={() => navigation.navigate('AddProduct', {
             currentUID: navigation.getParam('currentUID'), 
             onNavigateBack: navigation.getParam('onNavigateBack'),
+            previousScreen: 'productList',
             renderArtisanDetail: navigation.state.params.onProductListBack
           })}
           title="Add"

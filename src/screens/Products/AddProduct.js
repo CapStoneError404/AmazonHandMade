@@ -11,7 +11,7 @@ class AddProduct extends Component {
   }
   constructor(props) {
     super(props)
-
+    console.log("inside constructor")
     this.state = {
       productMainCategory: '', 
       productSubCategory: '', 
@@ -27,12 +27,17 @@ class AddProduct extends Component {
       //If you adding product, assumes never sold before
       productTimesSold: 0,
       focusedInputs: {title: false, desc: false, price: false, sku: false, quantity: false, time: false},
-      adding: false
+      adding: false,
+      previousScreen: ''
     }
 
     this.pickImage = this.pickImage.bind(this)
     this.createProduct = this.createProduct.bind(this)
     this.verifyFields = this.verifyFields.bind(this)
+  }
+
+  componentDidMount() {
+    this.setState({ previousScreen: this.props.navigation.getParam('previousScreen') })
   }
 
   pickImage() {
@@ -91,8 +96,12 @@ class AddProduct extends Component {
       }, this.props.navigation.getParam('currentUID')).then(() => {
         this.setState({adding: false})
         this.props.navigation.state.params.onNavigateBack()
-        this.props.navigation.state.params.renderArtisanDetail()
+
+        if(this.state.previousScreen === 'productList') {
+          this.props.navigation.state.params.renderArtisanDetail()
+        }
         this.props.navigation.goBack()
+        
       })
     }
   }
@@ -132,7 +141,6 @@ class AddProduct extends Component {
               enabled={this.state.productMainCategory != ''}
               selectedValue={this.state.productSubCategory}
               testID="SubCategorySelectorID"
-              //style={styles.categorySection}
               onValueChange={(itemValue, itemIndex) =>
                 (itemIndex !=0) && this.setState({productSubCategory: itemValue})
               }>
