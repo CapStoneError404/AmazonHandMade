@@ -267,8 +267,8 @@ class ArtisanDetail extends Component {
             buttonsArray={this.transactionButtons}
           >
             <CardSection style={{ flex: 1, flexDirection: 'column' }}>
-              <Text style={styles.descriptionStyle}>Total money owed: $1000</Text>
-              <Text style={styles.descriptionStyle}>Mony Paid: $ 2000</Text>
+              <Text style={styles.descriptionStyle}>Total Money owed: $1000</Text>
+              <Text style={styles.descriptionStyle}>Money Paid: $2000</Text>
               <Text style={styles.descriptionStyle}>Some other stats and stuff</Text>
             </CardSection>
             
