@@ -64,6 +64,17 @@ class ArtisanDetail extends Component {
       }
     ]
 
+    this.transactionButtons = [
+      {
+        title: 'Payouts',
+        onPress: () => console.log('Button 1 pressed')
+      },
+      {
+        title: 'View All',
+        onPress: () => console.log('Button 2 pressed')
+      }
+    ]
+
     this.onCancel = this.onCancel.bind(this)
     this.deletePressed = this.deletePressed.bind(this)
     this.showAlert = this.showAlert.bind(this)
@@ -249,6 +260,18 @@ class ArtisanDetail extends Component {
             buttonsArray={this.productsButtons}
           >
             {this.renderListOfProducts()}
+          </StandardCard>
+
+          <StandardCard
+            title="Transactions"
+            buttonsArray={this.transactionButtons}
+          >
+            <CardSection style={{ flex: 1, flexDirection: 'column' }}>
+              <Text style={styles.descriptionStyle}>Total money owed: $1000</Text>
+              <Text style={styles.descriptionStyle}>Mony Paid: $ 2000</Text>
+              <Text style={styles.descriptionStyle}>Some other stats and stuff</Text>
+            </CardSection>
+            
           </StandardCard>
          
           <AsyncButton
