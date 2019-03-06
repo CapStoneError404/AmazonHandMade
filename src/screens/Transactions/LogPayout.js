@@ -27,11 +27,11 @@ class LogPayout extends Component {
       this.logPayoutButtons = [
          {
             title: 'View All',
-            onPress: () => this.navigateToPayoutList()
+            onPress: () => console.log("button pressed")
          },
          {
             title: 'Stats',
-            onPress: () => console.log("Message Artisan")
+            onPress: () => console.log("button pressed")
          }
       ]
 
@@ -51,13 +51,7 @@ class LogPayout extends Component {
                         <Text>Some Text</Text>
                      </CardSection>
                   </StandardCard>
-                  <AsyncButton
-                     title="Artisan Payout"
-                     color="green"
-                     textColor="white"
-                     onPress={console.log("button pressed")}
-                     style={{ marginLeft: 10, marginRight: 10, marginTop: 20 }}
-                  />
+
                </ScrollView>
             </Wallpaper>
          </Wallpaper>

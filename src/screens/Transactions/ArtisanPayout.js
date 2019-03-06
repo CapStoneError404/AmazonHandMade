@@ -27,11 +27,11 @@ class ArtisanPayout extends Component {
       this.artisanPayoutButtons = [
          {
             title: 'View All',
-            onPress: () => this.navigateToPayoutList()
+            onPress: () => console.log("button pressed")
          },
          {
             title: 'Stats',
-            onPress: () => console.log("Message Artisan")
+            onPress: () => console.log("button pressed")
          }
       ]
       this.state = {}
@@ -54,7 +54,7 @@ class ArtisanPayout extends Component {
                   color="green"
                   textColor="white"
                   onPress={() =>
-                     this.props.navigation.navigate('PayoutList')
+                     this.props.navigation.navigate('LogPayout')
                   }
                   style={{ marginLeft: 10, marginRight: 10, marginTop: 20 }}
                />

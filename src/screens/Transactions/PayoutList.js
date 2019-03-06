@@ -27,11 +27,11 @@ class PayoutList extends Component {
       this.payoutListButtons = [
          {
             title: 'button',
-            onPress: () => this.navigateToPayoutList()
+            onPress: () => console.log("button pressed")
          },
          {
             title: 'button',
-            onPress: () => console.log("Message Artisan")
+            onPress: () => console.log("button pressed")
          }
       ]
 
