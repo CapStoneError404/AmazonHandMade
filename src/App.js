@@ -17,6 +17,7 @@ import {
   EditArtisan
 } from '@screens/ArtisanHub'
 import { AddProduct, ProductDetail, ProductList } from '@screens/Products'
+import { Transactions } from '@screens/Transactions'
 
 const ArtisanHubStack = createStackNavigator({
   ArtisanList: ArtisanList,
@@ -28,14 +29,20 @@ const ArtisanHubStack = createStackNavigator({
   ProductList: ProductList
 })
 
+const TransactionStack = createStackNavigator({
+  Transactions: Transactions
+})
+
 const TabNavigator = createBottomTabNavigator(
   {
     ArtisanHub: ArtisanHubStack,
-    Settings: Settings
+    Settings: Settings,
+    Transactions: TransactionStack
+
   },
   {
     initialRouteName: 'ArtisanHub',
-    order: ['ArtisanHub', 'Settings'],
+    order: ['ArtisanHub', 'Transactions', 'Settings'],
     animationEnabled: true,
     navigationOptions: ({ navigation }) => {
       return {
@@ -46,8 +53,9 @@ const TabNavigator = createBottomTabNavigator(
             iconName = 'users'
           } else if (routeName === 'Settings') {
             iconName = 'cog'
+          } else if (routeName === 'Transactions') {
+            iconName = 'dollar'
           }
-
           return <Icon name={iconName} size={25} color={tintColor} />
         },
         tabBarVisible: true
