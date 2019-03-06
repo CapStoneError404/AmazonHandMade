@@ -11,6 +11,7 @@ import {
    Text,
    View
 } from 'react-native'
+import { withMappedNavigationProps } from 'react-navigation-props-mapper'
 
 export default class Transactions extends Component {
 
@@ -27,7 +28,7 @@ export default class Transactions extends Component {
       this.transactionButtons = [
          {
             title: 'View All',
-            onPress: () => console.log("View All")
+            onPress: () => this.navigateToPayoutList()
          },
          {
             title: 'Stats',
@@ -41,25 +42,31 @@ export default class Transactions extends Component {
 
    navigateToPayoutList() {
       const { } = this.props
-      navigation.navigate('PayoutList', {
-         currentUID: uid,
-         onNavigateBack: this.handleOnNavigateBack,
-         previousScreen: 'Transactions'
-      })
+      navigation.navigate('PayoutList')
    }
 
    render() {
       return (
          <Wallpaper style={styles.container}>
-            <AsyncButton
-               title="PayoutList"
-               color="#c14700"
-               textColor="white"
-               onPress={() =>
-                  this.props.navigation.navigate('PayoutList')
-               }
-               style={styles.button}
-            />
+            <ScrollView style={{ flex: 1.8 }}>
+               <StandardCard
+                  title="Transactions"
+                  buttonsArray={this.transactionButtons}
+               >
+                  <CardSection>
+                     <Text>Some Text</Text>
+                  </CardSection>
+               </StandardCard>
+               <AsyncButton
+                  title="Payout List"
+                  color="green"
+                  textColor="white"
+                  onPress={() =>
+                     this.props.navigation.navigate('PayoutList')
+                  }
+                  style={{ marginLeft: 10, marginRight: 10, marginTop: 20 }}
+               />
+            </ScrollView>
          </Wallpaper>
       )
    }

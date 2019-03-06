@@ -1,6 +1,16 @@
-import { AsyncButton, Wallpaper } from '@components'
 import React, { Component } from 'react'
-import { StyleSheet } from 'react-native'
+import {
+   Wallpaper,
+   AsyncButton,
+   CardSection,
+   StandardCard
+} from '@components'
+import {
+   ScrollView,
+   StyleSheet,
+   Text,
+   View
+} from 'react-native'
 import { withMappedNavigationProps } from 'react-navigation-props-mapper'
 
 class PayoutList extends Component {
@@ -13,6 +23,17 @@ class PayoutList extends Component {
 
    constructor(props) {
       super(props)
+
+      this.payoutListButtons = [
+         {
+            title: 'button',
+            onPress: () => this.navigateToPayoutList()
+         },
+         {
+            title: 'button',
+            onPress: () => console.log("Message Artisan")
+         }
+      ]
 
       this.state = {}
       this.navigateToArtisanPayout = this.navigateToArtisanPayout.bind(this)
@@ -28,15 +49,27 @@ class PayoutList extends Component {
    render() {
       return (
          <Wallpaper style={styles.container}>
-            <AsyncButton
-               title="Log Payout"
-               color="#c14700"
-               textColor="white"
-               onPress={() =>
-                  this.props.navigation.navigate('ArtisanPayout')
-               }
-               style={styles.button}
-            />
+            <Wallpaper style={styles.container}>
+               <ScrollView style={{ flex: 1.8 }}>
+                  <StandardCard
+                     title="PayoutList"
+                     buttonsArray={this.payoutListButtons}
+                  >
+                     <CardSection>
+                        <Text>Some Text</Text>
+                     </CardSection>
+                  </StandardCard>
+                  <AsyncButton
+                     title="Artisan Payout"
+                     color="green"
+                     textColor="white"
+                     onPress={() =>
+                        this.props.navigation.navigate('ArtisanPayout')
+                     }
+                     style={{ marginLeft: 10, marginRight: 10, marginTop: 20 }}
+                  />
+               </ScrollView>
+            </Wallpaper>
          </Wallpaper>
       )
    }

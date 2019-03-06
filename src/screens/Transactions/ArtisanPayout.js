@@ -1,6 +1,16 @@
-import { AsyncButton, Wallpaper } from '@components'
 import React, { Component } from 'react'
-import { StyleSheet, View } from 'react-native'
+import {
+   Wallpaper,
+   AsyncButton,
+   CardSection,
+   StandardCard
+} from '@components'
+import {
+   ScrollView,
+   StyleSheet,
+   Text,
+   View
+} from 'react-native'
 import { withMappedNavigationProps } from 'react-navigation-props-mapper'
 
 class ArtisanPayout extends Component {
@@ -14,19 +24,41 @@ class ArtisanPayout extends Component {
    constructor(props) {
       super(props)
 
+      this.artisanPayoutButtons = [
+         {
+            title: 'View All',
+            onPress: () => this.navigateToPayoutList()
+         },
+         {
+            title: 'Stats',
+            onPress: () => console.log("Message Artisan")
+         }
+      ]
       this.state = {}
    }
 
    render() {
       return (
          <Wallpaper style={styles.container}>
-            <AsyncButton
-               title="Log Payout"
-               color="#c14700"
-               textColor="white"
-               onPress={console.log("Log Payout")}
-               style={styles.button}
-            />
+            <ScrollView style={{ flex: 1.8 }}>
+               <StandardCard
+                  title="Artisan Payout"
+                  buttonsArray={this.artisanPayoutButtons}
+               >
+                  <CardSection>
+                     <Text>Some Text</Text>
+                  </CardSection>
+               </StandardCard>
+               <AsyncButton
+                  title="Log Payout"
+                  color="green"
+                  textColor="white"
+                  onPress={() =>
+                     this.props.navigation.navigate('PayoutList')
+                  }
+                  style={{ marginLeft: 10, marginRight: 10, marginTop: 20 }}
+               />
+            </ScrollView>
          </Wallpaper>
       )
    }
