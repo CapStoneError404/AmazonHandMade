@@ -28,11 +28,22 @@ export default class Transactions extends Component {
       this.transactionButtons = [
          {
             title: 'View All',
-            onPress: () => this.navigateToPayoutList()
+            onPress: () => console.log("Nav to Transactions for artisans")
          },
          {
             title: 'Stats',
-            onPress: () => console.log("Message Artisan")
+            onPress: () => console.log("Clicked on Transaction Stats")
+         }
+      ]
+
+      this.payoutButtons = [
+         {
+            title: 'View All',
+            onPress: () => this.props.navigation.navigate('PayoutList')
+         },
+         {
+            title: 'Stats',
+            onPress: () => console.log("Clicked on Payout Stats")
          }
       ]
 
@@ -50,22 +61,24 @@ export default class Transactions extends Component {
          <Wallpaper style={styles.container}>
             <ScrollView style={{ flex: 1.8 }}>
                <StandardCard
+                  title="Payouts"
+                  buttonsArray={this.payoutButtons}
+               >
+                  <CardSection style={styles.cardSection}>
+                     <Text style={styles.cardText}>Money Owed: </Text>
+                     <Text style={styles.cardText}>Total payments: </Text>
+                  </CardSection>
+               </StandardCard>
+
+               <StandardCard
                   title="Transactions"
                   buttonsArray={this.transactionButtons}
                >
-                  <CardSection>
-                     <Text>Some Text</Text>
+                  <CardSection  style={styles.cardSection}>
+                    <Text style={styles.cardText}>Number items sold: </Text>
+                    <Text style={styles.cardText}>Overall Product Income: </Text>
                   </CardSection>
                </StandardCard>
-               <AsyncButton
-                  title="Payout List"
-                  color="green"
-                  textColor="white"
-                  onPress={() =>
-                     this.props.navigation.navigate('PayoutList')
-                  }
-                  style={{ marginLeft: 10, marginRight: 10, marginTop: 20 }}
-               />
             </ScrollView>
          </Wallpaper>
       )
@@ -84,10 +97,17 @@ const styles = StyleSheet.create({
       justifyContent: 'flex-start',
       alignItems: 'center',
    },
+   cardSection: {
+      flex: 1, 
+      flexDirection: 'column' 
+   },
    text: {
       fontSize: 20
    },
-   button: {
-      flex: 1
+   cardText: {
+      paddingVertical: 10,
+      flex: 1,
+      fontSize: 20,
+      color: '#444444'
    }
 })
