@@ -1,29 +1,64 @@
-import { Button, Wallpaper } from '@components'
 import React, { Component } from 'react'
-import { ScrollView, StyleSheet, Text, View } from 'react-native'
-import LinearGradient from 'react-native-linear-gradient'
+import {
+   Wallpaper,
+   AsyncButton,
+   CardSection,
+   StandardCard
+} from '@components'
+import {
+   ScrollView,
+   StyleSheet,
+   Text,
+   View
+} from 'react-native'
 
 export default class Transactions extends Component {
+
+   static navigationOptions = () => {
+      return {
+         title: 'Transactions'
+      }
+
+   }
    constructor(props) {
       super(props)
+      this.stat = {}
 
+      this.transactionButtons = [
+         {
+            title: 'View All',
+            onPress: () => console.log("View All")
+         },
+         {
+            title: 'Stats',
+            onPress: () => console.log("Message Artisan")
+         }
+      ]
+
+      this.navigateToPayoutList = this.navigateToPayoutList.bind(this)
+
+   }
+
+   navigateToPayoutList() {
+      const { } = this.props
+      navigation.navigate('PayoutList', {
+         currentUID: uid,
+         onNavigateBack: this.handleOnNavigateBack,
+         previousScreen: 'Transactions'
+      })
    }
 
    render() {
       return (
-         <Wallpaper>
-            <View style={styles.textContainer}>
-               <ScrollView>
-                  <Text style={styles.text}>{"Money"}</Text>
-               </ScrollView>
-            </View>
-            <Button
-               testID='money_button'
-               style={styles.button}
-               title="Artisan Payouts"
+         <Wallpaper style={styles.container}>
+            <AsyncButton
+               title="PayoutList"
                color="#c14700"
                textColor="white"
-               onPress={console.log("money button pressed!")}
+               onPress={() =>
+                  this.props.navigation.navigate('PayoutList')
+               }
+               style={styles.button}
             />
          </Wallpaper>
       )

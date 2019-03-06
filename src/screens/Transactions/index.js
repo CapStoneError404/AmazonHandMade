@@ -17,12 +17,21 @@ function mapDispatchToProps(dispatch) {
 }
 
 import { default as UnconnectedTransactions } from './Transactions'
+import { default as UnconnectedArtisanPayout } from './ArtisanPayout'
+import { default as UnconnectedLogPayout } from './LogPayout'
+import { default as UnconnectedPayoutList } from './PayoutList'
+
 
 
 const Transactions = connect(mapStateToProps, mapDispatchToProps)(UnconnectedTransactions)
+const ArtisanPayout = connect(mapStateToProps, mapDispatchToProps)(UnconnectedArtisanPayout)
+const LogPayout = connect(mapStateToProps, mapDispatchToProps)(UnconnectedLogPayout)
+const PayoutList = connect(mapStateToProps, mapDispatchToProps)(UnconnectedPayoutList)
 
 
 export {
-   Transactions
-
+   Transactions,
+   ArtisanPayout,
+   LogPayout,
+   PayoutList
 }

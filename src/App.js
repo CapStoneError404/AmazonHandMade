@@ -17,7 +17,12 @@ import {
   EditArtisan
 } from '@screens/ArtisanHub'
 import { AddProduct, ProductDetail, ProductList } from '@screens/Products'
-import { Transactions } from '@screens/Transactions'
+import {
+  Transactions,
+  ArtisanPayout,
+  LogPayout,
+  PayoutList
+} from '@screens/Transactions'
 
 const ArtisanHubStack = createStackNavigator({
   ArtisanList: ArtisanList,
@@ -30,7 +35,10 @@ const ArtisanHubStack = createStackNavigator({
 })
 
 const TransactionStack = createStackNavigator({
-  Transactions: Transactions
+  Transactions: Transactions,
+  ArtisanPayout: ArtisanPayout,
+  LogPayout: LogPayout,
+  PayoutList: PayoutList
 })
 
 const TabNavigator = createBottomTabNavigator(
