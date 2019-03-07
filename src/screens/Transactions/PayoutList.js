@@ -30,34 +30,34 @@ class PayoutList extends Component {
          fetchingArtisans: false
       }
 
-      this.fetchArtisans = this.fetchArtisans.bind(this)
+      // this.fetchArtisans = this.fetchArtisans.bind(this)
       this.navigateToArtisanPayout = this.navigateToArtisanPayout.bind(this)
    }
 
-   componentDidMount() {
-      this.fetchArtisans()
-   }
+   // componentDidMount() {
+   //    this.fetchArtisans()
+   // }
 
-    fetchArtisans() {
-      this.setState({fetchingArtisans: true})
-      this.props.fetchArtisans(this.props.User.uid).then(() => {
-        this.setState({fetchingArtisans: false})
-      })
-    }
+   //  fetchArtisans() {
+   //    this.setState({fetchingArtisans: true})
+   //    this.props.fetchArtisans(this.props.User.uid).then(() => {
+   //      this.setState({fetchingArtisans: false})
+   //    })
+   //  }
 
    navigateToArtisanPayout(artisan) {
-      const { } = this.props
+      // const { } = this.props
       this.props.navigation.navigate('ArtisanPayout', {
          onNavigateBack: this.handleOnNavigateBack
       })
    }
-
-   _renderPayouyListItem = ({item, index}) => {
+   
+   _renderPayoutListItem = ({item, index}) => {
       return (
         <TouchableOpacity
           testID={`listItem${index}`}
           style={styles.artisanView}
-          onPress={() => this.props.navigation.navigateToArtisanPayout(artisan)}
+          onPress={() => this.navigateToArtisanPayout(item)}
           key={item.key}
         >
           <ProfilePicture
@@ -68,7 +68,6 @@ class PayoutList extends Component {
           <View style={styles.namePhone}>
             <Text style={styles.text}>{item.name}</Text>
             <Text style={styles.text}>{item.phoneNumber}</Text>
-            <Text style={styles.text}>{`Quantity: ${item.pho}`}</Text>
           </View>
         </TouchableOpacity>
       )
@@ -216,3 +215,5 @@ const styles = StyleSheet.create({
 })
 
 export default withMappedNavigationProps()(PayoutList)
+
+

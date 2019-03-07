@@ -36,9 +36,10 @@ const ArtisanHubStack = createStackNavigator({
 
 const TransactionStack = createStackNavigator({
   Transactions: Transactions,
+  PayoutList: PayoutList,
   ArtisanPayout: ArtisanPayout,
-  LogPayout: LogPayout,
-  PayoutList: PayoutList
+  LogPayout: LogPayout
+  
 })
 
 const TabNavigator = createBottomTabNavigator(
