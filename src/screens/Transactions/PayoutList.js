@@ -67,7 +67,9 @@ class PayoutList extends Component {
             
           <View style={styles.namePhone}>
             <Text style={styles.text}>{item.name}</Text>
-            <Text style={styles.text}>{item.phoneNumber}</Text>
+            <Text style={styles.text}>{`Last Payout: ${Math.floor(Math.random() * 11 + 1)}/${Math.floor(Math.random() * 27 + 1)}/19`}</Text>
+            <Text style={styles.text}>{`Owed: $${Math.floor(Math.random() * 2500 + 1)}.${Math.floor(Math.random() * 98 + 1)}`}</Text>
+            <Text style={styles.text}>{`Paid: $${Math.floor(Math.random() * 2500 + 1)}.${Math.floor(Math.random() * 98 + 1)}`}</Text>
           </View>
         </TouchableOpacity>
       )
