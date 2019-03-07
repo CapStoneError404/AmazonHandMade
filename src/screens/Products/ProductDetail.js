@@ -9,6 +9,7 @@ import {
 import { Text, ScrollView, StyleSheet, LayoutAnimation } from 'react-native'
 import { withMappedNavigationProps } from 'react-navigation-props-mapper'
 import { Icon } from 'react-native-elements'
+import StandardCard from '../../components/StandardCard'
 
 class ProductDetail extends Component {
   static navigationOptions = {
@@ -24,7 +25,17 @@ class ProductDetail extends Component {
       statsExpanded: true
     }
 
-    this.renderEditButton = this.renderEditButton.bind(this)
+    this.productsButtons = [
+      {
+        title: 'Edit',
+        onPress: () => this.navigateToEditProduct() 
+      },
+      {
+        title: 'View Statistics',
+        onPress: () => console.log('Pressed stats button')
+      }
+    ]
+
     this.navigateToEditProduct = this.navigateToEditProduct.bind(this)
   }
 
@@ -36,90 +47,31 @@ class ProductDetail extends Component {
     console.log("Button Pressed")
   }
 
-
-  renderEditButton() {
-    if (this.state.editExpanded) {
-      return (
-        <CardSection style={{ backgroundColor: 'white' }}>
-          <Button
-            style={{ height: 20, backgroundColor: 'white' }}
-            title="Edit"
-            textColor="orange"
-            onPress={() => this.navigateToEditProduct()}
-          />
-          <Button
-            style={{ height: 25, backgroundColor: 'white' }}
-            title="Message"
-            textColor="orange"
-            onPress={() => console.log('Pressed message button')}
-          />
-        </CardSection>
-      )
-    }
-  }
   render() {
     return (
       <Wallpaper style={styles.container}>
         <ScrollView style={{ flex: 1.8 }}>
-          <Card>
+          <StandardCard 
+            title={this.props.Title} 
+            buttonsArray={this.productsButtons} 
+          >
+            <ProfilePicture
+              source={{ uri: this.props.mainPictureURL }}
+              style={styles.image}
+            />
+          </StandardCard>
+          <StandardCard 
+            title={this.props.MainCategory}
+          >
+            <Text style={styles.descriptionStyle}>
+              {this.props.Description}
+            </Text>
+          </StandardCard>
+          <StandardCard 
+            title="Info"
+          >
             <CardSection
               style={{
-                backgroundColor: 'rgb(71, 77, 84)',
-                justifyContent: 'space-between'
-              }}
-            >
-              <Text style={styles.headerText}>{this.props.Title}</Text>
-              <Icon
-                name="dots-vertical"
-                size={30}
-                color="orange"
-                type="material-community"
-                underlayColor={'rgb(71, 77, 84)'}
-                onPress={() =>
-                  this.setState({ editExpanded: !this.state.editExpanded })
-                }
-              />
-            </CardSection>
-            <CardSection>
-              <ProfilePicture
-                source={{ uri: this.props.mainPictureURL }}
-                style={styles.image}
-              />
-            </CardSection>
-            {this.renderEditButton()}
-          </Card>
-          <Card>
-            <CardSection
-              style={{
-                backgroundColor: 'rgb(71, 77, 84)',
-                justifyContent: 'space-between'
-              }}
-            >
-              <Text style={styles.headerText}>{this.props.MainCategory}</Text>
-            </CardSection>
-            <CardSection
-              style={{
-                backgroundColor: 'white',
-                justifyContent: 'space-between'
-              }}
-            >
-              <Text style={styles.descriptionStyle}>
-                {this.props.Description}
-              </Text>
-            </CardSection>
-          </Card>
-          <Card>
-            <CardSection
-              style={{
-                backgroundColor: 'rgb(71, 77, 84)',
-                justifyContent: 'space-between'
-              }}
-            >
-              <Text style={styles.headerText}>Info</Text>
-            </CardSection>
-            <CardSection
-              style={{
-                backgroundColor: 'white',
                 justifyContent: 'space-between'
               }}
             >
@@ -130,7 +82,6 @@ class ProductDetail extends Component {
             </CardSection>
             <CardSection
               style={{
-                backgroundColor: 'white',
                 justifyContent: 'space-between'
               }}
             >
@@ -141,7 +92,6 @@ class ProductDetail extends Component {
             </CardSection>
             <CardSection
               style={{
-                backgroundColor: 'white',
                 justifyContent: 'space-between'
               }}
             >
@@ -150,7 +100,6 @@ class ProductDetail extends Component {
             </CardSection>
             <CardSection
               style={{
-                backgroundColor: 'white',
                 justifyContent: 'space-between'
               }}
             >
@@ -159,7 +108,6 @@ class ProductDetail extends Component {
             </CardSection>
             <CardSection
               style={{
-                backgroundColor: 'white',
                 justifyContent: 'space-between'
               }}
             >
@@ -168,7 +116,7 @@ class ProductDetail extends Component {
                 {this.props.TimesSold}
               </Text>
             </CardSection>
-          </Card>
+          </StandardCard>
         </ScrollView>
       </Wallpaper>
     )
@@ -183,19 +131,11 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-    //  alignItems: 'center',
-    height: 200,
-    width: 250,
     borderWidth: 1,
-
     aspectRatio: 1,
-    //  alignItems: 'stretch',
-    //alignItems: 'center',
-    justifyContent: 'center'
-    // borderRadius: 60,
-    // margin: 5
-    //position: 'absolute',
-    //resizeMode: 'cover'
+    alignItems: 'stretch',
+    justifyContent: 'center',
+    borderWidth: 0
   },
   nameStyle: {
     flex: 1,
@@ -212,7 +152,7 @@ const styles = StyleSheet.create({
   descriptionStyle: {
     fontSize: 15,
     color: 'black',
-    marginLeft: 5,
+    margin: 10,
     flexDirection: 'row'
   },
   descriptionTitle: {

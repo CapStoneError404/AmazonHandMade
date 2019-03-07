@@ -188,10 +188,11 @@ class ArtisanDetail extends Component {
           />
         ) : (
           <FlatGrid
-            itemDimension={90}
+            itemDimension={100}
             items={this.sortedProducts().slice(0, 6)}
             style={styles.gridView}
             extraData={this.state}
+            spacing={10}
             renderItem={({ item }) => {
               return (
                 <TouchableOpacity
@@ -305,22 +306,22 @@ const styles = StyleSheet.create({
     marginLeft: 5
   },
   gridView: {
-    marginTop: 0,
+    margin: -10,
     flex: 1,
     flexDirection: 'row'
   },
   imageContainer: {
     justifyContent: 'space-evenly',
     borderRadius: 5,
-    height: 110,
-    width: 110,
+    height: 100,
+    width: 100,
     alignSelf: 'center'
   },
   elevationLow: {
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.8,
-    shadowRadius: 2
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.5,
+    shadowRadius: 1
   }
 })
 

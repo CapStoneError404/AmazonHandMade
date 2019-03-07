@@ -4,16 +4,17 @@ import * as actions from './actions'
 import * as globalActions from '@actions'
 
 function mapStateToProps(state) {
-   return {
-      User: state.User,
-      Artisans: state.Artisans,
-      Errors: state.Errors,
-      Products: state.Products
-   }
+  return {
+    User: state.User,
+    Artisans: state.Artisans,
+    Errors: state.Errors,
+    Products: state.Products,
+    Payouts: state.Payouts
+  }
 }
 
 function mapDispatchToProps(dispatch) {
-   return bindActionCreators({ ...actions, ...globalActions }, dispatch)
+  return bindActionCreators({ ...actions, ...globalActions }, dispatch)
 }
 
 import { default as UnconnectedTransactions } from './Transactions'
@@ -30,8 +31,8 @@ const PayoutList = connect(mapStateToProps, mapDispatchToProps)(UnconnectedPayou
 
 
 export {
-   Transactions,
-   ArtisanPayout,
-   LogPayout,
-   PayoutList
+  Transactions,
+  ArtisanPayout,
+  LogPayout,
+  PayoutList
 }
