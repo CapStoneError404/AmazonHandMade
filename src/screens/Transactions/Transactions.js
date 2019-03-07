@@ -11,19 +11,21 @@ import {
    Text,
    View
 } from 'react-native'
-import { withMappedNavigationProps } from 'react-navigation-props-mapper'
 
 export default class Transactions extends Component {
-
    static navigationOptions = () => {
       return {
          title: 'Transactions'
       }
 
    }
+
    constructor(props) {
       super(props)
-      this.stat = {}
+      this.state = {
+         paidAmount: null,
+         amountOwed: null
+      }
 
       this.transactionButtons = [
          {
@@ -48,7 +50,15 @@ export default class Transactions extends Component {
       ]
 
       this.navigateToPayoutList = this.navigateToPayoutList.bind(this)
+   }
 
+   componentDidMount() {
+      this.props.getAlreadyPaid()
+      this.props.getPaymentOwed()
+      this.setState({
+         amountOwed: this.props.Transactions.amountOwed,
+         paidAmount: this.props.Transactions.paidAmount
+      })
    }
 
    navigateToPayoutList() {
@@ -65,8 +75,8 @@ export default class Transactions extends Component {
                   buttonsArray={this.payoutButtons}
                >
                   <CardSection style={styles.cardSection}>
-                     <Text style={styles.cardText}>Money Owed: </Text>
-                     <Text style={styles.cardText}>Total payments: </Text>
+                     <Text style={styles.cardText}>Money Owed: {this.state.amountOwed}</Text>
+                     <Text style={styles.cardText}>Total payments: {this.state.paidAmount}</Text>
                   </CardSection>
                </StandardCard>
 
