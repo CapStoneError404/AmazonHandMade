@@ -7,7 +7,7 @@ import { withMappedNavigationProps } from 'react-navigation-props-mapper'
 class PayoutList extends Component {
    static navigationOptions = () => {
       return {
-         title: 'PayoutList'
+         title: 'Artisan Payouts'
       }
    }
 
