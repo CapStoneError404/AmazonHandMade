@@ -1,6 +1,6 @@
 import { AddImage, AsyncButton, Wallpaper } from '@components'
 import React, { Component } from 'react'
-import { StyleSheet, ScrollView, View, Text, TextInput, Picker } from 'react-native'
+import { StyleSheet, ScrollView, View, Text, TextInput, Picker, Platform } from 'react-native'
 import ImagePicker from 'react-native-image-crop-picker'
 import { withMappedNavigationProps } from 'react-navigation-props-mapper'
 import { ProductCategories } from './ProductCategories'
@@ -12,6 +12,8 @@ class AddProduct extends Component {
   constructor(props) {
     super(props)
     console.log("inside constructor")
+
+    
     this.state = {
       productMainCategory: '', 
       productSubCategory: '', 
@@ -288,13 +290,15 @@ const styles = StyleSheet.create({
   categorySection: {
     alignSelf: 'center',
     width: '90%',
-    height: 60,
     color: '#808080',
     backgroundColor: 'white',
     margin: '4%',
     borderRadius: 10,
   },
-  PickerItem: {
+  PickerItem: Platform.OS === 'ios' ? {
+    height: 200,
+    color: 'black'
+  } : {
     height: 60,
     color: 'black'
   },
