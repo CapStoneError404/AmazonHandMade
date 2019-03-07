@@ -7,9 +7,10 @@ import User from './User'
 import Artisans from './Artisans'
 import Products from './Products'
 import Payouts from './Payouts'
+import Transactions from './Transactions'
 
 //Then combine them all here
-const appReducer = combineReducers({ User, Errors, Artisans, Products, Payouts })
+const appReducer = combineReducers({ User, Errors, Artisans, Products, Payouts, Transactions })
 
 const rootReducer = (state, action) => {
   if(action.type == 'RESET_STORE' || (__DEV__ && action.type == 'LOGOUT')) {

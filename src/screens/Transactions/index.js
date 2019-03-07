@@ -9,7 +9,8 @@ function mapStateToProps(state) {
     Artisans: state.Artisans,
     Errors: state.Errors,
     Products: state.Products,
-    Payouts: state.Payouts
+    Payouts: state.Payouts,
+    Transactions: state.Transactions
   }
 }
 

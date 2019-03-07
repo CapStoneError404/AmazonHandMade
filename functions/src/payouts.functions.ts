@@ -18,7 +18,7 @@ export async function logPayout(data, context) {
   const payout = {
     cgaId: cgaId,
     artisanId: artisanId,
-    amount: parseInt(amount),
+    amount: parseFloat(amount),
     description: description,
     date: (new Date()).valueOf()
   }

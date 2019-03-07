@@ -36,32 +36,32 @@ const ArtisanHubStack = createStackNavigator({
 
 const TransactionStack = createStackNavigator({
   Transactions: Transactions,
+  PayoutList: PayoutList,
   ArtisanPayout: ArtisanPayout,
-  LogPayout: LogPayout,
-  PayoutList: PayoutList
+  LogPayout: LogPayout
 })
 
 const TabNavigator = createBottomTabNavigator(
   {
-    ArtisanHub: ArtisanHubStack,
+    "Artisan Hub": ArtisanHubStack,
     Settings: Settings,
-    Transactions: TransactionStack
+    "Money Management": TransactionStack
 
   },
   {
-    initialRouteName: 'ArtisanHub',
-    order: ['ArtisanHub', 'Transactions', 'Settings'],
+    initialRouteName: 'Artisan Hub',
+    order: ['Artisan Hub', 'Money Management', 'Settings'],
     animationEnabled: true,
     navigationOptions: ({ navigation }) => {
       return {
         tabBarIcon: ({ tintColor }) => {
           const { routeName } = navigation.state
           var iconName
-          if (routeName === 'ArtisanHub') {
+          if (routeName === 'Artisan Hub') {
             iconName = 'users'
           } else if (routeName === 'Settings') {
             iconName = 'cog'
-          } else if (routeName === 'Transactions') {
+          } else if (routeName === 'Money Management') {
             iconName = 'dollar'
           }
           return <Icon name={iconName} size={25} color={tintColor} />

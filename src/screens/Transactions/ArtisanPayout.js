@@ -37,10 +37,25 @@ class ArtisanPayout extends Component {
 
     console.log(this.props)
 
+    this.state = {
+      fetchingPayouts: false
+    }
+
+    this.fetchPayouts = this.fetchPayouts.bind(this)
     this.renderRecentPayout = this.renderRecentPayout.bind(this)
     this.navigateToLogPayout = this.navigateToLogPayout.bind(this)
     this.renderRecentPayouts = this.renderRecentPayouts.bind(this)
-    this.state = {}
+  }
+
+  componentDidMount() {
+    this.fetchPayouts()
+  }
+
+  fetchPayouts() {
+    this.setState({fetchPayouts: true})
+    this.props.fetchPayouts(this.props.User.uid).then(() => {
+      this.setState({fetchPayouts: false})
+    })
   }
 
   navigateToLogPayout() {
@@ -98,8 +113,7 @@ class ArtisanPayout extends Component {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
-    justifyContent: 'flex-start',
-    padding: '2%'
+    justifyContent: 'flex-start'
   },
   image: {
     borderRadius: 5
