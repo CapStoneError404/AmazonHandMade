@@ -11,33 +11,54 @@ import {
    Text,
    View
 } from 'react-native'
-import { withMappedNavigationProps } from 'react-navigation-props-mapper'
 
 export default class Transactions extends Component {
-
    static navigationOptions = () => {
       return {
          title: 'Transactions'
       }
 
    }
+
    constructor(props) {
       super(props)
-      this.stat = {}
+      this.state = {
+         paidAmount: null,
+         amountOwed: null
+      }
 
       this.transactionButtons = [
          {
             title: 'View All',
-            onPress: () => this.navigateToPayoutList()
+            onPress: () => console.log("Nav to Transactions for artisans")
          },
          {
             title: 'Stats',
-            onPress: () => console.log("Message Artisan")
+            onPress: () => console.log("Clicked on Transaction Stats")
+         }
+      ]
+
+      this.payoutButtons = [
+         {
+            title: 'View All',
+            onPress: () => this.props.navigation.navigate('PayoutList')
+         },
+         {
+            title: 'Stats',
+            onPress: () => console.log("Clicked on Payout Stats")
          }
       ]
 
       this.navigateToPayoutList = this.navigateToPayoutList.bind(this)
+   }
 
+   componentDidMount() {
+      this.props.getAlreadyPaid()
+      this.props.getPaymentOwed()
+      this.setState({
+         amountOwed: this.props.Transactions.amountOwed,
+         paidAmount: this.props.Transactions.paidAmount
+      })
    }
 
    navigateToPayoutList() {
@@ -50,22 +71,24 @@ export default class Transactions extends Component {
          <Wallpaper style={styles.container}>
             <ScrollView style={{ flex: 1.8 }}>
                <StandardCard
+                  title="Payouts"
+                  buttonsArray={this.payoutButtons}
+               >
+                  <CardSection style={styles.cardSection}>
+                     <Text style={styles.cardText}>Money Owed: {this.state.amountOwed}</Text>
+                     <Text style={styles.cardText}>Total payments: {this.state.paidAmount}</Text>
+                  </CardSection>
+               </StandardCard>
+
+               <StandardCard
                   title="Transactions"
                   buttonsArray={this.transactionButtons}
                >
-                  <CardSection>
-                     <Text>Some Text</Text>
+                  <CardSection  style={styles.cardSection}>
+                    <Text style={styles.cardText}>Number items sold: </Text>
+                    <Text style={styles.cardText}>Overall Product Income: </Text>
                   </CardSection>
                </StandardCard>
-               <AsyncButton
-                  title="Payout List"
-                  color="green"
-                  textColor="white"
-                  onPress={() =>
-                     this.props.navigation.navigate('PayoutList')
-                  }
-                  style={{ marginLeft: 10, marginRight: 10, marginTop: 20 }}
-               />
             </ScrollView>
          </Wallpaper>
       )
@@ -84,10 +107,17 @@ const styles = StyleSheet.create({
       justifyContent: 'flex-start',
       alignItems: 'center',
    },
+   cardSection: {
+      flex: 1, 
+      flexDirection: 'column' 
+   },
    text: {
       fontSize: 20
    },
-   button: {
-      flex: 1
+   cardText: {
+      paddingVertical: 10,
+      flex: 1,
+      fontSize: 20,
+      color: '#444444'
    }
 })
