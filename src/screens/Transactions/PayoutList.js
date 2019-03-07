@@ -1,16 +1,7 @@
+import { Wallpaper, AsyncButton, CardSection, StandardCard } from '@components'
 import React, { Component } from 'react'
-import {
-   Wallpaper,
-   AsyncButton,
-   CardSection,
-   StandardCard
-} from '@components'
-import {
-   ScrollView,
-   StyleSheet,
-   Text,
-   View
-} from 'react-native'
+import { ActivityIndicator, Button, FlatList, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { ProfilePicture } from '../../components'
 import { withMappedNavigationProps } from 'react-navigation-props-mapper'
 
 class PayoutList extends Component {
@@ -18,13 +9,12 @@ class PayoutList extends Component {
       return {
          title: 'PayoutList'
       }
-
    }
 
    constructor(props) {
       super(props)
 
-      this.payoutListButtons = [
+      /* this.payoutListButtons = [
          {
             title: 'button',
             onPress: () => console.log("button pressed")
@@ -33,21 +23,81 @@ class PayoutList extends Component {
             title: 'button',
             onPress: () => console.log("button pressed")
          }
-      ]
+      ] */
 
-      this.state = {}
+      this.state = {
+         showPayoutList: false,
+         fetchingArtisans: false
+      }
+
+      this.fetchArtisans = this.fetchArtisans.bind(this)
       this.navigateToArtisanPayout = this.navigateToArtisanPayout.bind(this)
    }
 
-   navigateToArtisanPayout() {
+   componentDidMount() {
+      this.fetchArtisans()
+   }
+
+    fetchArtisans() {
+      this.setState({fetchingArtisans: true})
+      this.props.fetchArtisans(this.props.User.uid).then(() => {
+        this.setState({fetchingArtisans: false})
+      })
+    }
+
+   navigateToArtisanPayout(artisan) {
       const { } = this.props
       this.props.navigation.navigate('ArtisanPayout', {
          onNavigateBack: this.handleOnNavigateBack
       })
    }
 
-   render() {
+   _renderPayouyListItem = ({item, index}) => {
       return (
+        <TouchableOpacity
+          testID={`listItem${index}`}
+          style={styles.artisanView}
+          onPress={() => this.props.navigation.navigateToArtisanPayout(artisan)}
+          key={item.key}
+        >
+          <ProfilePicture
+            source={{uri: item.profilePictureURL}}
+            style={styles.image}
+          />
+            
+          <View style={styles.namePhone}>
+            <Text style={styles.text}>{item.name}</Text>
+            <Text style={styles.text}>{item.phoneNumber}</Text>
+            <Text style={styles.text}>{`Quantity: ${item.pho}`}</Text>
+          </View>
+        </TouchableOpacity>
+      )
+    }
+
+   _keyExtractor = (item) => item.uid
+
+   sortedArtisans() {
+      if(this.props.Artisans != []) {
+        sortedArtisans = Array.from(this.props.Artisans)
+        sortedArtisans.sort((first, second) => {
+          name1 = first.name.toLowerCase()
+          name2 = second.name.toLowerCase()
+          if (name1 < name2)
+            return -1
+          else if(name1 > name2)
+            return 1
+          else
+            return 0
+        })
+        return sortedArtisans
+      } else {
+        return []
+      }
+    }
+
+   render() {
+      
+      /* return (
          <Wallpaper style={styles.container}>
             <Wallpaper style={styles.container}>
                <ScrollView style={{ flex: 1.8 }}>
@@ -72,6 +122,27 @@ class PayoutList extends Component {
             </Wallpaper>
          </Wallpaper>
       )
+   } */
+
+   return (
+      <Wallpaper>
+        {(this.props.Artisans != [] && this.state.fetchingPayoutsList) ? 
+          <ActivityIndicator 
+            size='large'
+            animating={this.props.spinning}
+            color='white'
+          />
+          :
+          <FlatList
+            testID='payouts_list'
+            data={this.sortedArtisans()}
+            keyExtractor={this._keyExtractor}
+            renderItem={this._renderPayoutListItem}
+            extraData={this.state}
+          />
+        }
+      </Wallpaper>
+    )
    }
 }
 
@@ -82,8 +153,23 @@ const styles = StyleSheet.create({
       padding: '2%'
    },
    image: {
-      borderRadius: 5
+      height: 90,
+      aspectRatio: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 45,
+      margin: 5
    },
+   artisanView: {
+      height: 100,
+      flexDirection: 'row',
+      alignItems: 'center',
+      backgroundColor: 'white',
+      borderRadius: 5,
+      marginTop: 10,
+      marginLeft: 10,
+      marginRight: 10
+    },
    firstSection: {
       width: '100%',
       height: 100,
