@@ -14,6 +14,7 @@ export default class AddArtisan extends Component {
     this.state = {
       name: "",
       phoneNumber: "",
+      location: "",
       profilePicturePath: "",
       description: "",
       adding: false
@@ -39,12 +40,14 @@ export default class AddArtisan extends Component {
       this.props.displayError("Name field required.")
     else if(!this.state.phoneNumber)
       this.props.displayError("Phone field required")
+    else if(!this.state.location)
+      this.props.displayError("Location required")
     else if(!this.state.description)
       this.props.displayError("Please provide a brief description")
     //else if(!this.state.profilePicturePath)
     //  this.props.displayError("Please upload a profile picture")
 
-    return this.state.name && this.state.phoneNumber && this.state.description// && this.state.profilePicturePath
+    return this.state.name && this.state.phoneNumber && this.state.location && this.state.description// && this.state.profilePicturePath
   }
   
   createArtisan() {
@@ -54,6 +57,7 @@ export default class AddArtisan extends Component {
       let artisanInfo = {
         name: this.state.name,
         phoneNumber: this.state.phoneNumber,
+        location: this.state.location,
         description: this.state.description
       }
 
@@ -92,6 +96,13 @@ export default class AddArtisan extends Component {
           </View>
         </View>
         <View style={styles.secondSection}>
+          <UserInput
+              iconName="map"
+              placeholder="Location"
+              value={this.state.location}
+              onChangeText={(newText) => this.setState({location: newText})}
+              style={styles.smallInput3}
+          />
           <UserInput 
             placeholder="Describe this artisan"
             value={this.state.description}
@@ -151,7 +162,14 @@ const styles = StyleSheet.create({
     marginBottom: 0,
     marginLeft: 4,
     marginRight: 0,
-    borderRadius: 5
+    borderRadius: 5,
+  },
+  smallInput3: {
+    marginTop: 2,
+    marginBottom: 0,
+    marginRight: 0,
+    borderRadius: 5,
+    maxHeight: 50
   },
   largeInputs: {
     marginTop: 4,

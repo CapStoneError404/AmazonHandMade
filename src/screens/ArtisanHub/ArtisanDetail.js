@@ -117,10 +117,11 @@ class ArtisanDetail extends Component {
   }
 
   navigateToEditArtisan() {
-    const { name, phoneNumber, description, uid } = this.state.currentArtisan
+    const { name, phoneNumber, location, description, uid } = this.state.currentArtisan
     this.props.navigation.navigate('EditArtisan', {
       name,
       phoneNumber,
+      location,
       description,
       uid,
       onNavigateBack: this.handleOnNavigateBack
@@ -221,7 +222,7 @@ class ArtisanDetail extends Component {
   }
 
   render() {
-    const { name, phoneNumber, description, profilePictureURL } = this.state.currentArtisan
+    const { name, phoneNumber, location, description, profilePictureURL } = this.state.currentArtisan
     return (
       <Wallpaper style={styles.container}>
         <ScrollView style={{ flex: 1.8 }}>
@@ -237,7 +238,7 @@ class ArtisanDetail extends Component {
               <View style={{ flex: 1, flexDirection: 'column' }}>
                 <Text style={styles.nameStyle}>{name}</Text>
                 <Text style={styles.phoneStyle}>{phoneNumber}</Text>
-                <Text style={styles.phoneStyle}>Location: Mexico</Text>
+                <Text style={styles.locationStyle}>{location}</Text>
               </View>
             </CardSection>
             <CardSection style={{ flex: 1, flexDirection: 'column' }}>
@@ -287,6 +288,12 @@ const styles = StyleSheet.create({
     marginLeft: 5
   },
   phoneStyle: {
+    flex: 2,
+    fontSize: 20,
+    color: '#444444',
+    marginLeft: 5
+  },
+  locationStyle: {
     flex: 2,
     fontSize: 20,
     color: '#444444',

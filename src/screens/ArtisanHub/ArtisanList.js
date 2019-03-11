@@ -60,6 +60,7 @@ export default class ArtisanList extends Component {
         />
         <View style={styles.namePhone}>
           <Text style={styles.text}>{item.name}</Text>
+          <Text style={styles.text}>{item.location}</Text>
           <Text style={styles.text}>{item.phoneNumber}</Text>
         </View>
       </TouchableOpacity>

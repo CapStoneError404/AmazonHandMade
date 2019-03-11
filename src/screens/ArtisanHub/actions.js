@@ -21,6 +21,7 @@ export function createArtisan(artisanInfo, cgaID, profilePicturePath) {
       let artisan = {
         name: response.data.name,
         phoneNumber: response.data.phoneNumber,
+        location: response.data.location,
         description: response.data.description,
         uid: response.data.uid
       }
@@ -44,15 +45,16 @@ export function createArtisan(artisanInfo, cgaID, profilePicturePath) {
 
 //Updates artisan info and if image is passed in than delete current one in storage,
 //update it with new image picked in both storage and database
-export const saveArtisan = ({ name, phoneNumber, description, profilePicturePath, uid }) => {
+export const saveArtisan = ({ name, phoneNumber, location, description, profilePicturePath, uid }) => {
   return (dispatch) => {
     return new Promise(async (resolve) => {
       await firebase.database().ref(`/artisans/${uid}`)
-        .update({ name, phoneNumber, description })
+        .update({ name, phoneNumber, location, description })
 
       artisanObject = {
         name,
         phoneNumber,
+        location,
         description,
         uid
       }
