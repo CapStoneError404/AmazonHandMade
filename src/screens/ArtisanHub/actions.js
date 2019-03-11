@@ -115,7 +115,7 @@ export function fetchProducts(artisanID) {
       }
 
       let productSnapshot = await firebase.database().ref(`artisans/${artisanID}/products`).once('value')
-      let productKeys = Object.keys(productSnapshot.val())
+      let productKeys = productSnapshot.val()? Object.keys(productSnapshot.val()): []
       productArray = productArray.filter(obj => productKeys.includes(obj.productID))
 
       resolve()
