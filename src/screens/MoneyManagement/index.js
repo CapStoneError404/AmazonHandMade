@@ -10,7 +10,7 @@ function mapStateToProps(state) {
     Errors: state.Errors,
     Products: state.Products,
     Payouts: state.Payouts,
-    Transactions: state.Transactions
+    MoneyManagement: state.MoneyManagement
   }
 }
 
@@ -18,21 +18,22 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ ...actions, ...globalActions }, dispatch)
 }
 
-import { default as UnconnectedTransactions } from './Transactions'
+import { default as UnconnectedMoneyManagement } from './MoneyManagement'
 import { default as UnconnectedArtisanPayout } from './ArtisanPayout'
 import { default as UnconnectedLogPayout } from './LogPayout'
 import { default as UnconnectedPayoutList } from './PayoutList'
 
 
 
-const Transactions = connect(mapStateToProps, mapDispatchToProps)(UnconnectedTransactions)
+const MoneyManagement = connect(mapStateToProps, mapDispatchToProps)(UnconnectedMoneyManagement)
 const ArtisanPayout = connect(mapStateToProps, mapDispatchToProps)(UnconnectedArtisanPayout)
 const LogPayout = connect(mapStateToProps, mapDispatchToProps)(UnconnectedLogPayout)
 const PayoutList = connect(mapStateToProps, mapDispatchToProps)(UnconnectedPayoutList)
 
 
 export {
-  Transactions,
+  MoneyManagement
+  ,
   ArtisanPayout,
   LogPayout,
   PayoutList

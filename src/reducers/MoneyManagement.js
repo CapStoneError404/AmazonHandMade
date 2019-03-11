@@ -1,4 +1,4 @@
-export default function Transactions(state = [], action) {
+export default function MoneyManagement(state = [], action) {
   console.log("Products reducing action " + action.type)
   switch (action.type) {
     case 'GET_AMOUNT_OWED':

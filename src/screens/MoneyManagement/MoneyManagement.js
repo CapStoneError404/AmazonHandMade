@@ -12,7 +12,7 @@ import {
   View
 } from 'react-native'
 
-export default class Transactions extends Component {
+export default class MoneyManagement extends Component {
    static navigationOptions = () => {
      return {
        title: 'Money Management'
@@ -56,8 +56,8 @@ export default class Transactions extends Component {
       this.props.getAlreadyPaid()
       this.props.getPaymentOwed()
       this.setState({
-         amountOwed: this.props.Transactions.amountOwed,
-         paidAmount: this.props.Transactions.paidAmount
+         amountOwed: this.props.MoneyManagement.amountOwed,
+         paidAmount: this.props.MoneyManagement.paidAmount
       })
    }
 

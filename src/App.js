@@ -18,11 +18,11 @@ import {
 } from '@screens/ArtisanHub'
 import { AddProduct, ProductDetail, ProductList } from '@screens/Products'
 import {
-  Transactions,
+  MoneyManagement,
   ArtisanPayout,
   LogPayout,
   PayoutList
-} from '@screens/Transactions'
+} from '@screens/MoneyManagement'
 
 const ArtisanHubStack = createStackNavigator({
   ArtisanList: ArtisanList,
@@ -34,8 +34,8 @@ const ArtisanHubStack = createStackNavigator({
   ProductList: ProductList
 })
 
-const TransactionStack = createStackNavigator({
-  Transactions: Transactions,
+const MoneyManagementStack = createStackNavigator({
+  MoneyManagement: MoneyManagement,
   PayoutList: PayoutList,
   ArtisanPayout: ArtisanPayout,
   LogPayout: LogPayout
@@ -45,7 +45,7 @@ const TabNavigator = createBottomTabNavigator(
   {
     "Artisan Hub": ArtisanHubStack,
     Settings: Settings,
-    "Money Management": TransactionStack
+    "Money Management": MoneyManagementStack
 
   },
   {
