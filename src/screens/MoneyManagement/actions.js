@@ -59,11 +59,11 @@ export function logPayout({cgaId, artisanId, amount, description}) {
 }
 
 export function getPaymentOwed(artisanId) {
-	console.log("Fetching amount due for" + (artisanId || "everyone"))
+  console.log("Fetching amount due for" + (artisanId || "everyone"))
   	return (dispatch) => {
     	return new Promise(async (resolve) => {
     		//Fetch products
-			let productSnapshot = await firebase.database().ref('products').once('value')
+      let productSnapshot = await firebase.database().ref('products').once('value')
 	      	let productObject = productSnapshot.val()
 
 	      	//If artisan is specified, remove unrelated products
@@ -74,8 +74,8 @@ export function getPaymentOwed(artisanId) {
 		      	productObject = Object.keys(productObject)
 				  .filter(key => productKeys.includes(key))
 				  .reduce((obj, key) => {
-				    obj[key] = productObject[key];
-				    return obj;
+				    obj[key] = productObject[key]
+				    return obj
 				  }, {})
 	      	}
 
@@ -92,23 +92,23 @@ export function getPaymentOwed(artisanId) {
 	      		if (transactionProd) {
 	      			amountOwed += (transactionObject[transactionID].numSold * transactionProd.StandardPrice)	
 	      		}
-          }
+      }
           
-          console.log(amountOwed)
+      console.log(amountOwed)
 
 	      	//amountOwed = (transactionObject["transactionID"].numSold)
 
 	      	//This is basically getAlreadyPaid() but not sure how to connect as redux actions  	
 	      	//**********
-			let payoutsSnapshot = await firebase.database().ref('payouts').once('value')
+      let payoutsSnapshot = await firebase.database().ref('payouts').once('value')
 	      	let payoutsObject = payoutsSnapshot.val()
 	      	let paidAmount = 0
 
 	      	//Loop through payments and calculate total
 	      	for (var payoutsID in payoutsObject) {
-            console.log(payoutsID)
+        console.log(payoutsID)
 	      		if ((artisanId == null) || payoutsObject[payoutsID].artisanId == artisanId) {
-              console.log(payoutsObject[payoutsID].amount)
+          console.log(payoutsObject[payoutsID].amount)
 	      			paidAmount += payoutsObject[payoutsID].amount	
 	      		}
 	      	} 
@@ -116,20 +116,20 @@ export function getPaymentOwed(artisanId) {
 
       console.log(paidAmount)
 	      	amountOwed = amountOwed - paidAmount
-			amountOwed=Math.round(amountOwed * 100) / 100
+      amountOwed=Math.round(amountOwed * 100) / 100
 
 	      	resolve()
 	      	dispatch({ type: 'GET_AMOUNT_OWED', amountOwed: amountOwed })
     	})
-	}
+  }
 }
 
 export function getAlreadyPaid(artisanId) {
-	console.log("Fetching amount already paid for" + (artisanId || "everyone"))
+  console.log("Fetching amount already paid for" + (artisanId || "everyone"))
   	return (dispatch) => {
     	return new Promise(async (resolve) => {
     		//Fetch payouts
-			let payoutsSnapshot = await firebase.database().ref('payouts').once('value')
+      let payoutsSnapshot = await firebase.database().ref('payouts').once('value')
 	      	let payoutsObject = payoutsSnapshot.val()
 	      	let paidAmount = 0
 	      	
@@ -145,5 +145,5 @@ export function getAlreadyPaid(artisanId) {
 	      	resolve()
 	      	dispatch({ type: 'GET_AMOUNT_PAID', paidAmount: paidAmount })
     	})
-	}
+  }
 }

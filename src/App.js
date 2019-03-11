@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { View } from 'react-native';
+import React, { Component } from 'react'
+import { View } from 'react-native'
 import {
   createStackNavigator,
   createSwitchNavigator,
   createBottomTabNavigator
-} from 'react-navigation';
-import DropdownAlert from 'react-native-dropdownalert';
-import Icon from 'react-native-vector-icons/FontAwesome';
+} from 'react-navigation'
+import DropdownAlert from 'react-native-dropdownalert'
+import Icon from 'react-native-vector-icons/FontAwesome'
 import { Login, Register, ForgotPassword } from '@screens/Auth'
 import Settings from '@screens/Settings'
 import Launch from '@screens/Launch'
@@ -99,7 +99,7 @@ const RootStack = createSwitchNavigator(
 
 class Main extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.props.clearErrors()
   }
 
@@ -127,7 +127,7 @@ import * as actions from '@actions'
 function mapStateToProps(state) {
   return {
     Errors: state.Errors
-  };
+  }
 }
 
 function mapDispatchToProps(dispatch) {
@@ -137,6 +137,6 @@ function mapDispatchToProps(dispatch) {
 const App = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Main);
+)(Main)
 
 export default App

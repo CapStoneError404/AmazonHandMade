@@ -111,13 +111,13 @@ class EditArtisan extends Component {
         <View style={styles.secondSection}>
           <View style={this.state.focusedInputs.location? [styles.focusedInput2, styles.inputWrapper2] :styles.inputWrapper2}>
             <UserInput
-                iconName="map"
-                placeholder="Location"
-                value={this.state.location}
-                onChangeText={(newText) => this.setState({location: newText})}
-                onFocus={()=> this.setState({focusedInputs: {...this.state.focusedInputs, location: true}})}
-                onBlur={()=> this.setState({focusedInputs: {...this.state.focusedInputs, location: false}})}
-                style={styles.smallInput3}
+              iconName="map"
+              placeholder="Location"
+              value={this.state.location}
+              onChangeText={(newText) => this.setState({location: newText})}
+              onFocus={()=> this.setState({focusedInputs: {...this.state.focusedInputs, location: true}})}
+              onBlur={()=> this.setState({focusedInputs: {...this.state.focusedInputs, location: false}})}
+              style={styles.smallInput3}
             />
           </View>
           <View style={this.state.focusedInputs.description? [styles.focusedInput2, styles.inputWrapper3] :styles.inputWrapper3}>
