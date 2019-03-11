@@ -6,8 +6,8 @@ export function createArtisan(artisanInfo, cgaID, profilePicturePath) {
   console.log("CGA ID: " + cgaID)
   console.log("Profile Picture Path: " + profilePicturePath)
 
-  return (dispatch, prevState) => {
-    return new Promise(async (resolve, reject) => {
+  return (dispatch) => { 
+    return new Promise(async (resolve) => {
       let addArtisan = firebase.functions().httpsCallable('addArtisan')
 
       let response = await addArtisan({
@@ -31,13 +31,12 @@ export function createArtisan(artisanInfo, cgaID, profilePicturePath) {
           .putFile(profilePicturePath)
 
         artisan.profilePictureURL = st_ref.downloadURL
-
         firebase.database().ref(`artisans/${artisan.uid}`).update(
           { profilePictureURL: st_ref.downloadURL })
       }
 
-      resolve()
-      dispatch({ type: 'ADD_ARTISAN', artisan: artisan })
+      resolve(artisan)
+      dispatch({type: 'ADD_ARTISAN', artisan: artisan})
     })
   }
 }
@@ -73,31 +72,6 @@ export const saveArtisan = ({ name, phoneNumber, description, profilePicturePath
   }
 }
 
-export function fetchArtisans(cgaID) {
-  console.log("Fetching Artisans")
-  return (dispatch, prevState) => {
-    return new Promise(async (resolve, reject) => {
-      let snapshot = await firebase.database().ref(`amazonUsers/${cgaID}/artisans`).once('value')
-      let artisanIds = snapshot.val() ? Object.keys(snapshot.val()) : []
-      let artisans = (await firebase.database().ref('artisans').once('value')).val()
-
-      artisanArray = []
-
-      for (var uid in artisans) {
-        if (artisanIds.includes(uid)) {
-          artisanArray.push({
-            ...artisans[uid],
-            uid: uid
-          })
-        }
-      }
-
-      resolve()
-      dispatch({ type: 'GET_ARTISANS', artisans: artisanArray })
-    })
-  }
-}
-
 //Fetch all products associated with the specfic artisan we current viewing
 export function fetchProducts(artisanID) {
   console.log("Fetching Products artisan ID" + artisanID)
@@ -129,15 +103,12 @@ export function fetchProducts(artisanID) {
 //Also check that artisan has an image if so delete that from storage
 export function deleteArtisan(artisans, uid) {
   return (dispatch) => {
-    return new Promise(async (resolve, reject) => {
+    return new Promise(async (resolve) => {
       let deleteArtisan = firebase.functions().httpsCallable('deleteArtisan')
-      await deleteArtisan({ uid: uid })
-
-      const artisanToDelete = artisans.find((item) => item.uid === uid)
-      if (artisanToDelete.profilePictureURL) {
-        await firebase.storage().ref(`artisanFiles/${uid}/images/profilePicture`).delete()
-      }
-
+      
+      await deleteArtisan({uid: uid})
+      await firebase.storage().ref(`artisanFiles/${uid}/images/profilePicture`).delete()
+      
       resolve()
       dispatch({ type: 'DELETE_ARTISAN', artisanId: uid })
     })

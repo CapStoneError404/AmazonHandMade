@@ -24,7 +24,7 @@ class ArtisanDetail extends Component {
     return {
       title: 'Artisan Details'
     }
-  };
+  }
 
   constructor(props) {
     super(props)
@@ -90,9 +90,9 @@ class ArtisanDetail extends Component {
 
   deletePressed() {
     this.setState({ adding: true })
-    this.props.deleteArtisan(this.props.Artisans, this.props.uid).then(() => {
+    this.props.deleteArtisan(this.props.uid).then(() => {
       this.setState({ adding: false })
-      this.props.navigation.navigate('ArtisanList')
+      this.props.navigation.navigate("ArtisanList")
     })
   }
 

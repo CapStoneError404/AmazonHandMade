@@ -23,6 +23,7 @@ import {
   LogPayout,
   PayoutList
 } from '@screens/Transactions'
+import { Conversation, ConversationList, NewConversation } from '@screens/Messaging';
 
 const ArtisanHubStack = createStackNavigator({
   ArtisanList: ArtisanList,
@@ -41,16 +42,24 @@ const TransactionStack = createStackNavigator({
   LogPayout: LogPayout
 })
 
+const MessageNavigator = createStackNavigator(
+  {
+    Conversations: ConversationList,
+    Conversation: Conversation,
+    NewConversation: NewConversation
+  }
+)
+
 const TabNavigator = createBottomTabNavigator(
   {
     "Artisan Hub": ArtisanHubStack,
     Settings: Settings,
-    "Money Management": TransactionStack
-
+    "Finances": TransactionStack,
+    "Messages": MessageNavigator
   },
   {
     initialRouteName: 'Artisan Hub',
-    order: ['Artisan Hub', 'Money Management', 'Settings'],
+    order: ['Artisan Hub', 'Messages', 'Finances', 'Settings'],
     animationEnabled: true,
     navigationOptions: ({ navigation }) => {
       return {
@@ -61,8 +70,10 @@ const TabNavigator = createBottomTabNavigator(
             iconName = 'users'
           } else if (routeName === 'Settings') {
             iconName = 'cog'
-          } else if (routeName === 'Money Management') {
+          } else if (routeName === 'Finances') {
             iconName = 'dollar'
+          } else if (routeName === 'Messages') {
+            iconName = 'comments'
           }
           return <Icon name={iconName} size={25} color={tintColor} />
         },

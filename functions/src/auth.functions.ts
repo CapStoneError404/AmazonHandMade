@@ -1,6 +1,6 @@
 import * as admin from 'firebase-admin'
 
-export function loginWithAmazon(data, context) {
+export function loginWithAmazon(data) {
   console.log("Logging in with Amazon with the following data:")
   console.log(data)
 

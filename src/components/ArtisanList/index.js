@@ -1,23 +1,10 @@
 import { Wallpaper } from '@components'
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { ActivityIndicator, Button, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { ProfilePicture } from '../../components'
 
 export default class ArtisanList extends Component {
-  static navigationOptions = ({navigation}) => {
-    return {
-      title: 'Artisans',
-      headerRight: (
-        <View style={{paddingRight: 20}}>
-          <Button 
-            transparent
-            onPress={() => navigation.navigate("AddArtisan")}
-            title="Add"
-          />
-        </View>
-      )
-    }
-  }
 
   constructor(props) {
     super(props)
@@ -28,7 +15,6 @@ export default class ArtisanList extends Component {
     }
 
     this.fetchArtisans = this.fetchArtisans.bind(this)
-    this.navigateToArtisan = this.navigateToArtisan.bind(this)
     this.sortedArtisans = this.sortedArtisans.bind(this)
   }
 
@@ -38,40 +24,16 @@ export default class ArtisanList extends Component {
 
   fetchArtisans() {
     this.setState({fetchingArtisans: true})
-    this.props.fetchArtisans(this.props.User.uid).then(() => {
+    this.props.fetchArtisans(this.props.user.uid).then(() => {
       this.setState({fetchingArtisans: false})
     })
-  }
-  
-  navigateToArtisan(artisan) {
-    this.props.navigation.navigate('ArtisanDetail', {...artisan})
-  }
-
-  _renderArtisanItem = ({item, index}) => {
-    return (
-      <TouchableOpacity 
-        testID={`listItem${index}`}
-        style={styles.artisanView}
-        onPress={() => this.navigateToArtisan(item)}
-        key={item.key}
-      >
-        <ProfilePicture
-          source={{uri: item.profilePictureURL}}
-          style={styles.image}
-        />
-        <View style={styles.namePhone}>
-          <Text style={styles.text}>{item.name}</Text>
-          <Text style={styles.text}>{item.phoneNumber}</Text>
-        </View>
-      </TouchableOpacity>
-    )
   }
 
   _keyExtractor = (item) => item.uid
 
   sortedArtisans() {
-    if(this.props.Artisans != []) {
-      sortedArtisans = Array.from(this.props.Artisans)
+    if(this.props.artisans != []) {
+      sortedArtisans = Array.from(this.props.artisans)
       sortedArtisans.sort((first, second) => {
         name1 = first.name.toLowerCase()
         name2 = second.name.toLowerCase()
@@ -91,10 +53,10 @@ export default class ArtisanList extends Component {
   render() {
     return (
       <Wallpaper>
-        {(this.props.Artisans != [] && this.state.fetchingArtisans) ?
+        {(this.props.artisans != [] && this.state.fetchingArtisans) ?
           <ActivityIndicator 
             size='large'
-            animating={this.props.spinning}
+            animating={this.state.fetchingArtisans}
             color='white'
           />
           :
@@ -102,13 +64,19 @@ export default class ArtisanList extends Component {
             testID='artisan_list'
             data={this.sortedArtisans()}
             keyExtractor={this._keyExtractor}
-            renderItem={this._renderArtisanItem}
+            renderItem={this.props.renderArtisanItem}
             extraData={this.state}
           />
         }
       </Wallpaper>
     )
   }
+}
+
+ArtisanList.propTypes = {
+  user: PropTypes.object,
+  artisans: PropTypes.array,
+  renderArtisanItem: PropTypes.function
 }
 
 const styles = StyleSheet.create({

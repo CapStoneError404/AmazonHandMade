@@ -1,6 +1,6 @@
 import * as admin from 'firebase-admin'
 
-export async function addArtisan(data, context) {
+export async function addArtisan(data) {
   console.log("Adding artisan with the following data:")
   console.log(data)
 
@@ -16,21 +16,19 @@ export async function addArtisan(data, context) {
   let newArtisan = admin.database().ref('artisans/').push(artisanDBInfo)
 
   // Add phone to artisan ID to phoneMap root
-  let newPhone = await admin.database()
-    .ref(`phoneMap/${artisanInfo.phoneNumber}`)
+  await admin.database()
+    .ref(`phoneMap/${artisanInfo.phoneNumber.replace(/[^\d+]/g, '')}`)
     .set(newArtisan.key)
 
   var artisanObject = {
     name: artisanInfo.name,
-    phoneNumber: artisanInfo.phoneNumber,
+    phoneNumber: artisanInfo.phoneNumber.replace(/[^\d+]/g, ''),
     description: artisanInfo.description,
     uid: newArtisan.key
   }
 
   // Add artisanID to cga in amazonUsers root
-  let updateCGATask = admin.database()
-    .ref(`amazonUsers/${cgaID}/artisans/${newArtisan.key}`)
-    .set(true)
+  admin.database().ref(`amazonUsers/${cgaID}/artisans/${newArtisan.key}`).set(true)
 
   console.log("Returning:")
   console.log(artisanObject)
@@ -38,7 +36,7 @@ export async function addArtisan(data, context) {
   return artisanObject
 }
 
-export async function deleteArtisan(data, context) {
+export async function deleteArtisan(data) {
   console.log("Deleting artisan with the following data:")
   console.log(data)
 

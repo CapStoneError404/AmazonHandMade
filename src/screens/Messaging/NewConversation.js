@@ -3,19 +3,10 @@ import React, { Component } from 'react'
 import { ActivityIndicator, Button, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { ProfilePicture } from '../../components'
 
-export default class ArtisanList extends Component {
+export default class NewConversation extends Component {
   static navigationOptions = ({navigation}) => {
     return {
-      title: 'Artisans',
-      headerRight: (
-        <View style={{paddingRight: 20}}>
-          <Button 
-            transparent
-            onPress={() => navigation.navigate("AddArtisan")}
-            title="Add"
-          />
-        </View>
-      )
+      title: 'New Conversation'
     }
   }
 
@@ -23,7 +14,6 @@ export default class ArtisanList extends Component {
     super(props)
 
     this.state = {
-      showAddArtisan: false,
       fetchingArtisans: false
     }
 
@@ -44,7 +34,7 @@ export default class ArtisanList extends Component {
   }
   
   navigateToArtisan(artisan) {
-    this.props.navigation.navigate('ArtisanDetail', {...artisan})
+    this.props.navigation.navigate('Conversation', {...artisan})
   }
 
   _renderArtisanItem = ({item, index}) => {
@@ -94,7 +84,7 @@ export default class ArtisanList extends Component {
         {(this.props.Artisans != [] && this.state.fetchingArtisans) ?
           <ActivityIndicator 
             size='large'
-            animating={this.props.spinning}
+            animating={this.state.fetchingArtisans}
             color='white'
           />
           :
