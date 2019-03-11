@@ -11,13 +11,13 @@ class Conversation extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
       title: navigation.getParam('artisan'),
-      headerRight: (
+      /*headerRight: (
         <Button 
           icon={<Icon name='images' size={25} color='gray' />}
           type="clear"
           onPress={navigation.getParam('pickImage')}
         />
-      )
+      )*/
     }
   };
 

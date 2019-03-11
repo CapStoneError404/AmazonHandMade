@@ -36,7 +36,7 @@ export function createArtisan(artisanInfo, cgaID, profilePicturePath) {
           { profilePictureURL: st_ref.downloadURL })
       }
 
-      resolve()
+      resolve(artisan)
       dispatch({type: 'ADD_ARTISAN', artisan: artisan})
     })
   }
@@ -69,31 +69,6 @@ export const saveArtisan = ({ name, phoneNumber, description, profilePicturePath
           
       resolve()
       dispatch({ type: 'SAVE_ARTISAN', artisan: artisanObject })
-    })
-  }
-}
-
-export function fetchArtisans(cgaID) {
-  console.log("Fetching Artisans")
-  return (dispatch) => {
-    return new Promise(async (resolve) => {
-      let snapshot = await firebase.database().ref(`amazonUsers/${cgaID}/artisans`).once('value')
-      let artisanIds = snapshot.val() ? Object.keys(snapshot.val()) : []
-      let artisans = (await firebase.database().ref('artisans').once('value')).val()
-
-      artisanArray = []
-      
-      for(var uid in artisans) {
-        if(artisanIds.includes(uid)) {
-          artisanArray.push({
-            ...artisans[uid],
-            uid: uid
-          })
-        }
-      }
-      
-      resolve()
-      dispatch({type: 'GET_ARTISANS', artisans: artisanArray})
     })
   }
 }

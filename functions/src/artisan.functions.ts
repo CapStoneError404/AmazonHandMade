@@ -17,12 +17,12 @@ export async function addArtisan(data) {
 
   // Add phone to artisan ID to phoneMap root
   await admin.database()
-    .ref(`phoneMap/${artisanInfo.phoneNumber}`)
+    .ref(`phoneMap/${artisanInfo.phoneNumber.replace(/[^\d+]/g, '')}`)
     .set(newArtisan.key)
 
   var artisanObject = {
     name: artisanInfo.name,
-    phoneNumber: artisanInfo.phoneNumber,
+    phoneNumber: artisanInfo.phoneNumber.replace(/[^\d+]/g, ''),
     description: artisanInfo.description,
     uid: newArtisan.key
   }

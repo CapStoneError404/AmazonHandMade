@@ -1,34 +1,5 @@
 import firebase from 'react-native-firebase'
 
-export function sendMessage(sender, message, recipients) {
-  console.log(`Sending a message from ${sender} to ${recipients} with the following content:`)
-  console.log(message)
-  
-  return (dispatch) => { 
-    return new Promise(async (resolve) => {
-      let sendMessage = firebase.functions().httpsCallable('sendMessage')
-      
-      let response = await sendMessage({
-        sender: sender,
-        recipients: recipients,
-        message: {
-          timeCreated: (new Date()).valueOf(),
-          contents: message
-        }        
-      })
-
-      console.log("Received data from cloud function:")
-      console.log(response)
-      
-      resolve()
-      dispatch({
-        type: 'SEND_MESSAGE', 
-        conversation: convertConversation(response.data)
-      })
-    })
-  }
-}
-
 export function fetchConversations(cgaID) {
   console.log(`Fetching all conversations for cga with uid: ${cgaID}`)
 

@@ -22,6 +22,7 @@ export default class AddArtisan extends Component {
     this.pickImage = this.pickImage.bind(this)
     this.createArtisan = this.createArtisan.bind(this)
     this.verifyFields = this.verifyFields.bind(this)
+    this.onTextChange = this.onTextChange.bind(this)
   }
 
   pickImage() {
@@ -57,11 +58,36 @@ export default class AddArtisan extends Component {
         description: this.state.description
       }
 
-      this.props.createArtisan(artisanInfo, this.props.User.uid, this.state.profilePicturePath).then(() => {
+      this.props.createArtisan(artisanInfo, this.props.User.uid, this.state.profilePicturePath).then(artisan => {
+        return this.props.sendMessage(
+          this.props.User.uid, 
+          `Hello ${artisanInfo.name}, welcome to our organization! Please respond "YES" to verify you would like to be added to our community.`,
+          {[artisan.uid]: artisanInfo.phoneNumber}
+        )
+      }).then(() => {
         this.setState({adding: false})
         this.props.navigation.goBack()
       })
     }
+  }
+
+  onTextChange(text) {
+    var cleaned = ('' + text).replace(/\D/g, '')
+    var match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/)
+    if (match) {
+        var intlCode = (match[1] ? '+1 ' : ''),
+            number = [intlCode, '(', match[2], ') ', match[3], '-', match[4]].join('');
+
+        this.setState({
+          phoneNumber: number
+        });
+
+        return;
+    }
+
+    this.setState({
+      phoneNumber: text
+    });
   }
 
   render() {
@@ -85,7 +111,7 @@ export default class AddArtisan extends Component {
               iconName="phone"
               placeholder="Phone Number"
               value={this.state.phoneNumber}
-              onChangeText={(newText) => this.setState({phoneNumber: newText})}
+              onChangeText={this.onTextChange}
               style={styles.smallInput2}
               keyboardType="number-pad"
             />

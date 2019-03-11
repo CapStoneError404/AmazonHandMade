@@ -17,21 +17,7 @@ export default class ConversationList extends Component {
   static navigationOptions = ({ navigation }) => {
     var iconName = 'edit'
     return {
-      title: 'Messages',
-      headerRight: (
-        <Button 
-          icon={<Icon name={iconName} size={25} color='gray' />}
-          type="clear"
-          onPress={navigation.getParam('chatButton')}
-        />
-      ),
-      headerLeft: (
-        <Button 
-          title='Cancel' 
-          onPress={navigation.getParam('cancelChat')}
-          type='clear'
-        />
-      )
+      title: 'Messages'
     }
   }
 

@@ -16,7 +16,7 @@ import {
   ArtisanDetail,
   EditArtisan
 } from '@screens/ArtisanHub';
-import { Conversation, ConversationList } from '@screens/Messaging';
+import { Conversation, ConversationList, NewConversation } from '@screens/Messaging';
 import { AddProduct, ProductDetail } from '@screens/Products';
 
 const ArtisanHubStack = createStackNavigator({
@@ -31,7 +31,8 @@ const ArtisanHubStack = createStackNavigator({
 const MessageNavigator = createStackNavigator(
   {
     Conversations: ConversationList,
-    Conversation: Conversation
+    Conversation: Conversation,
+    NewConversation: NewConversation
   }
 )
 

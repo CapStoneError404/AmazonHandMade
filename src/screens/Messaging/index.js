@@ -18,12 +18,15 @@ function mapDispatchToProps(dispatch) {
 
 import { default as UnconnectedConversationList } from './ConversationList'
 import { default as UnconnectedConversation } from './Conversation'
+import { default as UnconnectedNewConversation } from './NewConversation'
 
 const ConversationList = connect(mapStateToProps, mapDispatchToProps)(UnconnectedConversationList)
 const Conversation = connect(mapStateToProps, mapDispatchToProps)(UnconnectedConversation)
+const NewConversation = connect(mapStateToProps, mapDispatchToProps)(UnconnectedNewConversation)
 
 
 export {
   ConversationList,
-  Conversation
+  Conversation,
+  NewConversation
 }

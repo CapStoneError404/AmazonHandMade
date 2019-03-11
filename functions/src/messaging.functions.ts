@@ -25,7 +25,10 @@ export async function sendMessage(data) {
 
   const sender = data.sender
   const recipients = Object.keys(data.recipients)
-  const phoneNumbers = Object.keys(data.recipients).map(key => data.recipients[key])
+  const phoneNumbers = Object.keys(data.recipients).map(key => {
+    var formattedPhoneNumber = data.recipients[key]
+    return formattedPhoneNumber.replace(/[^\d+]/g, '')
+  })
   const message = data.message
 
   for(var i in phoneNumbers) {
