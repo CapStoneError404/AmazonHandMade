@@ -127,7 +127,7 @@ class AddProduct extends Component {
               selectedValue={this.state.productMainCategory}
               testID="MainCategorySelectorID"
               onValueChange={(itemValue, itemIndex) =>
-                (itemIndex !=0) && this.setState({productMainCategory: itemValue}) 
+                this.setState({productMainCategory: itemValue}) 
                 && this.setState({productSubCategory: ''})
               }>
               {Object.keys(ProductCategories).map(m => {
@@ -144,7 +144,7 @@ class AddProduct extends Component {
               selectedValue={this.state.productSubCategory}
               testID="SubCategorySelectorID"
               onValueChange={(itemValue, itemIndex) =>
-                (itemIndex !=0) && this.setState({productSubCategory: itemValue})
+                this.setState({productSubCategory: itemValue})
               }>
               {
                 (this.state.productMainCategory != "")? 
@@ -187,7 +187,7 @@ class AddProduct extends Component {
               testID="genderSelectorID"
               //style={{height: 50, width: 200}}
               onValueChange={(itemValue, itemIndex) =>
-                (itemIndex !=0) && this.setState({productGender: itemValue})
+                this.setState({productGender: itemValue})
               }>
               <Picker.Item label="Pick a gender type..." value="pick-one" />
               <Picker.Item label="Women" value="women" />
@@ -287,13 +287,22 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200
   },
-  categorySection: {
+  categorySection: Platform.OS === 'ios' ? {
     alignSelf: 'center',
     width: '90%',
     color: '#808080',
     backgroundColor: 'white',
     margin: '4%',
     borderRadius: 10,
+    height: 200
+  } : {
+    alignSelf: 'center',
+    width: '90%',
+    color: '#808080',
+    backgroundColor: 'white',
+    margin: '4%',
+    borderRadius: 10,
+    height: 60
   },
   PickerItem: Platform.OS === 'ios' ? {
     height: 200,
@@ -325,8 +334,7 @@ const styles = StyleSheet.create({
   button: {
     borderRadius: 5, 
     alignSelf: 'center',
-    //marginTop: '10%',
-    width: '80%'
+    width: '90%'
   },
   textInputStyle: {
     height: 50

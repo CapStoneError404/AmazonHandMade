@@ -31,8 +31,8 @@ class ArtisanPayout extends Component {
         onPress: () => console.log("button pressed")
       },
       {
-        title: 'Stats',
-        onPress: () => console.log("button pressed")
+        title: 'Log Payout',
+        onPress: () => this.navigateToLogPayout()
       }
     ]
 
@@ -101,7 +101,7 @@ class ArtisanPayout extends Component {
   render() {
     return (
       <Wallpaper style={styles.container}>
-        <ScrollView style={{ flex: 1.8 }}>
+        <ScrollView>
           <StandardCard
             title="Recent Payouts"
             buttonsArray={this.artisanPayoutButtons}
@@ -110,13 +110,6 @@ class ArtisanPayout extends Component {
               {this.renderRecentPayouts()}
             </View>
           </StandardCard>
-          <AsyncButton
-            title="Log Payout"
-            color="green"
-            textColor="white"
-            onPress={this.navigateToLogPayout}
-            style={{ marginLeft: 10, marginRight: 10, marginTop: 20 }}
-          />
         </ScrollView>
       </Wallpaper>
     )
