@@ -96,6 +96,25 @@ export default class AddArtisan extends Component {
     });
   }
 
+  onTextChange(text) {
+    var cleaned = ('' + text).replace(/\D/g, '')
+    var match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/)
+    if (match) {
+        var intlCode = (match[1] ? '+1 ' : ''),
+            number = [intlCode, '(', match[2], ') ', match[3], '-', match[4]].join('');
+
+        this.setState({
+          phoneNumber: number
+        });
+
+        return;
+    }
+
+    this.setState({
+      phoneNumber: text
+    });
+  }
+
   render() {
     return (
       <Wallpaper style={styles.container}>
@@ -122,7 +141,7 @@ export default class AddArtisan extends Component {
                 iconName="phone"
                 placeholder="Phone Number"
                 value={this.state.phoneNumber}
-                onChangeText={(newText) => this.setState({phoneNumber: newText})}
+                onChangeText={this.onTextChange}
                 onFocus={()=> this.setState({focusedInputs: {...this.state.focusedInputs, phoneNumber: true}})}
                 onBlur={()=> this.setState({focusedInputs: {...this.state.focusedInputs, phoneNumber: false}})}
                 style={styles.smallInput2}

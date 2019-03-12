@@ -74,6 +74,7 @@ class ArtisanDetail extends Component {
     this.onIconPress = this.onIconPress.bind(this)
     this.renderListOfProducts = this.renderListOfProducts.bind(this)
     this.navigateToAddProduct = this.navigateToAddProduct.bind(this)
+    this.navigateToMessage = this.navigateToMessage.bind(this)
   }
 
   componentDidMount() {
