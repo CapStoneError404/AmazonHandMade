@@ -9,7 +9,8 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  View
+  View,
+  TouchableOpacity
 } from 'react-native'
 import { withMappedNavigationProps } from 'react-navigation-props-mapper'
 
@@ -64,12 +65,24 @@ class ArtisanPayout extends Component {
     })
   }
 
+  navigateToPayoutDetail(payout) {
+    this.props.navigation.navigate('PayoutDetail', {
+      date: payout.date,
+      amount: payout.amount,
+      description: payout.description
+    })
+  }
+
   renderRecentPayout(payout, index) {
     return (
-      <View key={index} style={styles.recentPayoutCell}>
+      <TouchableOpacity 
+        key={index} 
+        onPress={() => this.navigateToPayoutDetail(payout)}
+        style={styles.recentPayoutCell}
+      >
         <Text style={styles.payoutText}>{(new Date(payout.date)).toLocaleDateString()}</Text>
         <Text style={styles.payoutText}>{payout.amount}</Text>
-      </View>
+      </TouchableOpacity>
     )
   }
 

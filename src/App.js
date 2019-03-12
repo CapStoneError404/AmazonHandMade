@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { View } from 'react-native';
+import React, { Component } from 'react'
+import { View } from 'react-native'
 import {
   createStackNavigator,
   createSwitchNavigator,
   createBottomTabNavigator
-} from 'react-navigation';
-import DropdownAlert from 'react-native-dropdownalert';
-import Icon from 'react-native-vector-icons/FontAwesome';
+} from 'react-navigation'
+import DropdownAlert from 'react-native-dropdownalert'
+import Icon from 'react-native-vector-icons/FontAwesome'
 import { Login, Register, ForgotPassword } from '@screens/Auth'
 import Settings from '@screens/Settings'
 import Launch from '@screens/Launch'
@@ -18,12 +18,17 @@ import {
 } from '@screens/ArtisanHub'
 import { AddProduct, ProductDetail, ProductList } from '@screens/Products'
 import {
-  Transactions,
+  MoneyManagement,
   ArtisanPayout,
   LogPayout,
-  PayoutList
-} from '@screens/Transactions'
-import { Conversation, ConversationList, NewConversation } from '@screens/Messaging';
+  PayoutList,
+  PayoutDetail
+} from '@screens/MoneyManagement'
+import { 
+  Conversation, 
+  ConversationList, 
+  NewConversation 
+} from '@screens/Messaging';
 
 const ArtisanHubStack = createStackNavigator({
   ArtisanList: ArtisanList,
@@ -35,11 +40,12 @@ const ArtisanHubStack = createStackNavigator({
   ProductList: ProductList
 })
 
-const TransactionStack = createStackNavigator({
-  Transactions: Transactions,
+const MoneyManagementStack = createStackNavigator({
+  MoneyManagement: MoneyManagement,
   PayoutList: PayoutList,
   ArtisanPayout: ArtisanPayout,
-  LogPayout: LogPayout
+  LogPayout: LogPayout,
+  PayoutDetail: PayoutDetail
 })
 
 const MessageNavigator = createStackNavigator(
@@ -54,7 +60,7 @@ const TabNavigator = createBottomTabNavigator(
   {
     "Artisan Hub": ArtisanHubStack,
     Settings: Settings,
-    "Finances": TransactionStack,
+    "Finances": MoneyManagementStack,
     "Messages": MessageNavigator
   },
   {
@@ -110,7 +116,7 @@ const RootStack = createSwitchNavigator(
 
 class Main extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.props.clearErrors()
   }
 
@@ -138,7 +144,7 @@ import * as actions from '@actions'
 function mapStateToProps(state) {
   return {
     Errors: state.Errors
-  };
+  }
 }
 
 function mapDispatchToProps(dispatch) {
@@ -148,6 +154,6 @@ function mapDispatchToProps(dispatch) {
 const App = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Main);
+)(Main)
 
 export default App

@@ -1,82 +1,21 @@
 import firebase from 'react-native-firebase'
 import LoginWithAmazon from 'react-native-login-with-amazon'
+import { fetchConversations, sendMessage as localSendMessage } from '../screens/Messaging/actions'
+import { fetchArtisans } from '../screens/ArtisanHub/actions'
 
-export function fetchArtisans(cgaID) {
-  console.log("Fetching Artisans")
+export function fetchAll(cgaID) {
   return (dispatch) => {
     return new Promise(async (resolve) => {
-      let snapshot = await firebase.database().ref(`amazonUsers/${cgaID}/artisans`).once('value')
-      let artisanIds = snapshot.val() ? Object.keys(snapshot.val()) : []
-      let artisans = (await firebase.database().ref('artisans').once('value')).val()
+      let artisans = fetchArtisans(cgaID)
+      let conversations = fetchConversations(cgaID)
 
-      artisanArray = []
-      
-      for(var uid in artisans) {
-        if(artisanIds.includes(uid)) {
-          artisanArray.push({
-            ...artisans[uid],
-            uid: uid
-          })
-        }
-      }
-      
-      resolve()
-      dispatch({type: 'GET_ARTISANS', artisans: artisanArray})
+      Promise.all([artisans, conversations]).then(() => resolve())
     })
   }
 }
 
 export function sendMessage(sender, message, recipients) {
-  console.log(`Sending a message from ${sender} to ${recipients} with the following content:`)
-  console.log(message)
-  
-  return (dispatch) => { 
-    return new Promise(async (resolve) => {
-      let sendMessage = firebase.functions().httpsCallable('sendMessage')
-      
-      let response = await sendMessage({
-        sender: sender,
-        recipients: recipients,
-        message: {
-          timeCreated: (new Date()).valueOf(),
-          contents: message
-        }        
-      })
-
-      console.log("Received data from cloud function:")
-      console.log(response)
-      
-      resolve()
-      dispatch({
-        type: 'SEND_MESSAGE', 
-        conversation: convertConversation(response.data)
-      })
-    })
-  }
-}
-
-function convertConversation(conversationObject) {
-  console.log("Converting conversation object:")
-  console.log(conversationObject)
-  
-  var messages = []
-
-  for(var mUID in conversationObject.messages) {
-    messages.push({
-      uid: mUID,
-      ...conversationObject.messages[mUID]
-    })
-  }
-
-  messages.sort((first, second) => {
-    return first.timeCreated - second.timeCreated
-  })
-
-  return {
-    uid: conversationObject.uid,
-    participants: Object.keys(conversationObject.participants),
-    messages: messages
-  }
+  return localSendMessage(sender, message, recipients)
 }
 
 export function authLogout() {

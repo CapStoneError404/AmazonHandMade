@@ -29,7 +29,9 @@ class LogPayout extends Component {
     this.state = {
       amount: "",
       description: "",
-      logging: false
+      logging: false,
+
+      focusedInputs: {amount: false, desc: false}
     }
 
     this.logPayout = this.logPayout.bind(this)
@@ -52,20 +54,28 @@ class LogPayout extends Component {
     return (
       <Wallpaper style={styles.container}>
         <View style={styles.container}>
-          <UserInput
-            iconName="dollar"
-            placeholder="How Much?"
-            value={this.state.amount}
-            onChangeText={(newText) => this.setState({amount: newText})}
-            style={styles.smallInput1}
-          />
-          <UserInput 
-            placeholder="For What?"
-            value={this.state.description}
-            onChangeText={(newText) => this.setState({description: newText})}
-            style={styles.largeInputs}
-            multiline={true}
-          />
+          <View style={this.state.focusedInputs.amount? [styles.focusedInput, styles.inputWrapper] :styles.inputWrapper}>
+            <UserInput
+              iconName="dollar"
+              placeholder="How Much?"
+              value={this.state.amount}
+              onChangeText={(newText) => this.setState({amount: newText})}
+              onFocus={()=> this.setState({focusedInputs: {...this.state.focusedInputs, amount: true}})}
+              onBlur={()=> this.setState({focusedInputs: {...this.state.focusedInputs, amount: false}})}
+              style={styles.smallInput1}
+            />
+          </View>
+          <View style={this.state.focusedInputs.desc? [styles.focusedInput, styles.inputWrapper] :styles.inputWrapper}>
+            <UserInput 
+              placeholder="For What?"
+              value={this.state.description}
+              onChangeText={(newText) => this.setState({description: newText})}
+              onFocus={()=> this.setState({focusedInputs: {...this.state.focusedInputs, desc: true}})}
+              onBlur={()=> this.setState({focusedInputs: {...this.state.focusedInputs, desc: false}})}
+              style={styles.largeInputs}
+              multiline={true}
+            />
+          </View>
           <AsyncButton 
             title="Log"
             color="#c14700"
@@ -86,22 +96,33 @@ const styles = StyleSheet.create({
     flex: 0
   },
   smallInput1: {
-    marginBottom: 2,
+    marginTop: 0,
+    marginBottom: 0,
     borderRadius: 5,
     height: 75
   },
   largeInputs: {
-    marginTop: 4,
+    marginTop: 0,
     marginBottom: 0,
     marginLeft: 0,
     marginRight: 0,
     borderRadius: 5,
-    height: 200
+    height: 200,
   },
   button: {
     borderRadius: 5, 
     flexDirection: 'column',
     height: 75
+  },
+  focusedInput: {
+    borderWidth: 2,
+    borderColor: 'orange',
+    borderRadius: 5
+  },
+  inputWrapper: {
+    marginVertical: 10,
+    backgroundColor: 'rgba(255,255,255,0.85)',
+    borderRadius: 5
   }
 })
 

@@ -49,7 +49,7 @@ class ArtisanDetail extends Component {
       },
       {
         title: 'Message',
-        onPress: () => console.log("Message Artisan")
+        onPress: () => this.navigateToMessage()
       }
     ]
 
@@ -96,6 +96,12 @@ class ArtisanDetail extends Component {
     })
   }
 
+  navigateToMessage() {
+    let conversation = this.props.Conversations.filter(conversation => 
+      conversation.uid.includes(this.props.uid))[0]
+    this.props.navigation.navigate('Conversation', conversation)
+  }
+
   fetchProducts() {
     const { uid } = this.props
     this.setState({ fetchingProducts: true })
@@ -117,10 +123,11 @@ class ArtisanDetail extends Component {
   }
 
   navigateToEditArtisan() {
-    const { name, phoneNumber, description, uid } = this.state.currentArtisan
+    const { name, phoneNumber, location, description, uid } = this.state.currentArtisan
     this.props.navigation.navigate('EditArtisan', {
       name,
       phoneNumber,
+      location,
       description,
       uid,
       onNavigateBack: this.handleOnNavigateBack
@@ -180,13 +187,15 @@ class ArtisanDetail extends Component {
   renderListOfProducts() {
     return(
       <CardSection>
-        {this.props.Products != [] && this.state.fetchingProducts ? (
+        {this.props.Products != [] ? (this.state.fetchingProducts ? (
           <ActivityIndicator
             size="large"
-            animating={this.props.spinning}
+            animating={this.state.fetchingProducts}
             color="white"
           />
         ) : (
+          <Text style={styles.noProductsText}>This artisan has no products!</Text>
+        )) : (
           <FlatGrid
             itemDimension={100}
             items={this.sortedProducts().slice(0, 6)}
@@ -221,7 +230,7 @@ class ArtisanDetail extends Component {
   }
 
   render() {
-    const { name, phoneNumber, description, profilePictureURL } = this.state.currentArtisan
+    const { name, phoneNumber, location, description, profilePictureURL } = this.state.currentArtisan
     return (
       <Wallpaper style={styles.container}>
         <ScrollView style={{ flex: 1.8 }}>
@@ -237,10 +246,10 @@ class ArtisanDetail extends Component {
               <View style={{ flex: 1, flexDirection: 'column' }}>
                 <Text style={styles.nameStyle}>{name}</Text>
                 <Text style={styles.phoneStyle}>{phoneNumber}</Text>
-                <Text style={styles.phoneStyle}>Location: Mexico</Text>
+                <Text style={styles.locationStyle}>{location}</Text>
               </View>
             </CardSection>
-            <CardSection style={{ flex: 1, flexDirection: 'column' }}>
+            <CardSection style={{ flex: 1, flexDirection: 'column', borderTopWidth: 1, borderColor: 'lightgray' }}>
               <Text style={styles.descriptionStyle}>{description}</Text>
             </CardSection>
           </StandardCard>
@@ -292,6 +301,12 @@ const styles = StyleSheet.create({
     color: '#444444',
     marginLeft: 5
   },
+  locationStyle: {
+    flex: 2,
+    fontSize: 20,
+    color: '#444444',
+    marginLeft: 5
+  },
   descriptionStyle: {
     fontSize: 20,
     color: '#444444',
@@ -322,6 +337,14 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 1, height: 1 },
     shadowOpacity: 0.5,
     shadowRadius: 1
+  },
+  noProductsText: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'stretch',
+    textAlign: 'center',
+    color: 'gray'
   }
 })
 

@@ -1,6 +1,15 @@
 import { Wallpaper } from '@components'
 import React, { Component } from 'react'
-import { ActivityIndicator, Button, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { 
+  ActivityIndicator, 
+  Button, 
+  FlatList, 
+  StyleSheet, 
+  Text, 
+  TouchableOpacity, 
+  View,
+  Platform 
+} from 'react-native'
 import { ProfilePicture } from '../../components'
 
 export default class ArtisanList extends Component {
@@ -8,7 +17,7 @@ export default class ArtisanList extends Component {
     return {
       title: 'Artisans',
       headerRight: (
-        <View style={{paddingRight: 20}}>
+        <View style={Platform.OS === 'ios' ? {paddingRight: 0} : {paddingRight: 20}}>
           <Button 
             transparent
             onPress={() => navigation.navigate("AddArtisan")}
@@ -61,6 +70,7 @@ export default class ArtisanList extends Component {
         />
         <View style={styles.namePhone}>
           <Text style={styles.text}>{item.name}</Text>
+          <Text style={styles.text}>{item.location}</Text>
           <Text style={styles.text}>{item.phoneNumber}</Text>
         </View>
       </TouchableOpacity>

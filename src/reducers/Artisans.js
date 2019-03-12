@@ -13,12 +13,12 @@ export default function Artisans(state = [], action) {
           return item
         }
 
-        return {
-          ...item,
-          ...action.artisan
-        }
-      })
-    default:
-      return state
+      return {
+        ...item,
+        ...action.artisan
+      }
+    })
+  default:
+    return state
   }
 }

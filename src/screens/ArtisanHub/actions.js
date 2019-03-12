@@ -21,6 +21,7 @@ export function createArtisan(artisanInfo, cgaID, profilePicturePath) {
       let artisan = {
         name: response.data.name,
         phoneNumber: response.data.phoneNumber,
+        location: response.data.location,
         description: response.data.description,
         uid: response.data.uid
       }
@@ -41,17 +42,43 @@ export function createArtisan(artisanInfo, cgaID, profilePicturePath) {
   }
 }
 
+export function fetchArtisans(cgaID) {
+  console.log("Fetching Artisans")
+  return (dispatch) => {
+    return new Promise(async (resolve) => {
+      let snapshot = await firebase.database().ref(`amazonUsers/${cgaID}/artisans`).once('value')
+      let artisanIds = snapshot.val() ? Object.keys(snapshot.val()) : []
+      let artisans = (await firebase.database().ref('artisans').once('value')).val()
+
+      artisanArray = []
+      
+      for(var uid in artisans) {
+        if(artisanIds.includes(uid)) {
+          artisanArray.push({
+            ...artisans[uid],
+            uid: uid
+          })
+        }
+      }
+      
+      resolve()
+      dispatch({type: 'GET_ARTISANS', artisans: artisanArray})
+    })
+  }
+}
+
 //Updates artisan info and if image is passed in than delete current one in storage,
 //update it with new image picked in both storage and database
-export const saveArtisan = ({ name, phoneNumber, description, profilePicturePath, uid }) => {
+export const saveArtisan = ({ name, phoneNumber, location, description, profilePicturePath, uid }) => {
   return (dispatch) => {
     return new Promise(async (resolve) => {
       await firebase.database().ref(`/artisans/${uid}`)
-        .update({ name, phoneNumber, description })
+        .update({ name, phoneNumber, location, description })
 
       artisanObject = {
         name,
         phoneNumber,
+        location,
         description,
         uid
       }
@@ -89,7 +116,7 @@ export function fetchProducts(artisanID) {
       }
 
       let productSnapshot = await firebase.database().ref(`artisans/${artisanID}/products`).once('value')
-      let productKeys = Object.keys(productSnapshot.val())
+      let productKeys = productSnapshot.val()? Object.keys(productSnapshot.val()): []
       productArray = productArray.filter(obj => productKeys.includes(obj.productID))
 
       resolve()
