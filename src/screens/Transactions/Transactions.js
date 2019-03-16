@@ -15,7 +15,7 @@ import {
 export default class Transactions extends Component {
    static navigationOptions = () => {
       return {
-         title: 'Transactions'
+         title: 'Transaction Management'
       }
 
    }
@@ -75,8 +75,8 @@ export default class Transactions extends Component {
                   buttonsArray={this.payoutButtons}
                >
                   <CardSection style={styles.cardSection}>
-                     <Text style={styles.cardText}>Money Owed: {this.state.amountOwed}</Text>
-                     <Text style={styles.cardText}>Total payments: {this.state.paidAmount}</Text>
+                     <Text style={styles.cardText}>{`Total Owed: $${Math.floor(Math.random() * 10000 + 1)}.${Math.floor(Math.random() * 98 + 1)}`}</Text>
+                     <Text style={styles.cardText}>{`Total Payouts: $${Math.floor(Math.random() * 10000 + 1)}.${Math.floor(Math.random() * 98 + 1)}`}</Text>
                   </CardSection>
                </StandardCard>
 
@@ -85,8 +85,8 @@ export default class Transactions extends Component {
                   buttonsArray={this.transactionButtons}
                >
                   <CardSection  style={styles.cardSection}>
-                    <Text style={styles.cardText}>Number items sold: </Text>
-                    <Text style={styles.cardText}>Overall Product Income: </Text>
+                    <Text style={styles.cardText}>{`Items Sold: ${Math.floor(Math.random() * 100 + 1)}`}</Text>
+                    <Text style={styles.cardText}>{`Gross Product Revenue: $${Math.floor(Math.random() * 50000 + 1)}.${Math.floor(Math.random() * 98 + 1)}`}</Text>
                   </CardSection>
                </StandardCard>
             </ScrollView>
