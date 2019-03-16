@@ -188,7 +188,7 @@ class ArtisanDetail extends Component {
   renderListOfProducts() {
     return(
       <CardSection>
-        {this.props.Products != [] ? (this.state.fetchingProducts ? (
+        {this.props.Products.length == 0 ? (this.state.fetchingProducts ? (
           <ActivityIndicator
             size="large"
             animating={this.state.fetchingProducts}

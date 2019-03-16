@@ -128,7 +128,7 @@ export function fetchProducts(artisanID) {
 // action takes in current list of artisans and artisan to be deleted
 // sends that artisan to reducer to be filtered out of state
 //Also check that artisan has an image if so delete that from storage
-export function deleteArtisan(artisans, uid) {
+export function deleteArtisan(uid) {
   return (dispatch) => {
     return new Promise(async (resolve) => {
       let deleteArtisan = firebase.functions().httpsCallable('deleteArtisan')
