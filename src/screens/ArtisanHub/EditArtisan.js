@@ -18,9 +18,12 @@ class EditArtisan extends Component {
     this.state = {
       name: this.props.name,
       phoneNumber: this.props.phoneNumber,
+      location: this.props.location,
       profilePicturePath: "",
       description: this.props.description,
-      adding: false
+      adding: false,
+
+      focusedInputs: {name: false, phoneNumber: false, location: false, description: false}
     }
 
     this.pickImage = this.pickImage.bind(this)
@@ -43,11 +46,13 @@ class EditArtisan extends Component {
       this.props.displayError("Name field required.")
     else if(!this.state.phoneNumber)
       this.props.displayError("Phone field required")
+    else if(!this.state.location)
+      this.props.displayError("Location required")
     else if(!this.state.description)
       this.props.displayError("Please provide a brief description")
     
       
-    return this.state.name && this.state.phoneNumber && this.state.description// && this.state.profilePicturePath
+    return this.state.name && this.state.phoneNumber && this.state.location && this.state.description// && this.state.profilePicturePath
   }
   
   saveArtisan() {
@@ -57,6 +62,7 @@ class EditArtisan extends Component {
         uid: this.props.uid, 
         name: this.state.name,
         phoneNumber: this.state.phoneNumber,
+        location: this.state.location,
         profilePicturePath: this.state.profilePicturePath,
         description: this.state.description
       }).then(() => {
@@ -77,31 +83,54 @@ class EditArtisan extends Component {
             style={styles.image}
           />
           <View style={styles.namePhone}>
-            <UserInput
-              iconName="id-card"
-              placeholder="Name"
-              value={this.state.name}
-              onChangeText={(newText) => this.setState({name: newText})}
-              style={styles.smallInput1}
-            />
-            <UserInput
-              iconName="phone"
-              placeholder="Phone Number"
-              value={this.state.phoneNumber}
-              onChangeText={(newText) => this.setState({phoneNumber: newText})}
-              style={styles.smallInput2}
-              keyboardType="number-pad"
-            />
+            <View style={this.state.focusedInputs.name? [styles.focusedInput, styles.inputWrapper] :styles.inputWrapper}>
+              <UserInput
+                iconName="id-card"
+                placeholder="Name"
+                value={this.state.name}
+                onChangeText={(newText) => this.setState({name: newText})}
+                onFocus={()=> this.setState({focusedInputs: {...this.state.focusedInputs, name: true}})}
+                onBlur={()=> this.setState({focusedInputs: {...this.state.focusedInputs, name: false}})}
+                style={styles.smallInput1}
+              />
+            </View>
+            <View style={this.state.focusedInputs.phoneNumber? [styles.focusedInput, styles.inputWrapper] :styles.inputWrapper}>
+              <UserInput
+                iconName="phone"
+                placeholder="Phone Number"
+                value={this.state.phoneNumber}
+                onChangeText={(newText) => this.setState({phoneNumber: newText})}
+                onFocus={()=> this.setState({focusedInputs: {...this.state.focusedInputs, phoneNumber: true}})}
+                onBlur={()=> this.setState({focusedInputs: {...this.state.focusedInputs, phoneNumber: false}})}
+                style={styles.smallInput2}
+                keyboardType="number-pad"
+              />
+            </View>
           </View>
         </View>
         <View style={styles.secondSection}>
-          <UserInput 
-            placeholder="Describe this artisan"
-            value={this.state.description}
-            onChangeText={(newText) => this.setState({description: newText})}
-            style={styles.largeInputs}
-            multiline={true}
-          />
+          <View style={this.state.focusedInputs.location? [styles.focusedInput2, styles.inputWrapper2] :styles.inputWrapper2}>
+            <UserInput
+              iconName="map"
+              placeholder="Location"
+              value={this.state.location}
+              onChangeText={(newText) => this.setState({location: newText})}
+              onFocus={()=> this.setState({focusedInputs: {...this.state.focusedInputs, location: true}})}
+              onBlur={()=> this.setState({focusedInputs: {...this.state.focusedInputs, location: false}})}
+              style={styles.smallInput3}
+            />
+          </View>
+          <View style={this.state.focusedInputs.description? [styles.focusedInput2, styles.inputWrapper3] :styles.inputWrapper3}>
+            <UserInput 
+              placeholder="Describe this artisan"
+              value={this.state.description}
+              onChangeText={(newText) => this.setState({description: newText})}
+              onFocus={()=> this.setState({focusedInputs: {...this.state.focusedInputs, description: true}})}
+              onBlur={()=> this.setState({focusedInputs: {...this.state.focusedInputs, description: false}})}
+              style={styles.largeInputs}
+              multiline={true}
+            />
+          </View>
         </View>
         <AsyncButton 
           title="Save"
@@ -144,20 +173,24 @@ const styles = StyleSheet.create({
   },
   smallInput1: {
     marginTop: 0,
-    marginBottom: 2,
-    marginLeft: 4,
+    marginBottom: 0,
     marginRight: 0,
     borderRadius: 5
   },
   smallInput2: {
-    marginTop: 2,
+    marginTop: 0,
     marginBottom: 0,
-    marginLeft: 4,
+    marginRight: 0,
+    borderRadius: 5
+  },
+  smallInput3: {
+    marginTop: 0,
+    marginBottom: 0,
     marginRight: 0,
     borderRadius: 5
   },
   largeInputs: {
-    marginTop: 4,
+    marginTop: 0,
     marginBottom: 0,
     marginLeft: 0,
     marginRight: 0,
@@ -167,6 +200,37 @@ const styles = StyleSheet.create({
     borderRadius: 5, 
     flex: 1, 
     flexDirection: 'column'
+  },
+  focusedInput: {
+    borderWidth: 2,
+    marginBottom: 2,
+    marginLeft: 4,
+    borderColor: 'orange',
+    borderRadius: 5
+  },
+  inputWrapper: {
+    borderRadius: 5,
+    marginBottom: 2,
+    marginLeft: 4,
+    backgroundColor: 'rgba(255,255,255,0.85)',
+    flex: 1,
+  },
+  focusedInput2: {
+    borderWidth: 2,
+    borderColor: 'orange',
+    borderRadius: 5
+  },
+  inputWrapper2: {
+    marginTop: 4,
+    borderRadius: 5,
+    backgroundColor: 'rgba(255,255,255,0.5)',
+    flex: 1
+  },
+  inputWrapper3: {
+    marginTop: 4,
+    borderRadius: 5,
+    backgroundColor: 'rgba(255,255,255,0.5)',
+    flex: 3
   }
 })
 

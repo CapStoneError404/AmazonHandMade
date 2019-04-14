@@ -46,15 +46,18 @@ export default class StandardCard extends Component {
     const { buttonsArray } = this.props
     
     if (this.state.buttonsExpanded) {
-      return (
-        <CardSection style={styles.buttonCardSectionStyle}>
-          {buttonsArray ? buttonsArray.map((item, key) => {
-            return this.renderButton(item, key)
-          }) : 
-            () => {throw new Error("Cannot map through empty array")}
-          }
-        </CardSection>
-      )
+      if(buttonsArray) {
+        return (
+          <View style={styles.buttonCardSectionStyle}>
+            {buttonsArray.map((item, key) => {
+              return this.renderButton(item, key)
+            })
+            }
+          </View>
+        )
+      }
+      
+      return null
     }
   }
 
@@ -66,12 +69,7 @@ export default class StandardCard extends Component {
     const { title } = this.props
     return (
       <View style={[styles.containerStyle, this.props.style]}>
-        <CardSection
-          style={{
-            backgroundColor: 'rgb(71, 77, 84)',
-            justifyContent: 'space-between'
-          }}
-        >
+        <View style={styles.headerStyle}>
           <Text style={styles.headerText}>{title}</Text>
           <Icon
             name="dots-vertical"
@@ -81,11 +79,9 @@ export default class StandardCard extends Component {
             underlayColor={'rgb(71, 77, 84)'}
             onPress={this.iconButtonPressed}
           />
-        </CardSection>
-
+        </View>
         {this.props.children}
         {this.showButtons()}
-
       </View>
     )
   }  
@@ -97,15 +93,13 @@ StandardCard.propTypes = {
     PropTypes.shape({
       title: PropTypes.string.isRequired,
       onPress: PropTypes.func.isRequired,
-    })).isRequired,
+    })
+  )
 }
 
 const styles = StyleSheet.create({
   containerStyle: {
-    borderWidth: 1,
-    borderRadius: 2,
-    borderColor: '#ddd',
-    borderBottomWidth: 0,
+    borderRadius: 10,
     shadowColor: '#000',
     shadowOffset: { 
       width: 0, 
@@ -114,22 +108,35 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 2,
     elevation: 1,
-    marginLeft: 5,
-    marginRight: 5,
-    marginTop: 10
+    margin: 10,
+    backgroundColor: 'white'
+  },
+  headerStyle: {
+    borderBottomWidth: 1,
+    padding: 5,
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderColor: '#ddd',
+    position: 'relative'
   },
   headerText: {
     fontSize: 20,
-    color: 'white',
-    marginLeft: 5
+    color: '#555555',
+    marginLeft: 5,
+    fontWeight: 'bold'
   },
   buttonCardSectionStyle: {
-    backgroundColor: 'white',
+    padding: 5,
+    justifyContent: 'flex-start',
+    flexDirection: 'row',
+    borderColor: '#ddd',
+    position: 'relative',
+    borderTopWidth: 1
   },
   buttonStyle: {
     height: 25,
     width: 5,
-    backgroundColor: 'white',
     paddingHorizontal: 10
   }
 })

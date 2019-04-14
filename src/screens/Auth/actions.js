@@ -30,7 +30,7 @@ export function amazonLogin() {
                 uid: data.cgaID
               }
 
-              resolve()
+              resolve(data.cgaID)
               dispatch({ type: 'LOGIN', user: user })
             })
           }).catch(error => {

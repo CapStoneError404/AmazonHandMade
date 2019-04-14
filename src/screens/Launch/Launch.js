@@ -1,7 +1,6 @@
 import { Logo, Wallpaper } from '@components'
 import React, { Component } from 'react'
 
-
 export default class Launch extends Component {
   constructor(props) {
     super(props)
