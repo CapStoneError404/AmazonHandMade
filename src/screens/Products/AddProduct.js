@@ -1,6 +1,6 @@
 import { AddImage, AsyncButton, Wallpaper } from '@components'
 import React, { Component } from 'react'
-import { StyleSheet, ScrollView, View, Text, TextInput, Picker } from 'react-native'
+import { StyleSheet, ScrollView, View, Text, TextInput, Picker, Platform } from 'react-native'
 import ImagePicker from 'react-native-image-crop-picker'
 import { withMappedNavigationProps } from 'react-navigation-props-mapper'
 import { ProductCategories } from './ProductCategories'
@@ -12,6 +12,8 @@ class AddProduct extends Component {
   constructor(props) {
     super(props)
     console.log("inside constructor")
+
+    
     this.state = {
       productMainCategory: '', 
       productSubCategory: '', 
@@ -125,7 +127,7 @@ class AddProduct extends Component {
               selectedValue={this.state.productMainCategory}
               testID="MainCategorySelectorID"
               onValueChange={(itemValue, itemIndex) =>
-                (itemIndex !=0) && this.setState({productMainCategory: itemValue}) 
+                this.setState({productMainCategory: itemValue}) 
                 && this.setState({productSubCategory: ''})
               }>
               {Object.keys(ProductCategories).map(m => {
@@ -142,7 +144,7 @@ class AddProduct extends Component {
               selectedValue={this.state.productSubCategory}
               testID="SubCategorySelectorID"
               onValueChange={(itemValue, itemIndex) =>
-                (itemIndex !=0) && this.setState({productSubCategory: itemValue})
+                this.setState({productSubCategory: itemValue})
               }>
               {
                 (this.state.productMainCategory != "")? 
@@ -185,7 +187,7 @@ class AddProduct extends Component {
               testID="genderSelectorID"
               //style={{height: 50, width: 200}}
               onValueChange={(itemValue, itemIndex) =>
-                (itemIndex !=0) && this.setState({productGender: itemValue})
+                this.setState({productGender: itemValue})
               }>
               <Picker.Item label="Pick a gender type..." value="pick-one" />
               <Picker.Item label="Women" value="women" />
@@ -285,16 +287,27 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200
   },
-  categorySection: {
+  categorySection: Platform.OS === 'ios' ? {
     alignSelf: 'center',
     width: '90%',
-    height: 60,
     color: '#808080',
     backgroundColor: 'white',
     margin: '4%',
     borderRadius: 10,
+    height: 200
+  } : {
+    alignSelf: 'center',
+    width: '90%',
+    color: '#808080',
+    backgroundColor: 'white',
+    margin: '4%',
+    borderRadius: 10,
+    height: 60
   },
-  PickerItem: {
+  PickerItem: Platform.OS === 'ios' ? {
+    height: 200,
+    color: 'black'
+  } : {
     height: 60,
     color: 'black'
   },
@@ -321,8 +334,7 @@ const styles = StyleSheet.create({
   button: {
     borderRadius: 5, 
     alignSelf: 'center',
-    //marginTop: '10%',
-    width: '80%'
+    width: '90%'
   },
   textInputStyle: {
     height: 50

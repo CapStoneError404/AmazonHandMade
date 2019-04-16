@@ -9,16 +9,18 @@ class ProductList extends Component {
     return { 
       title: 'Product List',
       headerRight: (
-        <Button
-          transparent
-          onPress={() => navigation.navigate('AddProduct', {
-            currentUID: navigation.getParam('currentUID'), 
-            onNavigateBack: navigation.getParam('onNavigateBack'),
-            previousScreen: 'productList',
-            renderArtisanDetail: navigation.state.params.onProductListBack
-          })}
-          title="Add"
-        />
+        <View style={{paddingRight: 20}}>
+          <Button
+            transparent
+            onPress={() => navigation.navigate('AddProduct', {
+              currentUID: navigation.getParam('currentUID'), 
+              onNavigateBack: navigation.getParam('onNavigateBack'),
+              previousScreen: 'productList',
+              renderArtisanDetail: navigation.state.params.onProductListBack
+            })}
+            title="Add"
+          />
+        </View>
       )
     }
   }

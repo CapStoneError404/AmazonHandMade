@@ -97,8 +97,6 @@ detox build --configuration ios.sim.debug
 detox test --configuration ios.sim.debug
 ```
 
-
-
 ## To run app
 To Run:
 ```
@@ -122,3 +120,14 @@ To try to automatically fix errors:
 ```
 npm run lint -- --fix
 ```
+## Code Style
+ + Each import must be on its own line
+```
+import {
+ArtisanList,
+AddArtisan,
+ArtisanDetail,
+EditArtisan
+} from '@screens/ArtisanHub'
+```
+ + 

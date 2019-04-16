@@ -8,7 +8,8 @@ function mapStateToProps(state) {
     User: state.User,
     Artisans: state.Artisans,
     Errors: state.Errors,
-    Products: state.Products
+    Products: state.Products,
+    Conversations: state.Conversations
   }
 }
 
