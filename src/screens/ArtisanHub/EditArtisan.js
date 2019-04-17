@@ -19,7 +19,7 @@ class EditArtisan extends Component {
       name: this.props.name,
       phoneNumber: this.props.phoneNumber,
       location: this.props.location,
-      profilePicturePath: "",
+      profilePicturePath: this.props.profilePictureURL,
       description: this.props.description,
       adding: false,
 

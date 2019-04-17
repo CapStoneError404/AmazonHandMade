@@ -124,13 +124,14 @@ class ArtisanDetail extends Component {
   }
 
   navigateToEditArtisan() {
-    const { name, phoneNumber, location, description, uid } = this.state.currentArtisan
+    const { name, phoneNumber, location, description, uid, profilePictureURL } = this.state.currentArtisan
     this.props.navigation.navigate('EditArtisan', {
       name,
       phoneNumber,
       location,
       description,
       uid,
+      profilePictureURL,
       onNavigateBack: this.handleOnNavigateBack
     })
   }
