@@ -75,7 +75,7 @@ For messaging to work, you need to create a twilio.json file. First, create a Tw
 {
     "accountSid": "YOUR_TWILIO_ACCOUNT_SID_HERE",
     "authToken": "YOUR_TWILIO_AUTH_TOKEN_HERE",
-    "phoneNumber": "YOUR_TWILIO_PHONE_NUMBER_HERE"
+    "phoneNumber": "YOUR_TWILIO_PHONE_NUMBER_HERE (In this format: +1 234 567 8900)"
 }
 ```
 
