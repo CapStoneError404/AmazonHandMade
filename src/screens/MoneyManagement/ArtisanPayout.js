@@ -80,22 +80,22 @@ class ArtisanPayout extends Component {
         onPress={() => this.navigateToPayoutDetail(payout)}
         style={styles.recentPayoutCell}
       >
-        <Text style={styles.payoutText}>{(new Date(payout.date)).toLocaleDateString()}</Text>
+        <Text style={styles.payoutText}>{(new Date(payout.date)).toLocaleString()}</Text>
         <Text style={styles.payoutText}>{payout.amount}</Text>
       </TouchableOpacity>
     )
   }
 
   renderRecentPayouts() {
-    var recentPayouts = this.props.Payouts.filter(payout => {
+    var payouts = this.props.Payouts.filter(payout => {
       return payout.artisanId === this.props.uid
     })
 
-    recentPayouts.sort((first, second) => {
-      return first.date <= second.date
+    payouts.sort((first, second) => {
+      return second.date - first.date
     })
 
-    return recentPayouts.slice(0, 6).map((payout, index) => this.renderRecentPayout(payout, index))
+    return payouts.slice(0, 6).map((payout, index) => this.renderRecentPayout(payout, index))
   }
 
   render() {

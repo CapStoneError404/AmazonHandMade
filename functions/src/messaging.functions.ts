@@ -32,7 +32,9 @@ export async function sendMessage(data) {
   const message = data.message
 
   for(var i in phoneNumbers) {
-    await sendText(phoneNumbers[i], message.contents)
+    await sendText(phoneNumbers[i], message.contents).catch(error => {
+      console.log(error)
+    })
   }
 
   let conversationID = await updateDatabaseWithMessage(message, sender, recipients)
@@ -70,7 +72,7 @@ function sendText(number, msg) {
   console.log(`Sending text to ${number} with message: ${msg}`)
   return client.messages.create({
     body: msg,
-    from: twilioInfo.phoneNumber,
+    from: twilioInfo.phoneNumber.replace(/\s/g, ''),
     to: number
   }).then(message => console.log(message.sid))
 }

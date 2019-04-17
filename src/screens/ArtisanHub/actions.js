@@ -134,7 +134,7 @@ export function deleteArtisan(uid) {
       let deleteArtisan = firebase.functions().httpsCallable('deleteArtisan')
       
       await deleteArtisan({uid: uid})
-      await firebase.storage().ref(`artisanFiles/${uid}/images/profilePicture`).delete()
+      await firebase.storage().ref(`artisanFiles/${uid}/images/profilePicture`).delete().catch(error => console.log(error))
       
       resolve()
       dispatch({ type: 'DELETE_ARTISAN', artisanId: uid })
