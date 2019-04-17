@@ -16,7 +16,7 @@ import {
   FlatList,
   TouchableOpacity
 } from 'react-native'
-import { withMappedNavigationProps } from 'react-navigation-props-mapper'
+import { withMappedNavigationParams } from 'react-navigation-props-mapper'
 
 class PayoutList extends Component {
    static navigationOptions = () => {
@@ -178,6 +178,6 @@ const styles = StyleSheet.create({
   }
 })
 
-export default withMappedNavigationProps()(PayoutList)
+export default withMappedNavigationParams()(PayoutList)
 
 

@@ -12,7 +12,7 @@ import {
   View
 } from 'react-native'
 import PropTypes from 'prop-types'
-import { withMappedNavigationProps } from 'react-navigation-props-mapper'
+import { withMappedNavigationParams } from 'react-navigation-props-mapper'
 
 class PayoutDetail extends Component {
   static navigationOptions = () => {
@@ -87,4 +87,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default withMappedNavigationProps()(PayoutDetail)
+export default withMappedNavigationParams()(PayoutDetail)

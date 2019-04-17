@@ -12,7 +12,7 @@ import {
   View,
   TouchableOpacity
 } from 'react-native'
-import { withMappedNavigationProps } from 'react-navigation-props-mapper'
+import { withMappedNavigationParams } from 'react-navigation-props-mapper'
 
 class ArtisanPayout extends Component {
   static navigationOptions = () => {
@@ -185,4 +185,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default withMappedNavigationProps()(ArtisanPayout)
+export default withMappedNavigationParams()(ArtisanPayout)

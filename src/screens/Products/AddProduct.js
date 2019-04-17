@@ -2,7 +2,7 @@ import { AddImage, AsyncButton, Wallpaper } from '@components'
 import React, { Component } from 'react'
 import { StyleSheet, ScrollView, View, Text, TextInput, Picker, Platform } from 'react-native'
 import ImagePicker from 'react-native-image-crop-picker'
-import { withMappedNavigationProps } from 'react-navigation-props-mapper'
+import { withMappedNavigationParams } from 'react-navigation-props-mapper'
 import { ProductCategories } from './ProductCategories'
 
 class AddProduct extends Component {
@@ -341,4 +341,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default withMappedNavigationProps()(AddProduct)
+export default withMappedNavigationParams()(AddProduct)

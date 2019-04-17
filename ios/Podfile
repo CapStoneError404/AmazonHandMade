@@ -23,30 +23,21 @@ target 'AmazonHandmadeRN' do
   pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
 
   # Required by RNFirebase
-  pod 'Firebase/Core', '~> 5.11.0'
-
-  # [OPTIONAL PODS] - comment out pods for firebase products you won't be using.
-  # pod 'Firebase/AdMob', '~> 5.11.0'
-  pod 'Firebase/Auth', '~> 5.11.0'
-  pod 'Firebase/Database', '~> 5.11.0'
-  pod 'Firebase/Functions', '~> 5.11.0'
-  pod 'Firebase/DynamicLinks', '~> 5.11.0'
-  pod 'Firebase/Firestore', '~> 5.11.0'
-  # pod 'Firebase/Invites', '~> 5.11.0'
-  # pod 'Firebase/Messaging', '~> 5.11.0'
-  # pod 'Firebase/RemoteConfig', '~> 5.11.0'
-  pod 'Firebase/Storage', '~> 5.11.0'
-  # pod 'Firebase/Performance', '~> 5.11.0'
-  pod 'Fabric', '~> 1.7.13'
-  pod 'Crashlytics', '~> 3.10.9'
+  pod 'Firebase/Core', '~> 5.20.1'
+  pod 'Firebase/Auth', '~> 5.20.1'
+  pod 'Firebase/Database', '~> 5.20.1'
+  pod 'Firebase/Functions', '~> 5.20.1'
+  pod 'Firebase/DynamicLinks', '~> 5.20.1'
+  pod 'Firebase/Firestore', '~> 5.20.1'
+  pod 'Firebase/Storage', '~> 5.20.1'
+  pod 'Fabric', '~> 1.9.0'
+  pod 'Crashlytics', '~> 3.12.0'
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
   pod 'BVLinearGradient', :path => '../node_modules/react-native-linear-gradient'
-
-
   pod 'RNImageCropPicker', :path => '../node_modules/react-native-image-crop-picker'
-
   pod 'RNLoginWithAmazon', :path => '../node_modules/react-native-login-with-amazon'
+  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
 
 end
 

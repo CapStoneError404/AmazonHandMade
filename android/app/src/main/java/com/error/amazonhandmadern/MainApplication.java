@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 //import com.oblador.vectoricons.VectorIconsPackage;
 //import com.reactlibrary.RNLoginWithAmazonPackage;
 // import com.BV.LinearGradient.LinearGradientPackage;
@@ -53,6 +54,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.asList(
         new MainReactPackage(),
+            new RNGestureHandlerPackage(),
             // new VectorIconsPackage(),
             // new RNLoginWithAmazonPackage(),
             // new LinearGradientPackage(),

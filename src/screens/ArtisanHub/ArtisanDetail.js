@@ -17,7 +17,7 @@ import {
   LayoutAnimation,
   ActivityIndicator
 } from 'react-native'
-import { withMappedNavigationProps } from 'react-navigation-props-mapper'
+import { withMappedNavigationParams } from 'react-navigation-props-mapper'
 import { FlatGrid } from 'react-native-super-grid'
 class ArtisanDetail extends Component {
   static navigationOptions = () => {
@@ -349,4 +349,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default withMappedNavigationProps()(ArtisanDetail)
+export default withMappedNavigationParams()(ArtisanDetail)
