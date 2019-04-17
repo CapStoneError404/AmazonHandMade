@@ -70,6 +70,15 @@ npm install
 
 Then, you need to get a service account api key file for your Firebase project. To do this, open your firebase project in the console, navigate to project settings using the settings wheel. Then, click the service accounts tab and click generate new private key. This should download a json file. Save this file/rename it to "service-account.json". Then, place this file in /funtions/assets in your handmade directory (creating the assets folder if it is not already there).
 
+For messaging to work, you need to create a twilio.json file. First, create a Twilio account if you have not done so yet, and set it up to have a phone number and sms capability. Once you have this done, create a twilio.json file at /functions/assets/ that looks like the following:
+```
+{
+    "accountSid": "YOUR_TWILIO_ACCOUNT_SID_HERE",
+    "authToken": "YOUR_TWILIO_AUTH_TOKEN_HERE",
+    "phoneNumber": "YOUR_TWILIO_PHONE_NUMBER_HERE"
+}
+```
+
 Finally, deploy the functions to your firebase project:
 ```
 firebase deploy --only functions
