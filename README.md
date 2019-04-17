@@ -41,7 +41,7 @@ Now, follow the set up for firebase functions:
 
 ##### Firebase Cloud Functions
 
-To contribute to our firebase cloud functions, you need to install some dependenices on your machine.
+To contribute to our firebase cloud functions, you need to install some dependenices on your machine. **You will also need to upgrade your Firebase project to the "Blaze" plan for messaging functions to work.** Don't worry, you wont be charged unless you exceed the "Free" tier still which is highly unlikely.
 
 The documentation is here: https://firebase.google.com/docs/functions/get-started
 
