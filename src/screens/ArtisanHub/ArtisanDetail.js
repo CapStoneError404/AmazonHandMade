@@ -262,6 +262,7 @@ class ArtisanDetail extends Component {
             {this.renderListOfProducts()}
           </StandardCard>
          
+          {/* 
           <AsyncButton
             title="Delete Artisan"
             color="red"
@@ -270,6 +271,7 @@ class ArtisanDetail extends Component {
             style={{ marginLeft: 10, marginRight: 10, marginTop: 20 }}
             spinning={this.state.adding}
           />
+          */}
         </ScrollView>
       </Wallpaper>
     )
