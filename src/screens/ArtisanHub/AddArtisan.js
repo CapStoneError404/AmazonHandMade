@@ -47,10 +47,10 @@ export default class AddArtisan extends Component {
       this.props.displayError("Location required")
     else if(!this.state.description)
       this.props.displayError("Please provide a brief description")
-    //else if(!this.state.profilePicturePath)
-    //  this.props.displayError("Please upload a profile picture")
+    else if(!this.state.profilePicturePath)
+      this.props.displayError("Please upload a profile picture")
 
-    return this.state.name && this.state.phoneNumber && this.state.location && this.state.description// && this.state.profilePicturePath
+    return this.state.name && this.state.phoneNumber && this.state.location && this.state.description && this.state.profilePicturePath
   }
   
   createArtisan() {
@@ -65,7 +65,7 @@ export default class AddArtisan extends Component {
       }
 
       this.props.createArtisan(artisanInfo, this.props.User.uid, this.state.profilePicturePath).then(artisan => {
-        return this.props.sendMessage(
+          return this.props.sendMessage(
           this.props.User.uid, 
           `Hello ${artisanInfo.name}, welcome to our organization! Please respond "YES" to verify you would like to be added to our community.`,
           {[artisan.uid]: artisanInfo.phoneNumber}

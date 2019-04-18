@@ -19,7 +19,7 @@ class EditArtisan extends Component {
       name: this.props.name,
       phoneNumber: this.props.phoneNumber,
       location: this.props.location,
-      profilePicturePath: "",
+      profilePicturePath: "", //this.props.profilePictureURL,
       description: this.props.description,
       adding: false,
 
@@ -50,9 +50,11 @@ class EditArtisan extends Component {
       this.props.displayError("Location required")
     else if(!this.state.description)
       this.props.displayError("Please provide a brief description")
+    // else if(!this.state.profilePicturePath)
+    //   this.props.displayError("Please upload a profile picture")
     
       
-    return this.state.name && this.state.phoneNumber && this.state.location && this.state.description// && this.state.profilePicturePath
+    return this.state.name && this.state.phoneNumber && this.state.location && this.state.description //&& this.state.profilePicturePath
   }
   
   saveArtisan() {

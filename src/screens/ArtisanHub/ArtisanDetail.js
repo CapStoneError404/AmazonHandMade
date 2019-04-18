@@ -124,13 +124,14 @@ class ArtisanDetail extends Component {
   }
 
   navigateToEditArtisan() {
-    const { name, phoneNumber, location, description, uid } = this.state.currentArtisan
+    const { name, phoneNumber, location, description, uid, profilePictureURL } = this.state.currentArtisan
     this.props.navigation.navigate('EditArtisan', {
       name,
       phoneNumber,
       location,
       description,
       uid,
+      profilePictureURL,
       onNavigateBack: this.handleOnNavigateBack
     })
   }
@@ -262,6 +263,7 @@ class ArtisanDetail extends Component {
             {this.renderListOfProducts()}
           </StandardCard>
          
+          {/* 
           <AsyncButton
             title="Delete Artisan"
             color="red"
@@ -270,6 +272,7 @@ class ArtisanDetail extends Component {
             style={{ marginLeft: 10, marginRight: 10, marginTop: 20 }}
             spinning={this.state.adding}
           />
+          */}
         </ScrollView>
       </Wallpaper>
     )
