@@ -2,7 +2,7 @@ import { AddImage, AsyncButton, UserInput, Wallpaper } from '@components'
 import React, { Component } from 'react'
 import { StyleSheet, View } from 'react-native'
 import ImagePicker from 'react-native-image-crop-picker'
-import { withMappedNavigationProps } from 'react-navigation-props-mapper'
+import { withMappedNavigationParams } from 'react-navigation-props-mapper'
 
 class EditArtisan extends Component {
   static navigationOptions = () => {
@@ -234,4 +234,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default withMappedNavigationProps()(EditArtisan)
+export default withMappedNavigationParams()(EditArtisan)

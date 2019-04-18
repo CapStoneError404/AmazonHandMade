@@ -7,7 +7,7 @@ import {
   CardSection
 } from '@components'
 import { Text, ScrollView, StyleSheet, LayoutAnimation } from 'react-native'
-import { withMappedNavigationProps } from 'react-navigation-props-mapper'
+import { withMappedNavigationParams } from 'react-navigation-props-mapper'
 import { Icon } from 'react-native-elements'
 import StandardCard from '../../components/StandardCard'
 
@@ -203,4 +203,4 @@ const styles = StyleSheet.create({
     shadowRadius: 2
   }
 })
-export default withMappedNavigationProps()(ProductDetail)
+export default withMappedNavigationParams()(ProductDetail)

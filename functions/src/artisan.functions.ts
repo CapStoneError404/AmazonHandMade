@@ -23,6 +23,7 @@ export async function addArtisan(data) {
   var artisanObject = {
     name: artisanInfo.name,
     phoneNumber: artisanInfo.phoneNumber.replace(/[^\d+]/g, ''),
+    location: artisanInfo.location,
     description: artisanInfo.description,
     uid: newArtisan.key
   }

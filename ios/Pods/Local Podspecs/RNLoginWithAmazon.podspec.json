@@ -1,0 +1,25 @@
+{
+  "name": "RNLoginWithAmazon",
+  "version": "1.0.0",
+  "summary": "RNLoginWithAmazon",
+  "description": "RNLoginWithAmazon",
+  "homepage": "https://github.com/ianbattin/react-native-login-with-amazon",
+  "license": "MIT",
+  "authors": {
+    "author": "author@domain.cn"
+  },
+  "platforms": {
+    "ios": "7.0"
+  },
+  "source": {
+    "git": "https://github.com/author/RNLoginWithAmazon.git",
+    "tag": "master"
+  },
+  "source_files": "RNLoginWithAmazon/**/*.{h,m}",
+  "requires_arc": true,
+  "dependencies": {
+    "React": [
+
+    ]
+  }
+}
