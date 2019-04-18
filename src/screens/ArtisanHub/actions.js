@@ -82,9 +82,11 @@ export const saveArtisan = ({ name, phoneNumber, location, description, profileP
         description,
         uid
       }
+      
+      //UPDATE PHONE MAPPING HERE OR IN FUNCTIONS
 
       if (profilePicturePath) {
-        await firebase.storage().ref(`artisanFiles/${uid}/images/profilePicture`).delete()
+        await firebase.storage().ref(`artisanFiles/${uid}/images/profilePicture`).delete().catch(error => console.log(error))
         let st_ref = await firebase.storage()
           .ref(`artisanFiles/${uid}/images/profilePicture`)
           .putFile(profilePicturePath)
