@@ -70,7 +70,7 @@ npm install
 
 Then, you need to get a service account api key file for your Firebase project. To do this, open your firebase project in the console, navigate to project settings using the settings wheel. Then, click the service accounts tab and click generate new private key. This should download a json file. Save this file/rename it to "service-account.json". Then, place this file in /funtions/assets in your handmade directory (creating the assets folder if it is not already there).
 
-For messaging to work, you need to create a twilio.json file. First, create a Twilio account if you have not done so yet, and set it up to have a phone number and sms capability. Once you have this done, create a twilio.json file at /functions/assets/ that looks like the following:
+For messaging to work, you need to set up Twilio. Follow the instructions for Twilio set up below (Only steps 1-3 for now). Once you have this done, create a twilio.json file at /functions/assets/ that looks like the following:
 ```
 {
     "accountSid": "YOUR_TWILIO_ACCOUNT_SID_HERE",
@@ -86,6 +86,24 @@ firebase deploy --only functions
 
 You can verify this was done correctly by going back to the Firebase console in your web browser, clicking the Functions tab, and checking to see if they are there.
 
+At this point, we need to finish our Twilio set up. Follow steps 4-10 in the section below.
+
+##### Twilio Setup
+
+1. Create a Twilio account if you dont have one.
+2. Once you have an account, you should have an Account SID and Auth Token. Copy these down somewhere to keep track of them
+3. Click Get a Trial Number, copy the number down somewhere.
+4. At this point, you should have deloyed your Firebase functions before continuing on
+5. In the Firebase console, navigate to the Functions tab and find the receiveMessage function. There should be a URL in the cell, Copy it.
+6. Now, return to the Twilio website.
+7. Click the Three Dots Circle Icon on the Left Bar (All Products and Services) and Navigate to Phone Numbers
+8. Click your phone number you just created
+9. Scroll down to A Message Comes In and replace the demo url with the Firebase Function URL you just copied
+10. Click Save. You're Done!
+
+
+##### Testing Cloud Functions Locally
+
 If you are working on cloud functions and want to test your changes locally run this:
 ```
 firebase serve
@@ -93,6 +111,7 @@ firebase serve
 and then modify any URLs in the source code refering to the cloud to your machine instead.
 
 All of the code for the cloud functions is in the "functions" folder
+
 
 ## Testing for IOS (Android soon to come)
 
