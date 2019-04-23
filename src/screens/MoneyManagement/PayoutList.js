@@ -16,7 +16,7 @@ import {
   FlatList,
   TouchableOpacity
 } from 'react-native'
-import { withMappedNavigationProps } from 'react-navigation-props-mapper'
+import { withMappedNavigationParams } from 'react-navigation-props-mapper'
 
 class PayoutList extends Component {
    static navigationOptions = () => {
@@ -31,6 +31,8 @@ class PayoutList extends Component {
 
      this.state = {}
      this.navigateToArtisanPayout = this.navigateToArtisanPayout.bind(this)
+     this.getPayoutsTotalForArtisan = this.getPayoutsTotalForArtisan.bind(this)
+     this.getProductsRevenueTotalForArtisan = this.getProductsRevenueTotalForArtisan.bind(this)
    }
 
    navigateToArtisanPayout(item) {
@@ -41,8 +43,44 @@ class PayoutList extends Component {
        ...item
      })
    }
+
+   getPayoutsTotalForArtisan(artisanUID) {
+    artisanPayouts = this.props.Payouts.filter(payout => {
+      return payout.artisanId == artisanUID
+    })
+
+    var totalAmount = 0.0
+    artisanPayouts.forEach(payout => {
+      totalAmount += payout.amount
+    })
+
+    return totalAmount
+  }
+
+  getProductsRevenueTotalForArtisan(artisanUID) {
+    artisanProductIds = this.props.Artisans.filter(artisan => { 
+      return artisan.uid == artisanUID
+    })[0].products
+
+    if(!artisanProductIds)
+      return 0
+    artisanProductIds = Object.keys(artisanProductIds)
+
+    artisanProducts = this.props.Products.filter(product => 
+      artisanProductIds.includes(product.productID))
+
+    var totalAmount = 0.0
+    artisanProducts.forEach(product => {
+      totalAmount += (parseInt(product.TimesSold) * parseFloat(product.StandardPrice))
+    })
+
+    return totalAmount
+  }
    
    _renderPayoutListItem = ({item, index}) => {
+     productsRevenueTotal = this.getProductsRevenueTotalForArtisan(item.uid)
+     payoutsTotal = this.getPayoutsTotalForArtisan(item.uid)
+
      return (
        <TouchableOpacity
          testID={`listItem${index}`}
@@ -58,8 +96,8 @@ class PayoutList extends Component {
          <View style={styles.namePhone}>
            <Text style={styles.text}>{item.name}</Text>
            <Text style={styles.text}>{`Last Payout: ${Math.floor(Math.random() * 11 + 1)}/${Math.floor(Math.random() * 27 + 1)}/19`}</Text>
-           <Text style={styles.text}>{`Owed: $300`}</Text>
-           <Text style={styles.text}>{`Paid: $700`}</Text>
+           <Text style={styles.text}>{`Owed: $${productsRevenueTotal - payoutsTotal}`}</Text>
+           <Text style={styles.text}>{`Paid: $${payoutsTotal}`}</Text>
          </View>
        </TouchableOpacity>
      )
@@ -178,6 +216,6 @@ const styles = StyleSheet.create({
   }
 })
 
-export default withMappedNavigationProps()(PayoutList)
+export default withMappedNavigationParams()(PayoutList)
 
 

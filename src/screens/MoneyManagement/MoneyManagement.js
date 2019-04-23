@@ -50,14 +50,18 @@ export default class MoneyManagement extends Component {
      ]
 
      this.navigateToPayoutList = this.navigateToPayoutList.bind(this)
+     this.getPayoutsTotal = this.getPayoutsTotal.bind(this)
+     this.getPayoutsTotalForArtisan = this.getPayoutsTotalForArtisan.bind(this)
+     this.getProductsRevenueTotal = this.getProductsRevenueTotal.bind(this)
+     this.getProductsRevenueTotalForArtisan = this.getProductsRevenueTotalForArtisan.bind(this)
    }
 
    componentDidMount() {
-     this.props.getAlreadyPaid()
-     this.props.getPaymentOwed()
+     payoutsTotal = this.getPayoutsTotal()
+     revenueTotal = this.getProductsRevenueTotal()
      this.setState({
-       amountOwed: this.props.MoneyManagement.amountOwed,
-       paidAmount: this.props.MoneyManagement.paidAmount
+       amountOwed: revenueTotal - payoutsTotal,
+       paidAmount: payoutsTotal
      })
    }
 
@@ -65,6 +69,59 @@ export default class MoneyManagement extends Component {
      const { } = this.props
      navigation.navigate('PayoutList')
    }
+
+   getPayoutsTotal() {
+     var totalAmount = 0.0
+     var artisanIds = this.props.Artisans.map(artisan => artisan.uid)
+     artisanIds.forEach(artisanId => {
+       totalAmount += this.getPayoutsTotalForArtisan(artisanId)
+     })
+
+     return totalAmount
+   }
+
+   getProductsRevenueTotal() {
+    var totalAmount = 0.0
+    var artisanIds = this.props.Artisans.map(artisan => artisan.uid)
+    artisanIds.forEach(artisanId => {
+      totalAmount += this.getProductsRevenueTotalForArtisan(artisanId)
+    })
+
+    return totalAmount
+   }
+
+   getPayoutsTotalForArtisan(artisanUID) {
+    artisanPayouts = this.props.Payouts.filter(payout => {
+      return payout.artisanId == artisanUID
+    })
+
+    var totalAmount = 0.0
+    artisanPayouts.forEach(payout => {
+      totalAmount += payout.amount
+    })
+
+    return totalAmount
+  }
+
+  getProductsRevenueTotalForArtisan(artisanUID) {
+    artisanProductIds = this.props.Artisans.filter(artisan => { 
+      return artisan.uid == artisanUID
+    })[0].products
+
+    if(!artisanProductIds)
+      return 0
+    artisanProductIds = Object.keys(artisanProductIds)
+
+    artisanProducts = this.props.Products.filter(product => 
+      artisanProductIds.includes(product.productID))
+
+    var totalAmount = 0.0
+    artisanProducts.forEach(product => {
+      totalAmount += (parseInt(product.TimesSold) * parseFloat(product.StandardPrice))
+    })
+
+    return totalAmount
+  }
 
    render() {
      return (

@@ -1,7 +1,7 @@
 import { AsyncButton, UserInput, Wallpaper } from '@components'
 import React, { Component } from 'react'
 import { StyleSheet, View } from 'react-native'
-import { withMappedNavigationProps } from 'react-navigation-props-mapper'
+import { withMappedNavigationParams } from 'react-navigation-props-mapper'
 
 class LogPayout extends Component {
   static navigationOptions = () => {
@@ -126,4 +126,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default withMappedNavigationProps()(LogPayout)
+export default withMappedNavigationParams()(LogPayout)

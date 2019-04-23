@@ -3,7 +3,8 @@ import { View } from 'react-native'
 import {
   createStackNavigator,
   createSwitchNavigator,
-  createBottomTabNavigator
+  createBottomTabNavigator,
+  createAppContainer
 } from 'react-navigation'
 import DropdownAlert from 'react-native-dropdownalert'
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -67,7 +68,7 @@ const TabNavigator = createBottomTabNavigator(
     initialRouteName: 'Artisan Hub',
     order: ['Artisan Hub', 'Messages', 'Finances', 'Settings'],
     animationEnabled: true,
-    navigationOptions: ({ navigation }) => {
+    defaultNavigationOptions: ({ navigation }) => {
       return {
         tabBarIcon: ({ tintColor }) => {
           const { routeName } = navigation.state
@@ -97,7 +98,7 @@ const AuthStack = createStackNavigator(
   },
   {
     initialRouteName: 'Login',
-    navigationOptions: {
+    defaultNavigationOptions: {
       headerTransparent: true
     }
   }
@@ -113,6 +114,8 @@ const RootStack = createSwitchNavigator(
     initialRouteName: 'Launch'
   }
 )
+
+const Navigation = createAppContainer(RootStack)
 
 class Main extends Component {
   constructor(props) {
@@ -130,7 +133,7 @@ class Main extends Component {
 
     return (
       <View style={{ flex: 1 }}>
-        <RootStack />
+        <Navigation />
         <DropdownAlert ref={ref => (this.dropdown = ref)} />
       </View>
     )
@@ -140,6 +143,7 @@ class Main extends Component {
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actions from '@actions'
+import { Root } from 'native-base';
 
 function mapStateToProps(state) {
   return {

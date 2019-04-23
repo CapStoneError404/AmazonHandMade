@@ -2,7 +2,7 @@ import { AddImage, AsyncButton, Wallpaper } from '@components'
 import React, { Component } from 'react'
 import { StyleSheet, ScrollView, View, Text, TextInput, Picker, Platform } from 'react-native'
 import ImagePicker from 'react-native-image-crop-picker'
-import { withMappedNavigationProps } from 'react-navigation-props-mapper'
+import { withMappedNavigationParams } from 'react-navigation-props-mapper'
 import { ProductCategories } from './ProductCategories'
 
 class AddProduct extends Component {
@@ -68,7 +68,7 @@ class AddProduct extends Component {
     else if(!this.state.productStandardPrice)
       this.props.displayError("! The required field Standard Price is empty.")
     else if(!this.state.productSellerSKU)
-      this.props.displayError("! The required field ? is empty.")
+      this.props.displayError("! The required field Seller SKU is empty.")
     else if(!this.state.productQuantity)
       this.props.displayError("! The required field Quantity is empty.")
     else if(!this.state.productTime)
@@ -126,8 +126,9 @@ class AddProduct extends Component {
               itemStyle={styles.PickerItem}
               selectedValue={this.state.productMainCategory}
               testID="MainCategorySelectorID"
-              onValueChange={(itemValue, itemIndex) =>
-                this.setState({productMainCategory: itemValue}) 
+              onValueChange={(itemValue, itemIndex) => 
+                itemValue != 'Pick a Primary Category...'
+                && this.setState({productMainCategory: itemValue}) 
                 && this.setState({productSubCategory: ''})
               }>
               {Object.keys(ProductCategories).map(m => {
@@ -144,7 +145,8 @@ class AddProduct extends Component {
               selectedValue={this.state.productSubCategory}
               testID="SubCategorySelectorID"
               onValueChange={(itemValue, itemIndex) =>
-                this.setState({productSubCategory: itemValue})
+                itemValue != 'Pick a Secondary Category...'
+                && this.setState({productSubCategory: itemValue})
               }>
               {
                 (this.state.productMainCategory != "")? 
@@ -187,7 +189,8 @@ class AddProduct extends Component {
               testID="genderSelectorID"
               //style={{height: 50, width: 200}}
               onValueChange={(itemValue, itemIndex) =>
-                this.setState({productGender: itemValue})
+                itemValue != 'pick-one'
+                && this.setState({productGender: itemValue})
               }>
               <Picker.Item label="Pick a gender type..." value="pick-one" />
               <Picker.Item label="Women" value="women" />
@@ -341,4 +344,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default withMappedNavigationProps()(AddProduct)
+export default withMappedNavigationParams()(AddProduct)

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Wallpaper } from '../../components'
 import { GiftedChat } from 'react-native-gifted-chat'
-import { withMappedNavigationProps } from 'react-navigation-props-mapper'
+import { withMappedNavigationParams } from 'react-navigation-props-mapper'
 import { Button } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import ImagePicker from 'react-native-image-crop-picker'
@@ -144,4 +144,4 @@ class Conversation extends Component {
   }
 }
 
-export default withMappedNavigationProps()(Conversation)
+export default withMappedNavigationParams()(Conversation)
