@@ -73,9 +73,9 @@ Then, you need to get a service account api key file for your Firebase project. 
 For messaging to work, you need to create a twilio.json file. First, create a Twilio account if you have not done so yet, and set it up to have a phone number and sms capability. Once you have this done, create a twilio.json file at /functions/assets/ that looks like the following:
 ```
 {
-    "accountSid": "YOUR_TWILIO_ACCOUNT_SID_HERE",
-    "authToken": "YOUR_TWILIO_AUTH_TOKEN_HERE",
-    "phoneNumber": "YOUR_TWILIO_PHONE_NUMBER_HERE (In this format: +1 234 567 8900)"
+    "account_sid": "YOUR_TWILIO_ACCOUNT_SID_HERE",
+    "auth_token": "YOUR_TWILIO_AUTH_TOKEN_HERE",
+    "phone_number": "YOUR_TWILIO_PHONE_NUMBER_HERE (In this format: +1 234 567 8900)"
 }
 ```
 

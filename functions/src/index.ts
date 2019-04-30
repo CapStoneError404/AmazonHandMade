@@ -5,6 +5,7 @@ import { loginWithAmazon } from './auth.functions'
 import { addArtisan, deleteArtisan } from './artisan.functions'
 import { logPayout } from './payouts.functions'
 import { sendMessage, receiveMessage } from './messaging.functions'
+import { addProduct } from './mws.functions'
 
 // This file needs to be retrieved from
 // https://console.firebase.google.com/u/0/project/handmade-error-404/settings/serviceaccounts/adminsdk
@@ -23,3 +24,4 @@ exports.deleteArtisan = functions.https.onCall(deleteArtisan)
 exports.logPayout = functions.https.onCall(logPayout)
 exports.sendMessage = functions.https.onCall(sendMessage)
 exports.receiveMessage = functions.https.onRequest(receiveMessage)
+exports.addProduct = functions.https.onCall(addProduct)

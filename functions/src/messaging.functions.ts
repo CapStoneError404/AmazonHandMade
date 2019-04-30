@@ -5,7 +5,7 @@ import * as twilio from 'twilio'
 // ask patrick for it if you need it.
 // it should NOT be uploaded to github!!!!!!!!!!!!
 const twilioInfo = require('../assets/twilio.json')
-const client = twilio(twilioInfo.accountSid, twilioInfo.authToken)
+const client = twilio(twilioInfo.account_sid, twilioInfo.auth_token)
 
 // data: {
 //   sender: UID of sender,
@@ -72,7 +72,7 @@ function sendText(number, msg) {
   console.log(`Sending text to ${number} with message: ${msg}`)
   return client.messages.create({
     body: msg,
-    from: twilioInfo.phoneNumber.replace(/\s/g, ''),
+    from: twilioInfo.phone_number.replace(/\s/g, ''),
     to: number
   }).then(message => console.log(message.sid))
 }
