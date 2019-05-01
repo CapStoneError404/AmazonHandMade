@@ -22,6 +22,7 @@ export default class AsyncButton extends Component {
     else {
       return (
         <TouchableOpacity
+          disabled={this.props.disabled}
           testID={this.props.testID}
           style={[styles.buttonWrapper, {backgroundColor: (this.props.color) ? this.props.color : 'black'}, this.props.style, ]}
           onPress={this.props.onPress}>

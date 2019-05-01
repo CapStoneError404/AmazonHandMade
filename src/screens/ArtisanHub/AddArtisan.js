@@ -2,6 +2,7 @@ import { AddImage, AsyncButton, UserInput, Wallpaper } from '@components'
 import React, { Component } from 'react'
 import { StyleSheet, View } from 'react-native'
 import ImagePicker from 'react-native-image-crop-picker'
+import { isValidPhoneNumber } from 'react-phone-number-input'
 
 export default class AddArtisan extends Component {
   static navigationOptions = {
@@ -18,7 +19,7 @@ export default class AddArtisan extends Component {
       profilePicturePath: "",
       description: "",
       adding: false,
-
+      
       focusedInputs: {name: false, phoneNumber: false, location: false, description: false}
     }
 
@@ -26,6 +27,7 @@ export default class AddArtisan extends Component {
     this.createArtisan = this.createArtisan.bind(this)
     this.verifyFields = this.verifyFields.bind(this)
     this.onTextChange = this.onTextChange.bind(this)
+    this.displayErrorMessage = this.displayErrorMessage.bind(this)
   }
 
   pickImage() {
@@ -38,19 +40,35 @@ export default class AddArtisan extends Component {
     })
   }
 
-  verifyFields() {
-    if(!this.state.name)
-      this.props.displayError("Name field required.")
-    else if(!this.state.phoneNumber)
-      this.props.displayError("Phone field required")
-    else if(!this.state.location)
-      this.props.displayError("Location required")
-    else if(!this.state.description)
-      this.props.displayError("Please provide a brief description")
-    else if(!this.state.profilePicturePath)
-      this.props.displayError("Please upload a profile picture")
+  displayErrorMessage(errorMessage) {
+    this.props.displayError(errorMessage)
+    return false;
+  }
 
-    return this.state.name && this.state.phoneNumber && this.state.location && this.state.description && this.state.profilePicturePath
+  verifyFields() {
+    let validFields = true;
+    if(!this.state.name)
+      validFields = this.displayErrorMessage("Name field required.")
+    else if(this.state.name) {
+      if(!this.state.name.match(/[a-zA-Z]/)) {
+        console.log(this.state.name)
+        validFields = this.displayErrorMessage("Only alphabetic characters allowed for name.")
+      }
+    }
+    else if(!this.state.phoneNumber)
+      validFields = this.displayErrorMessage("Phone field required")
+    else if(this.state.phoneNumber && !isValidPhoneNumber(this.state.phoneNumber))
+      validFields = this.displayErrorMessage("Phone number not valid")
+    else if(!this.state.location)
+      validFields = this.displayErrorMessage("Location required")
+    else if(!this.state.description)
+      validFields = this.displayErrorMessage("Please provide a brief description")
+    else if(!this.state.profilePicturePath)
+      validFields = this.displayErrorMessage("Please upload a profile picture")
+
+
+    return validFields;
+    
   }
   
   createArtisan() {
@@ -73,8 +91,10 @@ export default class AddArtisan extends Component {
       }).then(() => {
         this.setState({adding: false})
         this.props.navigation.goBack()
+      }, error => {
+        console.log(error)
       })
-    }
+    } 
   }
 
   onTextChange(text) {
@@ -89,30 +109,7 @@ export default class AddArtisan extends Component {
         });
 
         return;
-    }
-
-    this.setState({
-      phoneNumber: text
-    });
-  }
-
-  onTextChange(text) {
-    var cleaned = ('' + text).replace(/\D/g, '')
-    var match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/)
-    if (match) {
-        var intlCode = (match[1] ? '+1 ' : ''),
-            number = [intlCode, '(', match[2], ') ', match[3], '-', match[4]].join('');
-
-        this.setState({
-          phoneNumber: number
-        });
-
-        return;
-    }
-
-    this.setState({
-      phoneNumber: text
-    });
+    } 
   }
 
   render() {
@@ -176,11 +173,12 @@ export default class AddArtisan extends Component {
         </View>
         <AsyncButton 
           title="Create"
-          color="#c14700"
-          textColor="white"
+          color='#c14700'
+          textColor='white'
           onPress={this.createArtisan}
           style={styles.button}
           spinning={this.state.adding}
+          disabled={false}
         />
       </Wallpaper>
     )
