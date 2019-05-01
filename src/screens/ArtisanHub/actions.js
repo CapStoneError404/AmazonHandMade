@@ -139,7 +139,7 @@ export function deleteArtisan(uid) {
 
       //await firebase.storage().ref(`artisanFiles/${uid}/images/profilePicture`).delete().catch(error => console.log(error))
       let ref = await firebase.storage().ref(`artisanFiles/${uid}/images`)
-      ref.child("profilePicture").getDownloadURL().then(()=> ref.child("profilePicture").delete(), (error)=> console.log(error));
+      ref.child("profilePicture").getDownloadURL().then(()=> ref.child("profilePicture").delete(), (error)=> console.log(error))
       
       resolve()
       dispatch({ type: 'DELETE_ARTISAN', artisanId: uid })

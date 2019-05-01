@@ -42,11 +42,11 @@ export default class AddArtisan extends Component {
 
   displayErrorMessage(errorMessage) {
     this.props.displayError(errorMessage)
-    return false;
+    return false
   }
 
   verifyFields() {
-    let validFields = true;
+    let validFields = true
     if(!this.state.name)
       validFields = this.displayErrorMessage("Name field required.")
     else if(this.state.name) {
@@ -67,7 +67,7 @@ export default class AddArtisan extends Component {
       validFields = this.displayErrorMessage("Please upload a profile picture")
 
 
-    return validFields;
+    return validFields
     
   }
   
@@ -83,7 +83,7 @@ export default class AddArtisan extends Component {
       }
 
       this.props.createArtisan(artisanInfo, this.props.User.uid, this.state.profilePicturePath).then(artisan => {
-          return this.props.sendMessage(
+        return this.props.sendMessage(
           this.props.User.uid, 
           `Hello ${artisanInfo.name}, welcome to our organization! Please respond "YES" to verify you would like to be added to our community.`,
           {[artisan.uid]: artisanInfo.phoneNumber}
@@ -101,15 +101,19 @@ export default class AddArtisan extends Component {
     var cleaned = ('' + text).replace(/\D/g, '')
     var match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/)
     if (match) {
-        var intlCode = (match[1] ? '+1 ' : ''),
-            number = [intlCode, '(', match[2], ') ', match[3], '-', match[4]].join('');
+      var intlCode = (match[1] ? '+1 ' : ''),
+        number = [intlCode, '(', match[2], ') ', match[3], '-', match[4]].join('')
 
-        this.setState({
-          phoneNumber: number
-        });
+      this.setState({
+        phoneNumber: number
+      })
 
-        return;
+      return
     } 
+
+    this.setState({
+      phoneNumber: text
+    })
   }
 
   render() {

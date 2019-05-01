@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import {
   Wallpaper,
-  AsyncButton,
-  CardSection,
   StandardCard
 } from '@components'
 import {

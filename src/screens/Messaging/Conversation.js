@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { Wallpaper } from '../../components'
 import { GiftedChat } from 'react-native-gifted-chat'
 import { withMappedNavigationParams } from 'react-navigation-props-mapper'
-import { Button } from 'react-native-elements'
-import Icon from 'react-native-vector-icons/FontAwesome5'
 import ImagePicker from 'react-native-image-crop-picker'
 import firebase from 'react-native-firebase'
 
@@ -11,13 +9,6 @@ class Conversation extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
       title: navigation.getParam('artisan'),
-      /*headerRight: (
-        <Button 
-          icon={<Icon name='images' size={25} color='gray' />}
-          type="clear"
-          onPress={navigation.getParam('pickImage')}
-        />
-      )*/
     }
   };
 

@@ -6,7 +6,7 @@ import * as admin from 'firebase-admin'
 //   amount: Double,
 //   description: String
 // }
-export async function logPayout(data, context) { 
+export async function logPayout(data) { 
   console.log("Logging a payout with the following data:")
   console.log(data)
 

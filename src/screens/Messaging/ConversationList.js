@@ -7,15 +7,12 @@ import {
   TouchableOpacity,
   View
 } from 'react-native'
-import { Button } from 'react-native-elements'
-import Icon from 'react-native-vector-icons/FontAwesome'
 import { ProfilePicture , Wallpaper} from '../../components'
 import { RadioButton, RadioButtonInput } from 'react-native-simple-radio-button'
 
 
 export default class ConversationList extends Component {
-  static navigationOptions = ({ navigation }) => {
-    var iconName = 'edit'
+  static navigationOptions = () => {
     return {
       title: 'Messages'
     }

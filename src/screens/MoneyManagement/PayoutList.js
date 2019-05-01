@@ -1,18 +1,13 @@
 import React, { Component } from 'react'
 import {
   Wallpaper,
-  AsyncButton,
-  CardSection,
-  StandardCard,
   ProfilePicture
 } from '@components'
 import {
-  ScrollView,
   StyleSheet,
   Text,
   View,
   ActivityIndicator,
-  Button,
   FlatList,
   TouchableOpacity
 } from 'react-native'
@@ -36,7 +31,6 @@ class PayoutList extends Component {
    }
 
    navigateToArtisanPayout(item) {
-     const { } = this.props
      console.log(item)
      this.props.navigation.navigate('ArtisanPayout', {
        onNavigateBack: this.handleOnNavigateBack,
@@ -45,37 +39,37 @@ class PayoutList extends Component {
    }
 
    getPayoutsTotalForArtisan(artisanUID) {
-    artisanPayouts = this.props.Payouts.filter(payout => {
-      return payout.artisanId == artisanUID
-    })
+     artisanPayouts = this.props.Payouts.filter(payout => {
+       return payout.artisanId == artisanUID
+     })
 
-    var totalAmount = 0.0
-    artisanPayouts.forEach(payout => {
-      totalAmount += payout.amount
-    })
+     var totalAmount = 0.0
+     artisanPayouts.forEach(payout => {
+       totalAmount += payout.amount
+     })
 
-    return totalAmount
-  }
+     return totalAmount
+   }
 
-  getProductsRevenueTotalForArtisan(artisanUID) {
-    artisanProductIds = this.props.Artisans.filter(artisan => { 
-      return artisan.uid == artisanUID
-    })[0].products
+   getProductsRevenueTotalForArtisan(artisanUID) {
+     artisanProductIds = this.props.Artisans.filter(artisan => { 
+       return artisan.uid == artisanUID
+     })[0].products
 
-    if(!artisanProductIds)
-      return 0
-    artisanProductIds = Object.keys(artisanProductIds)
+     if(!artisanProductIds)
+       return 0
+     artisanProductIds = Object.keys(artisanProductIds)
 
-    artisanProducts = this.props.Products.filter(product => 
-      artisanProductIds.includes(product.productID))
+     artisanProducts = this.props.Products.filter(product => 
+       artisanProductIds.includes(product.productID))
 
-    var totalAmount = 0.0
-    artisanProducts.forEach(product => {
-      totalAmount += (parseInt(product.TimesSold) * parseFloat(product.StandardPrice))
-    })
+     var totalAmount = 0.0
+     artisanProducts.forEach(product => {
+       totalAmount += (parseInt(product.TimesSold) * parseFloat(product.StandardPrice))
+     })
 
-    return totalAmount
-  }
+     return totalAmount
+   }
    
    _renderPayoutListItem = ({item, index}) => {
      productsRevenueTotal = this.getProductsRevenueTotalForArtisan(item.uid)
