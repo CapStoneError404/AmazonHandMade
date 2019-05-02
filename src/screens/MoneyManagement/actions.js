@@ -57,3 +57,23 @@ export function logPayout({cgaId, artisanId, amount, description}) {
     })
   }
 }
+
+export function listOrders(lastUpdatedAfter) {
+  console.log(`Fetching all orders updated after ${lastUpdatedAfter}:`)
+
+  return (dispatch) => { 
+    return new Promise(async (resolve) => {
+
+      let functionCall = firebase.functions().httpsCallable('listOrders')
+      let response = await functionCall({
+        lastUpdatedAfter: lastUpdatedAfter
+      })
+
+      console.log("Received data from cloud function:")
+      console.log(response)
+
+      resolve()
+      dispatch({type: 'LIST_ORDERS', orders: []})
+    })
+  }
+}

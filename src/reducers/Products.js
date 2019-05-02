@@ -7,6 +7,8 @@ export default function Products(state = [], action) {
     return action.products
   case 'DELETE_PRODUCT':
     return state.filter(product => product.uid !== action.product.uid)
+  case 'LIST_ORDERS':
+    return action.orders  
   default:
     return state
   }

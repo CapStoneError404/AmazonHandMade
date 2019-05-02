@@ -30,9 +30,9 @@ export default class MoneyManagement extends Component {
      this.transactionButtons = [
        {
          title: 'View All',
-         onPress: () => console.log("Nav to Transactions for artisans")
+         onPress: () => this.props.listOrders(new Date(2016, 11, 24))
        },
-       {
+       { 
          title: 'Stats',
          onPress: () => console.log("Clicked on Transaction Stats")
        }

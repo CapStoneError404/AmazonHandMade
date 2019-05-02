@@ -53,7 +53,7 @@ export function createProduct(data, artisanID) {
   }
 }
 
-{/*
+/*
 // action takes in current list of products and product to be deleted
 // sends that product to reducer to be filtered out of state
 
@@ -71,4 +71,4 @@ export function deleteProduct(products, product, artisan) {
     })  
   }
 }
-*/}
+*/
