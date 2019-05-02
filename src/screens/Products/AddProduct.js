@@ -126,7 +126,7 @@ class AddProduct extends Component {
               itemStyle={styles.PickerItem}
               selectedValue={this.state.productMainCategory}
               testID="MainCategorySelectorID"
-              onValueChange={(itemValue, itemIndex) => 
+              onValueChange={(itemValue) => 
                 itemValue != 'Pick a Primary Category...'
                 && this.setState({productMainCategory: itemValue}) 
                 && this.setState({productSubCategory: ''})
@@ -144,7 +144,7 @@ class AddProduct extends Component {
               enabled={this.state.productMainCategory != ''}
               selectedValue={this.state.productSubCategory}
               testID="SubCategorySelectorID"
-              onValueChange={(itemValue, itemIndex) =>
+              onValueChange={(itemValue) =>
                 itemValue != 'Pick a Secondary Category...'
                 && this.setState({productSubCategory: itemValue})
               }>
@@ -188,7 +188,7 @@ class AddProduct extends Component {
               selectedValue={this.state.productGender}
               testID="genderSelectorID"
               //style={{height: 50, width: 200}}
-              onValueChange={(itemValue, itemIndex) =>
+              onValueChange={(itemValue) =>
                 itemValue != 'pick-one'
                 && this.setState({productGender: itemValue})
               }>

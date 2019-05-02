@@ -1,10 +1,10 @@
 import { Wallpaper } from '@components'
 import React, { Component } from 'react'
-import { ActivityIndicator, Button, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import { ProfilePicture } from '../../components'
 
 export default class NewConversation extends Component {
-  static navigationOptions = ({navigation}) => {
+  static navigationOptions = () => {
     return {
       title: 'New Conversation'
     }

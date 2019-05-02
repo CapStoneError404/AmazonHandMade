@@ -1,8 +1,7 @@
 import { Wallpaper } from '@components'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { ActivityIndicator, Button, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { ProfilePicture } from '../../components'
+import { ActivityIndicator, FlatList } from 'react-native'
 
 export default class ArtisanList extends Component {
 
@@ -79,36 +78,3 @@ ArtisanList.propTypes = {
   renderArtisanItem: PropTypes.function
 }
 
-const styles = StyleSheet.create({
-  image: {
-    height: 90,
-    aspectRatio: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 45,
-    margin: 5
-  },
-  artisanView: {
-    height: 100,
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    borderRadius: 5,
-    marginTop: 10,
-    marginLeft: 10,
-    marginRight: 10
-  },
-  namePhone: {
-    flex: 1,
-    height: '100%',
-    flexDirection: 'column',
-    alignItems: 'stretch',
-    justifyContent: 'space-evenly',
-    width: '100%',
-  },
-  text: {
-    fontSize: 20,
-    color: '#444444',
-    marginLeft: 5
-  }
-})
