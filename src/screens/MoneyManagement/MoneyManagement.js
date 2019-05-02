@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import {
   Wallpaper,
-  AsyncButton,
   CardSection,
   StandardCard
 } from '@components'
@@ -9,7 +8,6 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  View
 } from 'react-native'
 
 export default class MoneyManagement extends Component {
@@ -66,7 +64,6 @@ export default class MoneyManagement extends Component {
    }
 
    navigateToPayoutList() {
-     const { } = this.props
      navigation.navigate('PayoutList')
    }
 
@@ -81,47 +78,47 @@ export default class MoneyManagement extends Component {
    }
 
    getProductsRevenueTotal() {
-    var totalAmount = 0.0
-    var artisanIds = this.props.Artisans.map(artisan => artisan.uid)
-    artisanIds.forEach(artisanId => {
-      totalAmount += this.getProductsRevenueTotalForArtisan(artisanId)
-    })
+     var totalAmount = 0.0
+     var artisanIds = this.props.Artisans.map(artisan => artisan.uid)
+     artisanIds.forEach(artisanId => {
+       totalAmount += this.getProductsRevenueTotalForArtisan(artisanId)
+     })
 
-    return totalAmount
+     return totalAmount
    }
 
    getPayoutsTotalForArtisan(artisanUID) {
-    artisanPayouts = this.props.Payouts.filter(payout => {
-      return payout.artisanId == artisanUID
-    })
+     artisanPayouts = this.props.Payouts.filter(payout => {
+       return payout.artisanId == artisanUID
+     })
 
-    var totalAmount = 0.0
-    artisanPayouts.forEach(payout => {
-      totalAmount += payout.amount
-    })
+     var totalAmount = 0.0
+     artisanPayouts.forEach(payout => {
+       totalAmount += payout.amount
+     })
 
-    return totalAmount
-  }
+     return totalAmount
+   }
 
-  getProductsRevenueTotalForArtisan(artisanUID) {
-    artisanProductIds = this.props.Artisans.filter(artisan => { 
-      return artisan.uid == artisanUID
-    })[0].products
+   getProductsRevenueTotalForArtisan(artisanUID) {
+     artisanProductIds = this.props.Artisans.filter(artisan => { 
+       return artisan.uid == artisanUID
+     })[0].products
 
-    if(!artisanProductIds)
-      return 0
-    artisanProductIds = Object.keys(artisanProductIds)
+     if(!artisanProductIds)
+       return 0
+     artisanProductIds = Object.keys(artisanProductIds)
 
-    artisanProducts = this.props.Products.filter(product => 
-      artisanProductIds.includes(product.productID))
+     artisanProducts = this.props.Products.filter(product => 
+       artisanProductIds.includes(product.productID))
 
-    var totalAmount = 0.0
-    artisanProducts.forEach(product => {
-      totalAmount += (parseInt(product.TimesSold) * parseFloat(product.StandardPrice))
-    })
+     var totalAmount = 0.0
+     artisanProducts.forEach(product => {
+       totalAmount += (parseInt(product.TimesSold) * parseFloat(product.StandardPrice))
+     })
 
-    return totalAmount
-  }
+     return totalAmount
+   }
 
    render() {
      return (

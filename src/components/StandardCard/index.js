@@ -6,7 +6,6 @@ import {
   LayoutAnimation 
 } from 'react-native'
 import { 
-  CardSection, 
   Button 
 } from '@components'
 import PropTypes from 'prop-types'

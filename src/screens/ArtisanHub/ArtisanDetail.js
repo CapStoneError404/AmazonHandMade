@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import {
   ProfilePicture,
   Wallpaper,
-  AsyncButton,
   CardSection,
   StandardCard
 } from '@components'

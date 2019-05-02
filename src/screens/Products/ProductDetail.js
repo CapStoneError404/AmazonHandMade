@@ -1,14 +1,11 @@
 import React, { Component } from 'react'
 import {
-  Button,
   ProfilePicture,
   Wallpaper,
-  Card,
   CardSection
 } from '@components'
 import { Text, ScrollView, StyleSheet, LayoutAnimation } from 'react-native'
 import { withMappedNavigationParams } from 'react-navigation-props-mapper'
-import { Icon } from 'react-native-elements'
 import StandardCard from '../../components/StandardCard'
 
 class ProductDetail extends Component {
@@ -135,7 +132,6 @@ const styles = StyleSheet.create({
     aspectRatio: 1,
     alignItems: 'stretch',
     justifyContent: 'center',
-    borderWidth: 0
   },
   nameStyle: {
     flex: 1,
