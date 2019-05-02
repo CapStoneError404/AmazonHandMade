@@ -19,8 +19,8 @@ export default class AddArtisan extends Component {
       profilePicturePath: "",
       description: "",
       adding: false,
-      
-      focusedInputs: {name: false, phoneNumber: false, location: false, description: false}
+
+      focusedInputs: { name: false, phoneNumber: false, location: false, description: false }
     }
 
     this.pickImage = this.pickImage.bind(this)
@@ -36,7 +36,7 @@ export default class AddArtisan extends Component {
       height: 100,
       cropping: true
     }).then(image => {
-      this.setState({profilePicturePath: image.path})
+      this.setState({ profilePicturePath: image.path })
     })
   }
 
@@ -47,33 +47,38 @@ export default class AddArtisan extends Component {
 
   verifyFields() {
     let validFields = true
-    if(!this.state.name)
+    if (!this.state.name)
       validFields = this.displayErrorMessage("Name field required.")
-    else if(this.state.name) {
-      if(!this.state.name.match(/[a-zA-Z]/)) {
+
+    if (this.state.name) {
+      if (!this.state.name.match(/[a-zA-Z]/)) {
         console.log(this.state.name)
         validFields = this.displayErrorMessage("Only alphabetic characters allowed for name.")
       }
     }
-    else if(!this.state.phoneNumber)
+
+    if (!this.state.phoneNumber)
       validFields = this.displayErrorMessage("Phone field required")
-    else if(this.state.phoneNumber && !isValidPhoneNumber(this.state.phoneNumber))
+
+    if (this.state.phoneNumber && !isValidPhoneNumber(this.state.phoneNumber))
       validFields = this.displayErrorMessage("Phone number not valid")
-    else if(!this.state.location)
+
+    if (!this.state.location)
       validFields = this.displayErrorMessage("Location required")
-    else if(!this.state.description)
+
+    if (!this.state.description)
       validFields = this.displayErrorMessage("Please provide a brief description")
-    else if(!this.state.profilePicturePath)
+
+    if (!this.state.profilePicturePath)
       validFields = this.displayErrorMessage("Please upload a profile picture")
 
-
     return validFields
-    
+
   }
-  
+
   createArtisan() {
-    if(this.verifyFields()) {
-      this.setState({adding: true})
+    if (this.verifyFields()) {
+      this.setState({ adding: true })
 
       let artisanInfo = {
         name: this.state.name,
@@ -84,17 +89,17 @@ export default class AddArtisan extends Component {
 
       this.props.createArtisan(artisanInfo, this.props.User.uid, this.state.profilePicturePath).then(artisan => {
         return this.props.sendMessage(
-          this.props.User.uid, 
+          this.props.User.uid,
           `Hello ${artisanInfo.name}, welcome to our organization! Please respond "YES" to verify you would like to be added to our community.`,
-          {[artisan.uid]: artisanInfo.phoneNumber}
+          { [artisan.uid]: artisanInfo.phoneNumber }
         )
       }).then(() => {
-        this.setState({adding: false})
+        this.setState({ adding: false })
         this.props.navigation.goBack()
       }, error => {
         console.log(error)
       })
-    } 
+    }
   }
 
   onTextChange(text) {
@@ -109,7 +114,7 @@ export default class AddArtisan extends Component {
       })
 
       return
-    } 
+    }
 
     this.setState({
       phoneNumber: text
@@ -120,31 +125,31 @@ export default class AddArtisan extends Component {
     return (
       <Wallpaper style={styles.container}>
         <View style={styles.firstSection}>
-          <AddImage 
+          <AddImage
             imageUri={this.state.profilePicturePath}
             onPress={() => this.pickImage()}
             style={styles.image}
           />
           <View style={styles.namePhone}>
-            <View style={this.state.focusedInputs.name? [styles.focusedInput, styles.inputWrapper] :styles.inputWrapper}>
+            <View style={this.state.focusedInputs.name ? [styles.focusedInput, styles.inputWrapper] : styles.inputWrapper}>
               <UserInput
                 iconName="id-card"
                 placeholder="Name"
                 value={this.state.name}
-                onChangeText={(newText) => this.setState({name: newText})}
-                onFocus={()=> this.setState({focusedInputs: {...this.state.focusedInputs, name: true}})}
-                onBlur={()=> this.setState({focusedInputs: {...this.state.focusedInputs, name: false}})}
+                onChangeText={(newText) => this.setState({ name: newText })}
+                onFocus={() => this.setState({ focusedInputs: { ...this.state.focusedInputs, name: true } })}
+                onBlur={() => this.setState({ focusedInputs: { ...this.state.focusedInputs, name: false } })}
                 style={styles.smallInput1}
               />
             </View>
-            <View style={this.state.focusedInputs.phoneNumber? [styles.focusedInput, styles.inputWrapper] :styles.inputWrapper}>
+            <View style={this.state.focusedInputs.phoneNumber ? [styles.focusedInput, styles.inputWrapper] : styles.inputWrapper}>
               <UserInput
                 iconName="phone"
                 placeholder="Phone Number"
                 value={this.state.phoneNumber}
                 onChangeText={this.onTextChange}
-                onFocus={()=> this.setState({focusedInputs: {...this.state.focusedInputs, phoneNumber: true}})}
-                onBlur={()=> this.setState({focusedInputs: {...this.state.focusedInputs, phoneNumber: false}})}
+                onFocus={() => this.setState({ focusedInputs: { ...this.state.focusedInputs, phoneNumber: true } })}
+                onBlur={() => this.setState({ focusedInputs: { ...this.state.focusedInputs, phoneNumber: false } })}
                 style={styles.smallInput2}
                 keyboardType="number-pad"
               />
@@ -152,30 +157,30 @@ export default class AddArtisan extends Component {
           </View>
         </View>
         <View style={styles.secondSection}>
-          <View style={this.state.focusedInputs.location? [styles.focusedInput2, styles.inputWrapper2] :styles.inputWrapper2}>
+          <View style={this.state.focusedInputs.location ? [styles.focusedInput2, styles.inputWrapper2] : styles.inputWrapper2}>
             <UserInput
               iconName="map"
               placeholder="Location"
               value={this.state.location}
-              onChangeText={(newText) => this.setState({location: newText})}
-              onFocus={()=> this.setState({focusedInputs: {...this.state.focusedInputs, location: true}})}
-              onBlur={()=> this.setState({focusedInputs: {...this.state.focusedInputs, location: false}})}
+              onChangeText={(newText) => this.setState({ location: newText })}
+              onFocus={() => this.setState({ focusedInputs: { ...this.state.focusedInputs, location: true } })}
+              onBlur={() => this.setState({ focusedInputs: { ...this.state.focusedInputs, location: false } })}
               style={styles.smallInput3}
             />
           </View>
-          <View style={this.state.focusedInputs.description? [styles.focusedInput2, styles.inputWrapper3] :styles.inputWrapper3}>
-            <UserInput 
+          <View style={this.state.focusedInputs.description ? [styles.focusedInput2, styles.inputWrapper3] : styles.inputWrapper3}>
+            <UserInput
               placeholder="Describe this artisan"
               value={this.state.description}
-              onChangeText={(newText) => this.setState({description: newText})}
-              onFocus={()=> this.setState({focusedInputs: {...this.state.focusedInputs, description: true}})}
-              onBlur={()=> this.setState({focusedInputs: {...this.state.focusedInputs, description: false}})}
+              onChangeText={(newText) => this.setState({ description: newText })}
+              onFocus={() => this.setState({ focusedInputs: { ...this.state.focusedInputs, description: true } })}
+              onBlur={() => this.setState({ focusedInputs: { ...this.state.focusedInputs, description: false } })}
               style={styles.largeInputs}
               multiline={true}
             />
           </View>
         </View>
-        <AsyncButton 
+        <AsyncButton
           title="Create"
           color='#c14700'
           textColor='white'
@@ -241,8 +246,8 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   button: {
-    borderRadius: 5, 
-    flex: 1, 
+    borderRadius: 5,
+    flex: 1,
     flexDirection: 'column'
   },
   focusedInput: {
