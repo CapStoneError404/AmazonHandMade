@@ -39,6 +39,8 @@ target 'AmazonHandmadeRN' do
   pod 'RNLoginWithAmazon', :path => '../node_modules/react-native-login-with-amazon'
   pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
 
+  pod 'RNLocalize', :path => '../node_modules/react-native-localize'
+
 end
 
 post_install do |installer|

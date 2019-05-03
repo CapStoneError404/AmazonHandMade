@@ -60,6 +60,7 @@
     }
   },
   "dependencies": {
+    "i18n-js": "^3.2.1",
     "native-base": "^2.12.1",
     "react": "16.8.4",
     "react-native": "0.59.4",
@@ -73,6 +74,7 @@
     "react-native-keyboard-aware-scrollview": "^2.0.0",
     "react-native-linear-gradient": "^2.5.4",
     "react-native-login-with-amazon": "^1.1.8",
+    "react-native-localize": "^1.1.2",
     "react-native-motion": "^1.0.2",
     "react-native-side-drawer": "^1.0.9",
     "react-native-simple-radio-button": "^2.7.3",

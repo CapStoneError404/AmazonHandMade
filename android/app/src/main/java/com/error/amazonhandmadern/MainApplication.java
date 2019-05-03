@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.reactcommunity.rnlocalize.RNLocalizePackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.reactlibrary.RNLoginWithAmazonPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -49,6 +50,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.asList(
         new MainReactPackage(),
+            new RNLocalizePackage(),
             new RNGestureHandlerPackage(),
             new RNLoginWithAmazonPackage(),
             new VectorIconsPackage(),
