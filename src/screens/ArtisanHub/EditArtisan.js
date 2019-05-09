@@ -23,6 +23,7 @@ class EditArtisan extends Component {
       profilePicturePath: this.props.profilePictureURL,
       description: this.props.description,
       adding: false,
+      changedImage: false,
 
       focusedInputs: { name: false, phoneNumber: false, location: false, description: false }
     }
@@ -39,8 +40,10 @@ class EditArtisan extends Component {
       height: 100,
       cropping: true
     }).then(image => {
-      this.setState({ profilePicturePath: image.path })
-    })
+      this.setState({ profilePicturePath: image.path, changedImage: true })
+    }).catch(error => {
+      //do nothing
+    });
   }
 
   displayErrorMessage(errorMessage) {
@@ -87,7 +90,8 @@ class EditArtisan extends Component {
         phoneNumber: this.state.phoneNumber,
         location: this.state.location,
         profilePicturePath: this.state.profilePicturePath,
-        description: this.state.description
+        description: this.state.description,
+        changedImage: this.state.changedImage
       }).then(() => {
         this.setState({ adding: false })
         this.props.navigation.state.params.onNavigateBack()
