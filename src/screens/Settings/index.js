@@ -6,7 +6,8 @@ import * as globalActions from '@actions'
 function mapStateToProps(state) {
   return {
     User: state.User,
-    Errors: state.Errors
+    Errors: state.Errors,
+    Settings: state.Settings
   }
 }
 
