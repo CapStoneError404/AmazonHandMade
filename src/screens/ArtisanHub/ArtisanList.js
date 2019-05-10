@@ -105,7 +105,7 @@ export default class ArtisanList extends Component {
     }
   }
 
-  searchFilterFunction = () => {
+  searchFilterFunction() {
     if (!this.state.text) {
       this.setState({ artisans: this.sortedArtisans() })
       // console.log("text is empty: " + " " + this.state.artisans)
