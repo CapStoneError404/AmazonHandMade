@@ -38,14 +38,14 @@ export default class ArtisanList extends Component {
       fetchingArtisans: false,
       name: " ",
       text: "",
-      artisans: this.props.Artisans
+      artisans: this.sortedArtisans()
     }
 
     this.fetchArtisans = this.fetchArtisans.bind(this)
     this.navigateToArtisan = this.navigateToArtisan.bind(this)
     this.sortedArtisans = this.sortedArtisans.bind(this)
     this.searchFilterFunction = this.searchFilterFunction.bind(this)
-
+    
   }
 
   componentDidMount() {
@@ -105,35 +105,32 @@ export default class ArtisanList extends Component {
     }
   }
 
-  searchFilterFunction(text) {
-    this.setState({ text: text })
-    console.log("state.text: " + this.state.text)
-    if (this.state.text === "") {
+  searchFilterFunction = () => {
+    if (!this.state.text) {
       this.setState({ artisans: this.sortedArtisans() })
-      console.log("text is empty: " + " " + this.state.artisans)
+      // console.log("text is empty: " + " " + this.state.artisans)
     }
     else {
       const newData = this.props.Artisans.filter((item) => {
         const name = item.name.toLowerCase()
         const textData = this.state.text.toLowerCase()
         return name.indexOf(textData) !== -1
-      });
-      console.log("NewArtisan array: " + newData)
-      console.log("This is search text: " + text)
-
+      })
+      
       this.setState({
         artisans: newData // after filter we are setting users to new array
-      });
+      })
     }
   }
 
+  
   render() {
     return (
       <Wallpaper>
         <TextInput
           style={styles.input}
-          onChangeText={this.searchFilterFunction}
           value={this.state.text}
+          onChangeText={(newText) => this.setState({ text: newText }, this.searchFilterFunction)}
           underlineColorAndroid="transparent"
           placeholder="Search Artisan"
         />
