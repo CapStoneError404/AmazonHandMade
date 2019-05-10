@@ -29,7 +29,14 @@ import {
   Conversation, 
   ConversationList, 
   NewConversation 
-} from '@screens/Messaging';
+} from '@screens/Messaging'
+import {
+  ActionCenter
+} from '@screens/ActionCenter';
+
+const ActionCenterStack = createStackNavigator({
+  ActionCenter: ActionCenter
+})
 
 const ArtisanHubStack = createStackNavigator({
   ArtisanList: ArtisanList,
@@ -59,24 +66,25 @@ const MessageNavigator = createStackNavigator(
 
 const TabNavigator = createBottomTabNavigator(
   {
+    "Action Center": ActionCenterStack,
     "Artisan Hub": ArtisanHubStack,
     Settings: Settings,
     "Finances": MoneyManagementStack,
     "Messages": MessageNavigator
   },
   {
-    initialRouteName: 'Artisan Hub',
-    order: ['Artisan Hub', 'Messages', 'Finances', 'Settings'],
+    initialRouteName: 'Action Center',
+    order: ['Action Center', 'Artisan Hub', 'Messages', 'Finances'],
     animationEnabled: true,
     defaultNavigationOptions: ({ navigation }) => {
       return {
         tabBarIcon: ({ tintColor }) => {
           const { routeName } = navigation.state
           var iconName
-          if (routeName === 'Artisan Hub') {
+          if (routeName === 'Action Center') {
+            iconName = 'address-card'
+          } else if (routeName === 'Artisan Hub') {
             iconName = 'users'
-          } else if (routeName === 'Settings') {
-            iconName = 'cog'
           } else if (routeName === 'Finances') {
             iconName = 'dollar'
           } else if (routeName === 'Messages') {
