@@ -30,19 +30,27 @@ export default class ActionCenter extends Component {
        <Wallpaper style={styles.container}>
          <ScrollView style={{ flex: 1.8 }}>
            <StandardCard
-             title="Welcome CGA"
+             title="CGA Profile"
            >
              <CardSection style={styles.cardSection}>
              </CardSection>
            </StandardCard>
 
            <StandardCard
-             title="CGA Information"
+             title="About CGA"
              buttonsArray={this.transactionButtons}
            >
              <CardSection  style={styles.cardSection}>
              </CardSection>
            </StandardCard>
+
+           <StandardCard
+             title="Resources"
+           >
+             <CardSection style={styles.cardSection}>
+             </CardSection>
+           </StandardCard>
+
          </ScrollView>
        </Wallpaper>
      )

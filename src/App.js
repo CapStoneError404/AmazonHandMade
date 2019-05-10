@@ -82,7 +82,7 @@ const TabNavigator = createBottomTabNavigator(
           const { routeName } = navigation.state
           var iconName
           if (routeName === 'Action Center') {
-            iconName = 'address-card'
+            iconName = 'id-card'
           } else if (routeName === 'Artisan Hub') {
             iconName = 'users'
           } else if (routeName === 'Finances') {
