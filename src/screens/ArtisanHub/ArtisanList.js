@@ -108,7 +108,6 @@ export default class ArtisanList extends Component {
   searchFilterFunction() {
     if (!this.state.text) {
       this.setState({ artisans: this.sortedArtisans() })
-      // console.log("text is empty: " + " " + this.state.artisans)
     }
     else {
       const newData = this.props.Artisans.filter((item) => {
@@ -143,7 +142,6 @@ export default class ArtisanList extends Component {
           :
           <FlatList
             testID='artisan_list'
-            //data={this.sortedArtisans()}
             data={this.state.artisans}
             keyExtractor={this._keyExtractor}
             renderItem={this._renderArtisanItem}
