@@ -41,9 +41,9 @@ class EditArtisan extends Component {
       cropping: true
     }).then(image => {
       this.setState({ profilePicturePath: image.path, changedImage: true })
-    }).catch(error => {
+    }).catch(() => {
       //do nothing
-    });
+    })
   }
 
   displayErrorMessage(errorMessage) {

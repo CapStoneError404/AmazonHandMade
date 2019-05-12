@@ -1,5 +1,4 @@
 import firebase from 'react-native-firebase'
-import { regExpLiteral } from '@babel/types';
 
 export function createArtisan(artisanInfo, cgaID, profilePicturePath) {
   console.log("Creating an artisan with the following info:")
@@ -92,7 +91,7 @@ export const saveArtisan = ({ name, phoneNumber, location, description, profileP
           .ref(`artisanFiles/${uid}/images/profilePicture`)
           .putFile(profilePicturePath)
     
-        artisanObject.profilePictureURL = st_ref.downloadURL;
+        artisanObject.profilePictureURL = st_ref.downloadURL
         await firebase.database().ref(`/artisans/${uid}`).update({ profilePictureURL: st_ref.downloadURL })
       }
 
