@@ -30,17 +30,23 @@ export default class ActionCenter extends Component {
        <Wallpaper style={styles.container}>
          <ScrollView style={{ flex: 1.8 }}>
            <StandardCard
-             title="CGA Profile"
+             title="Welcome To HANDMADE"
            >
              <CardSection style={styles.cardSection}>
+              <Text style={styles.cardText}>Name:  </Text>
+              <Text style={styles.cardText}>Location: </Text>
              </CardSection>
            </StandardCard>
 
            <StandardCard
-             title="About CGA"
+             title="About This CGA"
              buttonsArray={this.transactionButtons}
            >
              <CardSection  style={styles.cardSection}>
+              <Text style={styles.cardText}>Number of Artisans: </Text>
+              <Text style={styles.cardText}>Gross Artisan Revenue: </Text>
+              <Text style={styles.cardText}>Total Number of Artisan Listings: </Text>
+              <Text style={styles.cardText}>Total Number of Items Sold: </Text>
              </CardSection>
            </StandardCard>
 
@@ -48,6 +54,9 @@ export default class ActionCenter extends Component {
              title="Resources"
            >
              <CardSection style={styles.cardSection}>
+              <Text style={styles.cardText}>Seller Central: </Text>
+              <Text style={styles.cardText}>Seller Forums: </Text>
+              <Text style={styles.cardText}>Contact Support: </Text>
              </CardSection>
            </StandardCard>
 
