@@ -8,6 +8,8 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  Linking,
+  TouchableOpacity
 } from 'react-native'
 import { ProfilePicture } from '../../components'
 
@@ -27,9 +29,7 @@ export default class ActionCenter extends Component {
    }
 
    render() {
-     console.log('YOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO' + JSON.stringify(this.props))
-
-     return (
+      return (
        <Wallpaper style={styles.container}>
          <ScrollView style={{ flex: 1.8 }}>
            <StandardCard
@@ -61,9 +61,15 @@ export default class ActionCenter extends Component {
              title="Resources"
            >
              <CardSection style={styles.cardSection}>
-              <Text style={styles.cardText}>Seller Central: </Text>
-              <Text style={styles.cardText}>Seller Forums: </Text>
-              <Text style={styles.cardText}>Contact Support: </Text>
+              <TouchableOpacity onPress={()=>Linking.openURL('https://sellercentral.amazon.com/')}>
+                <Text style={[styles.cardText, styles.linkText]}>Seller Central</Text>
+              </TouchableOpacity> 
+              <TouchableOpacity onPress={()=>Linking.openURL('https://sellercentral.amazon.com/forums/')}>
+                <Text style={[styles.cardText, styles.linkText]}>Seller Forums </Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={()=>Linking.openURL('https://www.amazon.com/ap/signin?openid.return_to=https%3A%2F%2Fwww.amazon.com%2Fhz%2Fcontact-us%3Ffrom%3Dgp%26*entries*%3D0%26_encoding%3DUTF8%26*Version*%3D1&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.assoc_handle=amzn_contactus_desktop_us&openid.mode=checkid_setup&marketPlaceId=ATVPDKIKX0DER&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&pageId=Amazon&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0&openid.pape.max_auth_age=3600&siteState=clientContext%3D133-3534273-1927417%2CsourceUrl%3Dhttps%253A%252F%252Fwww.amazon.com%252Fhz%252Fcontact-us%253Ffrom%253Dgp%2526*entries*%253D0%2526_encoding%253DUTF8%2526*Version*%253D1%2Csignature%3DroWGPjqxWUoNNtMkFrBDZBSTH0Yj3D')}>
+                <Text style={[styles.cardText, styles.linkText]}>Contact Support </Text>
+              </TouchableOpacity>
              </CardSection>
            </StandardCard>
 
@@ -106,5 +112,8 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 20,
     color: '#444444'
+  },
+  linkText: {
+    color:'#008296'
   }
 })
