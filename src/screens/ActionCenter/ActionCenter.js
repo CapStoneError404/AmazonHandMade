@@ -9,6 +9,7 @@ import {
   StyleSheet,
   Text,
 } from 'react-native'
+import { ProfilePicture } from '../../components'
 
 export default class ActionCenter extends Component {
    static navigationOptions = () => {
@@ -26,6 +27,8 @@ export default class ActionCenter extends Component {
    }
 
    render() {
+     console.log('YOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO' + JSON.stringify(this.props))
+
      return (
        <Wallpaper style={styles.container}>
          <ScrollView style={{ flex: 1.8 }}>
@@ -33,8 +36,12 @@ export default class ActionCenter extends Component {
              title="Welcome To HANDMADE"
            >
              <CardSection style={styles.cardSection}>
-              <Text style={styles.cardText}>Name:  </Text>
-              <Text style={styles.cardText}>Location: </Text>
+              <ProfilePicture
+               source={{uri: this.props.User.photoURL}}
+               style={styles.image}
+              />
+              <Text style={styles.cardText}>Name: {this.props.User.displayName} </Text>
+              <Text style={styles.cardText}>Email: {this.props.User.email}</Text>
              </CardSection>
            </StandardCard>
 
@@ -67,6 +74,14 @@ export default class ActionCenter extends Component {
 }
 
 const styles = StyleSheet.create({
+  image: {
+    height: 90,
+    aspectRatio: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 45,
+    margin: 5
+  },
   container: {
     flex: 1
   },
@@ -82,7 +97,9 @@ const styles = StyleSheet.create({
     flexDirection: 'column' 
   },
   text: {
-    fontSize: 20
+    fontSize: 10,
+    color: '#444444',
+    marginLeft: 5
   },
   cardText: {
     paddingVertical: 10,
