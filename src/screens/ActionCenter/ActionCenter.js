@@ -26,14 +26,51 @@ export default class ActionCenter extends Component {
      this.state = {
        
      }
+     this.settingsNavButton=[
+     {
+       title: 'Edit',
+       onPress: () => this.navigateToEditCGA()
+     },
+     {
+       title: 'Settings',
+       onPress: () => this.navigateToSettings()
+     }
+     
+     //this.getTotalListings = this.bind.getTotalListings
+    ]
+    this.navigateToEditCGA = this.navigateToEditCGA.bind(this)
+    this.navigateToSettings = this.navigateToSettings.bind(this)
+   }
+   /*
+   getTotalListings() {
+      var numArtisans = this.props.Artisans.length
+      var totalListings = 0
+
+      for(var i = 0; i < numArtisans; i++) {
+        this.props.Artisans[i]["products"]
+        totalListings += 
+      }
+   }*/
+
+   navigateToEditCGA() {
+    //todo
+   }
+
+   navigateToSettings() {
+    this.props.navigation.navigate("Settings")
    }
 
    render() {
+      console.log("Props: " + JSON.stringify(this.props))
+      console.log("Name: " + JSON.stringify(this.props.Artisans[1]["products"].length))
+      console.log("Products: " + JSON.stringify(this.props.Artisans[2]))
+
       return (
        <Wallpaper style={styles.container}>
          <ScrollView style={{ flex: 1.8 }}>
            <StandardCard
              title="Welcome To HANDMADE"
+             buttonsArray={this.settingsNavButton}
            >
              <CardSection style={styles.cardSection}>
               <ProfilePicture
@@ -46,14 +83,12 @@ export default class ActionCenter extends Component {
            </StandardCard>
 
            <StandardCard
-             title="About This CGA"
+             title="About Artisans"
              buttonsArray={this.transactionButtons}
            >
              <CardSection  style={styles.cardSection}>
-              <Text style={styles.cardText}>Number of Artisans: </Text>
-              <Text style={styles.cardText}>Gross Artisan Revenue: </Text>
-              <Text style={styles.cardText}>Total Number of Artisan Listings: </Text>
-              <Text style={styles.cardText}>Total Number of Items Sold: </Text>
+              <Text style={styles.cardText}>Number of Artisans: {this.props.Artisans.length}</Text>
+              <Text style={styles.cardText}>Total Artisan Listings: </Text>
              </CardSection>
            </StandardCard>
 
@@ -61,6 +96,9 @@ export default class ActionCenter extends Component {
              title="Resources"
            >
              <CardSection style={styles.cardSection}>
+              <TouchableOpacity onPress={()=>Linking.openURL('https://error404.gitbook.io/project/')}>
+                <Text style={[styles.cardText, styles.linkText]}>Application Documentation </Text>
+              </TouchableOpacity>
               <TouchableOpacity onPress={()=>Linking.openURL('https://sellercentral.amazon.com/')}>
                 <Text style={[styles.cardText, styles.linkText]}>Seller Central</Text>
               </TouchableOpacity> 
@@ -72,7 +110,6 @@ export default class ActionCenter extends Component {
               </TouchableOpacity>
              </CardSection>
            </StandardCard>
-
          </ScrollView>
        </Wallpaper>
      )

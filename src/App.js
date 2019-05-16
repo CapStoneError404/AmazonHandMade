@@ -35,7 +35,8 @@ import {
 } from '@screens/ActionCenter';
 
 const ActionCenterStack = createStackNavigator({
-  ActionCenter: ActionCenter
+  ActionCenter: ActionCenter,
+  Settings: Settings
 })
 
 const ArtisanHubStack = createStackNavigator({
@@ -68,7 +69,6 @@ const TabNavigator = createBottomTabNavigator(
   {
     "Action Center": ActionCenterStack,
     "Artisan Hub": ArtisanHubStack,
-    Settings: Settings,
     "Finances": MoneyManagementStack,
     "Messages": MessageNavigator
   },
