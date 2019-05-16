@@ -47,7 +47,7 @@ export default class ActionCenter extends Component {
       var totalListings = 0
 
       for(var i = 0; i < numArtisans; i++) {
-        totalListings += Object.keys(this.props.Artisans[i]["products"]).length
+        totalListings += Object.keys((this.props.Artisans[i]["products"]) || {}).length
       }
       return totalListings
    }
