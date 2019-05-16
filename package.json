@@ -72,7 +72,7 @@
     "react-native-image-crop-picker": "^0.23.1",
     "react-native-keyboard-aware-scrollview": "^2.0.0",
     "react-native-linear-gradient": "^2.5.4",
-    "react-native-login-with-amazon": "^1.1.6",
+    "react-native-login-with-amazon": "^1.1.8",
     "react-native-motion": "^1.0.2",
     "react-native-side-drawer": "^1.0.9",
     "react-native-simple-radio-button": "^2.7.3",
