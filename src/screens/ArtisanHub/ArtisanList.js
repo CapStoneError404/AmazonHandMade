@@ -52,6 +52,13 @@ export default class ArtisanList extends Component {
     this.fetchArtisans()
   }
 
+  componentDidUpdate(prevProps){
+    console.log(JSON.stringify(this.props.Artisans.length))
+    if ( prevProps.Artisans.length !== this.props.Artisans.length ) {
+      this.searchFilterFunction() //This will take care of updating artisans state
+    }
+  }
+
   fetchArtisans() {
     this.setState({ fetchingArtisans: true })
     this.props.fetchArtisans(this.props.User.uid).then(() => {
