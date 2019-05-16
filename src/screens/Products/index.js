@@ -21,9 +21,11 @@ function mapDispatchToProps(dispatch) {
 import { default as UnconnectedAddProduct } from './AddProduct'
 import { default as UnconnectedProductList } from './ProductList'
 import { default as UnconnedtedProductDetail } from './ProductDetail'
+import { default as UnconnectedLogSale } from './LogSale'
 
 const AddProduct = connect(mapStateToProps, mapDispatchToProps)(UnconnectedAddProduct)
 const ProductList = connect(mapStateToProps, mapDispatchToProps)(UnconnectedProductList)
 const ProductDetail = connect(mapDispatchToProps,mapDispatchToProps)(UnconnedtedProductDetail)
+const LogSale = connect(mapStateToProps, mapDispatchToProps)(UnconnectedLogSale)
 
-export { AddProduct, ProductDetail, ProductList }
+export { AddProduct, ProductDetail, ProductList, LogSale }
