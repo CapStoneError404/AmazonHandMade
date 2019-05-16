@@ -35,22 +35,22 @@ export default class ActionCenter extends Component {
        title: 'Settings',
        onPress: () => this.navigateToSettings()
      }
-     
-     //this.getTotalListings = this.bind.getTotalListings
     ]
     this.navigateToEditCGA = this.navigateToEditCGA.bind(this)
     this.navigateToSettings = this.navigateToSettings.bind(this)
+    this.getTotalListings = this.getTotalListings.bind(this)
    }
-   /*
+   
+   
    getTotalListings() {
       var numArtisans = this.props.Artisans.length
       var totalListings = 0
 
       for(var i = 0; i < numArtisans; i++) {
-        this.props.Artisans[i]["products"]
-        totalListings += 
+        totalListings += Object.keys(this.props.Artisans[i]["products"]).length
       }
-   }*/
+      return totalListings
+   }
 
    navigateToEditCGA() {
     //todo
@@ -61,10 +61,6 @@ export default class ActionCenter extends Component {
    }
 
    render() {
-      console.log("Props: " + JSON.stringify(this.props))
-      console.log("Name: " + JSON.stringify(this.props.Artisans[1]["products"].length))
-      console.log("Products: " + JSON.stringify(this.props.Artisans[2]))
-
       return (
        <Wallpaper style={styles.container}>
          <ScrollView style={{ flex: 1.8 }}>
@@ -88,7 +84,7 @@ export default class ActionCenter extends Component {
            >
              <CardSection  style={styles.cardSection}>
               <Text style={styles.cardText}>Number of Artisans: {this.props.Artisans.length}</Text>
-              <Text style={styles.cardText}>Total Artisan Listings: </Text>
+              <Text style={styles.cardText}>Total Artisan Listings: {this.getTotalListings()}</Text>
              </CardSection>
            </StandardCard>
 
