@@ -72,8 +72,19 @@ export function fetchArtisans(cgaID) {
 export const saveArtisan = ({ name, phoneNumber, location, description, profilePicturePath, uid, changedImage }) => {
   return (dispatch) => {
     return new Promise(async (resolve) => {
-      await firebase.database().ref(`/artisans/${uid}`)
-        .update({ name, phoneNumber, location, description })
+      let db_ref = await firebase.database().ref(`/artisans/${uid}`)
+      
+      //Update phoneMapping before old number changes
+      let artisanSnap = await db_ref.once('value')
+      let oldNum = artisanSnap.val().phoneNumber.replace(/([^0-9+])+/g, '')
+      //If the number changed
+      if (oldNum !== phoneNumber.replace(/([^0-9+])+/g, '')){
+        //console.log(oldNum + " " + phoneNumber.replace(/([^0-9+])+/g, ''))
+        await firebase.database().ref(`phoneMap/${oldNum}`).remove().catch(error => console.log(error))
+        await  firebase.database().ref(`phoneMap/${phoneNumber.replace(/[^\d+]/g, '')}`).set(uid)  
+      }
+      
+      db_ref.update({ name, phoneNumber, location, description })
 
       artisanObject = {
         name,
@@ -83,7 +94,6 @@ export const saveArtisan = ({ name, phoneNumber, location, description, profileP
         uid
       }
       
-      //UPDATE PHONE MAPPING HERE OR IN FUNCTIONS
       if (profilePicturePath && changedImage) {
         await firebase.storage().ref(`artisanFiles/${uid}/images/profilePicture`).delete().catch(error => console.log(error))
         
