@@ -52,10 +52,17 @@ export default class ArtisanList extends Component {
     this.fetchArtisans()
   }
 
-  componentDidUpdate(prevProps){
-    console.log(JSON.stringify(this.props.Artisans.length))
-    if ( prevProps.Artisans.length !== this.props.Artisans.length ) {
-      this.searchFilterFunction() //This will take care of updating artisans state
+  // componentDidUpdate(prevProps){
+  //   console.log("prevProps: " + JSON.stringify(prevProps))
+  //   if ( prevProps.Artisans !== this.props.Artisans ) {
+  //     this.searchFilterFunction() //This will take care of updating artisans state
+  //   }
+  // }
+  
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.Artisans != null){
+      console.log("nextProps: " + JSON.stringify(nextProps))
+      this.searchFilterFunction()
     }
   }
 
