@@ -1,4 +1,5 @@
 import firebase from 'react-native-firebase'
+import { parse } from '@babel/parser';
 
 export function createProduct(data, artisanID) {
   return (dispatch) => { 
@@ -49,6 +50,22 @@ export function createProduct(data, artisanID) {
    
       resolve()
       dispatch({type: 'ADD_PRODUCT', product: productObject})
+    })
+  }
+}
+
+export function logSale({productId, quantity}) {
+  return (dispatch) => { 
+    return new Promise(async (resolve) => {
+      var totalSales = 0
+      await firebase.database().ref(`products/${productId}/TimesSold`)
+        .transaction(currentTimesSold => {
+          totalSales = (currentTimesSold || 0) + quantity
+          return totalSales
+        })
+
+      resolve(totalSales)
+      dispatch({type: 'LOG_SALE', productId: productId, quantity: quantity})
     })
   }
 }

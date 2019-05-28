@@ -17,7 +17,12 @@ import {
   ArtisanDetail,
   EditArtisan
 } from '@screens/ArtisanHub'
-import { AddProduct, ProductDetail, ProductList } from '@screens/Products'
+import { 
+  AddProduct, 
+  ProductDetail, 
+  ProductList,
+  LogSale
+} from '@screens/Products'
 import {
   MoneyManagement,
   ArtisanPayout,
@@ -38,7 +43,8 @@ const ArtisanHubStack = createStackNavigator({
   EditArtisan: EditArtisan,
   AddProduct: AddProduct,
   ProductDetail: ProductDetail,
-  ProductList: ProductList
+  ProductList: ProductList,
+  LogSale: LogSale
 })
 
 const MoneyManagementStack = createStackNavigator({

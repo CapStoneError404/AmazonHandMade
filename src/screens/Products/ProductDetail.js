@@ -19,7 +19,8 @@ class ProductDetail extends Component {
       showModel: false,
       drawerOpen: false,
       editExpanded: true,
-      statsExpanded: true
+      statsExpanded: true,
+      numSales: this.props.TimesSold
     }
 
     this.productsButtons = [
@@ -28,16 +29,26 @@ class ProductDetail extends Component {
         onPress: () => this.navigateToEditProduct() 
       },
       {
-        title: 'View Statistics',
-        onPress: () => console.log('Pressed stats button')
+        title: 'Log Sales',
+        onPress: () => this.navigateToLogSale()
       }
     ]
 
+    this.navigateToLogSale = this.navigateToLogSale.bind(this)
     this.navigateToEditProduct = this.navigateToEditProduct.bind(this)
   }
 
   componentDidUpdate() {
     LayoutAnimation.easeInEaseOut()
+  }
+
+  navigateToLogSale() {
+    console.log("props")
+    console.log(this.props)
+    this.props.navigation.navigate('LogSale', {
+      ProductDetailScreen: this,
+      productId: this.props.productID
+    })
   }
 
   navigateToEditProduct() {
@@ -110,7 +121,7 @@ class ProductDetail extends Component {
             >
               <Text style={styles.ProductInfo}>Number of Sales</Text>
               <Text style={styles.SectionListItemS}>
-                {this.props.TimesSold}
+                {this.state.numSales}
               </Text>
             </CardSection>
           </StandardCard>
