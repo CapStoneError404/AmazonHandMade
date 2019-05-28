@@ -3,26 +3,22 @@ import { connect } from 'react-redux'
 import { Text } from 'react-native'
 import I18n, {setLocale} from "../../utils/i18n"
 
-class Translate extends Component {  
+class Translate extends Component {
   constructor(props) {
-    super(props);
-  
-    this.state = {
-      language: "en"
-    }
-  }
+    super(props)
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.Settings.language) {
-      this.setState({language: nextProps.Settings.language})
-    }
+    this.getTranslation = this.getTranslation.bind(this)
   }
   
-  render() {
-    const lang = this.state.language
+  getTranslation(string){
+    const lang = this.props.Settings.language
     
+    return I18n.t(string, {locale: lang})
+  }
+    
+  render() {
     return (
-      <Text style={[styles.containerStyle, this.props.style]}> {I18n.t({this.props.transString}, {locale: lang})} </Text>
+      <Text style={[styles.containerStyle, this.props.style]}> {this.getTranslation(this.props.transString)} </Text>
     )
   }
 }

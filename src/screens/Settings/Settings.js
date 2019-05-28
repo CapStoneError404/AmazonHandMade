@@ -1,4 +1,5 @@
-import Translate, { Button, Wallpaper } from '@components'
+import { Button, Wallpaper } from '@components'
+import Translate from '../../components/Translate'
 import React, { Component } from 'react'
 import { ScrollView, StyleSheet, Text, View, Picker, Platform } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
@@ -30,12 +31,11 @@ export default class Settings extends Component {
       <Wallpaper style={styles.container}>
         <View style={styles.textContainer}>
           <ScrollView>
-            {/* <Translate style={styles.text} transString="Settings.settingsTitle" /> */}
-            <Text style={styles.text}>{I18n.t("Settings.settingsTitle", {locale: lang})}</Text>
+            <Translate style={styles.text} transString='Settings.settingsTitle' />
           </ScrollView>
         </View>
         
-        <Text>{I18n.t("Settings.choseLanguage", {locale: lang})}:</Text>
+        <Translate transString='Settings.choseLanguage' />
         <View style={styles.categorySection}>
           <Picker
             itemStyle={styles.PickerItem}
