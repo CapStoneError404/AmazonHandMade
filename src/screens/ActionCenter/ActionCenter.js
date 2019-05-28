@@ -27,10 +27,11 @@ export default class ActionCenter extends Component {
        
      }
      this.settingsNavButton=[
+     /*
      {
        title: 'Edit',
        onPress: () => this.navigateToEditCGA()
-     },
+     }*/,
      {
        title: 'Settings',
        onPress: () => this.navigateToSettings()
@@ -69,10 +70,11 @@ export default class ActionCenter extends Component {
              buttonsArray={this.settingsNavButton}
            >
              <CardSection style={styles.cardSection}>
+              {/*}
               <ProfilePicture
                source={{uri: this.props.User.photoURL}}
                style={styles.image}
-              />
+              />*/}
               <Text style={styles.cardText}>Name: {this.props.User.displayName} </Text>
               <Text style={styles.cardText}>Email: {this.props.User.email}</Text>
              </CardSection>
