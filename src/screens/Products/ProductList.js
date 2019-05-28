@@ -35,6 +35,12 @@ class ProductList extends Component {
     }
 
   }
+  
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.Products != null){
+      this.searchFilterFunction()
+    }	    
+  }
 
   componentDidMount() {
     this.props.navigation.setParams({ onNavigateBack: this.handleOnNavigateBack })
@@ -64,7 +70,7 @@ class ProductList extends Component {
   }
 
   _renderProductListItem = ({item, index}) => {
-
+    console.log(item)
     return (
       <TouchableOpacity
         testID={`listItem${index}`}
@@ -108,6 +114,7 @@ class ProductList extends Component {
           :
           <FlatList
             testID='product_list'
+            extraData={this.state.currentProducts}
             data={this.state.currentProducts}
             keyExtractor={this._keyExtractor}
             renderItem={this._renderProductListItem}
