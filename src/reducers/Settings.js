@@ -1,6 +1,6 @@
 import * as RNLocalize from "react-native-localize"
 
-const initLanguage = RNLocalize.getLocales()
+const initLanguage = RNLocalize.getLocales()[0].languageTag
 
 export default function Settings(state = {language: initLanguage}, action) {
   console.log("Settings reducing action " + action.type)
