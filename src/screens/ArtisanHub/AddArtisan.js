@@ -123,72 +123,74 @@ export default class AddArtisan extends Component {
 
   render() {
     return (
-      <Wallpaper style={styles.container}>
-        <View style={styles.firstSection}>
-          <AddImage
-            imageUri={this.state.profilePicturePath}
-            onPress={() => this.pickImage()}
-            style={styles.image}
+      <Wallpaper>
+        <View style={styles.container}>
+          <View style={styles.firstSection}>
+            <AddImage
+              imageUri={this.state.profilePicturePath}
+              onPress={() => this.pickImage()}
+              style={styles.image}
+            />
+            <View style={styles.namePhone}>
+              <View style={this.state.focusedInputs.name ? [styles.focusedInput, styles.inputWrapper] : styles.inputWrapper}>
+                <UserInput
+                  iconName="id-card"
+                  placeholder="Name"
+                  value={this.state.name}
+                  onChangeText={(newText) => this.setState({ name: newText })}
+                  onFocus={() => this.setState({ focusedInputs: { ...this.state.focusedInputs, name: true } })}
+                  onBlur={() => this.setState({ focusedInputs: { ...this.state.focusedInputs, name: false } })}
+                  style={styles.smallInput1}
+                />
+              </View>
+              <View style={this.state.focusedInputs.phoneNumber ? [styles.focusedInput, styles.inputWrapper] : styles.inputWrapper}>
+                <UserInput
+                  iconName="phone"
+                  placeholder="Phone Number"
+                  value={this.state.phoneNumber}
+                  onChangeText={this.onTextChange}
+                  onFocus={() => this.setState({ focusedInputs: { ...this.state.focusedInputs, phoneNumber: true } })}
+                  onBlur={() => this.setState({ focusedInputs: { ...this.state.focusedInputs, phoneNumber: false } })}
+                  style={styles.smallInput2}
+                  keyboardType="number-pad"
+                />
+              </View>
+            </View>
+          </View>
+          <View style={styles.secondSection}>
+            <View style={this.state.focusedInputs.location ? [styles.focusedInput2, styles.inputWrapper2] : styles.inputWrapper2}>
+              <UserInput
+                iconName="map"
+                placeholder="Location"
+                value={this.state.location}
+                onChangeText={(newText) => this.setState({ location: newText })}
+                onFocus={() => this.setState({ focusedInputs: { ...this.state.focusedInputs, location: true } })}
+                onBlur={() => this.setState({ focusedInputs: { ...this.state.focusedInputs, location: false } })}
+                style={styles.smallInput3}
+              />
+            </View>
+            <View style={this.state.focusedInputs.description ? [styles.focusedInput2, styles.inputWrapper3] : styles.inputWrapper3}>
+              <UserInput
+                placeholder="Describe this artisan"
+                value={this.state.description}
+                onChangeText={(newText) => this.setState({ description: newText })}
+                onFocus={() => this.setState({ focusedInputs: { ...this.state.focusedInputs, description: true } })}
+                onBlur={() => this.setState({ focusedInputs: { ...this.state.focusedInputs, description: false } })}
+                style={styles.largeInputs}
+                multiline={true}
+              />
+            </View>
+          </View>
+          <AsyncButton
+            title="Create"
+            color='#c14700'
+            textColor='white'
+            onPress={this.createArtisan}
+            style={styles.button}
+            spinning={this.state.adding}
+            disabled={false}
           />
-          <View style={styles.namePhone}>
-            <View style={this.state.focusedInputs.name ? [styles.focusedInput, styles.inputWrapper] : styles.inputWrapper}>
-              <UserInput
-                iconName="id-card"
-                placeholder="Name"
-                value={this.state.name}
-                onChangeText={(newText) => this.setState({ name: newText })}
-                onFocus={() => this.setState({ focusedInputs: { ...this.state.focusedInputs, name: true } })}
-                onBlur={() => this.setState({ focusedInputs: { ...this.state.focusedInputs, name: false } })}
-                style={styles.smallInput1}
-              />
-            </View>
-            <View style={this.state.focusedInputs.phoneNumber ? [styles.focusedInput, styles.inputWrapper] : styles.inputWrapper}>
-              <UserInput
-                iconName="phone"
-                placeholder="Phone Number"
-                value={this.state.phoneNumber}
-                onChangeText={this.onTextChange}
-                onFocus={() => this.setState({ focusedInputs: { ...this.state.focusedInputs, phoneNumber: true } })}
-                onBlur={() => this.setState({ focusedInputs: { ...this.state.focusedInputs, phoneNumber: false } })}
-                style={styles.smallInput2}
-                keyboardType="number-pad"
-              />
-            </View>
-          </View>
         </View>
-        <View style={styles.secondSection}>
-          <View style={this.state.focusedInputs.location ? [styles.focusedInput2, styles.inputWrapper2] : styles.inputWrapper2}>
-            <UserInput
-              iconName="map"
-              placeholder="Location"
-              value={this.state.location}
-              onChangeText={(newText) => this.setState({ location: newText })}
-              onFocus={() => this.setState({ focusedInputs: { ...this.state.focusedInputs, location: true } })}
-              onBlur={() => this.setState({ focusedInputs: { ...this.state.focusedInputs, location: false } })}
-              style={styles.smallInput3}
-            />
-          </View>
-          <View style={this.state.focusedInputs.description ? [styles.focusedInput2, styles.inputWrapper3] : styles.inputWrapper3}>
-            <UserInput
-              placeholder="Describe this artisan"
-              value={this.state.description}
-              onChangeText={(newText) => this.setState({ description: newText })}
-              onFocus={() => this.setState({ focusedInputs: { ...this.state.focusedInputs, description: true } })}
-              onBlur={() => this.setState({ focusedInputs: { ...this.state.focusedInputs, description: false } })}
-              style={styles.largeInputs}
-              multiline={true}
-            />
-          </View>
-        </View>
-        <AsyncButton
-          title="Create"
-          color='#c14700'
-          textColor='white'
-          onPress={this.createArtisan}
-          style={styles.button}
-          spinning={this.state.adding}
-          disabled={false}
-        />
       </Wallpaper>
     )
   }
@@ -196,8 +198,9 @@ export default class AddArtisan extends Component {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     flexDirection: 'column',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
     padding: '2%'
   },
   image: {
