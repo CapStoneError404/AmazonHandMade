@@ -79,5 +79,12 @@ export default {
     time: "Tiempo de producción (días)",
     timeEx: "Ex: 5",
     save: "Guardar y Publicar"    
+  },
+  ProductList: {
+    title: "Lista de Productos",
+    add: "Añadir",
+    search: "Buscar Productos",
+    price: "precio",
+    quantity: "Cantidad"
   }
 };
