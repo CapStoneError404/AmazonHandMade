@@ -18,10 +18,12 @@ import {
 } from 'react-native'
 import { withMappedNavigationParams } from 'react-navigation-props-mapper'
 import { FlatGrid } from 'react-native-super-grid'
+import I18n, {setLocale} from "../../utils/i18n"
+
 class ArtisanDetail extends Component {
-  static navigationOptions = () => {
+  static navigationOptions = ({navigation}) => {
     return {
-      title: 'Artisan Details'
+      title: navigation.getParam('Title', 'Artisan Detail')
     }
   }
 
@@ -43,25 +45,27 @@ class ArtisanDetail extends Component {
 
     this.artisanInfoButtons = [
       {
-        title: 'Edit',
+        title: I18n.t("ArtisanDetail.edit", {locale: this.props.Settings.language}),
         onPress: () => this.navigateToEditArtisan()
       },
       {
-        title: 'Message',
+        title: I18n.t("ArtisanDetail.message", {locale: this.props.Settings.language}),
         onPress: () => this.navigateToMessage()
       }
     ]
 
     this.productsButtons = [
       {
-        title: 'Add',
+        title: I18n.t("ArtisanDetail.add", {locale: this.props.Settings.language}),
         onPress: () => this.navigateToAddProduct() 
       },
       {
-        title: 'View All',
+        title: I18n.t("ArtisanDetail.viewAll", {locale: this.props.Settings.language}),
         onPress: () => this.navigateToProductList() 
       }
     ]
+    
+    this.props.navigation.setParams({Title: I18n.t("ArtisanDetail.title", {locale: this.props.Settings.language})})
 
     this.onCancel = this.onCancel.bind(this)
     this.deletePressed = this.deletePressed.bind(this)
@@ -236,7 +240,7 @@ class ArtisanDetail extends Component {
       <Wallpaper style={styles.container}>
         <ScrollView style={{ flex: 1.8 }}>
           <StandardCard 
-            title="Artisan Info" 
+            title={I18n.t("ArtisanDetail.artisanInfo", {locale: this.props.Settings.language})} 
             buttonsArray={this.artisanInfoButtons} 
           >
             <CardSection>
@@ -256,7 +260,7 @@ class ArtisanDetail extends Component {
           </StandardCard>
 
           <StandardCard 
-            title="Top Products" 
+            title={I18n.t("ArtisanDetail.topProds", {locale: this.props.Settings.language})} 
             buttonsArray={this.productsButtons}
           >
             {this.renderListOfProducts()}

@@ -37,5 +37,14 @@ export default {
     income: "Overall product income",
     viewAll: "View All",
     stats: "Stats"
+  },
+  ArtisanDetail: {
+    title: "Artisan Details",
+    artisanInfo: "Artisan Info",
+    edit: "Edit",
+    message: "Message",
+    topProds: "Top Products",
+    add: "Add",
+    viewAll: "View All"
   }
 };

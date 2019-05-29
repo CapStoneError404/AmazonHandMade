@@ -37,5 +37,14 @@ export default {
     income: "Ingreso general del producto",
     viewAll: "Ver Todo",
     stats: "Estadísticas"
+  },
+  ArtisanDetail: {
+    title: "Detalles Artesanales",
+    artisanInfo: "Información del Artesano",
+    edit: "Editar",
+    message: "Mensaje",
+    topProds: "Mejores Productos",
+    add: "Añadir",
+    viewAll: "Ver Todo"
   }
 };
