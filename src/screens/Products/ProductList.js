@@ -3,11 +3,12 @@ import React, { Component } from 'react'
 import { ActivityIndicator, Button, FlatList, StyleSheet, Text, TouchableOpacity, View, TextInput } from 'react-native'
 import { ProfilePicture } from '../../components'
 import { withMappedNavigationParams } from 'react-navigation-props-mapper'
+import I18n, {setLocale} from "../../utils/i18n"
 
 class ProductList extends Component {
   static navigationOptions = ({navigation}) => {
     return { 
-      title: 'Product List',
+      title: navigation.getParam('Title', 'Product List'),
       headerRight: (
         <View style={{paddingRight: 20}}>
           <Button
@@ -18,7 +19,7 @@ class ProductList extends Component {
               previousScreen: 'productList',
               renderArtisanDetail: navigation.state.params.onProductListBack
             })}
-            title="Add"
+            title= {navigation.getParam('AddTitle', 'Add')}
           />
         </View>
       )
@@ -34,6 +35,8 @@ class ProductList extends Component {
       text: ""
     }
 
+    this.props.navigation.setParams({Title: I18n.t("ProductList.title", {locale: this.props.Settings.language})})
+    this.props.navigation.setParams({AddTitle: I18n.t("ProductList.add", {locale: this.props.Settings.language})})
   }
   
   componentWillReceiveProps(nextProps) {
@@ -85,8 +88,8 @@ class ProductList extends Component {
           
         <View style={styles.nameItem}>
           <Text style={styles.text}>{item.Title}</Text>
-          <Text style={styles.text}>{`Price: $${item.StandardPrice}`}</Text>
-          <Text style={styles.text}>{`Quantity: ${item.Quantity}`}</Text>
+          <Text style={styles.text}>{I18n.t("ProductList.price", {locale: this.props.Settings.language})}{`: $${item.StandardPrice}`}</Text>
+          <Text style={styles.text}>{I18n.t("ProductList.quantity", {locale: this.props.Settings.language})}{`: ${item.Quantity}`}</Text>
         </View>
       </TouchableOpacity>
     )
@@ -103,7 +106,7 @@ class ProductList extends Component {
           value={this.state.text}
           onChangeText={(newText) => this.setState({ text: newText }, this.searchFilterFunction)}
           underlineColorAndroid="transparent"
-          placeholder="Search Products"
+          placeholder={I18n.t("ProductList.search", {locale: this.props.Settings.language})}
         />
         {(this.props.Products != [] && this.state.fetchingProductList) ? 
           <ActivityIndicator 

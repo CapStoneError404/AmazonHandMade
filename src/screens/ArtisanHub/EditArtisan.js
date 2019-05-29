@@ -4,11 +4,12 @@ import { StyleSheet, View } from 'react-native'
 import ImagePicker from 'react-native-image-crop-picker'
 import { withMappedNavigationParams } from 'react-navigation-props-mapper'
 import { isValidPhoneNumber } from 'react-phone-number-input'
+import I18n, {setLocale} from "../../utils/i18n"
 
 class EditArtisan extends Component {
-  static navigationOptions = () => {
+  static navigationOptions = ({navigation}) => {
     return {
-      title: 'Edit Artisan'
+      title: navigation.getParam('Title', 'Edit Artisan')
     }
 
   }
@@ -27,6 +28,8 @@ class EditArtisan extends Component {
 
       focusedInputs: { name: false, phoneNumber: false, location: false, description: false }
     }
+    
+    this.props.navigation.setParams({Title: I18n.t("EditArtisan.title", {locale: this.props.Settings.language})})
 
     this.pickImage = this.pickImage.bind(this)
     this.saveArtisan = this.saveArtisan.bind(this)
@@ -180,7 +183,7 @@ class EditArtisan extends Component {
             </View>
           </View>
           <AsyncButton
-            title="Save"
+            title={I18n.t("EditArtisan.save", {locale: this.props.Settings.language})}
             color="#c14700"
             textColor="white"
             onPress={() => this.saveArtisan()}

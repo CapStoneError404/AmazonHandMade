@@ -11,12 +11,13 @@ import {
   ActivityIndicator,
   RefreshControl
 } from 'react-native'
-import { withMappedNavigationParams } from 'react-navigation-props-mapper';
+import { withMappedNavigationParams } from 'react-navigation-props-mapper'
+import I18n, {setLocale} from "../../utils/i18n"
 
 class MoneyManagement extends Component {
-   static navigationOptions = () => {
+   static navigationOptions = ({navigation}) => {
      return {
-       title: 'Money Management'
+       title: navigation.getParam('Title', 'Money Management')
      }
 
    }
@@ -35,10 +36,12 @@ class MoneyManagement extends Component {
 
      this.payoutButtons = [
        {
-         title: 'View All',
+         title: I18n.t("MoneyManagement.viewAll", {locale: this.props.Settings.language}),
          onPress: () => this.navigateToPayoutList()
        }
      ]
+     
+     this.props.navigation.setParams({Title: I18n.t("MoneyManagement.title", {locale: this.props.Settings.language})})
 
      this.updateNumbers = this.updateNumbers.bind(this)
      this.fetchPayoutsAndTransactions = this.fetchPayoutsAndTransactions.bind(this)
@@ -124,22 +127,22 @@ class MoneyManagement extends Component {
           }
          >
            <StandardCard
-             title="Payouts"
+             title={I18n.t("MoneyManagement.payouts", {locale: this.props.Settings.language})}
              buttonsArray={this.payoutButtons}
            >
              <CardSection style={styles.cardSection}>
-               <Text style={styles.cardText}>Money Owed: ${this.state.amountOwed.toFixed(2)}</Text>
-               <Text style={styles.cardText}>Total payments: ${this.state.paidAmount.toFixed(2)}</Text>
+               <Text style={styles.cardText}>{I18n.t("MoneyManagement.moneyOwed", {locale: this.props.Settings.language})}: ${this.state.amountOwed.toFixed(2)}</Text>
+               <Text style={styles.cardText}>{I18n.t("MoneyManagement.totalPayments", {locale: this.props.Settings.language})}: ${this.state.paidAmount.toFixed(2)}</Text>
              </CardSection>
            </StandardCard>
 
            <StandardCard
-             title="Transactions"
+             title={I18n.t("MoneyManagement.transactions", {locale: this.props.Settings.language})}
              buttonsArray={this.transactionButtons}
            >
              <CardSection  style={styles.cardSection}>
-               <Text style={styles.cardText}>Number items sold: {this.state.productsSold}</Text>
-               <Text style={styles.cardText}>Overall Product Income: ${this.state.productsRevenue.toFixed(2)}</Text>
+               <Text style={styles.cardText}>{I18n.t("MoneyManagement.numberSold", {locale: this.props.Settings.language})}: {this.state.productsSold}</Text>
+               <Text style={styles.cardText}>{I18n.t("MoneyManagement.income", {locale: this.props.Settings.language})}: ${this.state.productsRevenue.toFixed(2)}</Text>
              </CardSection>
            </StandardCard>
          </ScrollView>

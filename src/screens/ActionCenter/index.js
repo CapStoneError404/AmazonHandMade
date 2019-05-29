@@ -9,7 +9,8 @@ function mapStateToProps(state) {
     Artisans: state.Artisans,
     Errors: state.Errors,
     ActionCenter: state.ActionCenter,
-    Conversations: state.Conversations
+    Conversations: state.Conversations,
+    Settings: state.Settings
   }
 }
 

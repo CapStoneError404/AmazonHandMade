@@ -3,10 +3,11 @@ import React, { Component } from 'react'
 import { StyleSheet, View } from 'react-native'
 import ImagePicker from 'react-native-image-crop-picker'
 import { isValidPhoneNumber } from 'react-phone-number-input'
+import I18n, {setLocale} from "../../utils/i18n"
 
 export default class AddArtisan extends Component {
-  static navigationOptions = {
-    title: 'Add Artisan'
+  static navigationOptions = ({navigation}) => {
+    title: navigation.getParam('Title', 'Add Artisan')
   }
 
   constructor(props) {
@@ -22,6 +23,8 @@ export default class AddArtisan extends Component {
 
       focusedInputs: { name: false, phoneNumber: false, location: false, description: false }
     }
+    
+    this.props.navigation.setParams({Title: I18n.t("AddArtisan.title", {locale: this.props.Settings.language})})
 
     this.pickImage = this.pickImage.bind(this)
     this.createArtisan = this.createArtisan.bind(this)
@@ -127,6 +130,7 @@ export default class AddArtisan extends Component {
         <View style={styles.container}>
           <View style={styles.firstSection}>
             <AddImage
+              text = {I18n.t("AddArtisan.addImage", {locale: this.props.Settings.language})}
               imageUri={this.state.profilePicturePath}
               onPress={() => this.pickImage()}
               style={styles.image}
@@ -135,7 +139,7 @@ export default class AddArtisan extends Component {
               <View style={this.state.focusedInputs.name ? [styles.focusedInput, styles.inputWrapper] : styles.inputWrapper}>
                 <UserInput
                   iconName="id-card"
-                  placeholder="Name"
+                  placeholder={I18n.t("AddArtisan.name", {locale: this.props.Settings.language})}
                   value={this.state.name}
                   onChangeText={(newText) => this.setState({ name: newText })}
                   onFocus={() => this.setState({ focusedInputs: { ...this.state.focusedInputs, name: true } })}
@@ -146,7 +150,7 @@ export default class AddArtisan extends Component {
               <View style={this.state.focusedInputs.phoneNumber ? [styles.focusedInput, styles.inputWrapper] : styles.inputWrapper}>
                 <UserInput
                   iconName="phone"
-                  placeholder="Phone Number"
+                  placeholder={I18n.t("AddArtisan.phone", {locale: this.props.Settings.language})}
                   value={this.state.phoneNumber}
                   onChangeText={this.onTextChange}
                   onFocus={() => this.setState({ focusedInputs: { ...this.state.focusedInputs, phoneNumber: true } })}
@@ -161,7 +165,7 @@ export default class AddArtisan extends Component {
             <View style={this.state.focusedInputs.location ? [styles.focusedInput2, styles.inputWrapper2] : styles.inputWrapper2}>
               <UserInput
                 iconName="map"
-                placeholder="Location"
+                placeholder={I18n.t("AddArtisan.location", {locale: this.props.Settings.language})}
                 value={this.state.location}
                 onChangeText={(newText) => this.setState({ location: newText })}
                 onFocus={() => this.setState({ focusedInputs: { ...this.state.focusedInputs, location: true } })}
@@ -171,7 +175,7 @@ export default class AddArtisan extends Component {
             </View>
             <View style={this.state.focusedInputs.description ? [styles.focusedInput2, styles.inputWrapper3] : styles.inputWrapper3}>
               <UserInput
-                placeholder="Describe this artisan"
+                placeholder={I18n.t("AddArtisan.describe", {locale: this.props.Settings.language})}
                 value={this.state.description}
                 onChangeText={(newText) => this.setState({ description: newText })}
                 onFocus={() => this.setState({ focusedInputs: { ...this.state.focusedInputs, description: true } })}

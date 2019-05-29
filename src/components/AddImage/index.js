@@ -17,7 +17,7 @@ export default class AddImage extends Component {
           />
           :
           <View style={[styles.default, styles.addImage, this.props.style]}>
-            <Text style={styles.text}>Add Image</Text>
+            <Text style={styles.text}>{this.props.text? this.props.text: "Add Image"}</Text>
             <Icon
               name="plus"
               size={20}
@@ -48,8 +48,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#DDDDDD'
   },
   text: {
+    textAlign: 'center',
     fontSize: 16, 
     fontWeight: 'bold', 
     color: 'darkgrey'
+    
   }
 })
