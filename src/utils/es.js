@@ -46,5 +46,14 @@ export default {
     topProds: "Mejores Productos",
     add: "Añadir",
     viewAll: "Ver Todo"
+  },
+  AddArtisan: {
+    title: "Añadir Artesano",
+    addImage: "Añadir imagen", 
+    name: "Nombre",
+    phone: "Número de Teléfono",
+    location: "Ubicación",
+    describe: "Describe a este artesano",
+    create: "Crear"
   }
 };

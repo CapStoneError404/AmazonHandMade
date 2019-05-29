@@ -46,5 +46,14 @@ export default {
     topProds: "Top Products",
     add: "Add",
     viewAll: "View All"
+  },
+  AddArtisan: {
+    title: "Add Artisan",
+    addImage: "Add Image", 
+    name: "Name",
+    phone: "Phone Number",
+    location: "Location",
+    describe: "Describe this artisan",
+    create: "Create"
   }
 };
