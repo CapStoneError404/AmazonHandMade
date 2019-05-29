@@ -21,5 +21,10 @@ export default {
     sellerCentral: "Central del Vendedor",
     sellerForum: "Foros de Vendedores",
     contact: "Soporte de Contacto"
+  },
+  ArtisanList: {
+    title: "Artesanos",
+    add: "Añadir",
+    search: "Buscar Artesanos"
   }
 };

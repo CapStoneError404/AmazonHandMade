@@ -21,5 +21,10 @@ export default {
     sellerCentral: "Seller Central",
     sellerForum: "Seller Forums",
     contact: "Contact Support"
+  },
+  ArtisanList: {
+    title: "Artisans",
+    add: "ADD",
+    search: "Search Artisan"
   }
 };

@@ -12,18 +12,19 @@ import {
   Platform
 } from 'react-native'
 import { ProfilePicture } from '../../components'
+import I18n, {setLocale} from "../../utils/i18n"
 
 
 export default class ArtisanList extends Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      title: 'Artisans',
+      title: navigation.getParam('Title', 'Default Title'),
       headerRight: (
         <View style={Platform.OS === 'ios' ? { paddingRight: 0 } : { paddingRight: 20 }}>
           <Button
             transparent
             onPress={() => navigation.navigate("AddArtisan")}
-            title="Add"
+            title={navigation.getParam('AddTitle', 'Add')}
           />
         </View>
       )
@@ -40,6 +41,9 @@ export default class ArtisanList extends Component {
       text: "",
       artisans: this.sortedArtisans()
     }
+    
+    this.props.navigation.setParams({Title: I18n.t("ArtisanList.title", {locale: this.props.Settings.language})})
+    this.props.navigation.setParams({AddTitle: I18n.t("ArtisanList.add", {locale: this.props.Settings.language})})
 
     this.fetchArtisans = this.fetchArtisans.bind(this)
     this.navigateToArtisan = this.navigateToArtisan.bind(this)
@@ -145,7 +149,7 @@ export default class ArtisanList extends Component {
           value={this.state.text}
           onChangeText={(newText) => this.setState({ text: newText }, this.searchFilterFunction)}
           underlineColorAndroid="transparent"
-          placeholder="Search Artisan"
+          placeholder={I18n.t("ArtisanList.search", {locale: this.props.Settings.language})}
         />
         {(this.props.Artisans != [] && this.state.fetchingArtisans) ?
           <ActivityIndicator
