@@ -59,5 +59,25 @@ export default {
   EditArtisan: {
     title: "Modifier Artisan",
     save: "Enregistrer"
+  },
+  AddProduct: {
+    title: "Ajouter un Produit",
+    addImage: "Ajouter une image", 
+    mainCat: "Catégorie principale du produit",
+    subCat: "Sous-catégorie de produit",
+    prodTitle: "Titre",
+    prodTitleEx: "Ex: Veste en cuir brut",
+    prodDesc: "Description du produit",
+    prodDescEx: "Ex: S'il vous plaît voir le site Amazon pour un exemple",
+    gender: "Type de genre",
+    price: "Prix ​​standard",
+    priceEx: "Ex: 49.99",
+    sku: "Référence du vendeur",
+    skuEx: "Ex: sku123",
+    quantity: "Quantité",
+    quantityEx: "Ex: 4",
+    time: "Temps de production (jours)",
+    timeEx: "Ex: 5",
+    save: "Enregistrer et Publier"    
   }
 };

@@ -59,5 +59,25 @@ export default {
   EditArtisan: {
     title: "Edit Artisan",
     save: "Save"
+  },
+  AddProduct: {
+    title: "Add Product",
+    addImage: "Add Image", 
+    mainCat: "Product Main Category",
+    subCat: "Product Subcategory",
+    prodTitle: "Title",
+    prodTitleEx: "Ex: Rawhide Leather Jacket",
+    prodDesc: "Product Description",
+    prodDescEx: "Ex: Please see Amazon site for an example",
+    gender: "Gender Type",
+    price: "Standard Price",
+    priceEx: "Ex: 49.99",
+    sku: "Seller SKU",
+    skuEx: "Ex: sku123",
+    quantity: "Quantity",
+    quantityEx: "Ex: 4",
+    time: "Production Time (days)",
+    timeEx: "Ex: 5",
+    save: "Save & Publish"    
   }
 };

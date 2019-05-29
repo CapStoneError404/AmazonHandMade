@@ -59,5 +59,25 @@ export default {
   EditArtisan: {
     title: "Editar Artesano",
     save: "Salvar"
+  },
+  AddProduct: {
+    title: "Añadir Producto",
+    addImage: "Añadir imagen", 
+    mainCat: "Categoría principal del producto",
+    subCat: "Subcategoria de producto",
+    prodTitle: "Título",
+    prodTitleEx: "Ex: Chaqueta de cuero de cuero crudo",
+    prodDesc: "Descripción del producto",
+    prodDescEx: "Ex: Por favor, vea el sitio de Amazon para un ejemplo",
+    gender: "Tipo de género",
+    price: "Precio estándar",
+    priceEx: "Ex: 49.99",
+    sku: "Vendedor sku",
+    skuEx: "Ex: sku123",
+    quantity: "Cantidad",
+    quantityEx: "Ex: 4",
+    time: "Tiempo de producción (días)",
+    timeEx: "Ex: 5",
+    save: "Guardar y Publicar"    
   }
 };

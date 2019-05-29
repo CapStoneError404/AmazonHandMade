@@ -4,10 +4,11 @@ import { StyleSheet, ScrollView, View, Text, TextInput, Picker, Platform } from 
 import ImagePicker from 'react-native-image-crop-picker'
 import { withMappedNavigationParams } from 'react-navigation-props-mapper'
 import { ProductCategories } from './ProductCategories'
+import I18n from "../../utils/i18n"
 
 class AddProduct extends Component {
-  static navigationOptions = {
-    title: 'Add Product'
+  static navigationOptions = ({navigation}) => {
+    title: navigation.getParam('Title', 'Add Product')
   }
   constructor(props) {
     super(props)
@@ -32,6 +33,8 @@ class AddProduct extends Component {
       adding: false,
       previousScreen: ''
     }
+    
+    this.props.navigation.setParams({Title: I18n.t("AddProduct.title", {locale: this.props.Settings.language})})
 
     this.pickImage = this.pickImage.bind(this)
     this.createProduct = this.createProduct.bind(this)
@@ -114,13 +117,14 @@ class AddProduct extends Component {
         <ScrollView>
           <View style={styles.imageWrapper}>
             <AddImage 
+              text={I18n.t("AddProduct.addImage", {locale: this.props.Settings.language})}
               imageUri={this.state.productMainPicture}
               onPress={() => this.pickImage()}
               style={styles.image}
             />
           </View>
 
-          <Text style={styles.labelText}>Product Main Category</Text>
+          <Text style={styles.labelText}>{I18n.t("AddProduct.mainCat", {locale: this.props.Settings.language})}</Text>
           <View style={styles.categorySection}>
             <Picker
               itemStyle={styles.PickerItem}
@@ -137,7 +141,7 @@ class AddProduct extends Component {
             </Picker>
           </View>
 
-          <Text style={styles.labelText}>Product Subcategory</Text>
+          <Text style={styles.labelText}>{I18n.t("AddProduct.subCat", {locale: this.props.Settings.language})}</Text>
           <View style={styles.categorySection}>
             <Picker
               itemStyle={styles.PickerItem}
@@ -157,11 +161,11 @@ class AddProduct extends Component {
             </Picker>
           </View>
 
-          <Text style={styles.labelText}>Title</Text>
+          <Text style={styles.labelText}>{I18n.t("AddProduct.prodTitle", {locale: this.props.Settings.language})}</Text>
           <View style={this.state.focusedInputs.title? [styles.focusedInputSection, styles.InputWrapper] :styles.InputWrapper}>
             <TextInput
               style={styles.textInputStyle}
-              placeholder= "Ex: Rawhide Leather Jacket"
+              placeholder= {I18n.t("AddProduct.prodTitleEx", {locale: this.props.Settings.language})}
               value={this.state.productTitle}
               onChangeText={(newText) => this.setState({productTitle: newText})}
               onFocus={()=> this.setState({focusedInputs: {...this.state.focusedInputs, title: true}})}
@@ -169,11 +173,11 @@ class AddProduct extends Component {
             />
           </View>
 
-          <Text style={styles.labelText}>Product Description</Text>
+          <Text style={styles.labelText}>{I18n.t("AddProduct.prodDesc", {locale: this.props.Settings.language})}</Text>
           <View style={this.state.focusedInputs.desc? [styles.focusedInputSection, styles.InputWrapper] :styles.InputWrapper}>
             <TextInput
               style={styles.textInputStyle}
-              placeholder="Ex: Please see Amazon Site for an example"
+              placeholder={I18n.t("AddProduct.prodDescEx", {locale: this.props.Settings.language})}
               value={this.state.productDescription}
               onChangeText={(newText) => this.setState({productDescription: newText})}
               onFocus={()=> this.setState({focusedInputs: {...this.state.focusedInputs, desc: true}})}
@@ -181,7 +185,7 @@ class AddProduct extends Component {
             />
           </View>
 
-          <Text style={styles.labelText}>Gender Type</Text>
+          <Text style={styles.labelText}>{I18n.t("AddProduct.gender", {locale: this.props.Settings.language})}</Text>
           <View style={styles.categorySection}>
             <Picker
               itemStyle={styles.PickerItem}
@@ -202,12 +206,12 @@ class AddProduct extends Component {
             </Picker>
           </View>
 
-          <Text style={styles.labelText}>Standard Price</Text>
+          <Text style={styles.labelText}>{I18n.t("AddProduct.price", {locale: this.props.Settings.language})}</Text>
           <View style={this.state.focusedInputs.price? [styles.focusedInputSection, styles.InputWrapper] :styles.InputWrapper}>
             <TextInput
               style={styles.textInputStyle}
               keyboardType='numeric'
-              placeholder="Ex: 49.99"
+              placeholder={I18n.t("AddProduct.priceEx", {locale: this.props.Settings.language})}
               value={this.state.productStandardPrice}
               onChangeText={(newText) => this.setState({productStandardPrice: newText})}
               onFocus={()=> this.setState({focusedInputs: {...this.state.focusedInputs, price: true}})}
@@ -215,11 +219,11 @@ class AddProduct extends Component {
             />
           </View>
 
-          <Text style={styles.labelText}>Seller SKU</Text>
+          <Text style={styles.labelText}>{I18n.t("AddProduct.sku", {locale: this.props.Settings.language})}</Text>
           <View style={this.state.focusedInputs.sku? [styles.focusedInputSection, styles.InputWrapper] :styles.InputWrapper}>
             <TextInput
               style={styles.textInputStyle}
-              placeholder="Ex: MyProduct123"
+              placeholder={I18n.t("AddProduct.skuEx", {locale: this.props.Settings.language})}
               value={this.state.productSellerSKU}
               onChangeText={(newText) => this.setState({productSellerSKU: newText})}
               onFocus={()=> this.setState({focusedInputs: {...this.state.focusedInputs, sku: true}})}
@@ -227,12 +231,12 @@ class AddProduct extends Component {
             />
           </View>
 
-          <Text style={styles.labelText}>Quantity</Text>
+          <Text style={styles.labelText}>{I18n.t("AddProduct.quantity", {locale: this.props.Settings.language})}</Text>
           <View style={this.state.focusedInputs.quantity? [styles.focusedInputSection, styles.InputWrapper] :styles.InputWrapper}>
             <TextInput
               style={styles.textInputStyle}
               keyboardType='numeric'
-              placeholder="Ex. 4"
+              placeholder={I18n.t("AddProduct.quantityEx", {locale: this.props.Settings.language})}
               value={this.state.productQuantity}
               onChangeText={(newText) => this.setState({productQuantity: newText})}
               onFocus={()=> this.setState({focusedInputs: {...this.state.focusedInputs, quantity: true}})}
@@ -240,12 +244,12 @@ class AddProduct extends Component {
             /> 
           </View>
 
-          <Text style={styles.labelText}>Production Time (days)</Text>
+          <Text style={styles.labelText}>{I18n.t("AddProduct.time", {locale: this.props.Settings.language})}</Text>
           <View style={this.state.focusedInputs.time? [styles.focusedInputSection, styles.InputWrapper] :styles.InputWrapper}>
             <TextInput
               style={styles.textInputStyle}
               keyboardType='numeric'
-              placeholder="Ex: 5"
+              placeholder={I18n.t("AddProduct.timeEx", {locale: this.props.Settings.language})}
               value={this.state.productTime}
               onChangeText={(newText) => this.setState({productTime: newText})}
               onFocus={()=> this.setState({focusedInputs: {...this.state.focusedInputs, time: true}})}
@@ -254,7 +258,7 @@ class AddProduct extends Component {
           </View>
 
           <AsyncButton 
-            title="Save & Publish"
+            title={I18n.t("AddProduct.save", {locale: this.props.Settings.language})}
             color="#c14700"
             textColor="white"
             onPress={this.createProduct}
