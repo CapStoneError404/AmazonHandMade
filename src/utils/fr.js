@@ -26,5 +26,16 @@ export default {
     title: "Artisans",
     add: "Ajouter",
     search: "Rechercher des Artisans"
+  },
+  MoneyManagement: {
+    title: "Gestion de L'argent",
+    payouts: "Paiements",
+    moneyOwed: "Argent dû",
+    transactions: "Transactions", 
+    totalPayments: "Paiements totaux",
+    numberSold: "Nombre d'articles vendus",
+    income: "Revenu global du produit",
+    viewAll: "Voir Tout",
+    stats: "Statistiques"
   }
 };

@@ -26,5 +26,16 @@ export default {
     title: "Artesanos",
     add: "Añadir",
     search: "Buscar Artesanos"
+  },
+  MoneyManagement: {
+    title: "Administración del Dinero",
+    payouts: "Pagos",
+    moneyOwed: "Dinero debido",
+    transactions: "Actas", 
+    totalPayments: "Pagos totales",
+    numberSold: "Número de artículos vendidos",
+    income: "Ingreso general del producto",
+    viewAll: "Ver Todo",
+    stats: "Estadísticas"
   }
 };

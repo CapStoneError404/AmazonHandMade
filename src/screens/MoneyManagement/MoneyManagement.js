@@ -9,11 +9,12 @@ import {
   StyleSheet,
   Text,
 } from 'react-native'
+import I18n, {setLocale} from "../../utils/i18n"
 
 export default class MoneyManagement extends Component {
-   static navigationOptions = () => {
+   static navigationOptions = ({navigation}) => {
      return {
-       title: 'Money Management'
+       title: navigation.getParam('Title', 'Money Management')
      }
 
    }
@@ -27,25 +28,27 @@ export default class MoneyManagement extends Component {
 
      this.transactionButtons = [
        {
-         title: 'View All',
+         title: I18n.t("MoneyManagement.viewAll", {locale: this.props.Settings.language}),
          onPress: () => console.log("Nav to Transactions for artisans")
        },
        {
-         title: 'Stats',
+         title: I18n.t("MoneyManagement.stats", {locale: this.props.Settings.language}),
          onPress: () => console.log("Clicked on Transaction Stats")
        }
      ]
 
      this.payoutButtons = [
        {
-         title: 'View All',
+         title: I18n.t("MoneyManagement.viewAll", {locale: this.props.Settings.language}),
          onPress: () => this.props.navigation.navigate('PayoutList')
        },
        {
-         title: 'Stats',
+         title: I18n.t("MoneyManagement.stats", {locale: this.props.Settings.language}),
          onPress: () => console.log("Clicked on Payout Stats")
        }
      ]
+     
+     this.props.navigation.setParams({Title: I18n.t("MoneyManagement.title", {locale: this.props.Settings.language})})
 
      this.navigateToPayoutList = this.navigateToPayoutList.bind(this)
      this.getPayoutsTotal = this.getPayoutsTotal.bind(this)
@@ -125,22 +128,22 @@ export default class MoneyManagement extends Component {
        <Wallpaper style={styles.container}>
          <ScrollView style={{ flex: 1.8 }}>
            <StandardCard
-             title="Payouts"
+             title={I18n.t("MoneyManagement.payouts", {locale: this.props.Settings.language})}
              buttonsArray={this.payoutButtons}
            >
              <CardSection style={styles.cardSection}>
-               <Text style={styles.cardText}>Money Owed: {this.state.amountOwed}</Text>
-               <Text style={styles.cardText}>Total payments: {this.state.paidAmount}</Text>
+               <Text style={styles.cardText}>{I18n.t("MoneyManagement.moneyOwed", {locale: this.props.Settings.language})}: {this.state.amountOwed}</Text>
+               <Text style={styles.cardText}>{I18n.t("MoneyManagement.totalPayments", {locale: this.props.Settings.language})}: {this.state.paidAmount}</Text>
              </CardSection>
            </StandardCard>
 
            <StandardCard
-             title="Transactions"
+             title={I18n.t("MoneyManagement.transactions", {locale: this.props.Settings.language})}
              buttonsArray={this.transactionButtons}
            >
              <CardSection  style={styles.cardSection}>
-               <Text style={styles.cardText}>Number items sold: </Text>
-               <Text style={styles.cardText}>Overall Product Income: </Text>
+               <Text style={styles.cardText}>{I18n.t("MoneyManagement.numberSold", {locale: this.props.Settings.language})}: </Text>
+               <Text style={styles.cardText}>{I18n.t("MoneyManagement.income", {locale: this.props.Settings.language})}: </Text>
              </CardSection>
            </StandardCard>
          </ScrollView>

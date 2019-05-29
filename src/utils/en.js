@@ -26,5 +26,16 @@ export default {
     title: "Artisans",
     add: "ADD",
     search: "Search Artisan"
+  },
+  MoneyManagement: {
+    title: "Money Management",
+    payouts: "Payouts",
+    moneyOwed: "Money owed",
+    transactions: "Transactions", 
+    totalPayments: "Total payments",
+    numberSold: "Number items sold",
+    income: "Overall product income",
+    viewAll: "View All",
+    stats: "Stats"
   }
 };
