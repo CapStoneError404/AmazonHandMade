@@ -13,11 +13,12 @@ import {
 } from 'react-native'
 import { ProfilePicture } from '../../components'
 import { View } from 'native-base';
+import I18n, {setLocale} from "../../utils/i18n"
 
 export default class ActionCenter extends Component {
-  static navigationOptions = () => {
+  static navigationOptions = ({navigation}) => {
     return {
-      title: 'Action Center'
+      title: navigation.getParam('Title', 'Default Title')
     }
 
   }
@@ -34,10 +35,13 @@ export default class ActionCenter extends Component {
        onPress: () => this.navigateToEditCGA()
      }*/,
       {
-        title: 'Settings',
+        title: I18n.t("ActionCenter.settings", {locale: this.props.Settings.language}),
         onPress: () => this.navigateToSettings()
       }
     ]
+    
+    this.props.navigation.setParams({Title: I18n.t("ActionCenter.title", {locale: this.props.Settings.language})})
+    
     this.navigateToEditCGA = this.navigateToEditCGA.bind(this)
     this.navigateToSettings = this.navigateToSettings.bind(this)
     this.getTotalListings = this.getTotalListings.bind(this)
@@ -68,7 +72,7 @@ export default class ActionCenter extends Component {
         <Wallpaper style={styles.container}>
           <ScrollView style={{ flex: 1.8 }}>
             <StandardCard
-              title="Welcome To HANDMADE"
+              title={I18n.t("ActionCenter.welcome", {locale: this.props.Settings.language})}
               buttonsArray={this.settingsNavButton}
             >
               <CardSection style={styles.cardSection}>
@@ -77,36 +81,36 @@ export default class ActionCenter extends Component {
                 source={{uri: this.props.User.photoURL}}
                 style={styles.image}
                />*/}
-                <Text style={styles.cardText}>Name: {this.props.User.displayName} </Text>
-                <Text style={styles.cardText}>Email: {this.props.User.email}</Text>
+                <Text style={styles.cardText}>{I18n.t("ActionCenter.name", {locale: this.props.Settings.language})}: {this.props.User.displayName} </Text>
+                <Text style={styles.cardText}>{I18n.t("ActionCenter.email", {locale: this.props.Settings.language})}: {this.props.User.email}</Text>
               </CardSection>
             </StandardCard>
 
             <StandardCard
-              title="About Artisans"
+              title={I18n.t("ActionCenter.aboutArtisans", {locale: this.props.Settings.language})}
               buttonsArray={this.transactionButtons}
             >
               <CardSection style={styles.cardSection}>
-                <Text style={styles.cardText}>Number of Artisans: {this.props.Artisans.length}</Text>
-                <Text style={styles.cardText}>Total Artisan Listings: {this.getTotalListings()}</Text>
+                <Text style={styles.cardText}>{I18n.t("ActionCenter.numberOf", {locale: this.props.Settings.language})}: {this.props.Artisans.length}</Text>
+                <Text style={styles.cardText}>{I18n.t("ActionCenter.totalArtisans", {locale: this.props.Settings.language})}: {this.getTotalListings()}</Text>
               </CardSection>
             </StandardCard>
 
             <StandardCard
-              title="Resources"
+              title={I18n.t("ActionCenter.resources", {locale: this.props.Settings.language})}
             >
               <CardSection style={styles.cardSection}>
                 <TouchableOpacity onPress={() => Linking.openURL('https://error404.gitbook.io/project/')}>
-                  <Text style={[styles.cardText, styles.linkText]}>Application Documentation </Text>
+                  <Text style={[styles.cardText, styles.linkText]}>{I18n.t("ActionCenter.wiki", {locale: this.props.Settings.language})}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => Linking.openURL('https://sellercentral.amazon.com/')}>
-                  <Text style={[styles.cardText, styles.linkText]}>Seller Central</Text>
+                  <Text style={[styles.cardText, styles.linkText]}>{I18n.t("ActionCenter.sellerCentral", {locale: this.props.Settings.language})}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => Linking.openURL('https://sellercentral.amazon.com/forums/')}>
-                  <Text style={[styles.cardText, styles.linkText]}>Seller Forums </Text>
+                  <Text style={[styles.cardText, styles.linkText]}>{I18n.t("ActionCenter.sellerForum", {locale: this.props.Settings.language})}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => Linking.openURL('https://www.amazon.com/ap/signin?openid.return_to=https%3A%2F%2Fwww.amazon.com%2Fhz%2Fcontact-us%3Ffrom%3Dgp%26*entries*%3D0%26_encoding%3DUTF8%26*Version*%3D1&openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&openid.assoc_handle=amzn_contactus_desktop_us&openid.mode=checkid_setup&marketPlaceId=ATVPDKIKX0DER&openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&pageId=Amazon&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0&openid.pape.max_auth_age=3600&siteState=clientContext%3D133-3534273-1927417%2CsourceUrl%3Dhttps%253A%252F%252Fwww.amazon.com%252Fhz%252Fcontact-us%253Ffrom%253Dgp%2526*entries*%253D0%2526_encoding%253DUTF8%2526*Version*%253D1%2Csignature%3DroWGPjqxWUoNNtMkFrBDZBSTH0Yj3D')}>
-                  <Text style={[styles.cardText, styles.linkText]}>Contact Support </Text>
+                  <Text style={[styles.cardText, styles.linkText]}>{I18n.t("ActionCenter.contact", {locale: this.props.Settings.language})}</Text>
                 </TouchableOpacity>
               </CardSection>
             </StandardCard>
