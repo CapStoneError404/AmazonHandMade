@@ -55,5 +55,9 @@ export default {
     location: "Emplacement",
     describe: "Décris cet artisan",
     create: "Créer"
+  },
+  EditArtisan: {
+    title: "Modifier Artisan",
+    save: "Enregistrer"
   }
 };
