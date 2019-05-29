@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Wallpaper } from '../../components'
-import { GiftedChat } from 'react-native-gifted-chat'
+import { GiftedChat, Day } from 'react-native-gifted-chat'
 import { withMappedNavigationParams } from 'react-navigation-props-mapper'
 import ImagePicker from 'react-native-image-crop-picker'
 import firebase from 'react-native-firebase'
@@ -118,6 +118,10 @@ class Conversation extends Component {
       })
     })
   }
+
+  renderDay(props) {
+    return <Day {...props} textStyle={{color: 'white'}}/>
+  }
   
   render() {
     return (
@@ -130,6 +134,7 @@ class Conversation extends Component {
             _id: this.props.User.uid
           }}
           placeholder="Type a message..."
+          renderDay={this.renderDay}
         />
       </Wallpaper>
     )
