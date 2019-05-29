@@ -49,7 +49,6 @@ class ProductDetail extends Component {
     console.log("props")
     console.log(this.props)
     this.props.navigation.navigate('LogSale', {
-      ProductDetailScreen: this,
       productId: this.props.productID
     })
   }

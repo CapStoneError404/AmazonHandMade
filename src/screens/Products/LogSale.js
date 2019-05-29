@@ -36,7 +36,6 @@ class LogSale extends Component {
       quantity: parseInt(this.state.quantity)
     }).then((totalSales) => {
       this.setState({logging: false})
-      this.props.navigation.state.params.ProductDetailScreen.setState({numSales: totalSales})
       this.props.navigation.goBack()
     }).catch(error => {
       this.props.displayError(error)
