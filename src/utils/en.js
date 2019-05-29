@@ -96,5 +96,11 @@ export default {
     stock: "In Stock",
     gender: "Gender",
     number: "Number of Sales"
+  },
+  PayoutList: {
+    title: "Payout List",
+    lastPay: "Last Payout",
+    owed: "Owed",
+    paid: "Paid"
   }
 };

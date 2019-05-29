@@ -12,11 +12,12 @@ import {
   TouchableOpacity
 } from 'react-native'
 import { withMappedNavigationParams } from 'react-navigation-props-mapper'
+import I18n, {setLocale} from "../../utils/i18n"
 
 class PayoutList extends Component {
-   static navigationOptions = () => {
+   static navigationOptions = ({navigation}) => {
      return {
-       title: 'PayoutList'
+       title: navigation.getParam('Title', 'Payout List')
      }
 
    }
@@ -25,6 +26,9 @@ class PayoutList extends Component {
      super(props)
 
      this.state = {}
+     
+     this.props.navigation.setParams({Title: I18n.t("PayoutList.title", {locale: this.props.Settings.language})})
+
      this.navigateToArtisanPayout = this.navigateToArtisanPayout.bind(this)
      this.getPayoutsTotalForArtisan = this.getPayoutsTotalForArtisan.bind(this)
      this.getProductsRevenueTotalForArtisan = this.getProductsRevenueTotalForArtisan.bind(this)
@@ -89,9 +93,9 @@ class PayoutList extends Component {
             
          <View style={styles.namePhone}>
            <Text style={styles.text}>{item.name}</Text>
-           <Text style={styles.text}>{`Last Payout: ${Math.floor(Math.random() * 11 + 1)}/${Math.floor(Math.random() * 27 + 1)}/19`}</Text>
-           <Text style={styles.text}>{`Owed: $${productsRevenueTotal - payoutsTotal}`}</Text>
-           <Text style={styles.text}>{`Paid: $${payoutsTotal}`}</Text>
+           <Text style={styles.text}>{I18n.t("PayoutList.lastPay", {locale: this.props.Settings.language})}{`: ${Math.floor(Math.random() * 11 + 1)}/${Math.floor(Math.random() * 27 + 1)}/19`}</Text>
+           <Text style={styles.text}>{I18n.t("PayoutList.owed", {locale: this.props.Settings.language})}{`: $${productsRevenueTotal - payoutsTotal}`}</Text>
+           <Text style={styles.text}>{I18n.t("PayoutList.paid", {locale: this.props.Settings.language})}{`: $${payoutsTotal}`}</Text>
          </View>
        </TouchableOpacity>
      )
