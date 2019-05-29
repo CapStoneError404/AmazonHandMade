@@ -86,5 +86,15 @@ export default {
     search: "Buscar Productos",
     price: "precio",
     quantity: "Cantidad"
+  },
+  ProductDetail: {
+    title: "Detalle del Producto",
+    logSales: "Ventas de Registro",
+    info: "Info",
+    subCat: "Subcategoría",
+    price: "Precio",
+    stock: "En Stock",
+    gender: "Género",
+    number: "Número de ventas"
   }
 };

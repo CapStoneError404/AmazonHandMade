@@ -7,10 +7,11 @@ import {
 import { Text, ScrollView, StyleSheet, LayoutAnimation } from 'react-native'
 import { withMappedNavigationParams } from 'react-navigation-props-mapper'
 import StandardCard from '../../components/StandardCard'
+import I18n from "../../utils/i18n"
 
 class ProductDetail extends Component {
-  static navigationOptions = {
-    title: 'Product Detail'
+  static navigationOptions = ({navigation}) => {
+    title: navigation.getParam('Title', 'Product Detail')
   };
 
   constructor(props) {
@@ -29,10 +30,12 @@ class ProductDetail extends Component {
       //   onPress: () => this.navigateToEditProduct() 
       // },
       {
-        title: 'Log Sales',
+        title: I18n.t("ProductDetail.logSales", {locale: this.props.language}),
         onPress: () => this.navigateToLogSale()
       }
     ]
+
+    this.props.navigation.setParams({Title: I18n.t("ProductDetail.title", {locale: this.props.language})})
 
     this.navigateToLogSale = this.navigateToLogSale.bind(this)
     this.navigateToEditProduct = this.navigateToEditProduct.bind(this)
@@ -76,14 +79,14 @@ class ProductDetail extends Component {
             </Text>
           </StandardCard>
           <StandardCard 
-            title="Info"
+            title={I18n.t("ProductDetail.info", {locale: this.props.language})}
           >
             <CardSection
               style={{
                 justifyContent: 'space-between'
               }}
             >
-              <Text style={styles.ProductInfo}>Sub-Cat</Text>
+              <Text style={styles.ProductInfo}>{I18n.t("ProductDetail.subCat", {locale: this.props.language})}</Text>
               <Text style={styles.SectionListItemS}>
                 {this.props.SubCategory}
               </Text>
@@ -93,7 +96,7 @@ class ProductDetail extends Component {
                 justifyContent: 'space-between'
               }}
             >
-              <Text style={styles.ProductInfo}>Price</Text>
+              <Text style={styles.ProductInfo}>{I18n.t("ProductDetail.price", {locale: this.props.language})}</Text>
               <Text style={styles.SectionListItemS}>
                 {'$' + this.props.StandardPrice}
               </Text>
@@ -103,7 +106,7 @@ class ProductDetail extends Component {
                 justifyContent: 'space-between'
               }}
             >
-              <Text style={styles.ProductInfo}>In Stock</Text>
+              <Text style={styles.ProductInfo}>{I18n.t("ProductDetail.stock", {locale: this.props.language})}</Text>
               <Text style={styles.SectionListItemS}>{this.props.Quantity}</Text>
             </CardSection>
             <CardSection
@@ -111,7 +114,7 @@ class ProductDetail extends Component {
                 justifyContent: 'space-between'
               }}
             >
-              <Text style={styles.ProductInfo}>Gender</Text>
+              <Text style={styles.ProductInfo}>{I18n.t("ProductDetail.gender", {locale: this.props.language})}</Text>
               <Text style={styles.SectionListItemS}>{this.props.Gender}</Text>
             </CardSection>
             <CardSection
@@ -119,7 +122,7 @@ class ProductDetail extends Component {
                 justifyContent: 'space-between'
               }}
             >
-              <Text style={styles.ProductInfo}>Number of Sales</Text>
+              <Text style={styles.ProductInfo}>{I18n.t("ProductDetail.number", {locale: this.props.language})}</Text>
               <Text style={styles.SectionListItemS}>
                 {this.state.numSales}
               </Text>
