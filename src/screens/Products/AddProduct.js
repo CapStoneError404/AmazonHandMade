@@ -1,6 +1,15 @@
 import { AddImage, AsyncButton, Wallpaper } from '@components'
 import React, { Component } from 'react'
-import { StyleSheet, ScrollView, View, Text, TextInput, Picker, Platform } from 'react-native'
+import { 
+  StyleSheet, 
+  ScrollView, 
+  View, 
+  Text, 
+  TextInput, 
+  Picker, 
+  Platform
+} from 'react-native'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scrollview'
 import ImagePicker from 'react-native-image-crop-picker'
 import { withMappedNavigationParams } from 'react-navigation-props-mapper'
 import { ProductCategories } from './ProductCategories'
@@ -111,7 +120,7 @@ class AddProduct extends Component {
   render() {
     return (
       <Wallpaper style={styles.container}>
-        <ScrollView>
+        <KeyboardAwareScrollView>
           <View style={styles.imageWrapper}>
             <AddImage 
               imageUri={this.state.productMainPicture}
@@ -261,7 +270,7 @@ class AddProduct extends Component {
             style={styles.button}
             spinning={this.state.adding}
           />
-        </ScrollView>
+        </KeyboardAwareScrollView>
       </Wallpaper> 
     )
   }

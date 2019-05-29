@@ -69,7 +69,10 @@ export default class ArtisanList extends Component {
   fetchArtisans() {
     this.setState({ fetchingArtisans: true })
     this.props.fetchArtisans(this.props.User.uid).then(() => {
-      this.setState({ fetchingArtisans: false })
+      this.setState({ 
+        fetchingArtisans: false,
+        artisans: this.sortedArtisans()
+      })
     })
   }
 
@@ -199,14 +202,12 @@ const styles = StyleSheet.create({
     color: '#444444',
     marginLeft: 5
   },
-
   input: {
-    margin: 15,
-    height: 40,
-    padding: 10,
-    backgroundColor: "white",
-    borderColor: '#444444',
-    borderWidth: 1
+    height: 60,
+    backgroundColor: 'rgba(255,255,255,0.85)',
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    margin: 10
   },
   submitButton: {
     backgroundColor: '#7a42f4',

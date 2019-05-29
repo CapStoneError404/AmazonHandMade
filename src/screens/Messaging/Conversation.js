@@ -125,6 +125,7 @@ class Conversation extends Component {
         <GiftedChat
           messages={this.state.messages}
           onSend={messages => this.onSend(messages)}
+          bottomOffset={50}
           user={{
             _id: this.props.User.uid
           }}
