@@ -1,10 +1,16 @@
-import { Button } from '@components'
+import { Wallpaper, Button } from '@components'
 import React, { Component } from 'react'
 import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 
 
 export default class Settings extends Component {
+  static navigationOptions = () => {
+    return {
+      title: 'Settings'
+    }
+  }
+
   constructor(props) {
     super(props)
 
@@ -19,12 +25,7 @@ export default class Settings extends Component {
 
   render() {
     return (
-      <LinearGradient colors={['#AAAAAA', '#AAAAAA']} style={styles.container}>
-        <View style={styles.textContainer}>
-          <ScrollView>
-            <Text style={styles.text}>{"Settings"}</Text>
-          </ScrollView>
-        </View>
+      <Wallpaper style={styles.wallpaper}>
         <Button
           testID='logout_button'
           style={styles.button}
@@ -33,27 +34,17 @@ export default class Settings extends Component {
           textColor="white"
           onPress={this.logout}
         />
-      </LinearGradient>
+      </Wallpaper>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20
-  },
-  textContainer: {
-    flex: 8,
-    marginTop: 10,
-    marginBottom: 30,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-  },
-  text: {
-    fontSize: 20
+  wallpaper: {
+    padding: 10
   },
   button: {
-    flex: 1
+    flex: 0,
+    height: 50
   }
 })

@@ -18,6 +18,7 @@ import {
 } from 'react-native'
 import { withMappedNavigationParams } from 'react-navigation-props-mapper'
 import { FlatGrid } from 'react-native-super-grid'
+
 class ArtisanDetail extends Component {
   static navigationOptions = () => {
     return {

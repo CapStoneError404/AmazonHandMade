@@ -1,5 +1,7 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { fetchArtisans, fetchProducts } from '../ArtisanHub/actions.js'
+import { fetchConversations } from '../Messaging/actions.js'
 import * as globalActions from '@actions'
 
 function mapStateToProps(state) {
@@ -10,7 +12,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators(globalActions, dispatch)
+  return bindActionCreators({fetchArtisans, fetchProducts, fetchConversations, ...globalActions}, dispatch)
 }
 
 import Launch from './Launch'

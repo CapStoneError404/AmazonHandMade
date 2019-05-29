@@ -26,7 +26,7 @@ export function fetchConversations(cgaID) {
         }
       }
 
-      resolve()
+      resolve(conversationArray)
       dispatch({type: 'GET_CONVERSATIONS', conversations: conversationArray})
     })
   }

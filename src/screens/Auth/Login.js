@@ -29,9 +29,7 @@ export default class Login extends Component {
 
   loginWithAmazon() {
     this.setState({amazonWaiting: true})
-    this.props.amazonLogin().then((cgaID) => {
-      return this.props.fetchAll(cgaID)
-    }).then(() => {
+    this.props.amazonLogin().then(() => {
       this.setState({amazonWaiting: false})
       if(this.props.User)
         this.props.navigation.navigate("Home")

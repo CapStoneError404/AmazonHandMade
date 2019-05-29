@@ -45,19 +45,15 @@ class LogSale extends Component {
 
   render() {
     return (
-      <Wallpaper style={styles.container}>
+      <Wallpaper>
         <View style={styles.container}>
-          <View style={this.state.focusedInputs.quantity? [styles.focusedInput, styles.inputWrapper] :styles.inputWrapper}>
-            <UserInput
-              placeholder="How Many Items Sold?"
-              value={this.state.quantity}
-              onChangeText={(newText) => this.setState({quantity: newText})}
-              onFocus={()=> this.setState({focusedInputs: {...this.state.focusedInputs, quantity: true}})}
-              onBlur={()=> this.setState({focusedInputs: {...this.state.focusedInputs, quantity: false}})}
-              style={styles.smallInput1}
-              keyboardType="numeric"
-            />
-          </View>
+          <UserInput
+            placeholder="How Many Items Sold?"
+            value={this.state.quantity}
+            onChangeText={(newText) => this.setState({quantity: newText})}
+            style={styles.smallInput1}
+            keyboardType="numeric"
+          />
           <AsyncButton 
             title="Log"
             color="#c14700"
@@ -74,37 +70,20 @@ class LogSale extends Component {
   
 const styles = StyleSheet.create({
   container: {
-    padding: 5,
-    flex: 0
+    width: '100%',
+    height: '100%',
+    padding: 10
   },
   smallInput1: {
-    marginTop: 0,
-    marginBottom: 0,
+    flex: 0,
     borderRadius: 5,
     height: 75
   },
-  largeInputs: {
-    marginTop: 0,
-    marginBottom: 0,
-    marginLeft: 0,
-    marginRight: 0,
-    borderRadius: 5,
-    height: 200,
-  },
   button: {
+    flex: 0,
     borderRadius: 5, 
     flexDirection: 'column',
     height: 75
-  },
-  focusedInput: {
-    borderWidth: 2,
-    borderColor: 'orange',
-    borderRadius: 5
-  },
-  inputWrapper: {
-    marginVertical: 10,
-    backgroundColor: 'rgba(255,255,255,0.85)',
-    borderRadius: 5
   }
 })
 

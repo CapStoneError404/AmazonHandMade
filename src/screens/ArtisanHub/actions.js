@@ -61,7 +61,7 @@ export function fetchArtisans(cgaID) {
         }
       }
       
-      resolve()
+      resolve(artisanArray)
       dispatch({type: 'GET_ARTISANS', artisans: artisanArray})
     })
   }
@@ -131,7 +131,7 @@ export function fetchProducts(artisanID) {
       let productKeys = productSnapshot.val()? Object.keys(productSnapshot.val()): []
       productArray = productArray.filter(obj => productKeys.includes(obj.productID))
 
-      resolve()
+      resolve(productArray)
       dispatch({ type: 'GET_PRODUCTS', products: productArray })
     })
   }

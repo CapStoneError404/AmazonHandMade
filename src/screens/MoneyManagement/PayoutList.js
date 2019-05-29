@@ -18,7 +18,6 @@ class PayoutList extends Component {
      return {
        title: 'PayoutList'
      }
-
    }
 
    constructor(props) {
@@ -39,7 +38,7 @@ class PayoutList extends Component {
    }
 
    getPayoutsTotalForArtisan(artisanUID) {
-     artisanPayouts = this.props.Payouts.filter(payout => {
+     artisanPayouts = this.props.payouts.filter(payout => {
        return payout.artisanId == artisanUID
      })
 
@@ -52,15 +51,15 @@ class PayoutList extends Component {
    }
 
    getProductsRevenueTotalForArtisan(artisanUID) {
-     artisanProductIds = this.props.Artisans.filter(artisan => { 
-       return artisan.uid == artisanUID
-     })[0].products
+    artisanProductIds = this.props.Artisans.filter(artisan => { 
+      return artisan.uid == artisanUID
+    })[0].products
 
-     if(!artisanProductIds)
-       return 0
-     artisanProductIds = Object.keys(artisanProductIds)
+    if(!artisanProductIds)
+      return 0
+    artisanProductIds = Object.keys(artisanProductIds)
 
-     artisanProducts = this.props.Products.filter(product => 
+     artisanProducts = this.props.products.filter(product => 
        artisanProductIds.includes(product.productID))
 
      var totalAmount = 0.0
@@ -90,8 +89,8 @@ class PayoutList extends Component {
          <View style={styles.namePhone}>
            <Text style={styles.text}>{item.name}</Text>
            <Text style={styles.text}>{`Last Payout: ${Math.floor(Math.random() * 11 + 1)}/${Math.floor(Math.random() * 27 + 1)}/19`}</Text>
-           <Text style={styles.text}>{`Owed: $${productsRevenueTotal - payoutsTotal}`}</Text>
-           <Text style={styles.text}>{`Paid: $${payoutsTotal}`}</Text>
+           <Text style={styles.text}>{`Owed: $${(productsRevenueTotal - payoutsTotal).toFixed(2)}`}</Text>
+           <Text style={styles.text}>{`Paid: $${payoutsTotal.toFixed(2)}`}</Text>
          </View>
        </TouchableOpacity>
      )

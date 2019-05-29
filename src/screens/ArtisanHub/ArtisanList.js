@@ -9,7 +9,8 @@ import {
   TextInput,
   TouchableOpacity,
   View,
-  Platform
+  Platform,
+  RefreshControl
 } from 'react-native'
 import { ProfilePicture } from '../../components'
 
@@ -163,6 +164,12 @@ export default class ArtisanList extends Component {
             keyExtractor={this._keyExtractor}
             renderItem={this._renderArtisanItem}
             extraData={this.state}
+            refreshControl={
+              <RefreshControl
+                refreshing={this.state.fetchingArtisans}
+                onRefresh={this.fetchArtisans}
+              />
+            }
           />
         }
       </Wallpaper>

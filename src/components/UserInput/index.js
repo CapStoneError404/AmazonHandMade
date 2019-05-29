@@ -15,7 +15,7 @@ export default class UserInput extends Component {
         <TextInput
           testID={this.props.testID}
           {...this.props}
-          style={[styles.input, this.props.style]}
+          style={[styles.input, this.props.style, {flex: 1}]}
         />
       </View>
     )

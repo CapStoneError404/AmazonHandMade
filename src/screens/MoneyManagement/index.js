@@ -1,5 +1,6 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { fetchArtisans, fetchProducts } from '../ArtisanHub/actions.js'
 import * as actions from './actions'
 import * as globalActions from '@actions'
 
@@ -15,7 +16,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ ...actions, ...globalActions }, dispatch)
+  return bindActionCreators({ fetchArtisans, fetchProducts, ...actions, ...globalActions }, dispatch)
 }
 
 import { default as UnconnectedMoneyManagement } from './MoneyManagement'

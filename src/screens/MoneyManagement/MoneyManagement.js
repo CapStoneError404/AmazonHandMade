@@ -8,9 +8,12 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  ActivityIndicator,
+  RefreshControl
 } from 'react-native'
+import { withMappedNavigationParams } from 'react-navigation-props-mapper';
 
-export default class MoneyManagement extends Component {
+class MoneyManagement extends Component {
    static navigationOptions = () => {
      return {
        title: 'Money Management'
@@ -21,116 +24,112 @@ export default class MoneyManagement extends Component {
    constructor(props) {
      super(props)
      this.state = {
-       paidAmount: null,
-       amountOwed: null
+       payouts: [],
+       products: [],
+       paidAmount: 0,
+       amountOwed: 0,
+       productsSold: 0,
+       productsRevenue: 0,
+       fetching: false
      }
-
-     this.transactionButtons = [
-       {
-         title: 'View All',
-         onPress: () => console.log("Nav to Transactions for artisans")
-       },
-       {
-         title: 'Stats',
-         onPress: () => console.log("Clicked on Transaction Stats")
-       }
-     ]
 
      this.payoutButtons = [
        {
          title: 'View All',
-         onPress: () => this.props.navigation.navigate('PayoutList')
-       },
-       {
-         title: 'Stats',
-         onPress: () => console.log("Clicked on Payout Stats")
+         onPress: () => this.navigateToPayoutList()
        }
      ]
 
+     this.updateNumbers = this.updateNumbers.bind(this)
+     this.fetchPayoutsAndTransactions = this.fetchPayoutsAndTransactions.bind(this)
      this.navigateToPayoutList = this.navigateToPayoutList.bind(this)
-     this.getPayoutsTotal = this.getPayoutsTotal.bind(this)
-     this.getPayoutsTotalForArtisan = this.getPayoutsTotalForArtisan.bind(this)
-     this.getProductsRevenueTotal = this.getProductsRevenueTotal.bind(this)
-     this.getProductsRevenueTotalForArtisan = this.getProductsRevenueTotalForArtisan.bind(this)
    }
 
    componentDidMount() {
-     payoutsTotal = this.getPayoutsTotal()
-     revenueTotal = this.getProductsRevenueTotal()
-     this.setState({
-       amountOwed: revenueTotal - payoutsTotal,
-       paidAmount: payoutsTotal
+     this.updateNumbers()
+   }
+
+   updateNumbers() {
+    this.fetchPayoutsAndTransactions().then(() => {
+      payoutsTotal = this.state.payouts.reduce((total, current) => {
+        return total + current.amount
+      }, 0)
+
+      productsTotal = this.state.products.reduce((total, current) => {
+        return total + (current.TimesSold * current.StandardPrice)
+      }, 0)
+
+      numProductsSold = this.state.products.reduce((total, current) => {
+        return total + current.TimesSold
+      }, 0)
+
+      this.setState({
+        fetching: false,
+        paidAmount: payoutsTotal,
+        amountOwed: productsTotal - payoutsTotal,
+        productsRevenue: productsTotal,
+        productsSold: numProductsSold
+      })
+    })
+   }
+
+   async fetchPayoutsAndTransactions() {
+     this.setState({fetching: true})
+
+     var promises = []
+
+     let artisans = await this.props.fetchArtisans(this.props.User.uid)
+     let payouts = await this.props.fetchPayouts(this.props.User.uid)
+     var allProducts = []
+     artisans.forEach(artisan => {
+       let productPromise = this.props.fetchProducts(artisan.uid).then(products => {
+         allProducts = allProducts.concat(products)
+       })
+       promises.push(productPromise)
+     })
+
+     return Promise.all(promises).then(() => {
+       this.setState({
+         payouts: payouts,
+         products: allProducts
+       })
      })
    }
 
    navigateToPayoutList() {
-     navigation.navigate('PayoutList')
-   }
-
-   getPayoutsTotal() {
-     var totalAmount = 0.0
-     var artisanIds = this.props.Artisans.map(artisan => artisan.uid)
-     artisanIds.forEach(artisanId => {
-       totalAmount += this.getPayoutsTotalForArtisan(artisanId)
-     })
-
-     return totalAmount
-   }
-
-   getProductsRevenueTotal() {
-     var totalAmount = 0.0
-     var artisanIds = this.props.Artisans.map(artisan => artisan.uid)
-     artisanIds.forEach(artisanId => {
-       totalAmount += this.getProductsRevenueTotalForArtisan(artisanId)
-     })
-
-     return totalAmount
-   }
-
-   getPayoutsTotalForArtisan(artisanUID) {
-     artisanPayouts = this.props.Payouts.filter(payout => {
-       return payout.artisanId == artisanUID
-     })
-
-     var totalAmount = 0.0
-     artisanPayouts.forEach(payout => {
-       totalAmount += payout.amount
-     })
-
-     return totalAmount
-   }
-
-   getProductsRevenueTotalForArtisan(artisanUID) {
-     artisanProductIds = this.props.Artisans.filter(artisan => { 
-       return artisan.uid == artisanUID
-     })[0].products
-
-     if(!artisanProductIds)
-       return 0
-     artisanProductIds = Object.keys(artisanProductIds)
-
-     artisanProducts = this.props.Products.filter(product => 
-       artisanProductIds.includes(product.productID))
-
-     var totalAmount = 0.0
-     artisanProducts.forEach(product => {
-       totalAmount += (parseInt(product.TimesSold) * parseFloat(product.StandardPrice))
-     })
-
-     return totalAmount
+     this.props.navigation.navigate('PayoutList', {
+       ...this.props,
+       products: [].concat(this.state.products), 
+       payouts: [].concat(this.state.payouts)
+    })
    }
 
    render() {
      return (
        <Wallpaper style={styles.container}>
-         <ScrollView style={{ flex: 1.8 }}>
+         {this.state.fetching ?
+          <ActivityIndicator 
+            size='large'
+            animating={this.props.spinning}
+            color='white'
+          />
+          :
+         <ScrollView  
+           style={{ flex: 1.8 }}
+           refreshControl={
+            <RefreshControl
+              refreshing={this.state.fetching}
+              onRefresh={this.updateNumbers}
+            />
+          }
+         >
            <StandardCard
              title="Payouts"
              buttonsArray={this.payoutButtons}
            >
              <CardSection style={styles.cardSection}>
-               <Text style={styles.cardText}>Money Owed: {this.state.amountOwed}</Text>
-               <Text style={styles.cardText}>Total payments: {this.state.paidAmount}</Text>
+               <Text style={styles.cardText}>Money Owed: ${this.state.amountOwed.toFixed(2)}</Text>
+               <Text style={styles.cardText}>Total payments: ${this.state.paidAmount.toFixed(2)}</Text>
              </CardSection>
            </StandardCard>
 
@@ -139,11 +138,12 @@ export default class MoneyManagement extends Component {
              buttonsArray={this.transactionButtons}
            >
              <CardSection  style={styles.cardSection}>
-               <Text style={styles.cardText}>Number items sold: </Text>
-               <Text style={styles.cardText}>Overall Product Income: </Text>
+               <Text style={styles.cardText}>Number items sold: {this.state.productsSold}</Text>
+               <Text style={styles.cardText}>Overall Product Income: ${this.state.productsRevenue.toFixed(2)}</Text>
              </CardSection>
            </StandardCard>
          </ScrollView>
+         }
        </Wallpaper>
      )
    }
@@ -174,3 +174,5 @@ const styles = StyleSheet.create({
     color: '#444444'
   }
 })
+
+export default withMappedNavigationParams()(MoneyManagement)

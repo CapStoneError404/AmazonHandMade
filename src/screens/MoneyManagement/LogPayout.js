@@ -13,25 +13,10 @@ class LogPayout extends Component {
   constructor(props) {
     super(props)
 
-    this.logPayoutButtons = [
-      {
-        title: 'View All',
-        onPress: () => console.log("button pressed")
-      },
-      {
-        title: 'Stats',
-        onPress: () => console.log("button pressed")
-      }
-    ]
-
-    console.log(this.props)
-
     this.state = {
       amount: "",
       description: "",
       logging: false,
-
-      focusedInputs: {amount: false, desc: false}
     }
 
     this.logPayout = this.logPayout.bind(this)
@@ -54,28 +39,20 @@ class LogPayout extends Component {
     return (
       <Wallpaper style={styles.container}>
         <View style={styles.container}>
-          <View style={this.state.focusedInputs.amount? [styles.focusedInput, styles.inputWrapper] :styles.inputWrapper}>
-            <UserInput
-              iconName="dollar"
-              placeholder="How Much?"
-              value={this.state.amount}
-              onChangeText={(newText) => this.setState({amount: newText})}
-              onFocus={()=> this.setState({focusedInputs: {...this.state.focusedInputs, amount: true}})}
-              onBlur={()=> this.setState({focusedInputs: {...this.state.focusedInputs, amount: false}})}
-              style={styles.smallInput1}
-            />
-          </View>
-          <View style={this.state.focusedInputs.desc? [styles.focusedInput, styles.inputWrapper] :styles.inputWrapper}>
-            <UserInput 
-              placeholder="For What?"
-              value={this.state.description}
-              onChangeText={(newText) => this.setState({description: newText})}
-              onFocus={()=> this.setState({focusedInputs: {...this.state.focusedInputs, desc: true}})}
-              onBlur={()=> this.setState({focusedInputs: {...this.state.focusedInputs, desc: false}})}
-              style={styles.largeInputs}
-              multiline={true}
-            />
-          </View>
+          <UserInput
+            iconName="dollar"
+            placeholder="How Much?"
+            value={this.state.amount}
+            onChangeText={(newText) => this.setState({amount: newText})}
+            style={styles.smallInput1}
+          />
+          <UserInput 
+            placeholder="For What?"
+            value={this.state.description}
+            onChangeText={(newText) => this.setState({description: newText})}
+            style={styles.largeInputs}
+            multiline={true}
+          />
           <AsyncButton 
             title="Log"
             color="#c14700"
@@ -92,37 +69,25 @@ class LogPayout extends Component {
   
 const styles = StyleSheet.create({
   container: {
-    padding: 5,
-    flex: 0
+    width: '100%',
+    height: '100%',
+    padding: 10
   },
   smallInput1: {
-    marginTop: 0,
-    marginBottom: 0,
+    flex: 0,
     borderRadius: 5,
     height: 75
   },
   largeInputs: {
-    marginTop: 0,
-    marginBottom: 0,
-    marginLeft: 0,
-    marginRight: 0,
+    flex: 0,
+    height: 150,
     borderRadius: 5,
-    height: 200,
   },
   button: {
+    flex: 0,
     borderRadius: 5, 
     flexDirection: 'column',
     height: 75
-  },
-  focusedInput: {
-    borderWidth: 2,
-    borderColor: 'orange',
-    borderRadius: 5
-  },
-  inputWrapper: {
-    marginVertical: 10,
-    backgroundColor: 'rgba(255,255,255,0.85)',
-    borderRadius: 5
   }
 })
 

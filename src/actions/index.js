@@ -3,17 +3,6 @@ import LoginWithAmazon from 'react-native-login-with-amazon'
 import { fetchConversations, sendMessage as localSendMessage } from '../screens/Messaging/actions'
 import { fetchArtisans, fetchProducts } from '../screens/ArtisanHub/actions'
 
-export function fetchAll(cgaID) {
-  return (dispatch) => {
-    return new Promise(async (resolve) => {
-      let artisans = fetchArtisans(cgaID)
-      let conversations = fetchConversations(cgaID)
-
-      Promise.all([artisans, conversations]).then(() => resolve())
-    })
-  }
-}
-
 export function sendMessage(sender, message, recipients) {
   return localSendMessage(sender, message, recipients)
 }

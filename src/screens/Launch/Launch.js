@@ -1,5 +1,6 @@
 import { Logo, Wallpaper } from '@components'
 import React, { Component } from 'react'
+import { StyleSheet, Text, ActivityIndicator } from 'react-native'
 
 export default class Launch extends Component {
   constructor(props) {
@@ -7,8 +8,9 @@ export default class Launch extends Component {
   }
 
   componentDidMount() {
-    if(this.props.User)
+    if(this.props.User) {
       this.props.navigation.navigate("Home")
+    }
     else
       this.props.navigation.navigate("Login")
   }
@@ -17,7 +19,18 @@ export default class Launch extends Component {
     return (
       <Wallpaper>
         <Logo />
+        <ActivityIndicator
+          size='large'
+          animating={true}
+          color='white'
+        />
       </Wallpaper>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  text: {
+    
+  }
+})

@@ -10,7 +10,7 @@ export function fetchPayouts(cgaID) {
       payoutsArray = []
 
       for (var uid in payouts) {
-        if (payoutIds.includes(uid)) {
+        if(payoutIds.includes(uid)) {
           payoutsArray.push({
             ...payouts[uid],
             uid: uid
@@ -18,7 +18,7 @@ export function fetchPayouts(cgaID) {
         }
       }
 
-      resolve()
+      resolve(payoutsArray)
       dispatch({ type: 'GET_PAYOUTS', payouts: payoutsArray })
     })
   }
