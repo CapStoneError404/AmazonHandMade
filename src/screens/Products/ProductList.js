@@ -1,6 +1,6 @@
 import { Wallpaper } from '@components'
 import React, { Component } from 'react'
-import { ActivityIndicator, Button, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { ActivityIndicator, Button, FlatList, StyleSheet, Text, TouchableOpacity, View, TextInput } from 'react-native'
 import { ProfilePicture } from '../../components'
 import { withMappedNavigationParams } from 'react-navigation-props-mapper'
 
@@ -30,9 +30,16 @@ class ProductList extends Component {
 
     this.state = { 
       showProductList: false,
-      currentProducts: this.props.currentProducts
+      currentProducts: this.props.currentProducts,
+      text: ""
     }
 
+  }
+  
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.Products != null){
+      this.searchFilterFunction()
+    }	    
   }
 
   componentDidMount() {
@@ -45,8 +52,25 @@ class ProductList extends Component {
     })
   };
 
-  _renderProductListItem = ({item, index}) => {
+  searchFilterFunction() {
+    if (!this.state.text) {
+      this.setState({ currentProducts: this.props.Products })
+    }
+    else {
+      const newData = this.props.Products.filter((item) => {
+        const title = item.Title.toLowerCase()
+        const textData = this.state.text.toLowerCase()
+        return title.indexOf(textData) !== -1
+      })
+      
+      this.setState({
+        currentProducts: newData // after filter we are setting products to new array
+      })
+    }
+  }
 
+  _renderProductListItem = ({item, index}) => {
+    console.log(item)
     return (
       <TouchableOpacity
         testID={`listItem${index}`}
@@ -74,6 +98,13 @@ class ProductList extends Component {
   render() {
     return (
       <Wallpaper>
+        <TextInput
+          style={styles.input}
+          value={this.state.text}
+          onChangeText={(newText) => this.setState({ text: newText }, this.searchFilterFunction)}
+          underlineColorAndroid="transparent"
+          placeholder="Search Products"
+        />
         {(this.props.Products != [] && this.state.fetchingProductList) ? 
           <ActivityIndicator 
             size='large'
@@ -83,6 +114,7 @@ class ProductList extends Component {
           :
           <FlatList
             testID='product_list'
+            extraData={this.state.currentProducts}
             data={this.state.currentProducts}
             keyExtractor={this._keyExtractor}
             renderItem={this._renderProductListItem}
@@ -125,7 +157,15 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: '#444444',
     marginLeft: 5
-  }
+  },
+  input: {
+    margin: 15,
+    height: 40,
+    padding: 10,
+    backgroundColor: "white",
+    borderColor: '#444444',
+    borderWidth: 1
+  },
 })
 
 export default withMappedNavigationParams()(ProductList)

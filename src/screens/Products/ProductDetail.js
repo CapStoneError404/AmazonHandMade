@@ -24,10 +24,10 @@ class ProductDetail extends Component {
     }
 
     this.productsButtons = [
-      {
-        title: 'Edit',
-        onPress: () => this.navigateToEditProduct() 
-      },
+      // {
+      //   title: 'Edit',
+      //   onPress: () => this.navigateToEditProduct() 
+      // },
       {
         title: 'Log Sales',
         onPress: () => this.navigateToLogSale()
