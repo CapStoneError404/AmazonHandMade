@@ -159,13 +159,13 @@ const styles = StyleSheet.create({
     marginLeft: 5
   },
   input: {
-    margin: 15,
-    height: 40,
-    padding: 10,
-    backgroundColor: "white",
-    borderColor: '#444444',
-    borderWidth: 1
-  },
+    height: 60,
+    backgroundColor: 'rgba(255,255,255,0.85)',
+    paddingHorizontal: 20,
+    borderRadius: 10,
+    margin: 10,
+    fontSize: 20
+  }
 })
 
 export default withMappedNavigationParams()(ProductList)
