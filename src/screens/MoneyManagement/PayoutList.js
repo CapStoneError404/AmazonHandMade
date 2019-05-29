@@ -37,6 +37,23 @@ class PayoutList extends Component {
      })
    }
 
+   getLastPayoutDate(artisanUID) {
+      var payouts = this.props.payouts.filter(payout => {
+        return payout.artisanId === artisanUID
+      })
+  
+      payouts.sort((first, second) => {
+        return second.date - first.date
+      })
+
+      console.log(payouts)
+
+      if(payouts.length > 0)
+        return payouts[payouts.length - 1].date
+      else
+        return null
+   }
+
    getPayoutsTotalForArtisan(artisanUID) {
      artisanPayouts = this.props.payouts.filter(payout => {
        return payout.artisanId == artisanUID
@@ -73,6 +90,8 @@ class PayoutList extends Component {
    _renderPayoutListItem = ({item, index}) => {
      productsRevenueTotal = this.getProductsRevenueTotalForArtisan(item.uid)
      payoutsTotal = this.getPayoutsTotalForArtisan(item.uid)
+     payoutDate = this.getLastPayoutDate(item.uid)
+     payoutDateString = payoutDate ? new Date(payoutDate).toDateString() : "Never"
 
      return (
        <TouchableOpacity
@@ -88,7 +107,7 @@ class PayoutList extends Component {
             
          <View style={styles.namePhone}>
            <Text style={styles.text}>{item.name}</Text>
-           <Text style={styles.text}>{`Last Payout: ${Math.floor(Math.random() * 11 + 1)}/${Math.floor(Math.random() * 27 + 1)}/19`}</Text>
+           <Text style={styles.text}>{`Last Payout: ${payoutDateString}`}</Text>
            <Text style={styles.text}>{`Owed: $${(productsRevenueTotal - payoutsTotal).toFixed(2)}`}</Text>
            <Text style={styles.text}>{`Paid: $${payoutsTotal.toFixed(2)}`}</Text>
          </View>
