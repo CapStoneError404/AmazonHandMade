@@ -22,17 +22,32 @@ class LogPayout extends Component {
     this.logPayout = this.logPayout.bind(this)
   }
 
+  verifyFields() {
+    if(!this.state.amount)
+      this.props.displayError("! The required field Payout Amount is empty.")
+    else if(isNaN(this.state.amount) || this.state.amount <= 0) {
+      this.props.displayError("! The required field Payout Amount must be a number greater than 0")
+      return false
+    }
+    else if(!this.state.description)
+      this.props.displayError("! The required field Payout Description is empty.")
+
+    return this.state.amount && this.state.description
+  }
+
   logPayout() {
-    this.setState({logging: true})
-    this.props.logPayout({
-      cgaId: this.props.User.uid,
-      artisanId: this.props.uid,
-      amount: this.state.amount,
-      description: this.state.description
-    }).then(() => {
-      this.setState({logging: false})
-      this.props.navigation.goBack()
-    })
+    if(this.verifyFields()) {
+      this.setState({logging: true})
+      this.props.logPayout({
+        cgaId: this.props.User.uid,
+        artisanId: this.props.uid,
+        amount: this.state.amount,
+        description: this.state.description
+      }).then(() => {
+        this.setState({logging: false})
+        this.props.navigation.goBack()
+      })
+    }
   }
 
   render() {
@@ -42,6 +57,7 @@ class LogPayout extends Component {
           <UserInput
             iconName="dollar"
             placeholder="How Much?"
+            keyboardType='numeric'
             value={this.state.amount}
             onChangeText={(newText) => this.setState({amount: newText})}
             style={styles.smallInput1}
