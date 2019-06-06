@@ -62,6 +62,21 @@ class EditArtisan extends Component {
         validFields = this.displayErrorMessage("Only alphabetic characters allowed for name.")
       }
     }
+    
+    if (this.state.phoneNumber) {
+      //console.log("Artisans ======> " + JSON.stringify(this.props.Artisans))
+      //console.log("Tried entering phone nuber: " + this.state.phoneNumber)
+      
+      let phoneMatch = this.props.Artisans.some((artisan) => {
+        //console.log(JSON.stringify(artisan))
+        return artisan.phoneNumber == this.state.phoneNumber
+      })
+      
+      if (phoneMatch) {
+        console.log("Found matching number!");
+        validFields = this.displayErrorMessage("Phone field cant be used already")
+      }
+    }
 
     if (!this.state.phoneNumber)
       validFields = this.displayErrorMessage("Phone field required")
