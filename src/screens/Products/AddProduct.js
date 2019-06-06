@@ -61,8 +61,8 @@ class AddProduct extends Component {
       this.props.displayError("! The required field Main Picture is empty.")
     else if(!this.state.productTitle)
       this.props.displayError("! The required field Title is empty.")
-    else if(!this.state.productDescription)
-      this.props.displayError("! The required field Product Description is empty.")
+    else if(!this.state.productDescription || this.state.productDescription.length > 1000)
+      this.props.displayError("! The required field Product Description is empty or to long.")
     else if(!this.state.productGender)
       this.props.displayError("! The required field Gender is empty.")
     else if(!this.state.productStandardPrice)
@@ -77,7 +77,7 @@ class AddProduct extends Component {
     return this.state.productMainCategory && this.state.productSubCategory
       && this.state.productMainPicture && this.state.productTitle && this.state.productDescription
       && this.state.productGender && this.state.productStandardPrice && this.state.productSellerSKU
-      && this.state.productQuantity && this.state.productTime
+      && this.state.productQuantity && this.state.productTime && this.state.productDescription.length <= 1000
   }
   
   createProduct() {

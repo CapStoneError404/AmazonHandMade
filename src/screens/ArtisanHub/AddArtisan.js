@@ -145,7 +145,7 @@ export default class AddArtisan extends Component {
             <View style={this.state.focusedInputs.phoneNumber ? [styles.focusedInput, styles.inputWrapper] : styles.inputWrapper}>
               <UserInput
                 iconName="phone"
-                placeholder="Phone Number"
+                placeholder="+1 (805) 756-2311"
                 value={this.state.phoneNumber}
                 onChangeText={this.onTextChange}
                 onFocus={() => this.setState({ focusedInputs: { ...this.state.focusedInputs, phoneNumber: true } })}
